@@ -324,8 +324,8 @@ namespace NewLetter.Controllers
                 request.AddParameter("grant_type", "authorization_code");
                 request.AddParameter("code", code);
                 request.AddParameter("redirect_uri", "http://localhost:51126/Account/linkdInReg");
-                request.AddParameter("client_id", "8183ea15suyzy4");
-                request.AddParameter("client_secret", "Bm4AevVeyg5E0ZxI");
+                request.AddParameter("client_id", "772sds0w0tvipg");
+                request.AddParameter("client_secret", "6F2xR3Sn93vR0VQX");
                 //request.AddParameter("scope", "r_emailaddress");
 
                 IRestResponse response = client.Execute(request);
