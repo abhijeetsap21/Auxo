@@ -1,0 +1,90 @@
+﻿@model NewLetter.Models.referenceCheck
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>ReferenceCheck</title>
+</head>
+<body>
+@using (Html.BeginForm("ReferenceCheck", "profile", FormMethod.Post, new { id = "msform" }))
+{
+    <div>
+        <p>Thank you mr/s @Model.name </p>
+        <p> Please answer these questions to the best of your ability, as this information allows us to make an informed, correct hiring decision.</p>
+
+        <p> Please be aware that any information that you provide will be kept strictly confidential. A release authorizing you to provide the requested information has been signed by the applicant and a copy is attached.</p>
+
+        <p> Please verify by answering the following questions.</p>
+
+        <p>Q : Do you know him/her ?</p>
+        <p><table><tr><td><input type="radio" name="rb1" id="rb1" checked />YES</td><td><input type="radio" id="rb2"  name="r1" />NO</td></tr></table> </p>
+
+        <p>Q : How did s/he support co-workers? </p>
+        <p><table><tr><td><input type="radio"  name="r2" id="rb3" checked />co-operative</td><td><input type="radio" id="rb4"  name="r2" />Unilateral</td></tr></table> </p>
+
+        <p>Q : S/he had verification done from privious company? </p>
+        <p><table><tr><td><input type="radio" name="r3" id="rb5" checked />YES</td><td><input type="radio"  name="r3" id="rb6"/>NO</td></tr></table> </p>
+
+        <p><input type="submit" value="submit" onclick="return submitRef();" /></p>
+
+        @Html.HiddenFor(m => m.qenRefID)  @Html.HiddenFor(m => m.name)
+        @Html.HiddenFor(m => m.isCheckComplete)
+    </div>
+}
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+
+        if ('@ViewBag.result' == "ok")
+        {
+
+            alert('Thank you for providing your valuable time.');
+        }
+        $("form").submit(function (e) {
+            debugger
+            e.preventDefault();
+          
+
+        });
+    });
+    function submitRef()
+    {
+       
+        debugger
+        var r_1=document.getElementById("rb1").checked;
+       
+        var r_2 = document.getElementById('rb3').checked;
+        
+        var r_3 = document.getElementById('rb5').checked;
+       
+        var result = "false";
+        var j = 0;
+        var i=0;
+       
+        if (r_1)
+            {
+                j = j + 1;
+        }
+        if (r_2) {
+            j = j + 1;
+        }
+        if (r_3) {
+            j = j + 1;
+        }
+         if (j >= 2)
+        {
+            result = "true";
+        }
+        document.getElementById('isCheckComplete').value = result;
+        $("form").unbind('submit').submit();
+
+    }
+
+</script>

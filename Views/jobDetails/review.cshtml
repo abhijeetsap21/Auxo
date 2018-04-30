@@ -1,0 +1,154 @@
+﻿@model NewLetter.Models.jobDetail
+
+
+@{
+    ViewBag.Title = "review";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.min.js"></script>
+@using (Html.BeginForm("review", "jobDetails", FormMethod.Post, new { id = "msform" }))
+{
+    <fieldset>
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.jobID)
+       @{ var id = Model.jobID;    }
+
+        <h2 class="fs-title">Job Posting preview</h2><br />
+
+        <table  class="table">
+            <tr>
+                <td style="width:300px"><img height="60" width="60" src='@Model.CompanyLogo' /></td>
+               
+                <td style=" font-weight:bold; font-size:20px">@Html.DisplayFor(model => model.CompanyName)</td>
+               
+            </tr>
+             <tr>
+                <td style="font-weight:bold; font-size:16px">Job Title</td><td>@Html.DisplayFor(model => model.jobTitle)</td><td></td><td></td>
+            </tr>
+
+            <tr>
+                <td style="font-weight:bold; font-size:16px">No of Openings</td>
+                <td>@Html.DisplayFor(model => model.NoOfOpenings)</td>
+                <td style="font-weight:bold; font-size:16px">Job Type</td>
+                <td>@Html.DisplayFor(model => model.EmploymentType.EmploymentType1)</td>
+            </tr>
+
+            <tr>
+                <td style="font-weight:bold; font-size:16px">Education Required</td>
+                <td>@Html.DisplayFor(model => model.EducationReq)</td>
+            </tr><tr>
+                <td style="font-weight:bold; font-size:16px">City</td>
+                <td>@Html.DisplayFor(model => model.city.city1)</td>
+            </tr>
+
+            <tr>
+                <td style="font-weight:bold; font-size:16px">Work Experience</td>
+                <td>@Html.DisplayFor(model => model.workExpMin)</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold; font-size:16px">Salary</td>
+                <td>@Html.DisplayFor(model => model.salary) @Html.DisplayFor(model => model.currency) @Html.DisplayFor(model => model.unit)</td>
+                <td > Visible to candidate</td>
+                    <td>@Html.CheckBoxFor(model => model.salaryVisibleToEmployee)</td>
+            </tr>
+
+
+
+            <tr >
+                <td style="font-weight:bold; font-size:16px">Job Description</td>
+               
+                <td colspan="3" style="min-height:60px">@Html.Raw(@Model.jobDescription) </td>
+              
+            </tr>
+            <tr>
+                <td style="font-weight:bold; font-size:16px">Other Details</td>
+                <td colspan="3" style="min-height:60px">@Html.Raw(@Model.otherinformation) </td>
+
+            </tr>
+
+            <tr>
+                <td colspan="4" style="font-weight:bold; font-size:18px" > Job contact person details</td>
+                </tr>
+        <tr>
+                <td style="font-weight:bold; font-size:16px">Name </td>
+                <td colspan="3" style="min-height:60px">@Html.DisplayFor(model => model.jobContactPersonName) </td>
+
+            <td style="font-weight:bold; font-size:16px">Email </td>
+            <td colspan="3" style="min-height:60px">@Html.DisplayFor(model => model.jobContactPersonEmail) </td>
+               
+            </tr>
+
+            <tr>
+                <td style="font-weight:bold; font-size:16px">Phone </td>
+                <td colspan="3" style="min-height:60px">@Html.DisplayFor(model => model.jobContactPersonMobile) </td>
+
+                <td style="font-weight:bold; font-size:16px">Resume received at  </td>
+                <td colspan="3" style="min-height:60px">@Html.DisplayFor(model => model.responsesEmailID) </td>
+            </tr>
+            </table>
+               
+               
+
+
+
+        @*<dl>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.EmployerDetail.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EmployerDetail.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.EmployerDetail1.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EmployerDetail1.Name)
+                </dd>
+
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.industry.industryName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.industry.industryName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.jobDetails1.jobTitle)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.jobDetails1.jobTitle)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.jobDetail1.jobTitle)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.jobDetail1.jobTitle)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.jobStatu.statuts)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.jobStatu.statuts)
+                </dd>
+
+            </dl>*@
+        <div class="fclear"></div>
+        <div style="width:90%;float:left">
+          @*  @Html.EncodedActionLink("Previous", "company", "jobDetails", new { JobID = @id, datatype = 01 }, new { @class = "action-button previous" })*@
+    <input type="button" name="Previous" class="previous action-button" value="Previous" onclick="location.href='@Url.Action("company", "jobDetails",new { datatype= 01 })'" />
+            <input type="submit" name="Next" class="next action-button" value="Continue" id="btnnext"  />
+        </div>
+</fieldset>
+}

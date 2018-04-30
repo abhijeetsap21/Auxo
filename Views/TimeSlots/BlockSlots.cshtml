@@ -1,0 +1,88 @@
+﻿@model IEnumerable<NewLetter.Models.Blockslots>
+@{
+    ViewBag.Title = "BlockSlots";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+<h2>Block Slots</h2>
+
+<table class="table">
+    <tr>
+        <th>Sr</th>
+       
+        <th>
+            Time Slots
+        </th>
+        <th>Blocked</th>
+        <th>Blocked By</th>
+        <th>Date</th>
+    </tr>
+    @{int rowNo = 0;}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@(rowNo += 1) </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.slotTime)
+            </td>
+            <td><input type="checkbox" id='chk@(rowNo)' onclick="return BlockUnblockSlot(@item.slotID,@rowNo);" data-toggle="tooltip" title="click to block/unblock the slot" @(Convert.ToBoolean(item.blocked) == true ? "checked='checked'" : string.Empty) /></td>
+            <td>
+                @{ if (item.updated_BY != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.updated_BY)
+                    }
+                    else
+                    {
+                        <span>-</span>
+                    }
+                }              
+
+            </td>
+            <td>
+                @{ if (item.updated_date != Convert.ToDateTime( "1/1/0001 12:00:00 AM"))
+                    {
+                        @item.updated_date.ToString("dd-MMM-yyyy");
+                    }
+                    else
+                    {
+                        <span>-</span>
+                    }
+                }       
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script>
+
+    function BlockUnblockSlot(slotID, rowNo) {
+        var chk = document.getElementById('chk' + rowNo).checked;
+        debugger
+        $.ajax({
+            type: "GET",
+            url: "BlockUnblockSlot",
+            data: { 'slotID': slotID, 'chk': chk },           
+            success: function (data) {
+                debugger
+                if (data == "OK") {
+                    debugger
+                    alert("Record updated");
+                    location = location.href;
+                }
+                else {
+                    alert("Error occured, Record not updated");
+                }
+            }
+        });
+    }
+
+</script>
+<script>
+    jQuery(document).ready(function () {
+        initAutocomplete();
+        initialize();
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>

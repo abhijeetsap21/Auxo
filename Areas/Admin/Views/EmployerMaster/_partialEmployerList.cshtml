@@ -1,0 +1,37 @@
+﻿
+<table class="table">
+    <tr>
+        <th>Employer ID</th>
+        <th>Employer Name</th>
+        <th>Mobile </th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Company Name</th>
+        <th>Data Created Date</th>
+        <th>Data Last updated Date</th>
+        <th>Account IS ACTIVE?</th>
+        <th>Activate Or Deactivate</th>
+
+    </tr>
+
+
+    @foreach (var a in Model)
+            {
+        <tr>
+            <td>@a.EmployerID</td>
+            <td>@a.Name</td>
+            <td>@a.Mobile</td>
+            <td>@a.Email</td>
+            <td>@a.role</td>
+            <td>@a.companyName</td>
+            <td>@a.dataIsCreated</td>
+            <td>@a.dataIsUpdated</td>
+            <td><input type="checkbox" checked="@a.isActive" /></td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = a.EmployerID })
+        </td>
+
+
+    </tr>
+    }
+</table>

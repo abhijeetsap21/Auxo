@@ -1,0 +1,61 @@
+﻿@model NewLetter.Models.qenSkillName
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger
+        $("#skillName").autocomplete({
+
+            source: function (request, response) {
+
+                $.ajax({
+                    url: "select_fillSkills",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                                                       
+                            return { label: item.skillName, value: item.skillID };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    })
+</script>
+@using (Html.BeginForm("AddSkills", "NewLetter", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m=>m.qenSkillsID)
+    @Html.HiddenFor(m => m.qenID)
+
+    <div class="col_2">
+        <div class="col_1 tleft"><strong>Skill</strong></div>
+        @Html.TextBoxFor(model =>model.skillName, new { placeholder = "skill name here", maxlength = "100" })
+        @Html.ValidationMessageFor(model => model.skillName, "", new { @class = "text-danger" })
+    </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>year of experience </strong></div>
+            @Html.TextBoxFor(model => model.yearOfExp, new { placeholder = "year of Exp", maxlength = "100" })
+            @Html.ValidationMessageFor(model => model.yearOfExp, "", new { @class = "text-danger" })
+        </div>
+        
+
+
+        <div class="fclear"></div>
+    if (Model.qenSkillsID > 0)
+    {
+        <input type="submit" name="save" class="previous action-button" value="Update" id="btnsaveempinfo" style="margin-top:40px" />
+    }
+    else
+    {
+        <input type="submit" name="save" class="previous action-button" value="Submit" id="btnsaveempinfo" style="margin-top:40px" />
+    }
+}
+
+

@@ -1,0 +1,312 @@
+﻿@using NewLetter.Models;
+@{  ViewBag.Title = "Jobs";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+   }
+  
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>  
+
+
+    <style type="text/css">
+        .bs-example {
+            margin: 20px;
+        }
+
+        i {
+            float: right;
+            font-size: 9px;
+        }
+        .someclass {
+        }
+    </style>
+  
+   
+
+    <script  type="text/javascript">
+
+        var jqOld = jQuery.noConflict();
+        jqOld(document).ready(function () {
+            jqOld("#viewResult").load('@Url.Action("Jobsearch", "jobDetails")')
+          });
+
+        jqOld.fn.serializeObject = function () {
+               var o = {};
+               var a = this.serializeArray();
+               jqOld.each(a, function () {
+                   if (o[this.name] !== undefined) {
+                       if (!o[this.name].push) {
+                           o[this.name] = [o[this.name]];
+                       }
+                       o[this.name].push(this.value || '');
+                   } else {
+                       o[this.name] = this.value || '';
+                   }
+               });
+               return o;
+           }
+
+        var form = "";
+           function searchResult() {
+               form=  jqOld("#msform").serializeObject();
+               debugger
+               jqOld.ajax({
+                   url: 'http://newsletter.qendidate.com/stagingns/jobDetails/Jobsearch',
+                   type: 'POST',
+                   data: form,                   
+                   success: function (data) {
+                       debugger
+                       jqOld("#viewResult").html(data);
+                   }
+               });
+           }
+
+
+           var id = 1;
+           function searchA() {
+               id = id + 1;
+               debugger
+               var jobtitle = document.getElementById('txt_JobTitle').value;
+               var city = document.getElementById('locality').value;
+
+               var sel = document.getElementById('employmentType');
+               var employmentType = sel.options[sel.selectedIndex].value;
+               if (employmentType == "")
+               {
+                   employmentType = 0;
+               }
+               var sel1 = document.getElementById('ddl_update');
+               var ddl_update = sel1.options[sel1.selectedIndex].value;
+               if (ddl_update == "") {
+                   ddl_update = 0;
+               }
+
+               debugger
+               jqOld.ajax({
+
+                   url: 'http://newsletter.qendidate.com/stagingns/jobDetails/LoadMoreJobs',
+                   type: 'POST',
+                   data: { 'jobtitle': jobtitle, 'city': city, 'employmentType': employmentType, 'ddl_update':ddl_update, 'currentPageIndex': id },
+                   success: function (data) {
+                       debugger
+                       $('#MyTable tbody#frst').append(data);
+
+                   }
+               });
+
+               var r = document.getElementById('pagecount').value;
+               if (id >= r) {
+                   var a = document.getElementById('btnmore');
+                   a.style.display = "none"
+               }
+           }
+       </script>
+
+
+@*<script type="text/javascript">
+    jqOld(function () {
+        debugger
+        jqOld("#txtskill")
+            .bind("keydown", function (event) {
+                if (event.keyCode === jqOld.ui.keyCode.TAB &&
+                jqOld(this).data("ui-autocomplete").menu.active) {
+                    event.preventDefault();
+                }
+            })
+            .autocomplete({
+                minLength: 2,
+                source: function( request, response ) {
+                    jqOld.getJSON("/stagingns/jobDetails/select_fillSkills", {
+                        term: extractLast( request.term )
+                    }, response );
+                },
+                search: function () {
+                    // custom minLength
+                    var term = extractLast(this.value);
+                    if (term.length < 2) {
+                        return false;
+                    }
+                },
+                focus: function () {
+                    // prevent value inserted on focus
+                    return false;
+                },
+                select: function (event, ui) {
+                    var usersIdVal = jqOld("#UsersId").val();
+                    usersIdVal += ", " + ui.item.userId;
+                    jqOld("#UsersId").val(usersIdVal)
+
+                    var terms = split(this.value);
+                    // remove the current input
+                    terms.pop();
+                    // add the selected item
+                    terms.push(ui.item.value);
+                    // add placeholder to get the comma-and-space at the end
+                    terms.push("");
+                    this.value = terms.join(", ");
+                    return false;
+                }
+            });
+    });
+    function split(val) {
+        return val.split(/,\s*/);
+    }
+    function extractLast(term) {
+        return split(term).pop();
+    }
+
+</script>*@
+<script>
+    jqOld(function () { 
+        debugger
+if ('@ViewBag.socialvalue' == "No")
+
+    bootbox.alert({
+        title: "Alert !",
+        message: '<p>For Better Reach to the employers, Kindly associate your Account to LinkediN with Auxo. Please make sure that your Auxo Email is same as your linkedin</p>'
+                   + '<p><a href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=8183ea15suyzy4&redirect_uri=http%3A%2F%2Flocalhost:51126%2FAccount%2FlinkdInReg&state=987654321" class="btn btn-link-1"> <img src="/images/linkedin-btn.jpg" alt="Linkedin"> </a></p>'
+    });
+    });
+</script>
+
+@{string a = "";
+    if (TempData.Count> 0) {
+       a = TempData["Success"].ToString(); }
+   }
+  <script>
+      jqOld(function () {
+          debugger
+          if ('@a' == "Linked")
+          {
+              bootbox.alert({
+                  title: "Alert Success  !",
+                  message: '<p>Thank your associating your Account with LinkediN</p>'
+              });
+
+          }
+      });
+
+</script>
+
+
+
+ @using (Html.BeginForm("Jobs", "jobDetails", FormMethod.Post, new { id = "msform" }))
+ {
+
+    <div class="row">
+        <div class="col-sm-2" style="background-color:#eef; padding:5px">                       
+                <input type="text" value="" style="width:100%" name="txt_JobTitle" id="txt_JobTitle" placeholder="Job Title">
+          </div>
+                     
+        <div class="col-sm-2" style="background-color:#eef; padding:5px">
+            @Html.TextBox("city", null, new { id = "locality", placeholder = "City", onFocus = "geolocate()" })
+        </div>
+
+            
+        <div class="col-sm-2" style="background-color:#eef; padding:5px">
+            @Html.DropDownList("employmentType", " Job Type ")
+        </div>
+   
+                    <div class="col-sm-2" style="background-color:#eef; padding:5px">
+                        <select name="ddl_update" id="ddl_update">
+                            <option value="1">1 Month</option>
+                            <option value="2">1 Week </option>
+                            <option value="3">3 Month</option>
+                            <option value="4">6 Month </option>
+                            <option value="5">  ALL  </option>
+
+                        </select>
+                    </div>
+
+        <div class="col-sm-2" style="background-color:#eef; padding:5px">
+            <input type="button" name="search" class="previous action-button" value="Search" onclick="return searchResult();" />
+        </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1" id="viewResult">
+
+                </div>
+            </div>
+
+
+ 
+
+<script>
+      // This example displays an address form, using the autocomplete feature
+      // of the Google Places API to help users fill in the information.
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+        jQuery(document).ready(function () {
+            initAutocomplete();
+        });
+      var placeSearch, autocomplete;
+      var componentForm = {
+        locality: 'long_name'
+
+      };
+
+      function initAutocomplete() {
+          debugger
+        // Create the autocomplete object, restricting the search to geographical
+        // location types.
+          autocomplete = new google.maps.places.Autocomplete((document.getElementById('locality')), { autocomplete: ['geocode'] });
+            /** type {!HTMLInputElement} */
+
+
+        // When the user selects an address from the dropdown, populate the address
+        // fields in the form.
+        autocomplete.addListener('place_changed', fillInAddress);
+      }
+
+      function fillInAddress() {
+          debugger
+        // Get the place details from the autocomplete object.
+        var place = autocomplete.getPlace();
+
+        for (var component in componentForm) {
+          document.getElementById(component).value = '';
+          document.getElementById(component).disabled = false;
+        }
+
+        // Get each component of the address from the place details
+        // and fill the corresponding field on the form.
+        for (var i = 0; i < place.address_components.length; i++) {
+            debugger
+          var addressType = place.address_components[i].types[0];
+          if (componentForm[addressType]) {
+              debugger
+            var val = place.address_components[i][componentForm[addressType]];
+            document.getElementById(addressType).value = val;
+
+          }
+        }
+
+      }
+
+      // Bias the autocomplete object to the user's geographical location,
+      // as supplied by the browser's 'navigator.geolocation' object.
+      function geolocate() {
+
+          if (navigator.geolocation) {
+
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var geolocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            var circle = new google.maps.Circle({
+              center: geolocation,
+              radius: position.coords.accuracy
+            });
+            debugger
+            autocomplete.setBounds(circle.getBounds());
+          });
+        }
+      }
+</script>
+
+
+}
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDGhqKFgJrrhrXFGFHRzuPJ84hK7GbtAno"></script> 
+
+

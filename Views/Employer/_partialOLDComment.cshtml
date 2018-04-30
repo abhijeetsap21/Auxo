@@ -1,0 +1,35 @@
+﻿@model IEnumerable<NewLetter.Models.InterViewerComment>
+
+
+<table class="table">
+  
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.EmployerDetail.Name) : @Html.DisplayFor(modelItem => item.EmployerDetail.Name)
+            </td>
+        </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Department) :@Html.DisplayFor(modelItem => item.Department)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Candidate_status1.status): @Html.DisplayFor(modelItem => item.Candidate_status1.status)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Comment)      : @Html.DisplayFor(modelItem => item.Comment)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.ExpectedSalaryGross)   : @Html.DisplayFor(modelItem => item.ExpectedSalaryGross)  ; @Html.DisplayNameFor(model => model.ExpectedSalaryMonthly)      : @Html.DisplayFor(modelItem => item.ExpectedSalaryMonthly)
+                    </td>
+                </tr>
+
+    }
+
+</table>
+

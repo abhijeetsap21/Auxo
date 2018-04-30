@@ -1,0 +1,70 @@
+﻿
+@model IEnumerable<NewLetter.Models.sp_AdvertisementList_Result>
+@using NewLetter.Models;
+
+
+<style type="text/css">
+    body {
+        font-family: Arial;
+        font-size: 10pt;
+    }
+
+    table {
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+        background-color: #fff;
+    }
+
+        table th {
+            background-color: #B8DBFD;
+            color: #333;
+            font-weight: bold;
+        }
+
+        table th, table td {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+
+        table, table table td {
+            border: 0px solid #ccc;
+        }
+</style>
+
+
+<div>
+    @if (ViewBag.data == "Yes")
+    {
+        <table class="table">
+            <tr>
+                <th>Advertisement ID</th>
+                <th>Advertisement Image URL</th>
+                <th>Data Created </th>
+                <th>Data Updated</th>              
+           </tr>
+
+            @foreach (var a in Model)
+            {
+                <tr>
+                    @{ 
+                        string _id = a.advertisementRefID.ToString();
+                        string id = BaseUtil.encrypt(_id);
+
+                        }
+                    <td>@a.advertisementRefID<br /> <a href='http://localhost:51126/jobDetails/advertisementApplyHome/?refid=@id&&val=1'>Access</a></td>
+                    <td><a href="@a.advertisementimageURL">Link To Image</a></td>
+                    <td>@a.dataIsCreated</td>
+                    <td>@a.dataIsUpdated</td>
+                </tr>
+            }
+        </table>
+            <br />
+
+    }
+
+    
+    @if (ViewBag.data == "Nodata")
+    {
+        <div>No Data Avaiable</div>
+    }
+</div>

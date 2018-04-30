@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Thank You";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+@{ var refID = ""; if (TempData["refID"] != null) { refID = TempData["refID"].ToString(); } }
+<fieldset>
+    <h2 class="fs-title">Thank You.</h2><br />
+    <h2 class="fs-title">Job Posted successfully.</h2><br />
+    <div class="fclear"></div>
+    <div style="width:90%;float:left">
+        @{if (refID != "")
+            {
+                <input type="button" name="Previous" class="previous action-button" value="Post New Job" style="width:150px" onclick="location.href='@Url.Action("NewJob", "jobDetails", new { refID = refID})'" />
+            }
+            else
+            {
+                <input type="button" name="Previous" class="previous action-button" value="Post New Job" style="width:150px" onclick="location.href='@Url.Action("NewJob", "jobDetails")'" />
+            }
+        }
+       
+        <input type="submit" name="Next" class="next action-button" value="Search Resume" id="btnnext" onclick="location.href='#'" style="width:150px" />
+    </div>
+</fieldset>

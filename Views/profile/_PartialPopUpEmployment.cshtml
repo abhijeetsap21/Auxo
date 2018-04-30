@@ -1,0 +1,55 @@
+﻿@model NewLetter.Models.qenEmpDetail
+
+
+@using (Html.BeginForm("SaveEmploymentDetails", "profile", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="group">
+        @Html.TextBoxFor(ex => ex.CompanyName, new { placeholder = "Employer", maxlength = "100" })
+        <div class="alert alert-warning error-custom" role="alert">
+            @Html.ValidationMessageFor(ex => ex.CompanyName, "", new { @class = "col_1 tleft text-danger" })
+        </div>
+    </div>
+        @Html.HiddenFor(ex => ex.qenID) @Html.HiddenFor(ex => ex.qenEmploymentNum)
+        <div class="group">
+            @Html.TextBoxFor(ex => ex.qenSalary, new { placeholder = "salary", maxlength = "100" })
+            <div class="alert alert-warning error-custom" role="alert">
+                @Html.ValidationMessageFor(ex => ex.qenSalary, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+        </div>
+        <div class="group">
+            @Html.TextBoxFor(ex => ex.qenPosition, new { placeholder = "Position", maxlength = "100" })
+            <div class="alert alert-warning error-custom" role="alert">
+                @Html.ValidationMessageFor(ex => ex.qenPosition, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+        </div>
+        <div class="group">
+            @Html.TextBoxFor(ex => ex.jobDescription, new { placeholder = "Job Description", maxlength = "100" })
+            <div class="alert alert-warning error-custom" role="alert">
+                @Html.ValidationMessageFor(ex => ex.jobDescription, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+        </div>
+        <div class="group">
+            @Html.TextBoxFor(ex => ex.qenEmpFrom, "{0:d MMM yyyy}", new { placeholder = "Start Date", maxlength = "10", @class = "datepicker" })
+            <div class="alert alert-warning error-custom" role="alert">
+                @Html.ValidationMessageFor(ex => ex.qenEmpFrom, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+        </div>
+        <div class="group">
+            @Html.TextBoxFor(ex => ex.qenEmpTo, "{0:d MMM yyyy}", new { placeholder = "End Date", maxlength = "10", @class = "datepicker" })
+            <div class="alert alert-warning error-custom" role="alert">
+                @Html.ValidationMessageFor(ex => ex.qenEmpTo, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+        </div>
+        <div class="group plus-btn-wrap m-top">
+            <input type="submit" name="save" class="plus-btn" style="background:url(/images/plus-btn.png) no-repeat center" value="Save" />
+        </div>
+        <br /><br />
+}
+<script type="text/javascript">
+    var jqOld = jQuery.noConflict();
+    jqOld(function () {
+        jqOld(".datepicker").datepicker();
+    })
+</script>

@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+ 
+
+   <div class="form-horizontal pageSetup">
+        <div class="row">
+       
+             <div class="col-sm-7 col-sm-offset-1"> 
+        <p>
+            @if (Model != null)
+            {
+                @Html.Raw(Model.error_message);
+            }
+            else
+            {
+                Exception exception = Server.GetLastError();
+                if (exception != null)
+                {
+                    if (exception.InnerException != null)
+                    {
+                        @Html.Raw(exception.InnerException.ToString())
+                    }
+                }
+            }
+        </p>
+                 </div>
+            <div class="col-sm-3"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- education -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1249188172024040"
+     data-ad-slot="7417063014"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                <br /><br /><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- education -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1249188172024040"
+     data-ad-slot="7417063014"
+     data-ad-format="auto"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+            </div>
+    </div>
+    
+</div>
+
+

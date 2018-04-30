@@ -1,0 +1,26 @@
+﻿@model NewLetter.Models.candidateRegistration
+
+
+@using (Html.BeginForm("candidateReg", "Account", FormMethod.Post, new { @class = "login-form" }))
+{
+    @Html.ValidationMessageFor(model => model.candidateName, "", new { @class = "text-danger" })
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        @Html.TextBoxFor(model => model.candidateName, new { @class = "form-control", placeholder = "Full Name" })
+       
+    </div>
+    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email ID" })
+       
+    </div>
+    @Html.ValidationMessageFor(model => model.candidatePhone, "", new { @class = "text-danger" })
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
+        @Html.TextBoxFor(model => model.candidatePhone, new { @class = "form-control", placeholder = "Mobile No" })
+        
+    </div>
+    <input type="submit" class="btn" value="Register" />
+
+}

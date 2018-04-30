@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Confirm";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+@using (Html.BeginForm("review", "jobDetails", FormMethod.Post, new { id = "msform" }))
+{
+
+
+    <fieldset>
+        <h2 class="fs-title">Thank You.</h2><br />
+        <h2 class="fs-title">Job Posted successfully.</h2><br />
+        <div class="fclear"></div>
+        <div style="width:90%;float:left">
+            <input type="button" name="Previous" class="previous action-button" value="Post New Job" style="width:150px" onclick="location.href='@Url.Action("postJob", "jobDetails")'" />
+            <input type="submit" name="Next" class="next action-button" value="Search Resume" id="btnnext" onclick="location.href='#'" style="width:150px"/>
+        </div>
+        </fieldset>
+}

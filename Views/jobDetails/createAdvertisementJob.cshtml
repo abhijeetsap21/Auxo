@@ -1,0 +1,366 @@
+﻿@model NewLetter.Models.jobDetail
+
+@{
+    ViewBag.Title = "createAdvertisementJob";
+    long advtID = ViewBag.refID;
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/scripts/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        debugger
+        $("#city1").autocomplete({
+
+            source: function (request, response) {
+
+                $.ajax({
+                    url: "http://localhost:51126/jobDetails/select_city",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+
+                        response($.map(data, function (item) {
+                            debugger
+                            return { label: item.city1, value: item.city1 };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+    })
+</script>
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script type="text/javascript">
+    $(function () {
+        debugger 
+        $("#requiredSkills")
+            .bind("keydown", function (event) {
+                if (event.keyCode === $.ui.keyCode.TAB &&
+                $(this).data("ui-autocomplete").menu.active) {
+                    event.preventDefault();
+                }
+            })
+            .autocomplete({
+                minLength: 2,
+                source: function( request, response ) {
+                    $.getJSON("/jobDetails/select_fillSkills", {
+                        term: extractLast( request.term )
+                    }, response );
+                },
+                search: function () {
+                    // custom minLength
+                    var term = extractLast(this.value);
+                    if (term.length < 2) {
+                        return false;
+                    }
+                },
+                focus: function () {
+                    // prevent value inserted on focus
+                    return false;
+                },
+                select: function (event, ui) {
+                    var usersIdVal = $("#UsersId").val();
+                    usersIdVal += ", " + ui.item.userId;
+                    $("#UsersId").val(usersIdVal)
+
+                    var terms = split(this.value);
+                    // remove the current input
+                    terms.pop();
+                    // add the selected item
+                    terms.push(ui.item.value);
+                    // add placeholder to get the comma-and-space at the end
+                    terms.push("");
+                    this.value = terms.join(", ");
+                    return false;
+                }
+            });
+    });
+    function split(val) {
+        return val.split(/,\s*/);
+    }
+    function extractLast(term) {
+        return split(term).pop();
+    }
+
+</script>
+<div class="comm-bg comm-bg1 form-inline">
+    <h2>Create News Paper Ad</h2>
+
+    @using (Html.BeginForm("createJobAdvertisement", "jobDetails",new { ID = advtID}, FormMethod.Post,  new {enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Job Detail</h4>
+            <hr />
+           <!-- @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <input type="file" id="photoA" name="files" /><br /> <span id="lblError1" style="color: red;"></span>
+            <input id="upload" type="button" value="Upload" onclick="return Upload()" /> -->
+
+            <script type="text/javascript">
+            function Upload() {
+                //Get reference of FileUpload.
+                var fileUpload = document.getElementById("photoA");
+
+
+
+
+
+                //Check whether the file is valid Image.
+                var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(.jpg|.png|.gif)$");
+                if (regex.test(fileUpload.value.toLowerCase())) {
+
+                    if (typeof (fileUpload.files) != "undefined") {
+                        var reader = new FileReader();
+                        reader.readAsDataURL(fileUpload.files[0]);
+                        reader.onload = function (e) {
+                            var image = new Image();
+                            image.src = e.target.result;
+                            image.onload = function () {
+                                var height = this.height;
+                                var width = this.width;
+                                if (height > 100 || width > 100) {
+                                    alert("Height and Width must not exceed 100px.");
+                                    return false;
+                                }
+                                alert("Uploaded image has valid Height and Width.");
+                                return true;
+                            };
+                        }
+                    }
+                    else {
+                        alert("This browser does not support HTML5.");
+                        return false;
+                    }
+                }
+                else {
+                    alert("Please select a valid Image file.");
+                    return false;
+                }
+            }
+            </script> 
+			<div class="col-md-12"></div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+            	<div class="form-group">
+                                  <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Job ID:</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" class="form-control" id="concept" name="concept">
+                        </div>
+                                  </div>
+            </div>
+             <div class="col-md-6 col-sm-6 col-xs-12">
+            	<div class="form-group">
+                                  <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Required 
+Skills:</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" class="form-control" id="concept" name="concept">
+                        </div>
+                                  </div>
+            </div>
+			<div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.jobTitle, htmlAttributes: new { @class = "control-label col-md-6 col-sm-6 col-xs-12" })
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.EditorFor(model => model.jobTitle, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.jobTitle, "", new { @class = "text-danger" })
+                </div>
+            </div>
+			</div>
+<div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+
+	                @Html.LabelFor(model => model.jobDescription, htmlAttributes: new { @class = "control-label col-md-6 col-sm-6 col-xs-12" })
+
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.EditorFor(model => model.jobDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.jobDescription, "", new { @class = "text-danger" })
+                </div>
+            </div></div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.requiredSkills, htmlAttributes: new { @class = "control-label col-md-6 col-sm-6 col-xs-12" })
+
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.EditorFor(model => model.requiredSkills, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.requiredSkills, "", new { @class = "text-danger" })
+                </div>
+            </div>
+			</div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.NoOfOpenings, htmlAttributes: new { @class = "control-label col-md-6 col-sm-6 col-xs-12" })
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.EditorFor(model => model.NoOfOpenings, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NoOfOpenings, "", new { @class = "text-danger" })
+                </div>
+            </div>
+			</div>
+            <div class="col-md-12 padding-none"><hr></div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.salary, htmlAttributes: new { @class = "control-label col-md-6 col-sm-6 col-xs-12" })
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.EditorFor(model => model.salary, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.salary, "", new { @class = "text-danger" })
+                </div>
+            </div>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12">
+            	<div class="form-group">
+                                  <label class="col-md-6 col-sm-6 col-xs-12 control-label">Mobile:</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" class="form-control">
+                        </div>
+                                  </div>
+            </div>
+
+			
+
+<div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.currency, htmlAttributes: new { @class = "control-label col-md-6 col-sm-6 col-xs-12" })
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.DropDownList("currency",null, new { @class = "text-danger form-control custom-select" })
+                    @Html.ValidationMessageFor(model => model.currency, "", new { @class = "text-danger custom-select" })
+                </div>
+            </div>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.workExpMin, htmlAttributes: new { @class = "control-label col-md-6 col-sm-6 col-xs-12" })
+
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.EditorFor(model => model.workExpMin, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.workExpMin, "", new { @class = "text-danger" })
+                </div>
+            </div>
+			</div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+            	<div class="form-group">
+                                  <label class="col-md-6 col-sm-6 col-xs-12 control-label">Landline:</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" class="form-control">
+                        </div>
+           </div>
+	</div>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+            	<div class="form-group">
+                                  <label class="col-md-6 col-sm-6 col-xs-12 control-label">Address:</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" class="form-control">
+                        </div>
+           </div>
+	</div>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+            	<div class="form-group">
+                                  <label class="col-md-6 col-sm-6 col-xs-12 control-label">Email:</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" class="form-control">
+
+                        </div>
+           </div>
+	</div>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.city1, "City", htmlAttributes: new { @class = "control-label col-md-6 col-sm-6 col-xs-12" })
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.EditorFor(model => model.city1, new { htmlAttributes = new {@class = "form-control" } })
+                </div>
+</div>
+            </div>
+            
+    <div class="col-md-6 col-sm-6 col-xs-12">
+            	<div class="form-group">
+                                  <label class="col-md-6 col-sm-6 col-xs-12 control-label">State:</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class="form-control" id="status" name="status">
+                                <option>Paid</option>
+                                <option>Unpaid</option>
+                            </select>
+                        </div>
+           </div>
+	</div>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+            	<div class="form-group">
+                                  <label class="col-md-6 col-sm-6 col-xs-12 control-label">Country:</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select class="form-control" id="status" name="status">
+                                <option>India</option>
+                                <option>India</option>
+                            </select>
+                        </div>
+           </div>
+	</div>
+<div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.unit, htmlAttributes: new { @class = "control-label col-md-6 col-sm-6 col-xs-12" })
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.DropDownList("Unit",null, new { @class = "text-danger form-control custom-select" })
+                    @Html.ValidationMessageFor(model => model.unit, "", new { @class = " text-danger " })
+                </div>
+            </div>
+</div>
+
+			
+<div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.salaryVisibleToEmployee, htmlAttributes: new { @class = "control-label col-md-6 col-sm-6 col-xs-12" })
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.salaryVisibleToEmployee, new { htmlAttributes = new {@class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.salaryVisibleToEmployee, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.otherinformation, htmlAttributes: new { @class = "control-label col-md-6 col-sm-6 col-xs-12" })
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.EditorFor(model => model.otherinformation, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.otherinformation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+			</div>
+<div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.gender, htmlAttributes: new { @class = "control-label col-md-6 col-sm-6 col-xs-12" })
+				<div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.EditorFor(model => model.gender, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+					</div>
+                
+            </div>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12">
+            	<div class="form-group">
+                                  <label class="col-md-6 col-sm-6 col-xs-12 control-label">Special Notes:</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                             <textarea class="form-control" rows="2" id="comment"></textarea>
+                        </div>
+           </div>
+	</div>
+<div class="col-md-6 col-sm-6 col-xs-12 text-align">
+
+
+                    <input type="submit" value="Save for Later" class="btn btn-default dark-btn" onclick="return Upload() " />
+                    <input type="submit" value="Save & Generate Link" class="btn btn-default" onclick="return Upload() " />
+
+
+        </div>
+		</div>
+
+    }
+			</div>

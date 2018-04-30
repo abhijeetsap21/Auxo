@@ -1,0 +1,78 @@
+﻿@model IEnumerable<NewLetter.Models.AuxoDashBoard>
+    @{
+        ViewBag.Title = "Dashbord";
+        Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+    }
+@section head{
+    <script type="text/javascript">
+        var jqOld = jQuery.noConflict();
+        jqOld(document).ready(function () {
+            jqOld('#myDataTable').dataTable().makeEditable();
+            });
+    </script>
+}
+<div class="form-horizontal">
+    <h4>Dashbord</h4>
+	
+<div class="col-lg-12 col-md-12 col-xs-12 table-das">
+<div class="table-responsive">          
+  <table id="myDataTable" class="table table-striped table-bordered table-hover display">
+      <thead>
+          <tr>
+              <th>Sr.</th>
+              <th>
+                  @Html.DisplayNameFor(model => model.JobID)
+              </th>
+              <th>
+                  @Html.DisplayNameFor(model => model.jobTitle)
+              </th>
+              <th>
+                  @Html.DisplayNameFor(model => model.orionCV)
+              </th>
+              <th>
+                  @Html.DisplayNameFor(model => model.orionCOMM)
+              </th>
+              <th>
+                  @Html.DisplayNameFor(model => model.orionPASS)
+              </th>
+              <th>
+                  @Html.DisplayNameFor(model => model.orionMEET)
+              </th>
+              <th>
+                  @Html.DisplayNameFor(model => model.shortList)
+              </th>
+          </tr>
+          </thead>
+          @{int rowNo = 0;}
+          @foreach (var item in Model)
+          {
+              <tr class="dashboard-left-text">
+                  <td>@(rowNo += 1) </td>
+                  <td>
+                      <a href='@Url.Action("JobView", "jobDetails",new { jobID=@item.JobID })'>JOB#@item.JobID</a>  
+                  </td>
+                  <td>
+                      @Html.DisplayFor(modelItem => item.jobTitle)
+                  </td>
+                  <td>
+                      <a href='@Url.Action("cvShortlisted", "companyDetails",new { jobID=@item.JobID })'>@item.orionCV</a>
+                      
+                  </td>
+                  <td>
+                      <a href='@Url.Action("scheduleTestDashboard", "Employer",new { jobID=@item.JobID })'>@item.orionCOMM</a>
+                  </td>
+                  <td>
+                      <a href='@Url.Action("ProceedToMeetSchedule", "Employer",new { jobID=@item.JobID })'>@item.orionPASS</a>
+                  </td>
+                  <td>
+                      <a href='@Url.Action("CandidateComm", "Employer",new { jobID=@item.JobID })'>@item.orionMEET</a>
+                  </td>
+                  <td>
+                      <a href='@Url.Action("ShortlistedCadidates", "Employer",new { jobID=@item.JobID })'>@item.shortList</a>
+                  </td>
+              </tr>
+          }
+</table>
+</div>
+</div>
+

@@ -1,0 +1,132 @@
+﻿@model IEnumerable<NewLetter.Models.jobDetail>
+
+@{
+    ViewBag.Title = "MyJobs";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+<h2>MyJobs</h2>
+@section head{
+    <script type="text/javascript">
+        var jqOld = jQuery.noConflict();
+        jqOld(document).ready(function () {
+            jqOld('#myDataTable').dataTable().makeEditable();
+            });
+    </script>
+}
+
+
+<div class="div_table table-responsive">
+    <table id="myDataTable" class="table table-striped table-bordered table-hover col-md-12 display">
+      <thead> 
+          <tr>
+              <th>No.</th>
+              <th>Job ID</th>
+              <th>
+                  @Html.DisplayNameFor(model => model.jobTitle)
+              </th>
+
+              <th>
+                  @Html.DisplayNameFor(model => model.NoOfOpenings)
+              </th>
+              <th>
+                  @Html.DisplayNameFor(model => model.dataIsCreated)
+              </th>
+
+              <th>
+                  @Html.DisplayNameFor(model => model.jobStatu.statuts)
+              </th>
+              <th>Search Candidates</th>
+              <th>
+                  Is Advertisement
+              </th>
+              <th>
+                  Is Portal link
+              </th>
+              <th>Edit</th>
+              
+          </tr>
+        </thead>
+        <tbody>
+            @{    int i = 0; }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(i += 1)</td>
+                    <td>#@item.jobID</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.jobTitle)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NoOfOpenings)
+                    </td>
+                    <td>
+                        @item.dataIsCreated.ToString("dd MMM yyyy")
+                    </td>
+
+                    <td>
+                        @Html.DropDownList("jobStatusID", null, item.jobStatu.statuts.ToString(), new { id = "job_status_" + @i, @onchange = "changeStatus('job_status_" + @i + "','" + @item.jobID + "')" })
+                    </td>
+                    <td>
+                        <a href="@Url.Action("cvShortlisted","companyDetails",  new { jobID=item.jobID })">Search Candidates</a>
+                    </td>                   
+                    
+                    <td>
+                        @if (item.advertisementRefID == null)
+                        { <p>No</p>
+                        }
+                        else
+                        {
+                            <p>Yes</p>
+                        }
+
+                    </td>
+                    <td>
+                        @if (item.jobURL == null)
+                        {
+                            <p>No</p>
+                        }
+                        else
+                        {
+                            <p>Yes</p>
+                        }
+
+                    </td>
+                    <td>
+                        <a href="@Url.Action("NewJob","jobDetails",  new { jobID=item.jobID })"><i class="glyphicon glyphicon-edit"></i></a>
+
+                    </td>
+
+                </tr> i++;
+            }
+        </tbody>
+    </table>
+</div>
+    <script>
+
+        function changeStatus(ddl, jobID) {
+            debugger
+            var selectedVal = jqOld('#' + ddl).val();
+            if (selectedVal != "") {
+                jqOld.ajax({
+                    type: "GET",
+                    url: "jobStaus",
+                    data: { 'selectedVal': selectedVal, 'jobID': jobID },
+                    success: function (evt) {
+                        if (evt == "OK") {
+                            bootbox.alert({
+                                title: "Alert Success!",
+                                message: "job status updated"
+                            });
+
+                           
+                        }
+                    },
+                    error: function (req, status, error) {
+                        alert("Error Occured");
+                    }
+                });
+            }
+        }
+    </script>

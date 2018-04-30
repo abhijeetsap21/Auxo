@@ -1,0 +1,21 @@
+﻿@using NewLetter.Models;
+@{
+    ViewBag.Title = "candidateHome";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>candidateHome</h2>
+@{var userID1 = Convert.ToInt32( BaseUtil.GetSessionValue(AdminInfo.UserID.ToString())); }
+
+
+
+    <p>
+       
+        @Html.ActionLink("Personal Info", "PersonalInfo", "NewLetter",  new { qenid = @userID1 },null)
+    </p>
+
+    <p>
+        @Html.ActionLink("Apply Here ", "JobView", "jobDetails")
+    </p>
+
+

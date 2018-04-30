@@ -1,0 +1,239 @@
+﻿@using NewLetter.Models;
+
+<html lang="en">
+@{ bool isAuthenticated = BaseUtil.IsAuthenticated();
+    var roleID = BaseUtil.RoleID();
+    var userID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString());
+    var fullName = BaseUtil.GetSessionValue(AdminInfo.FullName.ToString());
+    var companyname = BaseUtil.GetSessionValue(AdminInfo.companyname.ToString());
+    var logo = BaseUtil.GetSessionValue(AdminInfo.logo.ToString());
+}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Auxo - Employer</title>
+    <!-- Bootstrap -->
+    <link href="~/css/bootstrap.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+
+    <link href="~/Content/themes/base/jquery.ui.all.css" rel="stylesheet" />
+
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+    @*<script src="~/Scripts/jquery-3.1.1.js"></script>*@
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+
+
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+
+    <script>
+    $(function () {
+        $('#notifi[onload]').trigger('onload');
+    });
+    </script>
+</head>
+<body>
+    <div class="container-fluid padding-none">
+        <div class="col-lg-12 padding-none">
+            <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                <div class="col-md-4 col-sm-4 col-xs-4 common-logo-block half-width">
+                    <div class="common-logo-main"><img src="~/images/auxo-inner.png" alt="Auxo"></div>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-4 common-qe-logo-block half-width">
+                    <div class="common-logo-main"><img src="~/images/qendidate-inner.png" alt="QeNdidate"></div>
+                </div>
+                @{ if (roleID == "5")
+                    {
+                        <div class="col-md-4 col-sm-4 col-xs-4 padding-left responsive-center full-width noticlass" id="notifi" onload="loadNotification();">
+
+                            <div class="common-round-shape">
+                                <img src="~/images/top-icon.png">
+                                <div class="n-green"><span class="count count_contact">&nbsp;</span></div>
+                            </div>
+                            <div class="common-round-shape">
+                                <img src="~/images/top-alert-icon.png">
+                                <div class="n-red"><span class="count count_download">&nbsp;</span></div>
+                            </div>
+                            <div class="common-round-shape">
+                                <div class="n-yellow"><span class="count count_view">&nbsp;</span></div>
+                                <img src="~/images/top-email-icon.png">
+                            </div>
+                            <div class="noti-content">
+                                <ul id="notiContent"></ul>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="col-md-6 col-sm-4 col-xs-12 common-qe-logo-block">
+                <div class="col-md-12 common-right-block">
+                    <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src="~/images/user-img.jpg" alt="img"></span><span class="common-user-loggedin-name">@fullName</span></div>
+                    <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src=@logo alt="img" style="width:35px"></span><span class="common-user-loggedin-comp">@companyname</span></div>
+                    <div class="dropdown common-top-dropdown">
+                        <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown"><img src="~/images/profile-icon.jpg"></button>
+
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" onclick="location.href='@Url.Action("Logout", "Account")'">Sign Out</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid padding-none gry">
+        <div class="row-eq-height">
+            <div class="col-md-2 col-sm-2 col-xs-12 padding-none left-nav">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                    </div>
+                    <div class="navbar-collapse collapse padding-none">
+                        <ul class="nav navbar-nav navbar-left">
+
+                            @{ if (roleID == "2")
+                                {
+                                    <li>@Html.ActionLink(" Post ", "jobDashboard", "jobDetails")</li>
+                                    <li><a href="#about">View Candidates</a></li>
+                                    <li>@Html.ActionLink("Edit Your Details", "empedit", "companyDetails")</li>
+                                    <li>@Html.ActionLink(" View Posted Jobs ", "Myjobs", "jobDetails")</li>
+                                    <li>@Html.ActionLink(" Dashboard ", "Dashbord", "Employer")</li>
+                                    <li>@Html.ActionLink(" Dashboard ", "cvShortlisted", "companyDetails")</li>
+                                    <li>@Html.ActionLink(" Pending Jobs ", "pendingJobs", "jobDetails")</li>
+                                    <li>@Html.ActionLink(" Created Advertisements ", "jobPluginList", "jobDetails")</li>
+                                    <li><a href="#about">Roles & Rights</a></li>
+
+                                }
+                                if (roleID == "5")
+                                {
+                                    <li>@Html.ActionLink("Profile", "editCandidate", "profile")</li>
+                                    <li>@Html.ActionLink("Find Jobs ", "jobs", "jobDetails")</li>
+                                    <li>@Html.ActionLink("Profile Summary", "ProfilePerformance", "profile")</li>
+                                    <li>@Html.ActionLink("Applied Job", "AppliedJobs", "profile")</li>
+
+                                }
+                                if (roleID == "1")
+                                {
+                                    <li>@Html.ActionLink("Education", "Index", "Education", new { area = "Admin" }, null)</li>
+                                    <li>@Html.ActionLink("Candidate Status", "Index", "CandidateStatus", new { area = "Admin" }, null)</li>
+                                    <li>@Html.ActionLink("Interview Slots", "Index", "Slots", new { area = "Admin" }, null)</li>
+                                    <li>@Html.ActionLink("Skills", "Index", "Skills", new { area = "Admin" }, null)</li>
+                                    <li>@Html.ActionLink("Employment Type", "Index", "EmploymentTypes", new { area = "Admin" }, null)</li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-md-10 col-sm-10 col-xs-12 padding-none right-form-panel">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var jqOld = jQuery.noConflict();
+        jqOld(document).ready(function () {
+            function setHeight() {
+                windowHeight = jqOld(window).innerHeight();
+                jqOld('.left-nav').css('min-height', windowHeight);
+            };
+            setHeight();
+
+            jqOld(window).resize(function () {
+                setHeight();
+            });
+        });
+
+    </script>
+
+    <script type="text/javascript">
+        debugger
+var jqOld = jQuery.noConflict();
+        jqOld(document).ready(function() {
+            jqOld('#myDataTable').DataTable();
+        } );
+    </script>
+</body>
+@RenderSection("head", required: false)
+
+<style type="text/css">
+    /*Added css for design notification area, you can design by your self*/
+    /* COPY css content from youtube video description*/
+    .noti-content {
+        position: fixed;
+        right: 100px;
+        background: #e5e5e5;
+        border-radius: 4px;
+        top: 47px;
+        width: 250px;
+        display: none;
+        border: 1px solid #9E988B;
+    }
+
+    ul#notiContent {
+        max-height: 200px;
+        overflow: auto;
+        padding: 0px;
+        margin: 0px;
+        padding-left: 20px;
+        z-index: 99999;
+        margin-top: 300px;
+        padding-top: 300px;
+        background: red;
+    }
+
+        ul#notiContent li {
+            margin: 3px;
+            padding: 6px;
+            background: red;
+        }
+
+
+
+    span.count {
+        position: relative;
+        top: -3px;
+    }
+</style>
+
+
+
+
+
+
+<script>
+    function DateCheck()
+{
+
+  var StartDate= document.getElementById('txtStartDate').value;
+  var EndDate= document.getElementById('txtEndDate').value;
+  var eDate = new Date(EndDate);
+  var sDate = new Date(StartDate);
+
+  if(StartDate!= '' && StartDate!= '' && sDate> eDate)
+  {
+       debugger
+       bootbox.alert({
+        title: 'Alert Success  !',
+        message: 'Please ensure that the End Date is greater than or equal to the Start Date.'
+       });
+
+    return false;
+    }
+}
+</script>
+</html>

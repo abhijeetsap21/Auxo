@@ -1,0 +1,54 @@
+﻿@model NewLetter.Models.qendidatePHD
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".datepicker").datepicker();
+    });
+</script>
+@using (Html.BeginForm("SavePhdInfo", "NewLetter", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.phdid)
+    @Html.HiddenFor(m => m.qenID)
+        <div class="col_1">
+            <div class="col_1 tleft"><strong>Certification name</strong></div>
+            @Html.TextBoxFor(m => m.courseField, new { placeholder = "Mention Your certification name here", maxlength = "100" })
+           
+        </div>
+            <div class="col_2">
+                <div class="col_1 tleft"><strong>Certification authority </strong></div>
+                @Html.TextBoxFor(m => m.collegeUniversity, new { placeholder = "Enter Name of issuing authority", maxlength = "100" })
+
+            </div>
+            <div class="col_2">
+                <div class="col_1 tleft"><strong>License number </strong></div>
+                @Html.TextBoxFor(m => m.phdTitle, new { placeholder = "Enter license numbe", maxlength = "100" })
+            </div>
+            @*<div class="col_2">
+                <div class="col_1 tleft"><strong>Enter Your Ph.D Field </strong></div>
+                 @Html.TextBoxFor(m => m.courseField, new { placeholder="Enter P.hd Field", maxlength = "100" })
+
+            </div>*@
+            <div class="col_2">
+                <div class="col_1 tleft"><strong>Start Date </strong></div>
+                @Html.TextBoxFor(m => m.phdStart, new { placeholder = "Start Date", @class = "datepicker" })
+            </div>
+            <div class="col_2">
+                <div class="col_1 tleft"><strong>End Date </strong></div>
+                @Html.TextBoxFor(m => m.phdEnd, new { placeholder = "End Date", @class = "datepicker" })
+            </div>
+            <div class="col_1">
+                <div class="col_1 tleft"><strong>Remarks </strong></div>
+                @Html.TextBoxFor(m => m.phdRemarks, new { placeholder = "Remarks", maxlength = "100" })
+            </div>
+            <div class="fclear"></div>
+            if (Model.phdid > 0)
+                {
+                    <input type="submit" name="save" class="previous action-button" value="Update" id="btnsaveempinfo" style="margin-top:40px" />
+                }
+                else
+                {
+                    <input type="submit" name="save" class="previous action-button" value="Submit" id="btnsaveempinfo" style="margin-top:40px" />
+                }
+            
+
+}

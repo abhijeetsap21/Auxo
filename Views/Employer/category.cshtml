@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "category";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>  
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<h2>category</h2>
+@{var jobID = ViewBag.jobID;}
+<script>
+    var URL = '@Url.Action("categoryC1", "Employer")?jobID=' + '@jobID';
+    $.get(URL, function (data) {
+        $("#dicCat1").html(data);
+    });
+
+    var URL = '@Url.Action("categoryC2", "Employer")?jobID=' + '@jobID';
+    $.get(URL, function (data) {
+        $("#dicCat2").html(data);
+    });
+
+    var URL = '@Url.Action("categoryC3", "Employer")?jobID=' + '@jobID';
+    $.get(URL, function (data) {
+        $("#dicCat3").html(data);
+    });
+</script>
+
+<div class="w3-bar w3-black">
+    <button class="w3-bar-item w3-button" onclick="openDiv('dicCat1')">category 1</button>
+    <button class="w3-bar-item w3-button" onclick="openDiv('dicCat2')">category 2</button>
+    <button class="w3-bar-item w3-button" onclick="openDiv('dicCat3')">category 3</button>
+    </div>
+<a href='@Url.Action("scheduleTestDashboard", "Employer",new { @ViewBag.jobID })'>GO TO Schedule Test</a>
+
+<div id="dicCat1" class="w3-container city">
+    @Html.Action("categoryC1", "Employer", new { @jobID })
+</div>
+
+<div id="dicCat2" class="w3-container city" style="display:none">
+    @Html.Action("categoryC2", "Employer", new { @jobID })
+</div>
+
+<div id="dicCat3" class="w3-container city" style="display:none">
+    @Html.Action("categoryC3", "Employer", new { @jobID })
+</div>
+   
+<script>
+
+function openDiv(divName) {
+    var i;
+    var x = document.getElementsByClassName("city");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";
+    }
+    document.getElementById(divName).style.display = "block";
+}
+</script>
+
+
+
+<div class="modal fade" id="myModal" role="dialog">   </div>
+
+
+<script>
+    function dispalyResume(qenID) {
+        debugger
+        var URL = '@Url.Action("_partialPreviewCV", "profile")?qenID=' + qenID;
+        $.get(URL, function (data) {
+            $("#myModal").html(data);
+        });
+    }
+</script>

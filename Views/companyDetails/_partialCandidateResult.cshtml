@@ -1,0 +1,194 @@
+﻿@using NewLetter
+@using NewLetter.Models;
+@model IEnumerable<NewLetter.Models.qendidateSearchmodel>
+@{  var roleID = BaseUtil.RoleID();
+    }
+
+
+
+    @{ var i = 0;}
+
+<head>
+    <style>
+    #tooltip{
+        background-color: white;
+        padding: 20px;
+        display: none;
+        }
+    #ast:hover + #tooltip 
+        {
+        display: block;
+        }
+     </style>
+</head>
+<br />
+    <div class="table-responsive">
+        <table id="myDataTable" class="table table-striped table-bordered table-hover col-md-12 display">
+          <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Experience</th>
+                  <th>Matching Skills</th>
+                  <th>Salary</th>
+                  <th>View Resume</th>
+                  <th>Category 1</th>
+                  <th>Category 2</th>
+                  <th>Category 3</th>
+              </tr>
+            </thead>
+            
+            <tbody>
+            
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>
+                            <p id="QENID">@(i = i + 1)</p>
+                        </td>
+                        <td class="cv-short-left">
+                            
+                           @if (item.selfApplied == true)
+                           {
+                               @Html.DisplayFor(ModelItem => item.qenname)  <span id="ast">&#42;</span><div id="tooltip">These candidates applied through Auxo </div>
+                           }
+                           else
+                           {
+                                @Html.DisplayFor(ModelItem => item.qenname)
+                           }
+                        </td>
+                        <td class="cv-short-left">
+                            @*<p>@item.qenExperience</p>*@
+                        </td>
+                        <td class="cv-short-left">
+                            <p>
+                                @{ string skills = BaseUtil.Qen_skillSet(item.qenid);
+                                }
+                                @skills
+                            </p>
+                        </td>
+                        <td class="cv-short-left">
+                            @*<p>@item.qenSalary</p>*@
+                        </td>
+                        <td>
+                            @Html.HiddenFor(ModelItem => item.qencategory, new { id = "item_qencategory"+ @i })
+                            <input type="button"  class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" value="View" onclick="return dispalyResume(@item.qenid);" /> 
+                        </td>
+
+                        @if (item.qencategory == 0)
+                    {
+
+                    <td><input type="radio" name='Category_@item.qenid' onclick="return categoriesCandidate1(@i,'item_qencategory'+ @i);" /></td>
+                    <td><input type="radio" name='Category_@item.qenid' onclick="return categoriesCandidate2(@i,'item_qencategory'+ @i);" /></td>
+                    <td><input type="radio" name='Category_@item.qenid' onclick="return categoriesCandidate3(@i,'item_qencategory'+ @i);" /></td>
+                    }
+                    else if (item.qencategory == 1)
+                        {
+
+                    <td><input type="radio" name='Category_@item.qenid' checked onclick="return categoriesCandidate1(@i,'item_qencategory');" /></td>
+                    <td><input type="radio" name='Category_@item.qenid' onclick="return categoriesCandidate2(@i,'item_qencategory');" /></td>
+                    <td><input type="radio" name='Category_@item.qenid' onclick="return categoriesCandidate3(@i,'item_qencategory');" /></td>
+                    }
+                    else if (item.qencategory == 2)
+                            {
+
+                    <td><input type="radio" name='Category_@item.qenid' onclick="return categoriesCandidate1(@i,'item_qencategory');" /></td>
+                    <td><input type="radio" name='Category_@item.qenid' checked onclick="return categoriesCandidate2(@i,'item_qencategory');" /></td>
+                    <td><input type="radio" name='Category_@item.qenid' onclick="return categoriesCandidate3(@i,'item_qencategory');" /></td>
+                    }
+                    else
+                    {
+
+                    <td><input type="radio" name='Category_@item.qenid' onclick="return categoriesCandidate1(@i,'item_qencategory');" /></td>
+                    <td>><input type="radio" name='Category_@item.qenid' onclick="return categoriesCandidate2(@i,'item_qencategory');" /></td>
+                    <td><input type="radio" name='Category_@item.qenid' checked onclick="return categoriesCandidate3(@i,'item_qencategory');" /></td>
+                    }
+
+
+                    </tr>
+
+                      }
+
+
+            </tbody>
+        </table>
+        <label><input class="cv-Proceed" type="button" value="Proceed" onclick="return proceedComm();" /></label>
+    </div>
+  
+
+
+<div class="modal fade" id="myModal" role="dialog">   </div>
+
+
+<script>
+    function dispalyResume(qenID) {
+        debugger
+        var URL = '@Url.Action("_partialPreviewCV", "profile")?qenID=' + qenID;
+        $.get(URL, function (data) {
+            $("#myModal").html(data);
+        });
+    }
+</script>
+
+
+
+
+    <script>
+        function categoriesCandidate1(i, id) {
+            debugger
+            var hdnFld = document.getElementById(id);
+            hdnFld.value = 1;
+        }
+
+        function categoriesCandidate2(i, id) {
+            debugger
+            var hdnFld = document.getElementById(id);
+            hdnFld.value = 2;
+        }
+
+        function categoriesCandidate3(i, id) {
+            debugger
+            var hdnFld = document.getElementById(id);
+            hdnFld.value = 3;
+        }
+
+
+    </script>
+
+    <script>
+        function proceedComm() {
+            debugger
+            var model = @Html.Raw(Json.Encode(Model))
+                noofrows(model);
+
+            $.ajax({
+                type: 'post',
+                url: '@Url.Action("saveToOrionComm", "companyDetails")',
+                data: JSON.stringify({ searchmodel: model }),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    debugger
+                    if (data != "no") {
+                        debugger
+                        var URL = '@Url.Action("category", "Employer")?jobID=' + data;
+                        window.location.href = URL;
+                    }
+                }
+            });
+
+        }
+        function noofrows(Model) {
+            debugger
+            var rows = document.getElementById('myDataTable').getElementsByTagName('tr')
+            var modelrows = rows.length;
+            for (i = 1 ; i < modelrows ; i++) {
+
+                var id = "item_qencategory" + i;
+                var hdnFld = document.getElementById(id).value;
+                Model[i - 1].qencategory = hdnFld;
+            }
+        }
+
+    </script>
+

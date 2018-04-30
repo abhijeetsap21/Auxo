@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "jobDashboard";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+<script type="text/javascript">
+     
+    function pageredirect(selectedradio) {
+        debugger
+
+        if (selectedradio == "f-option") {
+            window.location.href = 'NewJob';
+        }
+        if (selectedradio == "s-option") {
+            window.location.href = 'createAdvertisement';
+        }
+        if (selectedradio == "t-option") {
+            window.location.href = 'NewJob';
+        }
+    }
+</script>
+<div class="col-md-12 col-sm-12 col-xs-12 rightside rightside1">
+    <div class="radio-btn">
+        <ul>
+            <li>
+
+                <label for="f-option" onclick="" ><img src="~/images/icon1.jpg"> Post a Job</label>
+                <input type="radio" id="f-option" name="selector" onclick="return pageredirect('f-option');">
+                <div class="check"></div>
+            </li>
+            <li>
+                <input type="radio" id="s-option" name="selector" onclick="return pageredirect('s-option');">
+                <label for="s-option"><img src="~/images/icon2.jpg">newspaper ad</label>
+                <div class="check">
+                    <div class="inside"></div>
+                </div>
+            </li>
+            <li>
+                <input type="radio" id="t-option" name="selector">
+                <label for="t-option"><img src="~/images/icon3.jpg">Post on other portal</label>
+                <div class="check">
+                    <div class="inside"></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="col-xs-12 col-md-12 continue text-right padding-right">
+        <a href="#">continue</a>
+    </div>
+</div>
+

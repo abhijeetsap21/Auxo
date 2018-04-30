@@ -1,0 +1,32 @@
+﻿@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,700,400' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="~/Content/reset.css"> <!-- CSS reset -->
+    <link rel="stylesheet" href="~/Content/CustomStyle.css"> <!-- Resource style -->
+    <script src="~/Scripts/modernizr-2.6.2.js"></script> <!-- Modernizr -->
+
+    <title>qendidate</title>
+</head>
+<body>
+    <section class="cd-intro">
+        <div class="cd-intro-content scale">
+            <h1>Do you have a desire to be what you want to be ?</h1>
+            <p>Click below to expose your talent to the world ...</p>
+            <div class="action-wrapper">
+                <a style="cursor:pointer" onclick="location.href='@Url.Action("PersonalInfo", "NewLetter", new { qenid = ViewBag.qenid })'" class="cd-btn main-action">Your LaunchPad</a>
+            </div>
+        </div>
+    </section>
+
+    <script src="~/Scripts/jquery-2.1.4.js"></script>
+    <script src="~/Scripts/main.js"></script> <!-- Resource jQuery -->
+</body>
+</html>

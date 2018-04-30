@@ -1,0 +1,188 @@
+﻿@model NewLetter.Models.qenrefvalidation
+@{
+    ViewBag.Title = "RefrenceInfo";
+}
+
+
+<style>
+    span.col_1.tleft.text-danger.field-validation-error :before {
+        content: " Warning ! ";
+        color: red;
+        font-weight: bold;
+    }
+
+    .text-danger {
+        color: red;
+    }
+</style>
+
+<div id="references">
+    <div class="container">
+        <div class="row sub-container">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="right-box">
+                    @using (Html.BeginForm("SaveRefrenceInfo", "profile", FormMethod.Post, new { id = "msform" }))
+                    {
+
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.qenid)          @Html.HiddenFor(m => m.qenRefID1)
+                        var qenid = Model.qenid;
+                        <h1 style="margin-bottom:20px;">references</h1>
+                            <h2 class="steps"><span>1</span></h2>
+                            <div class="group">
+                                @Html.TextBoxFor(m => m.qenRefName1, new { id = "qenRefName1", placeholder = "Full Name" })
+                                <div class="alert alert-warning error-custom" role="alert">
+                                    @Html.ValidationMessageFor(m => m.qenRefName1, "", new { @class = "col_1 tleft text-danger" })
+                                </div>
+                            </div>
+                            <div class="group">
+
+                                @Html.TextBoxFor(m => m.qenRefPhone1, new { id = "qenRefPhone1", placeholder = "Mobile Number", maxlength = "10" })
+                                <div class="alert alert-warning error-custom" role="alert">
+                                    @Html.ValidationMessageFor(m => m.qenRefPhone1, "", new { @class = "col_1 tleft text-danger" })
+                                </div>
+                            </div>
+                            <div class="group">
+
+                                @Html.TextBoxFor(m => m.qenRefEmail1, new { id = "qenRefEmail1", placeholder = "Email" })
+                                <div class="alert alert-warning error-custom" role="alert">
+                                    @Html.ValidationMessageFor(m => m.qenRefEmail1, "", new { @class = "col_1 tleft text-danger" })
+                                </div>
+                            </div>
+                            <div class="group">
+                                @Html.TextBoxFor(m => m.qenRefCompany1, new { id = "qenRefCompany1", placeholder = "Company Name" })
+                                <div class="alert alert-warning error-custom" role="alert">
+                                    @Html.ValidationMessageFor(m => m.qenRefCompany1, "", new { @class = "col_1 tleft text-danger" })
+                                </div>
+                            </div>
+                            <div class="group">
+                                @Html.TextBoxFor(m => m.qenRefPosition1, new { id = "qenRefPosition1", placeholder = "Designation" })
+                                <div class="alert alert-warning error-custom" role="alert">
+                                    @Html.ValidationMessageFor(m => m.qenRefPosition1, "", new { @class = "col_1 tleft text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="group">
+                                
+                                @{ if (Model.qenRefID1 != 0)
+                                    {
+                                        if (Model.isCheckComplete1)
+                                        {<span id="ref1">Verified</span> }
+                                        else
+                                        {
+                                            <input type="button" id="ref2" onclick="return resendRefMail1();" value="Resend mail" />
+                                           
+                                        }
+
+                                    }
+                                }
+                            </div>
+
+                                <div>&nbsp;</div>
+                                <h2 class="steps"><span>2</span></h2>
+                                <div class="group">@Html.HiddenFor(m => m.qenRefID2)
+                                    @Html.TextBoxFor(m => m.qenRefName2, new { id = "qenRefName2", placeholder = "Full Name" })
+                                    <div class="alert alert-warning error-custom" role="alert">
+                                        @Html.ValidationMessageFor(m => m.qenRefName2, "", new { @class = "col_1 tleft text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="group">
+                                    @Html.TextBoxFor(m => m.qenRefPhone2, new { id = "qenRefPhone2", placeholder = "Mobile Number", maxlength = "10" })
+                                    <div class="alert alert-warning error-custom" role="alert">
+                                        @Html.ValidationMessageFor(m => m.qenRefPhone2, "", new { @class = "col_1 tleft text-danger" })
+                                    </div>
+                                </div>
+                                <div class="group">
+                                    @Html.TextBoxFor(m => m.qenRefEmail2, new { id = "qenRefEmail2", placeholder = "Email" })
+                                    <div class="alert alert-warning error-custom" role="alert">
+                                        @Html.ValidationMessageFor(m => m.qenRefEmail2, "", new { @class = "col_1 tleft text-danger" })
+                                    </div>
+                                </div>
+                                <div class="group">
+                                    @Html.TextBoxFor(m => m.qenRefCompany2, new { id = "qenRefCompany2", placeholder = "Company Name" })
+                                    <div class="alert alert-warning error-custom" role="alert">
+                                        @Html.ValidationMessageFor(m => m.qenRefCompany2, "", new { @class = "col_1 tleft text-danger" })
+                                    </div>
+                                </div>
+                                <div class="group">
+                                    @Html.TextBoxFor(m => m.qenRefPosition2, new { id = "qenRefPosition2", placeholder = "Designation" })
+                                    <div class="alert alert-warning error-custom" role="alert">
+                                        @Html.ValidationMessageFor(m => m.qenRefPosition2, "", new { @class = "col_1 tleft text-danger" })
+                                    </div>
+                                </div>
+                                <div class="group">
+
+                                    @{ if (Model.qenRefID2 != 0)
+                                            {
+                                                if (Model.isCheckComplete2)
+                                                {<span id="ref2">Verified</span> }
+                                            else
+                                            {
+                                                <input type="button" id="ref2" onclick="return resendRefMail2();" value="Resend mail" />
+                                            }
+
+                                        }
+                                    }
+                                </div>
+                                <div class="group next-btn-wrap">
+                                    <input type="submit" name="Submit" id="btnnext" class="Submit action-button" value="Save" />
+                                </div>
+                                }
+
+                            </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<script>
+    
+    function resendRefMail1()
+    {
+        debugger
+        var qenID = document.getElementById("qenid").value;
+        var qenRefID1 = document.getElementById("qenRefID1").value;
+        var email = document.getElementById("qenRefEmail1").value;
+        var name = document.getElementById("qenRefName1").value;
+        $.ajax({
+            
+            url: '@Url.Action("sendReferenceEmailer", "profile")',
+            data: {'email': email, 'name': name, 'qenID': qenID, 'qenRefID1': qenRefID1 },
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data == "ok") {
+                    alert("Mail sent.");
+                }
+                else { alert("There is some technical problem to send mail."); }
+            }
+        });
+
+    }
+
+    function resendRefMail2() {
+        var qenID2 = document.getElementById("qenid").value;
+        var qenRefID2 = document.getElementById("qenRefID2").value;
+        debugger
+        var name2 = document.getElementById("qenRefName2").value;
+        var email2 = document.getElementById("qenRefEmail2").value;
+        
+        $.ajax({
+            url: '@Url.Action("sendReferenceEmailer", "profile")',
+            data: { 'email': email2, 'name': name2, 'qenID': qenID2, 'qenRefID1': qenRefID2 },
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data == "ok") {
+                    alert("Mail sent.");
+                }
+                else { alert("There is some technical problem to send mail."); }
+            }
+        });
+    }
+    
+</script>

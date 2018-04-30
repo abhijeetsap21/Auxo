@@ -1,0 +1,96 @@
+﻿@model NewLetter.Models.requiredSkills
+
+@{
+    ViewBag.Title = "Skills";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+<link href="~/Content/themes/base/autocomplete.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#skills")
+            .bind("keydown", function (event) {
+                if (event.keyCode === $.ui.keyCode.TAB &&
+                $(this).data("ui-autocomplete").menu.active) {
+                    event.preventDefault();
+                }
+            })
+            .autocomplete({
+                minLength: 2,
+                source: function( request, response ) {
+                    $.getJSON("/jobDetails/select_fillSkills", {
+                        term: extractLast( request.term )
+                    }, response );
+                },
+                search: function () {
+                    // custom minLength
+                    var term = extractLast(this.value);
+                    if (term.length < 2) {
+                        return false;
+                    }
+                },
+                focus: function () {
+                    // prevent value inserted on focus
+                    return false;
+                },
+                select: function (event, ui) {
+                    debugger
+                    var usersIdVal = $("#UsersId").val();
+                    usersIdVal += ", " + ui.item.userId;
+                    $("#UsersId").val(usersIdVal)
+
+                    var terms = split(this.value);
+                    // remove the current input
+                    terms.pop();
+                    // add the selected item
+                    terms.push(ui.item.value);
+                    // add placeholder to get the comma-and-space at the end
+                    terms.push("");
+                    this.value = terms.join(", ");
+                    return false;
+                }
+            });
+    });
+    function split(val) {
+        return val.split(/,\s*/);
+    }
+    function extractLast(term) {
+        return split(term).pop();
+    }
+</script>
+@using (Html.BeginForm("Skills", "jobDetails", FormMethod.Post, new { id = "msform" }))
+{
+     var id = @Model.jobID;
+    <fieldset>
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.jobID)
+       
+        <h2 class="fs-title">Education And Skills</h2><br />
+        <div class="col_1">
+            <div class="col_3 tleft">
+                @Html.LabelFor(model => model.EducationReq)
+            </div>
+            <div class="col_2">
+                @Html.DropDownList("EducationReq")
+            </div>
+            </div>
+            <div class="col_1">
+                <div class="col_3 tleft">
+                    @Html.LabelFor(model => model.skills)
+                </div>                    
+                <div class="col_2">
+                    @Html.EditorFor(model => model.skills, "", new { @class = "" })
+                    @Html.Hidden("UsersId")
+
+                </div>
+                </div>
+        <div class="fclear"></div>
+        <div style="width:90%;float:left">
+
+            @*@Html.EncodedActionLink("Previous", "postJob", "jobDetails", new { @class = "action-button previous" })*@
+            <input type="button" name="Previous" class="previous action-button" value="Previous" onclick="location.href='@Url.Action("postJob", "jobDetails")'" />
+            <input type="submit" name="Next" class="next action-button" value="Next" id="btnnext"/>
+        </div>
+</fieldset>
+}

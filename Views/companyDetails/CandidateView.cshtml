@@ -1,0 +1,252 @@
+﻿@model NewLetter.Models.ResumeModel
+@{
+    ViewBag.Title = "CandidateView";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.rawgit.com/niklasvh/html2canvas/0.5.0-alpha2/dist/html2canvas.min.js"></script>
+<script type="text/javascript" src="//cdn.rawgit.com/MrRio/jsPDF/master/dist/jspdf.min.js"></script>
+<script type="text/javascript"></script>
+
+<h2>CandidateView</h2>
+</script>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Resume</title>
+</head>
+<style>
+    body {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .mydiv {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 15px;
+        padding: 0px;
+        margin: 0px 0 5px;
+        color: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .mydiv td {
+        font-size: 14px;
+        color: #000;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .lightblue {
+        color: #A52A2A;
+        font-size: 15px;
+    }
+
+    .right-b {
+        border-right: 0px solid #483d8b;
+    }
+
+    .p-right {
+        padding: 0 0px 0 0px;
+    }
+
+    .bgcolor {
+        background: #1d2d48;
+        padding: 10px;
+        color: #fff;
+        font-size: 15px;
+    }
+
+    .border-b {
+        border-bottom: 1px solid #483d8b;
+    }
+</style>
+<body>
+    <div class="mydiv">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td align="right"></td>
+            </tr>
+            <tr>
+                <td align="right"><img src="~/Images/orion.png"></td>
+            </tr>
+            <tr>
+                <td>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr><td width="29%" class="right-b bgcolor"><h1>Personal Details</h1></td></tr>
+                        <tr>
+                            <td width="71%">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td class="p-right" height="30" align="left" valign="middle">@Model.personainfo.qenName</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-right" height="30" align="left" valign="middle">@Model.personainfo.qenEmail</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-right" height="30" align="left" valign="middle">@Model.personainfo.qenPhone</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td height="30" class="p-right" align="left" valign="middle">@Model.personainfo.City</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr><td width="29%" class="right-b bgcolor"><h1>Education</h1></td></tr>
+                        <tr><td height="5">&nbsp;</td></tr>
+                        <tr>
+
+                            <td width="71%" align="left" valign="top">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td class="p-right" height="30" align="left" valign="top"><strong class="lightblue">High School Details</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-right" height="30" align="left" valign="middle">
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td width="37%" height="30" align="left" valign="middle"><strong>Board Name</strong></td>
+                                                    <td width="42%" align="left" valign="middle" class="p-right"><strong>Passing Year</strong></td>
+                                                    <td width="21%" align="left" valign="middle" class="p-right"><strong>Percentage</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td height="30" align="left" valign="middle">@Model.educationinfo.secondary.secondaryBoard</td>
+                                                    <td class="p-right" align="left" valign="middle">@Model.educationinfo.secondary.secondaryPassYear</td>
+                                                    <td class="p-right" align="left" valign="middle">@Model.educationinfo.secondary.secondaryPercentage</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-right" height="30" align="left" valign="middle"><strong class="lightblue">Senior School Details</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-right" height="30" align="left" valign="middle">
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td width="37%" height="30" align="left" valign="middle"><strong>Board Name</strong></td>
+                                                    <td width="42%" align="left" valign="middle" class="p-right"><strong>Passing Year</strong></td>
+                                                    <td width="21%" align="left" valign="middle" class="p-right"><strong>Percentage</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td height="30" align="left" valign="middle">@Model.educationinfo.hsecondary.hSecondaryBoard</td>
+                                                    <td class="p-right" align="left" valign="middle">@Model.educationinfo.hsecondary.hSecondaryPassYear</td>
+                                                    <td class="p-right" align="left" valign="middle">@Model.educationinfo.hsecondary.hSecondaryPercentage</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-right" height="30" align="left" valign="middle"><strong class="lightblue">Graduation Details</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-right" height="30" align="left" valign="middle">
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td width="37%" height="30" align="left" valign="middle"><strong>College Name</strong></td>
+                                                    <td width="42%" align="left" valign="middle" class="p-right"><strong>Course Name</strong></td>
+                                                    <td width="21%" align="left" valign="middle" class="p-right"><strong>Percentage</strong></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td height="30" align="left" valign="middle">@Model.educationinfo.graduation.collegeName</td>
+                                                    <td class="p-right" align="left" valign="middle">@Model.educationinfo.graduation.courseName</td>
+                                                    <td class="p-right" align="left" valign="middle">@Model.educationinfo.graduation.gradPercentage</td>
+
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr><td width="29%" class="right-b bgcolor"><h1>Employment History</h1></td></tr>
+                        <tr><td height="5">&nbsp;</td></tr>
+                        <tr>
+
+                            <td width="71%" align="left" valign="top">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    @if (Model.employmentinfo != null && Model.employmentinfo.Count > 0)
+                                    {
+                                        foreach (var item in Model.employmentinfo)
+                                        {
+                                            <tr>
+                                                <td width="37%" height="30" align="left" valign="middle"><strong>Company Name</strong></td>
+                                                <td width="42%" align="left" valign="middle" class="p-right"><strong>Position</strong></td>
+                                                <td width="21%" align="left" valign="middle" class="p-right"><strong>From</strong></td>
+                                                <td width="21%" align="left" valign="middle" class="p-right"><strong>To</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td height="30" align="left" valign="middle">@item.CompanyName</td>
+                                                <td class="p-right" align="left" valign="middle">@item.qenPosition</td>
+                                                <td class="p-right" align="left" valign="middle">@item.qenEmpFrom</td>
+                                                <td class="p-right" align="left" valign="middle">@item.qenEmpTo</td>
+                                            </tr>
+                                        }
+                                    }
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr><td width="29%" class="right-b bgcolor"><h1>Skills</h1></td></tr>
+                        <tr><td height="5">&nbsp;</td></tr>
+                        <tr>
+
+                            <td width="71%" align="left" valign="top">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+
+                                   
+
+
+
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+
+
+
+
+            </tr>
+
+
+        </table>
+
+
+
+
+    </div>
+
+</body>
+</html>

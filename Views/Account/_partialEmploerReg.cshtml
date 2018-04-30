@@ -1,0 +1,46 @@
+﻿@model NewLetter.Models.empRegistration 
+@using (Html.BeginForm("partialEmployerReg", "Account", FormMethod.Post, new { @class = "login-form" }))
+{
+                @Html.AntiForgeryToken()
+
+
+    @Html.ValidationMessageFor(model => model.companyName, "", new { @class = "text-danger" })
+        <div class="input-group">           
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                @Html.TextBoxFor(model => model.companyName,  new { @class = "form-control", placeholder = "Organization Name" } )
+               
+            </div>
+
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        <div class="input-group">           
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
+               
+        </div>
+        @Html.ValidationMessageFor(model => model.website, "", new { @class = "text-danger" })
+        <div class="input-group">
+         
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                @Html.TextBoxFor(model => model.website, new { @class = "form-control", placeholder = "Website URL" })            
+           
+        </div>
+
+        @Html.ValidationMessageFor(model => model.mobile, "", new { @class = "text-danger" })
+        <div class="input-group">
+          
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                @Html.TextBoxFor(model => model.mobile, new { @class = "form-control", placeholder = "MObile" })
+        </div>
+
+        @Html.ValidationMessageFor(model => model.employerTypeID, "", new { @class = "text-danger" })
+        <div class="input-group">     
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>      
+                @Html.DropDownList("employerTypeID", null, new { @class = "form-control" })              
+          
+        </div>
+
+       <div class="col-md-4 col-xs-4 col-xs-4 padding-none">
+    <input type="submit" class="btn" value="Login" />
+</div>
+
+}

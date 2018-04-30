@@ -1,0 +1,110 @@
+﻿@model IEnumerable<NewLetter.Models.sp_skillsList_Result>
+
+@{
+    int PageCount = Convert.ToInt32(ViewBag.count);
+    int CurrentPageIndex = Convert.ToInt32(ViewBag.currindex);
+}
+
+<style type="text/css">
+    body {
+        font-family: Arial;
+        font-size: 10pt;
+    }
+
+    table {
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+        background-color: #fff;
+    }
+
+        table th {
+            background-color: #B8DBFD;
+            color: #333;
+            font-weight: bold;
+        }
+
+        table th, table td {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+
+        table, table table td {
+            border: 0px solid #ccc;
+        }
+</style>
+<div>
+    @if (ViewBag.data == "Yes")
+    {
+    <table class="table">
+        <tr>
+            <th>Skill  ID</th>
+            <th>Skill Name</th>
+            <th>Data Created Date</th>
+            <th>Data Last updated Date</th>
+            <th>Account IS ACTIVE?</th>
+            <th>Activate Or Deactivate</th>
+        </tr>
+
+
+        @foreach (var a in Model)
+        {
+            <tr>
+                <td>@a.skillsID</td>
+                <td>@a.skillName</td>
+                <td>@a.dataIsCreated</td>
+                <td>@a.dataIsUpdated</td>
+                <td><input type="checkbox" checked="@a.isActive" /></td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = a.skillsID })
+                </td>
+
+
+            </tr>
+        }
+    </table>
+    }
+
+    <br />
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            @for (int i = 1; i <= PageCount; i++)
+            {
+                <td>
+                    @if (i != CurrentPageIndex)
+                    {
+                        <a href="javascript:PagerClick(@i);">@i</a>
+                    }
+                    else
+                    {
+                        <span>@i</span>
+                    }
+                </td>
+            }
+        </tr>
+    </table>
+    <input type="hidden" id="hfCurrentPageIndex" name="currentPageIndex" value='@CurrentPageIndex' />
+
+    @if (ViewBag.data == "Nodata")
+    {
+        <div>No Data Avaiable</div>
+    } 
+
+</div>
+
+<script type="text/javascript">
+    function PagerClick(index) {
+        debugger
+            document.getElementById("hfCurrentPageIndex").value = index;
+        //document.forms[0].submit();
+            nextVal (index);
+        }
+
+        debugger
+        function demo() {
+            debugger
+            var val = @CurrentPageIndex;
+            document.getElementById("hfCurrentPageIndex").value = val;
+            document.forms[0].submit();
+        }
+
+</script>

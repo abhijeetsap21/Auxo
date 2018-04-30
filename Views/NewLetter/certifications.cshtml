@@ -1,0 +1,143 @@
+﻿@model IEnumerable<NewLetter.Models.qendidatePHD>
+@{
+    ViewBag.Title = "PhdInfo";
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".deletejob").click(function () {
+            debugger
+            var jobno = $(this).attr('id');
+            $.ajax({
+                type: "POST",
+                url: "DeleteCertifications",
+                data: { 'phdid': jobno },
+                dataType: "html",
+                success: function (evt) {
+                    var control = "#" + jobno;
+                    var control2 = "#" + jobno;
+                    $(control).remove();
+                    $(control2).remove();
+                    //$("#" + jobno + " .jobinfo").remove();
+                },
+                error: function (req, status, error) {
+                    alert("Error Occured");
+                }
+            });
+        });
+        $(".editjob").click(function () {
+            debugger
+            var jobno = $(this).attr('id');
+            var qenid = $("#hdnqenid").val();
+            $.ajax({
+                type: "GET",
+                url: "certificationsAddPop",
+                data: { 'phdid': jobno, 'qenid': qenid },
+                dataType: "html",
+                success: function (evt) {
+                    $('#dialog-edit').html(evt);
+                    $("#dialog-edit").dialog("open");
+                },
+                error: function (req, status, error) {
+                    alert("Error Occured");
+                }
+            });
+            $("#dialog-edit").dialog({
+                title: "Job Details",
+                autoOpen: false,
+                resizable: false,
+                height: 500,
+                width: 700,
+                show: { effect: 'drop', direction: "up" },
+                modal: true,
+                draggable: true,
+                open: function (event, ui) {
+                    $(this).dialog("open");
+                },
+                buttons: {
+                    "Close": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            return false;
+        });
+
+
+        $(".addMoreItemContainer").click(function () {
+            debugger
+            var qenid = $("#hdnqenid").val();
+            var jobno = 0;
+            $.ajax({
+                type: "GET",
+                url: "certificationsAddPop",
+                data: { 'phdid': jobno, 'qenid': qenid },
+                dataType: "html",
+                success: function (evt) {
+                    $('#dialog-edit').html(evt);
+                    $("#dialog-edit").dialog("open");
+                },
+                error: function (req, status, error) {
+                    alert("Error Occured");
+                }
+            });
+
+            $("#dialog-edit").dialog({
+                title: "Job Details",
+                autoOpen: false,
+                resizable: false,
+                height: 500,
+                width: 700,
+                show: { effect: 'drop', direction: "up" },
+                modal: true,
+                draggable: true,
+                open: function (event, ui) {
+                    $(this).dialog("open");
+                },
+                buttons: {
+                    "Close": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
+
+<form action="/" method="post" id="msform">
+    @{ var id = ViewBag.qenID;}
+    <input type="hidden" id="hdnqenid" value="@id" />
+    <fieldset>
+        <h2 class="fs-title">Training and Certifications</h2>
+        <h3 class="fs-subtitle">This is step 3 info</h3>
+
+        <div class="addMoreItemContainer" id="job">
+            + Add Job
+        </div>
+        <div>
+            @foreach (var data in Model)
+            {
+                <div class="jobinfo" id="@data.phdid">
+                    <span>@data.courseField</span><br />
+                    <span>@data.phdTitle</span><br />
+                    <span>@data.collegeUniversity</span><br />
+                    <span>@data.phdStart</span>&nbsp;To&nbsp;<span>@data.phdEnd</span><br />
+                    <span>@data.phdRemarks</span><br />
+                </div>
+                <div class="cornerdiv" id="@data.phdid">
+                    <a href="#" class="editjob" id="@data.phdid">Edit</a>
+                    <a href="#" class="deletejob" id="@data.phdid">Delete</a>
+                </div>
+            }
+        </div>
+        <div style="width:90%;float:left">
+            <input type="button" name="Previous" class="previous action-button" value="Previous" onclick="location.href='@Url.Action("AcademicInfo", "NewLetter",new { qenid = @id })'" />
+            <input type="button" name="Next" class="next action-button" value="Next" id="btnnext" onclick="location.href='@Url.Action("EmplomentInfo", "NewLetter",new { qenid = @id})'" />
+        </div>
+        <div id="dialog-edit" style="display: none"></div>
+    </fieldset>
+</form>
+

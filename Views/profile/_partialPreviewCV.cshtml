@@ -1,0 +1,189 @@
+﻿@model NewLetter.Models.ResumeModel
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CV</title>
+<style>
+    #Grid {
+        font-family: Tahoma, Geneva, sans-serif;
+        -webkit-print-color-adjust: exact;
+    }
+</style>
+
+
+
+<div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Resume</h4>
+        </div>
+        <div class="modal-body" style="overflow:auto">
+            <div id="Grid" style="width:595px;height:842px;">
+                <div style="width:1000px; margin:20px auto; overflow:hidden; border:6px solid #e4e4e6;">
+                    <div style="background:#20b08f; -webkit-print-color-adjust: exact; padding:8px 0; font-size:13px; color:#fff; text-align:center;">@Model.personainfo.zipCode&nbsp;&nbsp;|&nbsp;&nbsp;Call - @Model.personainfo.qenPhone&nbsp;&nbsp;|&nbsp;&nbsp;Email - @Model.personainfo.qenEmail</div>
+                    <div style="width:100px;  border-radius:100px; overflow: hidden; margin:17px auto 0;"><img src="@Model.personainfo.qenImage" width="100" height="93" /></div>
+                    <div style="padding:25px 0; width:100%; float:left; font-size:32px; text-align:center; line-height:35px;">
+
+                        @Model.personainfo.qenName
+                        <span style="font-size:16px; color:#666; display:block;"><img src="dot.png" width="5" height="5" />&nbsp;ASP .Net Developer&nbsp;<img src="dot.png" width="5" height="5" /></span>
+                    </div>
+                    <div style="width:700px; float:left">
+                        <div style="width:100%; float:left; border-bottom:1px solid #20b08f;  margin-bottom:8px;">
+                            <span style="background: #20b08f; -webkit-print-color-adjust: exact; width: 25px; height: 31px; float: left; padding:0px; margin-right: 8px;"></span>
+                            <span style="float:left; font-size:18px; color:#666;">Career Summary</span>
+                        </div>
+                        <p style="color: #666; font-size:18px; line-height:20px; float: left; margin-top:0px; padding: 0 0 10px 33px;">@Html.Raw(Model.personainfo.CareerObjective)</p>
+                        <div style="width:100%; float:left; border-bottom:1px solid #20b08f;  margin-bottom:8px;">
+                            <span style="background: #20b08f; -webkit-print-color-adjust: exact; width: 25px; height: 31px; float: left; padding:0px; margin-right: 8px;"></span>
+                            <span style="float:left; font-size:18px; color:#666;">Experiences</span>
+                        </div>
+                        <div style="float:left; padding:0 0 0 33px; font-size:14px; width:95%">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="10">
+                                @if (Model.employmentinfo != null && Model.employmentinfo.Count > 0)
+                                {
+                                    foreach (var item in Model.employmentinfo)
+                                    {
+                                        <tr>
+                                            <td width="33%" height="35" align="left" valign="middle">@item.qenEmpFrom.Value.ToShortDateString() - @item.qenEmpTo.Value.ToShortDateString()</td>
+                                            <td width="33%" height="35" align="left" valign="middle">@item.CompanyName</td>
+                                            <td width="33%" height="35" align="left" valign="middle">@item.qenPosition</td>
+                                        </tr>
+                                    }
+                                }
+                            </table>
+                        </div>
+                    </div>
+                    <div style="width: 206px; float: right; background: #e9f4ee;  padding: 20px; margin: 0 22px 0 0;">
+                        <span style="display:block; font-size:18px; color:#666; padding:0 0 5px;">Address</span>
+                        <p style="font-size:13px; color:#666; line-height:23px; margin-top:0px;">
+                            @Model.personainfo.qenAddress,<br />
+                            @Model.personainfo.City,<br />
+                            @Model.personainfo.country , @Model.personainfo.zipCode
+                        </p>
+                        <span style="display:block; font-size:18px; color:#666; padding:0 0 5px;">Contact</span>
+                        <span style="float:left; padding:0 10px 5px 0; font-size:13px; color:#666;"><strong>Phone :</strong></span>
+                        <span style="float:left; padding:0 10px 5px 0; font-size:13px; color:#666;">@Model.personainfo.qenPhone</span> <br />
+                        <p <span style="display:block; font-size:18px; color:#666;">References</span></p>
+                        <p style="font-size:13px; color:#666; line-height:23px; margin-top:0px;">
+                            @if (Model.refrences != null && Model.refrences.Count > 0)
+                            {
+                                foreach (var item in Model.refrences)
+                                {
+                                    @item.qenRefName<br />
+                                    @item.qenRefPhone<br />
+                                    @item.qenRefEmail<br />
+                                }
+                            }
+                        </p>
+                    </div>
+                    <div style="width: 98%; float: left;  border-bottom: 1px solid #20b08f;  margin-bottom: 21px; margin-top: 17px;">
+                        <span style="background: #20b08f; width: 25px; height: 31px; float: left; padding:0px; margin-right: 8px;"></span>
+                        <span style="float:left; font-size:18px; color:#666;">SKills & Education</span>
+                    </div>
+                    <div style="width:100%; float:left; padding:0 0 0 30px;">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="32%" align="left" valign="middle">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td colspan="2" align="left" valign="middle"><span style="width:100%; float:left; margin-bottom:8px;"><span style="float:left; font-size:18px; color:#666;">Certifications</span></span></td>
+                                        </tr>
+                                        @if (Model.phdinfo != null && Model.phdinfo.Count > 0)
+                                        {
+                                            foreach (var item in Model.phdinfo)
+                                            {
+                                                <tr>
+                                                    <td height="30" align="left" valign="middle" style="font-size:13px; color:#666;">@item.courseField</td>
+                                                    <td height="30" align="left" valign="middle"><span style="height:12px; width:12px; float:left; background:#03b581; margin-right:5px; border-radius:12px;"></span><span style="height:12px; width:12px; float:left; background:#03b581; margin-right:5px; border-radius:12px;"></span><span style="height:12px; width:12px; float:left; background:#03b581; margin-right:5px; border-radius:12px;"></span><span style="height:12px; width:12px; float:left; background:#ddded9; margin-right:5px; border-radius:12px;"></span></td>
+                                                </tr>
+                                            }
+                                        }
+                                        <tr>
+                                            <td height="50" colspan="2" align="left" valign="middle" style="font-size:13px; color:#666;"><span style="width:100%; float:left; margin-bottom:8px;"><span style="float:left; font-size:18px; color:#666;">Professional Skills</span></span></td>
+                                        </tr>
+                                        @if (Model.skills != null && Model.skills.Count > 0)
+                                        {
+                                            foreach (var item in Model.skills)
+                                            {
+                                                <tr>
+                                                    <td height="30" align="left" valign="middle" style="font-size:13px; color:#666;">@item.skill.skillName</td>
+                                                    <td height="30" align="left" valign="middle"><span style="height:12px; width:12px; float:left; background:#03b581; margin-right:5px; border-radius:12px;"></span><span style="height:12px; width:12px; float:left; background:#03b581; margin-right:5px; border-radius:12px;"></span><span style="height:12px; width:12px; float:left; background:#ddded9; margin-right:5px; border-radius:12px;"></span><span style="height:12px; width:12px; float:left; background:#ddded9; margin-right:5px; border-radius:12px;"></span></td>
+                                                </tr>
+                                            }
+                                        }
+                                    </table>
+                                </td>
+                                <td width="1%" align="left" valign="middle" style="border-left:1px solid #22af8f;"></td>
+                                <td width="67%" align="left" valign="top">
+                                    <table width="100%" border="0" cellspacing="5" cellpadding="10">
+                                        <tr>
+                                            <td colspan="3"><span style="width:100%; float:left; margin-bottom:8px;"><span style="float:left; font-size:18px; color:#666;">Education</span></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#2BA993">&nbsp;</td>
+                                            <td bgcolor="#eaf3ee" style="font-size:14px;">@Model.educationinfo.pgraduation.collegeUniversity<span style="display:block; font-size:12px; color:#666;">@Model.educationinfo.pgraduation.courseName</span></td>
+                                            <td bgcolor="#eaf3ee" style="font-size:14px;">@Model.educationinfo.pgraduation.YearPassing</td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#2BA993">&nbsp;</td>
+                                            <td bgcolor="#FFFFFF" style="font-size:14px;">@Model.educationinfo.graduation.collegeUniversity<span style="display:block; font-size:12px; color:#666;">@Model.educationinfo.graduation.courseName</span></td>
+                                            <td bgcolor="#FFFFFF" style="font-size:14px;">@Model.educationinfo.graduation.YearPassing</td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#2BA993">&nbsp;</td>
+                                            <td bgcolor="#EAF3EE" style="font-size:14px;">@Model.educationinfo.hsecondary.hSecondaryBoard<span style="display:block; font-size:12px; color:#666;">@Model.educationinfo.hsecondary.hSecondaryPercentage</span></td>
+                                            <td bgcolor="#EAF3EE" style="font-size:14px;">@Model.educationinfo.hsecondary.hSecondaryPercentage</td>
+                                        </tr>
+                                        <tr>
+                                            <td width="6%" bgcolor="#2BA993">&nbsp;</td>
+                                            <td width="60%" bgcolor="#FFFFFF" style="font-size:14px;">@Model.educationinfo.secondary.secondaryBoard<span style="display:block; font-size:12px; color:#666;" @Model.educationinfo.secondary.secondaryPercentage=Model.educationinfo.secondary.secondaryPercentage</span></td>
+                                            <td width="34%" bgcolor="#FFFFFF" style="font-size:14px;">@Model.educationinfo.secondary.secondaryPassYear</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" valign="middle">&nbsp;</td>
+                                <td align="left" valign="middle" style="border-left:1px solid #22af8f;"></td>
+                                <td align="left" valign="top">&nbsp;</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div style="width: 98%; float: left;  border-bottom: 1px solid #20b08f;  margin-bottom: 21px; margin-top: 17px;">
+                        <span style="background: #20b08f; width: 25px; height: 31px; float: left; padding:0px; margin-right: 8px;"></span>
+                        <span style="float:left; font-size:18px; color:#666;">Career Highlightes</span>
+                    </div>
+                    <div style="width:100%; float:left; padding:0 0 0 30px;">
+                        <p style="color: #666; font-size:18px; line-height:20px; float: left; margin-top:0px; padding: 0 0 10px 33px;">
+                            @Html.Raw(Model.personainfo.CareerHighlight)
+                            <div style="width: 100%; float: right; background: #2ba993;  padding: 20px; margin: 0 0 0 0;"></div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+           
+
+            <script type="text/javascript">
+                $(function () {
+                    $("#btnSubmit").click(function () {
+                        $("input[name='GridHtml']").val($("#Grid").html());
+                    });
+                });
+            </script>
+
+
+        </div>
+        <div class="modal-footer">
+            @using (Html.BeginForm("Export", "profile", FormMethod.Post))
+            {
+                <input type="hidden" name="GridHtml" /><input type="hidden" name="qenID_" value='@Model.personainfo.qenID' />
+                   <input type="submit" id="btnSubmit" value="Export" /><button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            } 
+        </div>
+    </div>
+
+</div>

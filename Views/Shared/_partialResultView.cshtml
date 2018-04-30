@@ -1,0 +1,121 @@
+﻿@using NewLetter
+@using NewLetter.Models;
+@model IEnumerable<NewLetter.Models.sp_searchjob_Result>
+
+ 
+
+
+@{  var roleID = BaseUtil.RoleID(); var loginID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString()); int totalpages = Convert.ToInt32(ViewBag.totalpages);}
+
+<div class="div_table table-responsive">
+    <table id="MyTable" class="table table-striped table-bordered table-hover col-md-12 display">
+        <thead>
+            <tr><td>y</td></tr></thead>
+        <tbody id="frst">
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    <div class="bs-example">
+                        <div class="media">
+                            <div class="media-left  media-top">
+                                <a href="#">
+                                    <img src='@item.CompanyLogo' class="media-object" style="width:60px" alt='@item.CompanyName'>
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">@item.CompanyName <small><i>Posted on @item.dataIsCreated</i></small></h4>
+                                <p>@item.jobTitle</p>
+                                <div class="col-sm-12">
+                                    <div class="col-sm-1" style="font-size:13px"> Skills : </div>                                   
+                                    <div class="col-sm-11" style="font-size:13px">  @item.skillset</div>
+                                </div>
+                                <div class="col-sm-12">
+
+                                    <table style="width:100%">
+                                        <tr>
+                                            <td style="font-size:13px">Openings : </td>
+                                            <td>@item.NoOfOpenings</td>
+
+                                            <td style="font-size:13px">Work Experience : </td>
+                                            @{ string exp = "";
+                                                if (@item.workExpMin == 0)
+                                                {
+                                                    exp = "Fresher";
+                                                }
+                                                else { exp = @item.workExpMin + "year"; }
+                                            }
+                                            <td>@exp</td>
+                                            <td style="font-size:13px">Location : </td>
+                                            <td>@item.city</td>
+
+                                            <td style="font-size:13px">Education : </td>
+                                            <td>@item.EducationReq</td>
+
+                                            <td style="font-size:13px">Industry : </td>
+                                            <td>@item.industryName</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-sm-12">
+                                    @{if (@roleID == "1" || @roleID == "2" || @roleID == "3" || @roleID == "4")
+                                        {
+                                        <input type="button" name="Edit" class="previous action-button" value="Edit" onclick="location.href='@Url.Action("NewJob", "jobDetails", new { jobID = @item.jobID })'" />
+                                        <input type="button" name="Candidates" class="previous action-button" value="Candidates " onclick="location.href='@Url.Action("cvShortlisted", "companyDetails", new { jobID = @item.jobID })'" />
+                                            var pass = BaseUtil.encrypt(BaseUtil.GetSessionValue(AdminInfo.password.ToString()));
+                                            var email = BaseUtil.encrypt(BaseUtil.GetSessionValue(AdminInfo.EmailID.ToString()));
+
+
+                                        <input type="button" name="Auxopass" class="previous action-button" value="Auxo Pass" onclick="location.href = 'http://localhost:49319/Login.aspx?uid=' + @email + '&key='+ @pass" />
+                                        }
+                                    }
+                                    @Html.ActionLink("View", "JobView", "jobDetails", new { jobID = BaseUtil.encrypt(@item.jobID.ToString()) }, null)
+                                    
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+              }
+        </tbody>
+    </table>
+   @{ if (Model != null) { 
+    <input type="button" onclick="return searchA();" value="See More JObs" id="btnmore" />
+    <input type="hidden" id="pagecount" value='@totalpages' />
+       }
+}
+
+</div>
+
+
+<script> 
+    var jqOld = jQuery.noConflict();
+    jqOld(document).ready(function () {
+        jqOld('#MyTable').DataTable({
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    var column = this;
+                    var select = jqOld('<select><option value=""></option></select>')
+                        .appendTo(jqOld(column.footer()).empty())
+                        .on('change', function () {
+                            var val = jqOld.fn.dataTable.util.escapeRegex(
+                                jqOld(this).val()
+                            );
+                            //to select and search from grid  
+                            column
+                                .search(val ? '^' + val + 'jqOld' : '', true, false)
+                                .draw();
+                        });
+
+                    column.data().unique().sort().each(function (d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
+            }
+        });
+    });
+</script>

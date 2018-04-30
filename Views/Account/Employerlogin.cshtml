@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "Employer Zone";    
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+   
+    <!-- Bootstrap -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</head>
+
+<body class="register-page">
+ 
+    <div class="container-fluid padding-none">
+        <div class="container">
+            <div class="col-xs-6 col-md-6 col-sm-6 padding-none"><img src="~/images/auxo-login.png"></div>
+            <div class="col-xs-6 col-md-6 col-sm-6 text-right padding-none"><img src="~/images/spota-needle-login.png"></div>
+            <div class="register-main">
+               
+                <div class="col-lg-10 col-lg-offset-1">
+                    @if (TempData["result"] != null)
+                    {
+                        var result = Convert.ToString(TempData["result"]);
+                        if (result == "Registred")
+                        {
+                            <div style="width:100%" class="alert alert-success">You have been registered. Please check your email for activation link.</div>
+                        }
+                        else
+                        {
+                            <div style="width:100%" class="alert alert-danger">@result</div>
+                        }
+                    }
+                </div>
+                <div class="col-sm-5 col-md-5 col-xs-12">
+                    <div class="form-box">
+                        <div class="form-top">
+                            <div class="form-top-left">
+                                <p><strong>Already have an account?</strong></p>
+                                <h3>Login Here</h3>
+                            </div>
+                            <div class="form-top-right"><i class="fa fa-key"></i> </div>
+                        </div>
+                        <div class="form-bottom">
+                            @*- ----------Employer login---------------------*@
+                            @Html.Action("_Employerlogin")
+
+
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="col-md-12 col-sm-12 col-xs-12 text-center or"><img src="~/images/orimg.jpg" alt="img"></div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 text-center alternate">Alternate Way to Login </div>
+                    </div>
+                    <div class="social-login col-md-12 col-sm-12 col-xs-12">
+                        <div class="social-login-buttons"> <a class="btn btn-link-1 btn-link-1-facebook" href="#"><img src="~/images/facebook.jpg"></a> <a class="btn btn-link-1 btn-link-1-twitter" href="#"><img src="~/images/in-icon.jpg"></a> <a class="btn btn-link-1 btn-link-1-google-plus" href="#"><img src="~/images/g-icon.jpg"></a> </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-5 col-md-5 col-xs-12">
+                    <div class="form-box">
+                        <div class="form-top">
+                            <div class="form-top-left">
+                                <p><strong>Don't have an account?</strong></p>
+                                <h3>Register Now</h3>
+                            </div>
+                            <div class="form-top-right"> <i class="fa fa-pencil"></i> </div>
+                        </div>
+                        <div class="form-bottom">
+                            @*------------------ Employer registration-------------------------*@
+
+                            @Html.Action("partialEmployerReg")
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+
+            <div class="login-bottom col-md-12 col-sm-12 col-xs-12"><img src="~/images/login-shadow.png" width="713" height="38"></div>
+            <div class="col-md-12 col-xs-12 col-sm-12 text-right"><img src="~/images/powerby.png"></div>
+        </div>
+    </div>
+
+</body>
+
+</html>

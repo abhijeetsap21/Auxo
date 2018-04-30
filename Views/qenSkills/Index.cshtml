@@ -1,0 +1,46 @@
+﻿@model IEnumerable<NewLetter.Models.qenSkill>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.yearOfExp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.qendidateList.qenName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.skill.skillName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.yearOfExp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.qendidateList.qenName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.skill.skillName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.qenSkillsID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.qenSkillsID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.qenSkillsID })
+        </td>
+    </tr>
+}
+
+</table>

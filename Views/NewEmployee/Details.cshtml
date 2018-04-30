@@ -1,0 +1,90 @@
+﻿@model NewLetter.Models.EmployerDetail
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EmployerDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mobile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dataIsCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dataIsCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isActive)
+        </dd>
+
+     
+
+       
+
+        <dt>
+            Role
+        </dt>
+
+        <dd>
+            @ViewBag.role
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dataIsUpdated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dataIsUpdated)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.companyDetail.companyName)*@
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.companyDetail.companyName)*@
+        </dd>
+
+   
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EmployerID }) 
+ 
+</p>

@@ -1,0 +1,567 @@
+﻿@model NewLetter.Models.job_posting_Title
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/scripts/tinymce/tinymce.min.js"></script>
+
+<script type="text/javascript">
+
+    //$(document).ready(function () {
+    //    debugger
+    //    $("#city").autocomplete({
+    //        source: function (request, response) {
+    //            $.ajax({
+    //                url: "http://localhost:51126/jobDetails/select_city",
+    //                type: "POST",
+    //                dataType: "json",
+    //                data: { Prefix: request.term },
+    //                success: function (data) {
+                       
+    //                    response($.map(data, function (item) {
+    //                        debugger
+    //                        return { label: item.city1, value: item.city1 };
+    //                    }))
+
+    //                }
+    //            })
+    //        },
+    //        messages: {
+    //            noResults: "", results: ""
+    //        }
+    //    });
+    //})
+    $(document).ready(function () {
+        
+        debugger
+        $('#city').keyup(function() {debugger
+            var $field = $(this);
+
+            // this is the value before the keypress
+            var beforeVal = $field.val();      
+
+          
+            var Google_Places_API_KEY = "AIzaSyDxMS9KrSM4mLJ1W96G-_tGzWn8v5ebuFw";      //Get it from - https://code.google.com/apis/console/?noredirect#project:647731786600:access
+            var language = "en";        //'en' for English, 'nl' for Nederland's Language
+
+
+            var Auto_Complete_Link = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyDxMS9KrSM4mLJ1W96G-_tGzWn8v5ebuFw&types=geocode&language=en&input=lukhno&callback=jQuery112403389588240999837_1506759954471&_=1506759954472";
+
+            $.ajax({
+                url: Auto_Complete_Link,
+                type: "GET",
+                dataType: 'json',
+                cache: false,
+                success: function (response) {
+                    alert(response);
+                }
+            });
+            
+        });
+    })
+</script>
+<script type="text/javascript">
+        // Initialize your tinyMCE Editor with your preferred options
+        tinyMCE.init({
+            // General options
+            mode: "textareas",
+            theme: "modern",
+            // Theme options
+            theme_advanced_buttons1: "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
+            // theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+            // theme_advanced_buttons3: "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+            // theme_advanced_buttons4: "insertlayer,moveforward,movebackward,absolute,|,styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,pagebreak,|,insertfile,insertimage",
+            theme_advanced_toolbar_location: "top",
+            theme_advanced_toolbar_align: "left",
+            theme_advanced_statusbar_location: "bottom",
+            theme_advanced_resizing: true,
+
+            // Example content CSS (should be your site CSS)
+            //content_css: "css/example.css",
+        });
+</script>
+<style>
+    div#mceu_12-body.mce-container-body {
+        display: none;
+    }
+
+    div#mceu_12-body.mce-flow-layout {
+        display: none;
+    }
+
+    div#mceu_26-body.mce-container-body {
+        display: none;
+    }
+
+    div#mceu_26-body.mce-flow-layout {
+        display: none;
+    }
+
+    .mce-branding-powered-by {
+        display: none;
+    }
+
+    iframe#jobDescription_ifr { min-height:200px;
+    }
+</style>
+@using (Html.BeginForm("postJob", "jobDetails", FormMethod.Post, new { id = "msform" }))
+{
+    <fieldset>
+        @Html.AntiForgeryToken()
+       @Html.HiddenFor(m => m.jobID) 
+        <h2 class="fs-title">Job Information</h2>
+
+      
+            @Html.LabelFor(model => model.jobTitle, htmlAttributes: new { @class = "col_1 tleft" })
+            @Html.TextBoxFor(m => m.jobTitle, new { placeholder = "Brief and short job title" })
+            @Html.ValidationMessageFor(model => model.jobTitle, "", new { @class = "col_1 tleft text-danger" })
+       
+        <div class="col_4">            
+                @Html.LabelFor(model => model.openings, htmlAttributes: new { @class = "col_1 tleft" })
+                @Html.EditorFor(model => model.openings, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.openings, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+        <div class="col_4"></div>
+            <div class="col_4">
+                @Html.LabelFor(model => model.employmentType, htmlAttributes: new { @class = "col_1 tleft" })
+                @Html.DropDownList("employmentType")
+                @Html.ValidationMessageFor(model => model.employmentType, "", new { @class = "col_1 tleft text-danger" })
+
+            </div>
+        @Html.LabelFor(model => model.jobDescription, htmlAttributes: new { @class = "col_1 tleft" })
+            <div class="col_1">
+               
+                @Html.TextAreaFor(model => model.jobDescription)
+            
+            </div>@Html.ValidationMessageFor(model => model.jobDescription, "", new { @class = "col_1 tleft text-danger" })
+        <div class="col_1">
+            <div class="col_2">
+                @Html.LabelFor(model => model.industry, htmlAttributes: new { @class = "col_1 tleft" })
+                @Html.DropDownList("industry"," Select Industry ")
+                @Html.ValidationMessageFor(model => model.industry, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+            </div>
+        <div class="col_1">
+            <div class="col_2">
+              
+                @Html.LabelFor(model => model.city, htmlAttributes: new { @class = "col_1 tleft" })
+                @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control", onFocus = "geolocate()" } })
+                @Html.ValidationMessageFor(model => model.city, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+            </div>
+        <div class="col_1">
+            <div class="col_4">
+                @Html.LabelFor(model => model.salary, htmlAttributes: new { @class = "col_1 tleft" })
+                @Html.EditorFor(model => model.salary, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.salary, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+
+            <div class="col_4">
+                @Html.LabelFor(model => model.currency, htmlAttributes: new { @class = "col_1 tleft" })
+                @Html.DropDownList("currency")
+                @Html.ValidationMessageFor(model => model.currency, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+            <div class="col_4">
+                @Html.LabelFor(model => model.Unit, htmlAttributes: new { @class = "col_1 tleft" })
+                @Html.DropDownList("Unit")
+                @Html.ValidationMessageFor(model => model.Unit, "", new { @class = " col_1 tleft text-danger" })
+            </div>
+            </div>
+        <div class="col_1">
+            <div class="col_2">
+                <div class="col_4">
+                    @Html.CheckBoxFor(m => m.salaryVisibleToEmployee)
+                </div>
+                <div class="col_0">
+                    Salary visible to employee
+                </div>
+            </div>
+            </div>
+            <div class="col_4">
+                @Html.LabelFor(model => model.experience, htmlAttributes: new { @class = "col_1 tleft" })
+                @Html.EditorFor(model => model.experience, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.experience, "", new { @class = "text-danger" })
+            </div>
+        <br /><br /><br /><br />
+        <div id="locationField">
+            <input id="autocomplete" placeholder="Enter your address"
+                   onFocus="geolocate()" type="text" />
+        </div>
+        <table id="address">
+            <tr>
+                <td class="label">Street address</td>
+                <td class="slimField">
+                    <input class="field" id="street_number"
+                           disabled="true" />
+                </td>
+                <td class="wideField" colspan="2">
+                    <input class="field" id="route"
+                           disabled="true" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">City</td>
+                <!-- Note: Selection of address components in this example is typical.
+            You may need to adjust it for the locations relevant to your app. See  https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform           -->
+                <td class="wideField" colspan="3">
+                    <input class="field" id="locality" disabled />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">State</td>
+                <td class="slimField">
+                    <input class="field"
+                           id="administrative_area_level_1" disabled />
+                </td>
+                <td class="label">Zip code</td>
+                <td class="wideField">
+                    <input class="field" id="postal_code"
+                           disabled="true" />
+                </td>
+            </tr>
+            <tr>
+                <td class="label">Country</td>
+                <td class="wideField" colspan="3">
+                    <input class="field"
+                           id="country" disable />
+                </td>
+            </tr>
+        </table>
+            <div class="fclear"></div>
+
+
+            <div style = "width:90%;float:left" >
+
+                <input type="submit" name="Next" class="next action-button" value="Next" />
+            </div>
+</fieldset>
+        }
+
+
+
+        @*@using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4>jobDetail</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.jobTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.jobTitle, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.jobTitle, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.companyID, "companyID", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("companyID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.companyID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.workExpMin, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.workExpMin, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.workExpMin, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.workExpMax, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.workExpMax, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.workExpMax, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.salary, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.salary, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.salary, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.salaryUnit, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.salaryUnit, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.salaryUnit, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.currency, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.currency, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.currency, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.industryID, "industryID", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("industryID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.industryID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.cityID, "cityID", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("cityID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.cityID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EmploymentTypeID, "EmploymentTypeID", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("EmploymentTypeID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.EmploymentTypeID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EducationReq, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.EducationReq, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.EducationReq, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NoOfOpenings, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.NoOfOpenings, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NoOfOpenings, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.createdBy, "createdBy", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("createdBy", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.createdBy, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.createdDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.createdDate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.createdDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.modifiedBy, "modifiedBy", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("modifiedBy", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.modifiedBy, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.modifiedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.modifiedDate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.modifiedDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.jobStatusID, "jobStatusID", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("jobStatusID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.jobStatusID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.jobContactPersonName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.jobContactPersonName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.jobContactPersonName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.jobContactPersonMobile, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.jobContactPersonMobile, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.jobContactPersonMobile, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.jobContactPersonEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.jobContactPersonEmail, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.jobContactPersonEmail, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }*@
+
+<style>
+    /* Always set the map height explicitly to define the size of the div
+      * element that contains the map. */
+    #map {
+        height: 100%;
+    }
+    /* Optional: Makes the sample page fill the window. */
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+<style>
+    #locationField, #controls {
+        position: relative;
+        width: 480px;
+    }
+
+    #autocomplete {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 99%;
+    }
+
+    .label {
+        text-align: right;
+        font-weight: bold;
+        width: 100px;
+        color: #303030;
+    }
+
+    #address {
+        border: 1px solid #000090;
+        background-color: #f0f0ff;
+        width: 480px;
+        padding-right: 2px;
+    }
+
+        #address td {
+            font-size: 10pt;
+        }
+
+    .field {
+        width: 99%;
+    }
+
+    .slimField {
+        width: 80px;
+    }
+
+    .wideField {
+        width: 200px;
+    }
+
+    #locationField {
+        height: 20px;
+        margin-bottom: 2px;
+    }
+</style>
+
+<script>
+      // This example displays an address form, using the autocomplete feature
+      // of the Google Places API to help users fill in the information.
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      var placeSearch, autocomplete;
+      var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+      };
+
+      function initAutocomplete() {
+        // Create the autocomplete object, restricting the search to geographical
+        // location types.
+        autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),
+            {types: ['geocode']});
+
+        // When the user selects an address from the dropdown, populate the address
+        // fields in the form.
+        autocomplete.addListener('place_changed', fillInAddress);
+      }
+
+      function fillInAddress() {
+        // Get the place details from the autocomplete object.
+        var place = autocomplete.getPlace();
+
+        for (var component in componentForm) {
+          document.getElementById(component).value = '';
+          document.getElementById(component).disabled = false;
+        }
+
+        // Get each component of the address from the place details
+        // and fill the corresponding field on the form.
+        for (var i = 0; i < place.address_components.length; i++) {
+          var addressType = place.address_components[i].types[0];
+          if (componentForm[addressType]) {
+            var val = place.address_components[i][componentForm[addressType]];
+            document.getElementById(addressType).value = val;
+          }
+        }
+      }
+
+      // Bias the autocomplete object to the user's geographical location,
+      // as supplied by the browser's 'navigator.geolocation' object.
+      function geolocate() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var geolocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            var circle = new google.maps.Circle({
+              center: geolocation,
+              radius: position.coords.accuracy
+            });
+            autocomplete.setBounds(circle.getBounds());
+          });
+        }
+      }
+</script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDGhqKFgJrrhrXFGFHRzuPJ84hK7GbtAno"></script>

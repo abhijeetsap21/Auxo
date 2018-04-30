@@ -1,0 +1,138 @@
+﻿@model NewLetter.Models.empRegistration
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+@{
+    ViewBag.Title = "Create";
+    Layout =  "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+<h2>Create</h2>
+
+
+
+
+@using (Html.BeginForm("Create", "companyDetails", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>companyDetail</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.companyName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.companyName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.companyName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+                <input type="file" id="photoA" name="files" /><br /> <span id="lblError1" style="color: red;"></span>
+        <input id="upload" type="button" value="Upload" onclick="return Upload()" />
+                    
+        <script type="text/javascript">
+            function Upload() {
+                //Get reference of FileUpload.
+                var fileUpload = document.getElementById("photoA");
+
+                //Check whether the file is valid Image.
+                var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(.jpg|.png|.gif)$");
+                if (regex.test(fileUpload.value.toLowerCase())) {
+
+                    
+                    if (typeof (fileUpload.files) != "undefined") {
+                        
+                        var reader = new FileReader();
+                      
+                        reader.readAsDataURL(fileUpload.files[0]);
+                        reader.onload = function (e) {
+                         
+                            var image = new Image();
+
+                            
+                            image.src = e.target.result;
+
+                           
+                            image.onload = function () {
+                                var height = this.height;
+                                var width = this.width;
+                                if (height > 100 || width > 100) {
+                                    alert("Height and Width must not exceed 100px.");
+                                    return false;
+                                }
+                                alert("Uploaded image has valid Height and Width.");
+                                return true;
+                            };
+
+                        }
+                    } else {
+                        alert("This browser does not support HTML5.");
+                        return false;
+                    }
+                } else {
+                    alert("Please select a valid Image file.");
+                    return false;
+                }
+            }
+
+        </script>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.cityID, "Select City", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("cityID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.cityID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.website, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.website, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.website, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.companyIndustry, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("companyIndustry", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.companyIndustry, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.employerTypeID, "employerTypeID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("employerTypeID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.employerTypeID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default"  />
+            </div>
+        </div>
+    </div>
+}
+
+
+

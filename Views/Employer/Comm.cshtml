@@ -1,0 +1,60 @@
+﻿@model IEnumerable<NewLetter.Models.qenMialSendInterested>
+
+@{
+    ViewBag.Title = "Comm";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+<h2>Comm</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="myDataTable" class="table table-striped table-bordered table-hover col-md-12 display">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.qendidateList.qenName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mailSentjobChancgeInterested)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mailSentDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mailReceivedjobChancgeInterested)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mailReceivedDatetime)
+            </th>
+          
+          
+           
+           
+        </tr>
+</thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.qendidateList.qenName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mailSentjobChancgeInterested)
+                </td>
+                <td>
+                    @item.mailSentDateTime.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mailReceivedjobChancgeInterested)
+                </td>
+                <td>
+                    @item.mailReceivedDatetime.ToString("dd/MM/yyyy")
+                </td>              
+                
+                
+            </tr>
+        }
+
+</table>

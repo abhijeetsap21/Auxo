@@ -1,0 +1,16 @@
+﻿@model NewLetter.Models.advertisementList
+@{
+    ViewBag.Title = "generatenewspaperjob";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+    long ID = ViewBag.ID;
+}
+
+<h2>generatenewspaperjob</h2>
+<div>
+<img src="@Model.advertisementimageURL" />
+<br />
+<label>@Model.advertisementURL</label>
+</div>
+<p>
+    @Html.ActionLink(" Exit and Print your completed advertisement", "createAD", "jobDetails", new { ID = ID }, null)
+</p>

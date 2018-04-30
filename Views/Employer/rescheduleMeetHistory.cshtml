@@ -1,0 +1,84 @@
+﻿@model IEnumerable<NewLetter.Models.qenInterviewSchedule>
+
+@{
+    ViewBag.Title = "rescheduleMeetHistory";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+<h2>Meet History</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.qendidateList.qenName)
+        </th>
+        <th>
+            Mail Send 
+        </th>       
+        <th>
+          Recieved
+        </th>
+       
+        <th>
+           Date
+        </th>
+        <th>
+            Time 
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.meetPreferredMedium)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.reasonReScheduled)
+        </th>      
+          
+     
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.qendidateList.qenName)
+        </td>
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.meetScheduledMailSent)   @Html.DisplayFor(modelItem => item.meetMailSentDateTime)
+        </td>
+      
+        <td>
+            @{ if (item.meetScheduledMailRecieved)
+                {
+                    @Html.DisplayFor(modelItem => item.meetScheduledMailRecieved)   @Html.DisplayFor(modelItem => item.meetMailRepliedDateTime)
+
+                }
+            }
+         
+        </td>
+        <td>
+@{ if (item.meetScheduledMailRecieved)
+    {
+            @Html.DisplayFor(modelItem => item.meetScheduledDateTime)
+    }
+    }
+        </td>
+      <td>@Html.DisplayFor(modelItem => item.slot.slotTime)</td>
+        <td>
+            @Html.DisplayFor(modelItem => item.meetPreferredMedium)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.reasonReScheduled)
+        </td>
+        
+        <td>
+            
+        </td>   
+       
+        
+    </tr>
+}
+
+</table>

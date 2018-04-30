@@ -1,0 +1,154 @@
+﻿@model IEnumerable<NewLetter.Models.HiredCandidate>
+
+@{
+    ViewBag.Title = "HiredCandidateList";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+<h2>HiredCandidateList</h2>
+
+
+   <table id="myDataTable" class="table table-striped table-bordered table-hover col-md-12 display">
+                <thead>
+
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.qendidateList.qenName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.joinningDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ExpectedSalaryMonthly)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ExpectedSalaryGross)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Designtion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SpecialComment)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EmployerDetail.Name)
+                        </th>
+
+                        <th>Comment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+        {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.qendidateList.qenName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.joinningDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExpectedSalaryMonthly)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExpectedSalaryGross)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Designtion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SpecialComment)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployerDetail.Name)
+                        </td>
+
+                        <td>
+                            <a onclick="return Comments(@item.jobID,@item.qenID);" data-toggle="modal" data-target="#myModal">Comment</a>
+
+                        </td>
+                    </tr>
+        }
+                </tbody>
+            </table>
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <input type="hidden" id="jobID" />
+    <input type="hidden" id="QenID" />
+    <div id="popid"></div>
+
+</div>
+
+<script>
+        function Comments(jobno, qenid) {
+            document.getElementById('jobID').value = jobno;
+            document.getElementById('QenID').value = qenid;
+            var URL = '@Url.Action("Comments","Employer")?jobID=' + jobno + '&qenID=' + qenid;
+            $.get(URL, function (data) {
+                debugger
+                $("#popid").html(data);
+            })
+
+        }
+</script>
+<script>
+
+        function oldComments() {
+            var jobID = document.getElementById('jobID').value;
+            var qenID = document.getElementById('QenID').value;
+            debugger
+            var URL = '@Url.Action("Oldcomments", "Employer")?jobID=' + jobID + '&qenID=' + qenID;
+            debugger
+            $.get(URL, function (data) {
+                debugger
+                $("#oldComment").html(data);
+            });
+
+        }
+
+        function newcomment() {
+            var jobID = document.getElementById('jobID').value;
+            var qenID = document.getElementById('QenID').value;
+            var URL = '@Url.Action("Newcomments", "Employer")?jobID=' + jobID + '&qenID=' + qenID;
+            debugger
+            $.get(URL, function (data) {
+                debugger
+                $("#newComment").html(data);
+            })
+        }
+</script>
+
+
+<script>
+        $(window).on('load', function () {
+            debugger
+            if (location.hash) {
+                $('a[href=\'' + location.hash + '\']').tab('show');
+            }
+            var activeTab = localStorage.getItem('activeTab');
+            if (activeTab) {
+                $('a[href="' + activeTab + '"]').tab('show');
+            }
+        });
+        $('#myTab').on('click', 'a[data-toggle=\'tab\']', function (e) {
+            e.preventDefault()
+            debugger
+            var tab_name = this.getAttribute('href')
+            if (history.pushState) {
+                history.pushState(null, null, tab_name)
+            }
+            else {
+                location.hash = tab_name
+            }
+            localStorage.setItem('activeTab', tab_name)
+
+            $(this).tab('show');
+            return false;
+        });
+        $(window).on('popstate', function () {
+            debugger
+            var anchor = location.hash ||
+              $('a[data-toggle=\'tab\']').first().attr('href');
+            $('a[href=\'' + anchor + '\']').tab('show');
+        });
+</script>

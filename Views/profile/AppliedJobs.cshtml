@@ -1,0 +1,46 @@
+﻿@model IEnumerable<NewLetter.Models.qenAppliedJob>
+
+@{
+    ViewBag.Title = "AppliedJobs";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+<h2>AppliedJobs</h2>
+
+<table class="table">
+    <tr>
+        <th>Sr.</th>
+        <th>
+            @Html.DisplayNameFor(model => model.appliedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jobDetail.jobTitle)
+        </th>
+         
+        <th>
+            @Html.DisplayNameFor(model => model.jobDetail.CompanyName)
+        </th>    
+        <th>
+            @Html.DisplayNameFor(model => model.App_status.status)
+        </th>
+    </tr>
+    @{int rowNo = 0;}
+@foreach (var item in Model) {
+    <tr>
+        <td>@(rowNo += 1) </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.appliedDate)
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.jobDetail.jobTitle)
+        </td>       
+        <td>
+            @Html.DisplayFor(modelItem => item.jobDetail.CompanyName)
+        </td>      
+        <td>
+            @Html.DisplayFor(modelItem => item.App_status.status)
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,45 @@
+﻿
+
+
+<div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">          
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Comments</h4>
+        </div>
+        <div class="modal-body" style="overflow:auto">
+            <div class="container">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active"><a data-toggle="tab" href="#oldComment" onclick="return oldComments()">Old Comments</a></li>
+                    <li><a data-toggle="tab" href="#newComment" onclick="return newcomment()">New Comment</a></li>
+
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active  fade in" id="oldComment" onload="oldComments()"> >
+                       
+                    </div>
+                    <div class="tab-pane" id="newComment">
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">                         
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(function () {
+        $('#oldComment[onload]').trigger('onload');
+    });
+
+
+</script>
+
+

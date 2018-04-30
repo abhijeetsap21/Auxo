@@ -1,0 +1,71 @@
+﻿@model IEnumerable<NewLetter.Models.jobPluginList>
+
+@{
+    
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+<h2>My Advertisements</h2>
+@section head{
+    <script type="text/javascript">
+        var jqOld = jQuery.noConflict();
+        jqOld(document).ready(function () {
+            jqOld('#myDataTable').dataTable().makeEditable();
+            });
+    </script>
+}
+
+
+
+<div class="div_table table-responsive">
+    <table id="myDataTable" class="table table-striped table-bordered table-hover col-md-12 display">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Advertisement  ID</th>               
+
+                <th>
+                    Date Is created
+                </th> 
+                <th>
+                    Image URL
+                </th>    
+                <th>
+                    PDF URL
+                </th>           
+                <th>Edit Advertisement
+                </th>                    
+                <th>
+                    Jobs in Advertisement
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @{    int i = 0; }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>#@item.advertisementRefID</td>
+                    <td>
+                        @item.dataIsCreated.ToString("dd/MM/yyyy")
+                    </td>
+
+                    <td>
+                        <a href="@item.advertisementimageURL">Link To Image</a>
+                    </td>   
+                    <td>
+                        <a href="@item.advertisementPDFUrk">Link To PDF</a>
+                    </td>                 
+                    <td>
+                        <a href="@Url.Action("createAdvertisement","jobDetails",  new { jobID=item.advertisementRefID })"><i class="glyphicon glyphicon-edit"></i></a>
+                    </td>
+                    <td>
+                        <a href="@item.advertisementJobsUrl"><i class="glyphicon glyphicon-edit"></i></a>
+                    </td>
+
+                </tr> i++;
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,110 @@
+﻿@model NewLetter.Models.EmployerModel
+
+    <style>
+        span.col_1.tleft.text-danger.field-validation-error :before {
+            content: " Warning ! ";
+            color: red;
+            font-weight: bold;
+        }
+
+        .text-danger {
+            color: red;
+        }
+    </style>
+
+
+
+<div id="employment">
+    @{ var id = ViewBag.qenID;}
+
+    <div class="container">
+        <div class="row sub-container">
+            
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="right-box">
+
+                    @*<div class="form" id="content-1">*@
+
+                        <h1>EMPLOYMENT</h1>
+
+                        @{ if (Model.employers.Count != 0)
+                            {
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Company Name</th>
+                                            <th>Designation</th>
+                                            <th>Date</th>
+
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="certificatelistbody">
+                                        @{int row = 0;  }
+                                        @foreach (var data in Model.employers)
+                                        {
+
+                                            <tr>
+
+                                                <td>@data.CompanyName</td>
+                                                <td>@data.qenPosition</td>
+                                                <td>@data.qenEmpFrom.Value.ToString("dd MMM yyyy") <br>@data.qenEmpTo.Value.ToString("dd MMM yyyy")</td>
+
+                                                <td>
+                                                    <a onclick="return editemployment(@data.qenEmploymentNum);"><i class="glyphicon glyphicon-edit"></i></a>
+                                                    <a onclick="return deleteemployment(@data.qenEmploymentNum,this);" id="delete_@data.qenEmploymentNum"><i class="glyphicon glyphicon-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                            }
+                        }
+                        <div id="AddSkillsEMP">
+                            @Html.Action("EmploymentAddPop", new { qenid = @id })
+                        </div>
+
+
+                    </div>
+                       </div>
+            </div>
+
+        </div>
+
+    @*</div>*@
+    <script>
+        function editemployment(empno)
+       {
+           debugger
+           var URL = '@Url.Action("EmploymentAddPop", "profile")?empno=' + empno;
+           $.get(URL, function (data) {
+               debugger
+              
+               $("#AddSkillsEMP").html(data);
+           });
+       }
+
+        function deleteemployment(empno, ID)
+       {
+           debugger
+           var URL = '@Url.Action("Deletejob", "profile")?empno=' + empno;
+
+
+               $.get(URL, function (data) {
+                   debugger
+                   location = location.href;
+               });
+
+
+       }
+    </script>
+</div>
+
+
+
+
+
+

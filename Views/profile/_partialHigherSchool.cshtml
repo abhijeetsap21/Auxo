@@ -1,0 +1,61 @@
+﻿
+@model NewLetter.Models.qenHigherSecondary
+
+@using (Html.BeginForm("higherSchool", "profile", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="">
+      <!--  <p class="blue-title">Higher School</p>-->
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        @Html.HiddenFor(model => model.qenID)
+
+        <div class="group">
+            @Html.TextBoxFor(model => model.schoolName, new { placeholder = "Secodary School Name", maxlength = "100" })
+            <div class="alert alert-warning error-custom" role="alert">
+                @Html.ValidationMessageFor(model => model.schoolName, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+        </div>
+
+        <div class="group">
+            @Html.TextBoxFor(model => model.hSecondaryBoard, new { placeholder = "Secodary Board Name", maxlength = "100" })
+            <div class="alert alert-warning error-custom" role="alert">
+                @Html.ValidationMessageFor(model => model.hSecondaryBoard, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+        </div>
+
+
+        <div class="group">
+            @Html.TextBoxFor(model => model.hSecondarySubjects, new { placeholder = "Secondary Subjects", maxlength = "100" })
+            <div class="alert alert-warning error-custom" role="alert">
+                @Html.ValidationMessageFor(model => model.hSecondarySubjects, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+        </div>
+
+        <div class="group">
+            @Html.TextBoxFor(m => m.hSecondaryPercentage, new { placeholder = "Percentage Obtained", maxlength = "3" })
+            <div class="alert alert-warning error-custom" role="alert">
+                @Html.ValidationMessageFor(m => m.hSecondaryPercentage, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+        </div>
+        <div class="group">
+            @Html.TextBoxFor(m => m.hSecondaryPassYear, new { placeholder = "passing Year", maxlength = "4" })
+            <div class="alert alert-warning error-custom" role="alert">
+                @Html.ValidationMessageFor(m => m.hSecondaryPassYear, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+        </div>
+
+        <div class="group">
+            <div class="col-md-12">
+                <input type="submit" value="Update" class="academic-create-btn" />
+            </div>
+        </div>
+    </div>
+}
+<hr />
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>

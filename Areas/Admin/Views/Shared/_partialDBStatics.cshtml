@@ -1,0 +1,38 @@
+﻿
+
+
+<div>
+    <h2>Student</h2>
+    <table id="tblstatics" cellpadding="2" cellspacing="2" border="1" width="100%" onload="return databind();">
+        
+    </table>
+</div>  
+
+<script>
+    $(function () {
+        $('#tblstatics[onload]').trigger('onload');
+    });
+
+    function databind()
+    {
+        debugger
+        var uri = '@Url.Action("dbStatics_", "dbStatics")';
+        debugger
+        $.getJSON(uri, function (data) {
+            debugger
+            $("#tblstatics").html('<tr>  <td style="background-color: gray; color: white">jobCount : ' + data.jobCount + '</td> </tr>'
+            + '<tr> <td style="background-color: gray; color: white">EmployerCount : ' + data.EmployerCount + '</td></tr>'
+            + '<tr> <td style="background-color: gray; color: white">companyCount : ' + data.companyCount + '</td></tr>'
+            + '<tr> <td style="background-color: gray; color:white">candidateCount : ' + data.candidateCount + '</td></tr>'
+            + '<tr> <td style="background-color: gray; color:white">openJob : ' + data.openJob + '</td></tr>'
+            + '<tr> <td style="background-color: gray; color: white">FilledJob : ' + data.FilledJob + '</td></tr>'
+            + '<tr> <td style="background-color: gray; color: white">candidateDailyRegistration : ' + data.candidateDailyRegistration + '</td></tr>'
+            + '<tr> <td style="background-color: gray; color: white">EmployerDailyRegistration : ' + data.EmployerDailyRegistration + '</td></tr>'
+            + '<tr> <td style="background-color: gray; color:white">jobDailyposted : ' + data.jobDailyposted + '</td></tr>'
+            + '<tr> <td style="background-color: gray; color:white">LoginEmployer : ' + data.LoginEmployer + '</td></tr>'
+            + '<tr> <td style="background-color: gray; color: white">LoginCandidate : ' + data.LoginCandidate + '</td></tr>'
+            + '<tr> <td style="background-color: gray; color: white">interViewScheduled : ' + data.interViewScheduled + '</td></tr>'
+            + '<tr> <td style="background-color: gray; color: white">applicationProccessed : ' + data.applicationProccessed + '</td></tr>');
+        })
+    }
+</script>

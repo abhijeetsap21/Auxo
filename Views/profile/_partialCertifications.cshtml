@@ -1,0 +1,110 @@
+﻿@model IEnumerable<NewLetter.Models.qendidatePHD>
+@{
+    ViewBag.Title = "PhdInfo";
+}
+<head>
+    <title>Quendidate</title>
+    <style>
+        span.col_1.tleft.text-danger.field-validation-error :before {
+            content: " Warning ! ";
+            color: red;
+            font-weight: bold;
+        }
+
+        .text-danger {
+            color: red;
+        }
+    </style>
+    
+</head>
+
+<div id="certi">
+    @{ var id = ViewBag.qenID;}
+
+    <div class="container">
+        <div class="row sub-container">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                <div class="right-box">
+
+                    @*<div class="form" id="content-1">*@
+
+                        <h1>certifications</h1>
+
+                        @{ if (Model.Count() != 0)
+                            {
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Name</th>
+                                            <th>Authority</th>
+                                            <th>Licence No</th>
+                                            <th> </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="certificatelistbody">
+
+                                        @foreach (var data in Model)
+                                        {
+
+                                            <tr>
+                                                <td>@data.courseField</td>
+                                                <td>@data.collegeUniversity</td>
+                                                <td>@data.phdTitle </td>
+
+                                                <td>
+                                                    <a onclick="return editCerificate(@data.phdid);"><i class="glyphicon glyphicon-edit"></i></a>
+                                                    <a onclick="return deleteCerificate(@data.phdid,this);" id="delete_@data.phdid"><i class="glyphicon glyphicon-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                        }
+                        <div id="AddSkills">
+                            @Html.Action("certificationsAddPop", new { qenid = @id })
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    @*</div>*@
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+    <script>
+       function editCerificate(phdid)
+       {
+           debugger
+           var URL = '@Url.Action("certificationsAddPop", "profile")?phdid='+ phdid ;
+           $.get(URL, function (data) {
+               debugger
+               $("#AddSkills").html(data);
+           });
+       }
+
+       function deleteCerificate(phdid,ID)
+       {
+           debugger
+
+           var URL = '@Url.Action("DeleteCertifications", "profile")?phdid=' + phdid;
+
+
+               $.get(URL, function (data) {
+                   debugger
+                   location = location.href;
+               });
+       }
+    </script>
+
+</div>
+

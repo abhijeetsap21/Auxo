@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "JobHold";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml"; ;
+}
+
+
+
+    <fieldset>
+       
+        <h2 class="fs-title">Job status is on hold.</h2><br />
+        <div class="fclear"></div>
+        <div style="width:90%;float:left">
+            <input type="button" name="Previous" class="previous action-button" value="Post new job" style="width:150px" onclick="location.href='@Url.Action("postJob", "jobDetails")'" />
+            <input type="button" name="Next" class="next action-button" value="Job list" id="btnnext" onclick="location.href='@Url.Action("jobs", "jobDetails")'" style="width:150px" />
+        </div>
+    </fieldset>
+
+
+

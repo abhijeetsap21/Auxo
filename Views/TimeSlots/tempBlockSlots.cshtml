@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "tempBlockSlots";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+<link href="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
+<script src="http://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"> </script>
+
+<script type="text/javascript">
+ $(document).ready(function () {
+     $(function () {
+         $('#mySkills').multiselect({
+             includeSelectAllOption: true
+         });
+     });
+  
+ });
+ function assignVlToHidden() {
+     debugger
+     document.getElementById('mySkillsValues').value = $("#mySkills").val();
+ }</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<h2> block slots temparary </h2> 
+<div class="col-sm-12">
+    <div class="col-sm-6">
+        <select id="mySkills" multiple="multiple" required name="mySkillsName">
+            @if (ViewBag.mySkills != null)
+            {
+                foreach (var item in ViewBag.mySkills)
+                {
+                    if (item.Text != null)
+                    {
+                        <option value="@item.Value"> @item.Text </option>
+                    }
+                }
+            }
+        </select>
+        @Html.Hidden("mySkillsValues")
+    </div>
+    <div class="col-sm-6">
+        @Html.TextBox("sdate", null, new { @class = "form-control datepicker", @placeHolder = "date" })
+        </div>
+    </div>
+<div>
+   
+</div> <br /> <br />
+<input type="submit" id="btnGetSkills" value="Block" onclick="assignVlToHidden();" />  
+}
+<script type="text/javascript">
+    $(".datepicker").datepicker();
+</script>

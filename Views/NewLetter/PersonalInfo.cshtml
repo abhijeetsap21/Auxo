@@ -1,0 +1,61 @@
+﻿@model  NewLetter.Models.qendidateList
+ 
+      @using (Html.BeginForm("SavePersonalInfo", "NewLetter", FormMethod.Post, new { id = "msform" }))
+      {
+         @Html.AntiForgeryToken()
+        <fieldset>
+            <h2 class="fs-title">Personal Information</h2>
+            <h3 class="fs-subtitle">This is step 1 info</h3>
+            @Html.HiddenFor(m => m.qenID)
+        
+            <div class="col_1 tleft"><strong>Full Name <span>*</span></strong></div>
+            <div class="col_1">
+                @Html.TextBoxFor(m => m.qenName, new { id = "Name", placeholder = "Full Name", maxlength="50" })
+                @Html.ValidationMessageFor(model => model.qenName, "", new { @class = "text-danger" })
+                @*<input type="text"  ID="fname" >*@
+            </div>
+            <div class="col_2">
+                <div class="col_1 tleft"><strong>Address<span>*</span></strong></div>
+                  @Html.TextBoxFor(m => m.qenAddress, new { id = "txtaddress", placeholder = "Address" ,maxlength = "100"})
+                @Html.ValidationMessageFor(model => model.qenAddress, "", new { @class = "text-danger" })
+            </div>
+            <div class="col_2">
+                <div class="col_1 tleft"><strong>Current City</strong></div>
+                @*<input type="text" ID="txtcity" >*@
+                @Html.TextBoxFor(m => m.qenCityID, new { id = "txtcity", placeholder = "Current City",maxlength = "100" })
+                @Html.ValidationMessageFor(model => model.qenCityID, "", new { @class = "text-danger" })
+            </div>
+            <div class="col_2">
+                <div class="col_1 tleft"><strong>Phone Number <span>*</span></strong></div>
+                @Html.TextBoxFor(m => m.qenPhone, new { id = "phone", placeholder = "Phone Number", maxlength = "10" })
+                @Html.ValidationMessageFor(model => model.qenPhone, "", new { @class = "text-danger" })
+            </div>
+            <div class="col_2">
+                <div class="col_1 tleft"><strong>E-mail</strong></div>
+                @Html.TextBoxFor(m => m.qenEmail, new { id = "email", placeholder = "Email", maxlength = "50" })
+                @Html.ValidationMessageFor(model => model.qenEmail, "", new { @class = "text-danger" })
+            </div>
+            <div class="col_1">
+                <div class="col_1 tleft"><strong>LinkdIn URL</strong></div>
+                @Html.TextBoxFor(m => m.qenLinkdInUrl, new { id = "lUrl", placeholder = "LinkedIn Url", maxlength = "50" })
+                @*<input type="text" ID="lUrl" >*@
+            </div>
+            <div class="col_2">
+                <div class="col_1 tleft"><strong>Nationality</strong></div>
+                @*<input type="text" ID="txtnational" >*@
+                @Html.TextBoxFor(m => m.qenNationality, new { id = "txtnational", placeholder = "Nationality", maxlength = "50" })
+                @Html.ValidationMessageFor(model => model.qenNationality, "", new { @class = "text-danger" })
+            </div>
+            <div class="col_2">
+                <div class="col_1 tleft"><strong>Passport</strong></div>
+                @Html.TextBoxFor(m => m.qenPassport, new { id = "txtpassport", placeholder = "Passport", maxlength = "50" })
+                @Html.ValidationMessageFor(model => model.qenPassport, "", new { @class = "text-danger" })
+                @*<input type="text" ID="txtpassport" >*@
+            </div>
+            <input type="submit" name="next" class="next action-button" value="Next"   />
+         
+        </fieldset>
+      }
+
+
+

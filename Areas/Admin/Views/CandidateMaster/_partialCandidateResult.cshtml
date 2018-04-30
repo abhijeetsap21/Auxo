@@ -1,0 +1,140 @@
+﻿@model IEnumerable<NewLetter.Models.sp_QendidateList_Result>
+
+@{
+    int PageCount = Convert.ToInt32(ViewBag.count);
+    int CurrentPageIndex = Convert.ToInt32(ViewBag.currindex);
+}
+
+<style type="text/css">
+    body {
+        font-family: Arial;
+        font-size: 10pt;
+    }
+
+    table {
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+        background-color: #fff;
+    }
+
+        table th {
+            background-color: #B8DBFD;
+            color: #333;
+            font-weight: bold;
+        }
+
+        table th, table td {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+
+        table, table table td {
+            border: 0px solid #ccc;
+        }
+</style>
+
+@{ var index = 0;}
+     
+<div>   
+      
+        @if (ViewBag.data == "Yes")
+        {
+            <table class="table">
+                <tr>
+                    <th>Qendidate ID</th>
+                    <th>Qendidate Name</th>
+                    <th>Mobile </th>
+                    <th>Email</th>
+                    <th>Data Created Date</th>
+                    <th>Data Last updated Date</th>
+                    <th>Account IS ACTIVE?</th>
+                   
+
+                </tr>
+
+                @foreach (var a in Model)
+                {
+                    <tr>
+                        <td> @(index += 1)</td>
+                        <td>@a.qenName</td>
+                        <td>@a.qenPhone</td>
+                        <td>@a.qenEmail</td>
+                        <td>@a.dataIsCreated</td>
+                        <td>@a.dataIsUpdated</td>
+                        <td><input type="checkbox" checked="@a.isActive" onclick="updateDBForAcive(this,@a.qenID )"/></td>
+                       
+                    </tr>
+                    <div class="modal fade" id="myModal" role="dialog">
+                        @Html.Action("_partialEditCandidateMaster", new { id = a.qenID })
+                    </div>
+                }
+            </table>
+                        <br />
+            
+
+        }
+    
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            @for (int i = 1; i <= PageCount; i++)
+            {
+                <td>
+                    @if (i != CurrentPageIndex)
+                    {
+                        <a href="javascript:PagerClick(@i);">@i</a>
+                    }
+                    else
+                    {
+                        <span>@i</span>
+                    }
+                </td>
+            }
+        </tr>
+    </table>
+    <input type="hidden" id="hfCurrentPageIndex" name="currentPageIndex" value='@CurrentPageIndex' />
+
+
+    @if (ViewBag.data == "Nodata")
+    {
+        <div>No Data Avaiable</div>
+        <input type="hidden" id="hfCurrentPageIndex" name="currentPageIndex" value='1' />
+    }   
+
+
+  
+</div>
+<script type="text/javascript">
+    function PagerClick(index) {
+        debugger
+            document.getElementById("hfCurrentPageIndex").value = index;
+        //document.forms[0].submit();
+            nextVal (index);
+        }
+
+        debugger
+        function demo() {
+            debugger 
+            var val = @CurrentPageIndex;
+            document.getElementById("hfCurrentPageIndex").value = val;
+            document.forms[0].submit();
+        }
+
+</script>
+
+<script>
+    function updateDBForAcive(check,qenID )
+    {
+        var chk=false;
+        if($(check).prop("checked") == true){
+            chk=true;
+        }
+
+        var URL = '@Url.Action("updateDB", "CandidateMaster")?check=' + chk+'&qenID=' +qenID;
+        $.get(URL, function (data) {
+            if(data=="ok")
+            {alert('record updated');}
+            else
+            {alert('record not updated');}
+        });
+    }
+</script>

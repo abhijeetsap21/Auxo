@@ -1,0 +1,71 @@
+﻿@model NewLetter.Models.qendidateGraduation
+
+@using (Html.BeginForm("Graduation", "profile", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="">
+      <!--  <p class="blue-title">Graduation</p>-->
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        @Html.HiddenFor(model => model.qenID)
+
+        <div class="group">
+            @Html.TextBoxFor(m => m.collegeName, new { placeholder = "College Name", maxlength = "100" })
+            <div class="alert alert-warning error-custom" role="alert">
+                @Html.ValidationMessageFor(m => m.collegeName, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+
+        </div>
+        <div class="group">
+            @Html.TextBoxFor(m => m.collegeUniversity, new { placeholder = "University Name", maxlength = "100" })
+            <div class="alert alert-warning error-custom" role="alert">
+                @Html.ValidationMessageFor(m => m.collegeUniversity, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+        </div>
+
+        <div class="group">
+            @Html.TextBoxFor(m => m.courseName, new { placeholder = "Course Name", maxlength = "100" })
+            <div class="alert alert-warning error-custom" role="alert">
+                @Html.ValidationMessageFor(m => m.courseName, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+        </div>
+        <div class="group">
+            @Html.TextBoxFor(m => m.courseField, new { placeholder = "Course Field", maxlength = "100" })
+            <div class="alert alert-warning error-custom" role="alert">
+                @Html.ValidationMessageFor(m => m.courseField, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+        </div>
+        <div class="group">
+            @Html.TextBoxFor(m => m.subjects, new { placeholder = "Subjects", maxlength = "100" })
+            <div class="alert alert-warning error-custom" role="alert">
+                @Html.ValidationMessageFor(m => m.subjects, "", new { @class = "col_1 tleft text-danger" })
+            </div>
+        </div>
+        <div class="group">
+            @Html.TextBoxFor(m => m.gradPercentage, new { id = "gradpercentage", placeholder = "Percentage Obtained" })
+            <div class="alert alert-warning error-custom" role="alert">
+                @Html.ValidationMessageFor(m => m.gradPercentage, "", new { @class = "col_1 tleft text-danger", maxlength = "3" })
+            </div>
+        </div>
+        <div class="group">
+            @Html.TextBoxFor(m => m.YearPassing, new { id = "gradpassyear", placeholder = "Passing Year" })
+            <div class="alert alert-warning error-custom" role="alert">
+                @Html.ValidationMessageFor(m => m.YearPassing, "", new { @class = "col_1 tleft text-danger", maxlength = "4" })
+            </div>
+        </div>
+
+        <div class="group">
+            <div class="col-md-12">
+                <input type="submit" value="Update" class="academic-create-btn" />
+            </div>
+        </div>
+    </div><hr />
+}
+
+
+
+<script src="~/Scripts/jquery.validate.js" defer></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js" defer></script>

@@ -1,0 +1,173 @@
+﻿@model IEnumerable<NewLetter.Models.CandidateCom>
+    @using NewLetter.Models
+@{
+    ViewBag.Title = "CandidateComm";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+
+<div class="form-horizontal">
+<h4>Orion MEET</h4>
+<div class="col-lg-12 col-md-12 col-xs-12 table-das">
+<div class="table-responsive">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+@{ long jid = 0;}
+<table id="myDataTable" class="table table-striped table-bordered table-hover col-md-12 display">
+    <thead>
+        <tr>
+           
+            <th>Name</th>
+            <th>reScheduled</th>
+            <th>Meet Accepted</th>
+            <th>Preferred Medium</th>
+            <th>Scheduled Date</th>
+            <th> Time</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.qenName)
+                </td>
+                <td>
+                    <a href='@Url.Action("rescheduleMeetHistory", "Employer", new { qenID = @item.qenID, jobID = @item.jobID })'>@item.reScheduled</a>
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.meetScheduledMailRecieved)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.meetPreferredMedium)
+                </td>
+                <td>
+                    @{if (item.meetScheduledMailRecieved)
+                        {@Html.DisplayFor(modelItem => item.meetScheduledDateTime)}
+                    }
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.slotTime)
+                </td>
+       
+                <td>
+                    <input type="button" id="btn_" onclick="return ProceedToMeet(@item.qenID,@item.jobID,'@item.qenName','@item.qenEmail','msg_@item.qenID','@item.meetID','-');" value="Re-Schedule Meet" />
+                    <span id='msg_@item.qenID'></span>
+                </td>
+
+                <td><a onclick="return Comments(@item.jobID,@item.qenID);" data-toggle="modal" data-target="#myModal">Comment</a></td>
+            </tr> { jid = @item.jobID; }
+                        }
+    </tbody>
+
+</table>
+<a href='@Url.Action("HiredCandidateList", "Employer",new {jobID= @jid })' class="hired-btn-defult">GO TO Hired List</a>
+</div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <input type="hidden" id="jobID" />
+    <input type="hidden" id="QenID" />
+    <div id="popid"></div>
+</div>
+</div>
+
+
+
+
+<script>
+    function ProceedToMeet(qenID, jobID, qenName, qenEmail, msgdiv,  mailSendID, examMarks)
+    {
+        debugger
+        var IsMeetScheduled = "True";
+        var data = { 'qenID': qenID, 'qenName': qenName, 'qenEmail': qenEmail, 'jobID': jobID, 'IsMeetScheduled': IsMeetScheduled, 'mailSendID': mailSendID, 'examMarks': examMarks }
+        jqOld.post('/Employer/ProceedToMeet', data,
+         function (data) {
+             if(data=="ok")
+             {
+                 document.getElementById(msgdiv).innerHTML = "Mail Sent";
+             }
+             else
+             {document.getElementById(msgdiv).innerHTML  = "Mail Not Send";}
+         })
+        }
+</script>
+
+
+
+<script>
+    function Comments(jobno, qenid) {
+        document.getElementById('jobID').value=jobno;
+        document.getElementById('QenID').value = qenid;
+        var URL = '@Url.Action("Comments","Employer")?jobID=' + jobno + '&qenID=' + qenid;
+        $.get(URL, function (data) {
+            debugger
+            $("#popid").html(data);
+        })
+              
+    }
+</script>
+<script>
+  
+    function oldComments() {
+        var jobID = document.getElementById('jobID').value;
+        var qenID = document.getElementById('QenID').value;
+        debugger
+        var URL = '@Url.Action("Oldcomments", "Employer")?jobID=' + jobID + '&qenID=' + qenID;
+        debugger
+        $.get(URL, function (data) {
+            debugger
+            $("#oldComment").html(data);
+        });
+
+    }
+
+    function newcomment() {
+        var jobID = document.getElementById('jobID').value;
+        var qenID = document.getElementById('QenID').value;
+        var URL = '@Url.Action("Newcomments", "Employer")?jobID=' + jobID + '&qenID=' + qenID;
+        debugger
+        $.get(URL, function (data) {
+            debugger
+            $("#newComment").html(data);
+        })
+    }
+</script>
+
+
+<script>
+    $(window).on('load',function () {
+        debugger
+        if (location.hash) {
+            $('a[href=\'' + location.hash + '\']').tab('show');
+        }
+        var activeTab = localStorage.getItem('activeTab');
+        if (activeTab) {
+            $('a[href="' + activeTab + '"]').tab('show');
+        }
+    });
+    $('#myTab').on('click', 'a[data-toggle=\'tab\']', function (e) {
+        e.preventDefault()
+        debugger
+        var tab_name = this.getAttribute('href')
+        if (history.pushState) {
+            history.pushState(null, null, tab_name)
+        }
+        else {
+            location.hash = tab_name
+        }
+        localStorage.setItem('activeTab', tab_name)
+
+        $(this).tab('show');
+        return false;
+    });
+    $(window).on('popstate', function () {
+        debugger
+        var anchor = location.hash ||
+          $('a[data-toggle=\'tab\']').first().attr('href');
+        $('a[href=\'' + anchor + '\']').tab('show');
+    });
+</script>

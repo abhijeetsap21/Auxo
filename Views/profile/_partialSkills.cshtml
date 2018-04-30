@@ -1,0 +1,120 @@
+﻿@model IEnumerable<NewLetter.Models.qenSkill>
+
+
+    <style>
+        span.col_1.tleft.text-danger.field-validation-error :before {
+            content: " Warning ! ";
+            color: red;
+            font-weight: bold;
+        }
+
+        .text-danger {
+            color: red;
+        }
+    </style>
+
+<div id="employment">
+    @{ var id = ViewBag.qenID;}
+
+    <div class="container">
+        <div class="row sub-container">            
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="right-box">
+                    @*<div class="form" id="content-1">*@
+                        <h1>Skills</h1>
+                        @if (Model.Count() > 0)
+                        {
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Skill</th>
+                                        <th>Exp.</th>
+                                        <th> </th>
+                                    </tr>
+                                </thead>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.skill.skillName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.yearOfExp)
+                                        </td>
+                                        <td>
+                                            <a onclick="return editskill(@item.qenSkillsID);"><i class="glyphicon glyphicon-edit"></i></a>
+                                            <a onclick="return deleteskill(@item.qenSkillsID,this);" id="delete_@item.qenSkillsID"><i class="glyphicon glyphicon-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        }
+                        <div id="AddSkillscan">
+                            @Html.Action("skillsAddPop", new { qenid = @id })
+                        </div>
+
+
+                    </div>                    
+                </div>
+            </div>
+
+        </div>
+
+    @*</div>*@
+    <script>
+
+        function editskill(qenSkillsID)
+       {
+           debugger
+           var URL = '@Url.Action("skillsAddPop", "profile")?qenSkillsID=' + qenSkillsID;
+           $.get(URL, function (data) {
+               debugger
+               $("#AddSkillscan").html(data);
+           });
+       }
+
+        function deleteskill(qenSkillsID, ID)
+       {
+           debugger
+           $("#certificatelistbody").html();
+           var URL = '@Url.Action("DeleteqenSkills", "profile")?qenSkillsID=' + qenSkillsID;
+
+
+               $.get(URL, function (data) {
+                   debugger
+                   location = location.href;
+               });
+
+
+       }
+    </script>
+    <script type="text/javascript">
+        var jqOld = jQuery.noConflict();
+        jqOld("#skillName").autocomplete({
+            source: function (request, response) {
+                debugger
+                jqOld.ajax({
+                    url: "/jobDetails/select_fillSkills",
+                    dataType: "json",
+                    data: { term: request.term },
+                    success: function (data) {
+                        debugger
+                        response($.map(data, function (item) {
+                            debugger
+                            return { label: item.value, value: item.value };
+                        }))
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "", results: ""
+            }
+        });
+
+    </script>
+</div>
+
+
+

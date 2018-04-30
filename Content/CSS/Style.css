@@ -1,0 +1,761 @@
+﻿body {background-color: #eee; 
+}
+@media screen and (min-width:768px) {
+    .inputForm {
+        width: 600px;
+        background-color: #fff;
+        border: 1px rgba(0, 0, 0, 0.2) groove;
+        border-radius: 2px;
+        float: left;
+        text-align: left;
+        padding:30px;
+        left: 30%;
+        top: 130px;
+        position: relative;
+    }
+    .detail{
+        
+        background-color: white;
+        border: 1px rgba(0, 0, 0, 0.2) groove;
+        border-radius: 2px;
+        float: left;
+        text-align: left;       
+        top: 100px;
+        position: relative;
+        padding-bottom:50px;
+        width:100%;
+        margin:2px 0px;
+    }
+    .LineTitle {
+    padding-top:8px;   
+    border: 0;
+    border-top: 1px solid #eee;
+
+}
+    .sidenav .closebtn, .openbtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    display:none;
+}
+      .sidenav {
+    height: 100%; 
+    z-index:1;
+    top: 100px;
+    left: 0;
+    background-color: darkslategrey;
+    overflow-x: hidden;
+    transition: 0.5s;
+    margin:auto;
+    padding-top: 40px;
+
+}
+    .notification {
+    text-align:center;
+        color: white;
+    font-size: 15px;
+    }
+        .SearchIcon {
+       height: 40px;
+    width: 30px;
+    right: 5px;
+    position: fixed;
+    top: 165px;
+    background-color: #000;
+    color:white;
+    z-index: 10;
+     cursor:pointer;
+     padding: 12px 2px;
+    }
+        .SearchIcon:before {
+          height: 0px;
+            width: 0px;
+            right: 35px;
+             top: 165px;
+            position: fixed;
+            z-index: 10;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            border-right: 20px solid #000;
+            content: " ";            
+           
+        }
+
+    .SearchPan {
+        width:100%;
+        width:400px;
+        padding:25px;
+        border:3px solid gold;
+        background-color:white;
+        right: 5px;
+        position: fixed;
+        top: 165px;
+        z-index: 11;       
+        border-radius:8px;
+        display:none;
+    }
+ }
+@media screen and (min-width:372px) and (max-width:768px) {
+    .inputForm {
+        width: 100%;
+        background-color: #fff;
+        border: 1px rgba(0, 0, 0, 0.2) groove;
+        border-radius: 2px;
+        float: left;
+        text-align: left;
+        padding: 30px;
+    }
+
+    .detail {
+        background-color: white;
+        border: 1px rgba(0, 0, 0, 0.2) groove;
+        border-radius: 2px;
+        float: left;
+        text-align: left;
+        top: 100px;
+        position: relative;
+        padding-bottom: 50px;
+        width: 100%;
+        margin: 2px 0px;
+    }
+
+    .LineTitle {
+       padding-top: 8px;
+       
+        border: 0;
+        border-top: none;
+    }
+    .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    display:block;
+ }
+
+    .openbtn {
+        position: fixed;
+        top: 262px;
+        left: 0px;
+        font-size: 42px;       
+         display:block;
+         z-index:2;
+         background-color:black;        
+         color:white;
+         padding: 6px 10px;    
+    border: 1px solid transparent;
+    border-radius: 4px;
+    }
+      .sidenav {
+    height: 100%; 
+    z-index:1;
+    width:0;
+    top: 100px;
+    left: 0;
+    background-color: darkslategrey;
+    overflow-x: hidden;
+    transition: 0.5s;
+    margin:auto;
+    padding-top: 40px;
+    position:fixed;
+    display:none;
+
+}
+      .notification {
+    text-align:left;
+        color: #fff;
+    font-size: 15px;
+    background-color:#ec971f;
+    }
+    .alert {padding:15px 0px;
+    }
+      .SearchIcon {
+       height: 40px;
+        width: 30px;
+        right: 2px;
+        position: fixed;
+        top: 262px;
+        background-color: #000;
+        color:white;
+        z-index: 10;
+         cursor:pointer;
+         padding: 12px 2px;
+    }
+        .SearchIcon:before {
+          height: 0px;
+            width: 0px;
+            right: 32px;
+             top: 262px;
+            position: fixed;
+            z-index: 10;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            border-right: 20px solid #000;
+            content: " ";            
+           
+        }
+
+    .SearchPan {
+        width:100%;
+        width:400px;
+        padding:25px;
+        border:3px solid gold;
+        background-color:white;
+        right: 2px;
+        position: fixed;
+        top: 262px;
+        z-index: 11;       
+        border-radius:8px;
+        display:none;
+    }   
+    .notification {
+    text-align: left;
+    color: #fff;
+    font-size: 15px;
+    padding: 6px;
+    background-color: #ec971f;
+}
+}
+@media screen and (max-width:371px) {
+    .inputForm {
+        width: 100%;
+        background-color: #fff;
+        border: 1px rgba(0, 0, 0, 0.2) groove;
+        border-radius: 2px;
+        float: left;
+        text-align: left;
+    }
+
+    .detail {
+        background-color: white;
+        border: 1px rgba(0, 0, 0, 0.2) groove;
+        border-radius: 2px;
+        float: left;
+        text-align: left;
+        top: 100px;
+        position: relative;
+        padding-bottom: 50px;
+        width: 100%;
+        margin: 2px 0px;
+    }
+
+    .LineTitle {
+         padding-top: 8px;
+        border: 0;
+        border-top: none;
+    }
+     .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    display:block;
+ }
+
+    .openbtn {
+         position: fixed;
+        top: 262px;
+        left: 0px;
+        font-size: 42px;       
+         display:block;
+         z-index:2;
+         background-color:black;         
+         color:white;
+         padding: 6px 10px;    
+    border: 1px solid transparent;
+    border-radius: 4px;
+    }
+      .sidenav {
+    height: 100%; 
+    z-index:1;
+    width:0;
+    top: 100px;
+    left: 0;
+    background-color: darkslategrey;
+    overflow-x: hidden;
+    transition: 0.5s;
+    margin:auto;
+    padding-top: 40px;
+    position:fixed;
+     display:none;
+}
+      .notification {
+    text-align:left;
+        color: #fff;
+    font-size: 15px;
+    padding:6px;
+    background-color:#ec971f;
+    }
+       .alert {padding:15px 0px;
+    }
+      .SearchIcon {
+       height: 40px;
+        width: 30px;
+        right: 2px;
+        position: fixed;
+        top: 262px;
+        background-color: #000;
+        color:white;
+        z-index: 10;
+         cursor:pointer;
+         padding: 12px 2px;
+    }
+        .SearchIcon:before {
+          height: 0px;
+            width: 0px;
+            right: 32px;
+             top: 262px;
+            position: fixed;
+            z-index: 10;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            border-right: 20px solid #000;
+            content: " ";            
+           
+        }
+
+    .SearchPan {
+        width:100%;
+        width:400px;
+        padding:25px;
+        border:3px solid gold;
+        background-color:white;
+        right: 2px;
+        position: fixed;
+        top: 262px;
+        z-index: 11;       
+        border-radius:8px;
+        display:none;
+    }
+}
+
+  
+input[type="email"], input[type="number"], input[type="password"], input[type="tel"], input[type="url"], input[type="text"], input[type="select"], select {
+    font-size: 14px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #757575;
+}
+
+    input[type="email"]:hover, input[type="email"]:focus,
+    input[type="number"]:hover, input[type="number"]:focus,
+    input[type="password"]:hover, input[type="password"]:focus,
+    input[type="tel"]:hover, input[type="tel"]:focus,
+    input[type="url"]:hover, input[type="url"]:focus,
+    input[type="text"]:hover, input[type="text"]:focus,
+    input[type="select"]:hover, input[type="select"]:focus,
+    select:hover, select:focus
+     {
+        border: none;
+        border-bottom: 1px solid #757575;
+        outline: none;
+    }
+
+    .btn {
+  
+    margin: 5px;
+    font-size: 14px;
+}
+textarea
+{
+     font-size: 14px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;   
+    border-bottom: 1px solid #757575;
+    height: 80px;
+ }
+
+
+    .Title {
+            font-size: 16px;
+            padding: 12px;
+            color: white;
+            text-align: center;
+            background-color: #0094ff;            
+            font-family: -webkit-body;
+            border-radius: 3px;
+            font-weight: bold;
+            
+ }
+
+   
+
+ 
+        .ModelPopUp {
+            filter: alpha(opacity=80);
+            opacity: 0.93;
+            z-index: 95;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;            
+            background-color: #000;
+        }
+
+@media screen and (max-width:767px) {
+     .innerPopUp,innerPopUp_double {
+                width: 94%;
+                border: 3px solid rgba(0, 0, 0, 0.81);
+                z-index: 10;
+                top: 3%;
+                left: 3%;
+                position: fixed;
+                border-radius: 3px;
+                background-color: beige;
+                padding: 20px;
+                max-height:300px;
+                overflow-y:auto;
+            }
+     .div_close {
+                font-size: 15px;
+                font-weight: bolder;
+                color: white;
+                background-color: #333333;
+                border-radius: 12px;
+                height: 20px;
+                width: 20px;
+                cursor: pointer;
+                left: 1%;
+                top: -1px;
+                position: absolute;
+                vertical-align: middle;
+                text-align: center;
+                z-index: 100;
+            }
+      
+}
+  .innerPopUp {
+                width: 80%;
+                border: 3px solid rgba(0, 0, 0, 0.81);
+                z-index: 10;
+                top: 3%;
+                left: 17%;
+                position: fixed;
+                border-radius: 3px;
+                background-color: beige;
+                padding: 10px;
+                  max-height:94%;
+                overflow-y:auto;
+            }
+         .innerPopUp_double {
+                width: 50%;
+                border: 3px solid rgba(0, 0, 0, 0.81);
+                z-index: 10;
+                top: 10%;
+                left: 30%;
+                position: fixed;
+                border-radius: 3px;
+                background-color: beige;
+                padding: 20px;               
+                overflow-y:auto;
+            }
+            .div_close {
+                font-size: 15px;
+                font-weight: bolder;
+                color: white;
+                background-color: #333333;
+                border-radius: 12px;
+                height: 20px;
+                width: 20px;
+                cursor: pointer;
+                left: 98%;
+                top: -2px;
+                position: absolute;
+                vertical-align: middle;
+                text-align: center;
+            }
+
+
+
+
+.group           { 
+  position:relative; 
+  margin-bottom:18px; 
+}
+/* LABEL ======================================= */
+
+
+/* active state */
+input:focus ~ label, input:valid ~ label         {
+  top:-20px;
+  font-size:14px;
+  color:#fff;
+}
+
+/* BOTTOM BARS ================================= */
+.bar    { position:relative; display:block; width:100%; }
+.bar:before, .bar:after     {
+  content:'';
+  height:2px; 
+  width:0;
+  bottom:1px; 
+  position:absolute;
+  background:#5264AE; 
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%; 
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after,textarea:focus ~ .bar:before, textarea:focus ~ .bar:after, 
+input[type="select"]:focus ~ .bar:before, input[type="sel ect"]:focus ~ .bar:after ,select:focus ~ .bar:before, select:focus ~ .bar:after{
+  width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+  position:absolute;
+  height:60%; 
+  width:100px; 
+  top:25%; 
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+/* active state */
+input:focus ~ .highlight,textarea:focus ~ .highlight {
+  -webkit-animation:inputHighlighter 0.3s ease;
+  -moz-animation:inputHighlighter 0.3s ease;
+  animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+    from { background:#5264AE; }
+  to    { width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+    from { background:#5264AE; }
+  to    { width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+    from { background:#5264AE; }
+  to    { width:0; background:transparent; }
+}
+
+
+
+
+#sLogin{
+    border-radius: 10px 200px 10px 10px;
+    -moz-border-radius: 10px 200px 10px 10px;
+    -webkit-border-radius: 10px 200px 10px 10px;
+    border: 0px solid #000000;
+    background-color: #337ab7;
+    width: 52%;
+    color: #fff;
+    padding: 5px;  cursor:pointer;
+}
+#sLogon {
+    border: 0px solid #000000;
+    width: 48%;
+    padding: 5px;
+    cursor:pointer;
+}
+
+.LoginIcon {
+        border-radius: 50%;
+        font-size: 20px;
+        padding: 10px 18px;
+        color:#fff ;
+        background-color: gold;
+        text-transform: uppercase;
+        font-weight:bold;
+}
+ .logo-img {
+        height: 100px;
+        left:20%;
+        position:relative;
+
+    }
+ .navbar-nav > li > div > input[type="text"] {
+    border: none;
+    padding: 8px 15px;
+    font-size: 14px;
+       width: 70%;
+}
+
+.navbar-nav li div input[type="text"]:hover, .navbar-nav li div input[type="text"]:focus {
+    border: none;
+}
+
+.navbar-inverse {
+    background-color: rgb(255, 255, 255); 
+    height: 100px;  
+    border-color: rgb(255, 255, 255) rgb(255, 255, 255) rgb(238, 238, 255);
+    border-bottom: 1px solid rgb(238, 238, 255);
+}
+
+.navbar-nav > li {
+    text-decoration: none;
+    display: block;
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 5px;
+    transition: color 0.2s ease;
+}
+
+.navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(51, 122, 183);
+    background-image: none;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-image: initial;
+    border-radius: 4px;
+}
+
+.navbar-collapse {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav {
+        float: left;
+        margin: 15px;
+    }
+}
+
+.required:before 
+{
+    content: "* ";
+    font-weight: bolder;
+    color: red; 
+}
+
+.field-validation-error {
+    color: red;
+    padding-left: 50px;
+}
+.navbar-nav > li > .dropdown-menu {
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    max-height: 210px;
+    overflow: auto;
+}
+
+
+.navbar-inverse {
+    background-color:#fff; 
+    height: 100px;  
+    border-color: rgb(255, 255, 255) rgb(255, 255, 255) rgb(238, 238, 255);
+    border-bottom: 1px solid rgb(238, 238, 255);
+}
+
+.navbar-nav > li {
+    text-decoration: none;
+    display: block;
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 5px;
+    transition: color 0.2s ease;
+}
+
+.navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(51, 122, 183);
+    background-image: none;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-image: initial;
+    border-radius: 4px;
+}
+
+.navbar-collapse {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+
+
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #fff;
+    display: block;
+    transition: 0.3s
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: whitesmoke;
+    text-decoration:underline;
+}
+
+
+
+
+    .sidenav img {
+        height :100px;
+        width:100px;
+        border-radius:50%;
+        left: 25%;
+        position: relative;
+        margin: 20px 0px;
+    }
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.msgSuccess {
+background-color:green;
+padding:8px 10px;
+vertical-align:middle;
+color:white;
+font-size:12px;
+border-radius:3px;
+margin:5px;
+}
+
+.msgFial {
+background-color:red;
+padding:8px 10px;
+vertical-align:middle;
+color:white;
+font-size:14px;
+border-radius:3px;
+margin:5px;
+}
+.notification a {
+    color:white;
+}
+.notification a:hover, .notification a:focus{
+    cursor:pointer;text-decoration:none;
+}
+
+#ticketSummary {
+    top: 100px;
+    position: relative;
+}
+.alert {  
+    margin-bottom: 0px;   
+}

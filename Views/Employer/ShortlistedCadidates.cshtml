@@ -1,0 +1,188 @@
+﻿@model IEnumerable<NewLetter.Models.interViewerComment>
+@{
+    ViewBag.Title = "ShortlistedCadidates";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><div class="form-horizontal">
+<h4>Shortlisted Cadidates</h4>
+<div class="col-lg-12 col-md-12 col-xs-12 table-das">
+<div class="table-responsive">
+@{ long jid = 0;}
+<table id="myDataTable" class="table table-striped table-bordered table-hover col-md-12 display">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.QenName)</th>
+            <th>@Html.DisplayNameFor(model => model.ExamMark)</th>
+            <th>Skill Match</th>
+            <th>Salary</th>
+            <th>Comment</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{var row = 0; }
+        @foreach (var item in Model)
+        {
+            row += 1;
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QenName)
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExamMark)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Skills)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExpectedSalaryMonthly) - @Html.DisplayFor(modelItem => item.ExpectedSalaryGross)
+                </td>
+                <td>
+                    <a onclick="return Comments(@item.jobID,@item.qenID);" data-toggle="modal" data-target="#myModal">Comment</a>
+                </td>
+                <td>@Html.DropDownList("Candidate_status", null, item.status.ToString(), new { id = "Candidate_status_" + @row, @onchange = "changeStatus('Candidate_status_" + @row + "','" + @item.jobID + "','" + @item.qenID + "')" })</td>
+            </tr>
+            { jid = @item.jobID; }
+        }
+    </tbody>
+</table>
+<a href='@Url.Action("HiredCandidateList", "Employer",new {jobID= @jid })' class='hired-btn-defult'>GO TO Hired List</a>
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <input type="hidden" id="jobID" />
+    <input type="hidden" id="QenID" />
+    <div id="popid"></div>
+   
+</div>
+</div>
+</div>
+</div>
+<div class="modal fade" id="myModal2" role="dialog">
+    <div id="addSalary"></div>
+    </div>
+    <script>
+       
+        function changeStatus(ddl, jobID, qenID) {
+            debugger
+            var selectedVal = $('#' + ddl).val();
+            if (selectedVal != "") {
+                $.ajax({
+                    type: "GET",
+                    url: "candidateStaus",
+                    data: { 'selectedVal': selectedVal, 'jobID': jobID, 'qenID': qenID },
+                    success: function (evt) {
+                        if (evt == "OK") {
+                            alert("updated");
+                        }
+
+                    },
+                    error: function (req, status, error) {
+                        alert("Error Occured");
+                    }
+                });
+                if (selectedVal == 4) {
+                    $.ajax({
+                        type: "GET",
+                        url: "HiredCandidatesComment",
+                        data: { 'jobID': jobID, 'qenID': qenID },
+                        success: function (evt) {
+                            debugger
+                            $('#addSalary').html(evt);
+                           
+                            $("#myModal2").modal('show');
+                          
+
+                        },
+                        error: function (req, status, error) {
+                            alert("Error Occured");
+                        }
+                    });
+                }
+                if (selectedVal == 1) {
+                    $.ajax({
+                        type: 'post',
+                        url: 'candidateShortlisted',
+                        data: { 'jobID': jobID, 'qenID': qenID },
+                        success: function (data) {
+                            alert("Mail sent.");
+                        }
+                    });
+                }
+            }
+        }
+    </script>
+
+    <script>
+        function Comments(jobno, qenid) {
+            document.getElementById('jobID').value = jobno;
+            document.getElementById('QenID').value = qenid;
+            var URL = '@Url.Action("Comments","Employer")?jobID=' + jobno + '&qenID=' + qenid;
+            $.get(URL, function (data) {
+                debugger
+                $("#popid").html(data);
+            })
+
+        }
+    </script>
+    <script>
+
+        function oldComments() {
+            var jobID = document.getElementById('jobID').value;
+            var qenID = document.getElementById('QenID').value;
+            debugger
+            var URL = '@Url.Action("Oldcomments", "Employer")?jobID=' + jobID + '&qenID=' + qenID;
+            debugger
+            $.get(URL, function (data) {
+                debugger
+                $("#oldComment").html(data);
+            });
+
+        }
+
+        function newcomment() {
+            var jobID = document.getElementById('jobID').value;
+            var qenID = document.getElementById('QenID').value;
+            var URL = '@Url.Action("Newcomments", "Employer")?jobID=' + jobID + '&qenID=' + qenID;
+            debugger
+            $.get(URL, function (data) {
+                debugger
+                $("#newComment").html(data);
+            })
+        }
+    </script>
+
+
+    <script>
+        $(window).on('load', function () {
+            debugger
+            if (location.hash) {
+                $('a[href=\'' + location.hash + '\']').tab('show');
+            }
+            var activeTab = localStorage.getItem('activeTab');
+            if (activeTab) {
+                $('a[href="' + activeTab + '"]').tab('show');
+            }
+        });
+        $('#myTab').on('click', 'a[data-toggle=\'tab\']', function (e) {
+            e.preventDefault()
+            debugger
+            var tab_name = this.getAttribute('href')
+            if (history.pushState) {
+                history.pushState(null, null, tab_name)
+            }
+            else {
+                location.hash = tab_name
+            }
+            localStorage.setItem('activeTab', tab_name)
+
+            $(this).tab('show');
+            return false;
+        });
+        $(window).on('popstate', function () {
+            debugger
+            var anchor = location.hash ||
+              $('a[data-toggle=\'tab\']').first().attr('href');
+            $('a[href=\'' + anchor + '\']').tab('show');
+        });
+    </script>

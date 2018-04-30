@@ -1,0 +1,60 @@
+﻿@model NewLetter.Models.qendidatePHD
+
+
+@using (Html.BeginForm("SavePhdInfo", "profile", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.phdid)
+    @Html.HiddenFor(m => m.qenID)
+
+
+
+    <div class="group">
+        @Html.TextBoxFor(m => m.courseField, new { placeholder = "Certificate Name", maxlength = "100" })
+        <div class="alert alert-warning error-custom" role="alert">
+            @Html.ValidationMessageFor(model => model.courseField, "", new { @class = "col_1 tleft text-danger" })
+        </div>
+    </div>
+    <div class="group">
+
+        @Html.TextBoxFor(m => m.collegeUniversity, new { placeholder = "Certificate Authority", maxlength = "100" })
+        <div class="alert alert-warning error-custom" role="alert">
+            @Html.ValidationMessageFor(model => model.collegeUniversity, "", new { @class = "col_1 tleft text-danger" })
+        </div>
+    </div>
+    <div class="group">
+        @Html.TextBoxFor(m => m.phdTitle, new { placeholder = "Licence Number", maxlength = "100" })
+        <div class="alert alert-warning error-custom" role="alert">
+            @Html.ValidationMessageFor(model => model.phdTitle, "", new { @class = "col_1 tleft text-danger" })
+        </div>
+    </div>
+
+    <div class="group">
+        @Html.TextBoxFor(m => m.phdStart, new { placeholder = "Start Date", @class = "datepicker", id= "txtStartDate" })
+        <div class="alert alert-warning error-custom" role="alert">
+            @Html.ValidationMessageFor(model => model.phdStart, "", new { @class = "col_1 tleft text-danger" })
+        </div>
+    </div>
+    <div class="group">
+        @Html.TextBoxFor(m => m.phdEnd, "{0:d MMM yyyy}", new { placeholder = "End Date", @class = "datepicker" })
+        <div class="alert alert-warning error-custom" role="alert">
+            @Html.ValidationMessageFor(model => model.phdEnd, "", new { @class = "col_1 tleft text-danger" })
+        </div>
+    </div>
+    <div class="group">
+        @Html.TextBoxFor(m => m.phdRemarks, new { placeholder = "Remarks", maxlength = "100" })
+        <div class="alert alert-warning error-custom" role="alert">
+            @Html.ValidationMessageFor(model => model.phdRemarks, "", new { @class = "col_1 tleft text-danger" })
+        </div>
+    </div>
+
+    <input type="submit" name="save" class="plus-btn" style="background:url(/images/plus-btn.png) no-repeat center" value="Save" />
+        <br /><br /><br />
+}
+
+<script type="text/javascript">
+    var jqOld = jQuery.noConflict();
+    jqOld(function () {
+        jqOld(".datepicker").datepicker();
+    })
+</script>

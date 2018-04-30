@@ -1,0 +1,62 @@
+﻿@model NewLetter.Models.qenEmpDetail
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script type="text/javascript">
+    $(".datepicker").datepicker();
+</script>
+
+@using (Html.BeginForm("SaveEmploymentDetails", "NewLetter", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" id="jobnumber" />
+    <div class="col_1">
+        <div class="col_1 tleft"><strong>Employer Name <span>*</span></strong></div>
+        @*<input type="text" id="txtemployename" runat="server" placeholder=""/>*@
+        @Html.TextBoxFor(ex => ex.CompanyName)
+        @Html.ValidationMessageFor(ex => ex.CompanyName, "", new { @class = "text-danger" })
+        @Html.HiddenFor(ex => ex.qenEmploymentNum)
+        @Html.HiddenFor(ex => ex.qenID)
+    </div>
+    <div class="col_3">
+        <div class="col_1 tleft"><strong>Salary in  <span>*</span></strong></div>
+
+        @*<input type="text" id="txtsal" runat="server" placeholder="Rs"/>*@
+        @Html.TextBoxFor(ex => ex.qenSalary)
+        @Html.ValidationMessageFor(ex => ex.qenSalary, "", new { @class = "text-danger" })
+    </div>
+    <div class="col_3">
+        <div class="col_1 tleft"><strong>Position <span>*</span></strong></div>
+
+        @*<input type="text" id="txtposition" runat="server" placeholder=""/>*@
+        @Html.TextBoxFor(ex => ex.qenPosition)
+        @Html.ValidationMessageFor(ex => ex.qenPosition ,"", new { @class = "text-danger" })
+    </div>
+    <div class="col_3">
+        <div class="col_1 tleft"><strong>Job Description</strong></div>
+
+        @*<input type="text" id="txtjobdescription" runat="server" placeholder=""/>*@
+        @Html.TextBoxFor(ex => ex.jobDescription)
+    </div>
+    <div class="col_2">
+        <div class="col_1 tleft"><strong>Employed From</strong> (MM/DD/YYYY) <span><strong>*</strong></span></div>
+
+        @*<input type="text" id="efrom" runat="server" placeholder="" class="datepicker"/>*@
+        @Html.TextBoxFor(ex => ex.qenEmpFrom, new { @class = "datepicker" })
+        @Html.ValidationMessageFor(ex => ex.qenEmpFrom ,"", new { @class = "text-danger" })
+    </div>
+    <div class="col_2">
+        <div class="col_1 tleft"><strong>Employed To</strong> (MM/DD/YYYY) <span><strong>*</strong></span></div>
+
+        @Html.TextBoxFor(ex => ex.qenEmpTo, new { @class = "datepicker" })
+        @Html.ValidationMessageFor(ex => ex.qenEmpTo, "", new { @class = "text-danger" })
+      @*  <input type="checkbox" id="chkiscurrent" value="0" aria-invalid="false">Currently working here*@
+    </div>
+    if (Model.qenEmploymentNum > 0)
+    {
+    <input type="submit" name="save" class="previous action-button" value="Update" id="btnsaveempinfo"/>
+    }
+    else
+    {
+        <input type="submit" name="save" class="previous action-button" value="Submit" id="btnsaveempinfo" />
+    }
+}

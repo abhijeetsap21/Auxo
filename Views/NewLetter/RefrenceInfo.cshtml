@@ -1,0 +1,112 @@
+﻿@model NewLetter.Models.qenrefvalidation
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+@{
+    ViewBag.Title = "RefrenceInfo";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnnext").click(function () {
+            if (!$("input[name='q26_haveYou31']:checked").val()) {
+                alert('Please agree to terms and conditions');
+                return false;
+            }
+        });
+
+    });
+
+</script>
+
+@using (Html.BeginForm("SaveRefrenceInfo", "NewLetter", FormMethod.Post, new { id = "msform" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.qenid)
+    <fieldset>
+        <h2 class="fs-title">References</h2>
+        <input type="hidden" id="qendidateid" value="1" />
+        <h3 class="fs-subtitle">This is step 6 info</h3>
+        <div class="col_1 tleft" style="padding-bottom: 10px;">Please provide details of people you have known in your last organization.</div>
+
+        <h2 class="steps"><span>1</span></h2>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Full Name </strong></div>
+            <div class="col_1" style="padding-left: 0;">
+                @*<input type="text" name="refname" id="refname" placeholder="Full Name" />*@
+                @Html.TextBoxFor(m => m.qenRefName1, new { id = "qenRefName1", placeholder = "Full Name" })
+                @Html.ValidationMessageFor(m => m.qenRefName1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Phone Number </strong></div>
+            @Html.TextBoxFor(m => m.qenRefPhone1, new { id = "qenRefPhone1", placeholder = "Phone Number" })
+            @Html.ValidationMessageFor(m => m.qenRefPhone1, "", new { @class = "text-danger" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Email</strong></div>
+            @Html.TextBoxFor(m => m.qenRefEmail1, new { id = "qenRefEmail1", placeholder = "Email" })
+            @Html.ValidationMessageFor(m => m.qenRefEmail1, "", new { @class = "text-danger" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Company Name </strong></div>
+            @*<input type="text" name="refcompany" id="refcompany" placeholder="" />*@
+            @Html.TextBoxFor(m => m.qenRefCompany1, new { id = "qenRefCompany1", placeholder = "Company Name" })
+            @Html.ValidationMessageFor(m => m.qenRefCompany1, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Position</strong></div>
+            @Html.TextBoxFor(m => m.qenRefPosition1, new { id = "qenRefPosition1", placeholder = "Position In company" })
+            @Html.ValidationMessageFor(m => m.qenRefPosition1, "", new { @class = "text-danger" })
+            @*<input type="text" name="refposition"  />*@
+        </div>
+        <div>&nbsp;</div>
+        <h2 class="steps"><span>2</span></h2>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Full Name </strong></div>
+            <div class="col_1" style="padding-left: 0;">
+                @*<input type="text" name="refname" id="refname" placeholder="Full Name" />*@
+                @Html.TextBoxFor(m => m.qenRefName2, new { id = "qenRefName2", placeholder = "Full Name" })
+                @Html.ValidationMessageFor(m => m.qenRefName2, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Phone Number </strong></div>
+            @Html.TextBoxFor(m => m.qenRefPhone2, new { id = "qenRefPhone2", placeholder = "Phone Number" })
+            @Html.ValidationMessageFor(m => m.qenRefPhone2, "", new { @class = "text-danger" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Email</strong></div>
+            @Html.TextBoxFor(m => m.qenRefEmail1, new { id = "qenRefEmail1", placeholder = "Email" })
+            @Html.ValidationMessageFor(m => m.qenRefEmail1, "", new { @class = "text-danger" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Company Name </strong></div>
+            @*<input type="text" name="refcompany" id="refcompany" placeholder="" />*@
+            @Html.TextBoxFor(m => m.qenRefCompany2, new { id = "qenRefCompany2", placeholder = "Company Name" })
+            @Html.ValidationMessageFor(m => m.qenRefCompany2, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Position</strong></div>
+            @Html.TextBoxFor(m => m.qenRefPosition2, new { id = "qenRefPosition2", placeholder = "Position In company" })
+            @Html.ValidationMessageFor(m => m.qenRefPosition2, "", new { @class = "text-danger" })
+            @*<input type="text" name="refposition"  />*@
+        </div>
+        <div class="col_1 tleft">
+            <p>By clicking the submit button, I certify that the facts contained in this application are true and complete to the best of my knowledge and understand that, if employed, falsified statements on this application shall be grounds for dismissal. I authorize investigation of all statements contained herein and the references and employers listed above to give you any and all information concerning my previous employment and any pertinent information they may have, personal or otherwise, and release the company from all liability for any damage that may result from utilization of such information. I also understand and agree that no representative of the company has any authority to enter into any agreement for employement for any specified period of time, or to make any agreement contrary to the foregoing, unless it is in writing and signed by an authorized company representative. This online application does not permit the release or use of disability-related or medical information in a manner prohibited by the American with Disabilities Act (ADA) and other relevant federal and state laws.</p>
+        </div>
+        <div class="col_1 tleft"><strong>I have read and agree to the above statement </strong></div>
+        <div class="col_1 tleft">
+            <label>
+               @Html.RadioButtonFor(m => m.acceptterms, new { @class = "form-radio form-validation-error" })&nbsp;I agree
+                @Html.ValidationMessageFor(m => m.acceptterms,"", new { @class = "text-danger" })
+            </label>
+        </div>
+        <div class="fclear"></div>
+        <input type="submit" name="previous" class="previous action-button" value="Previous" />
+        <input type="submit" name="Submit" class="Submit action-button" value="Submit" />
+    </fieldset>
+}

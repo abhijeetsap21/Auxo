@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "companyMain";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+
+
+<h2>companyMain</h2>
+@using (Html.BeginForm("companyMain", "companyDetails"))
+{
+    <p>
+        @Html.ActionLink("Edit Company Details", "editCompany")
+    </p>
+
+    <p>
+        @Html.ActionLink("Edit Your Details ", "editEmployer")
+    </p>
+
+    <p>
+        @Html.ActionLink("View Qendidates ", "candidates")
+    </p>
+
+    <p>
+        @Html.ActionLink("View Resumes ", "Jobs" , "jobDetails")
+    </p>
+
+    <p>
+        @Html.ActionLink("Shortlisted CV ", "cvShortlisted")
+    </p>
+
+    <p>
+        @Html.ActionLink(" Post ", "jobDashboard", "jobDetails")
+    </p>
+}
+
+
+

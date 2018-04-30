@@ -1,0 +1,137 @@
+﻿@using System.Web.Mvc.Html
+@model NewLetter.Models.AcademicModel
+@{
+    ViewBag.Title = "AcademicInfo";
+}
+@using (Html.BeginForm("SaveAcademicInfo", "NewLetter", FormMethod.Post, new { id = "msform" }))
+{
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <h2 class="fs-title">Educational History</h2>
+        <h3 class="fs-subtitle">This is step 2 info</h3>
+        @Html.HiddenFor(m => m.qenid)
+        <div class="col_1 tleft"><strong style="color: #107aaf;">Enter Your Secondary Details <span>*</span></strong></div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Secondary School Name<span>*</span></strong></div>
+            @Html.TextBoxFor(m => m.secondary.schoolName, new { placeholder = "Secodary School Name", maxlength = "100" })
+            @Html.ValidationMessageFor(m => m.secondary.schoolName, "", new { @class = "text-danger", })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Secondary Board Name <span>*</span></strong></div>
+            @Html.TextBoxFor(m => m.secondary.secondaryBoard, new { placeholder = "Secodary Board Name", maxlength = "100" })
+            @Html.ValidationMessageFor(m => m.secondary.secondaryBoard, "", new { @class = "text-danger" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Secondary Subjects <span>*</span></strong></div>
+            @Html.TextBoxFor(m => m.secondary.secondarySubjects, new { placeholder = "Secondary Subjects", maxlength = "100" })
+            @Html.ValidationMessageFor(m => m.secondary.secondarySubjects, "", new { @class = "text-danger" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Percentage Obtained <span>*</span></strong></div>
+            @Html.TextBoxFor(m => m.secondary.secondaryPercentage, new { placeholder = "Percentage Obtained", maxlength = "3" })
+            @Html.ValidationMessageFor(m => m.secondary.secondaryPercentage, "", new { @class = "text-danger" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Year Of Passing <span>*</span></strong></div>
+            @Html.TextBoxFor(m => m.secondary.secondaryPassYear, new { placeholder = "Year of obtaining", maxlength = "4" })
+            @Html.ValidationMessageFor(m => m.secondary.secondaryPassYear, "", new { @class = "text-danger" })
+        </div>
+        <div class="col_1 tleft"><strong style="color: #107aaf;">Enter Your Higher Secondary Details <span>*</span></strong></div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Higher Secondary School Name<span>*</span></strong></div>
+            @Html.TextBoxFor(m => m.hsecondary.schoolName, new { placeholder = "Higher Secondary School Name", maxlength = "100" })
+            @Html.ValidationMessageFor(m => m.hsecondary.schoolName, "", new { @class = "text-danger" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Higher Secondary Board Name  <span>*</span></strong></div>
+            @Html.TextBoxFor(m => m.hsecondary.hSecondaryBoard, new { placeholder = "Higher Secondary Board Name", maxlength = "100" })
+            @Html.ValidationMessageFor(m => m.hsecondary.hSecondaryBoard, "", new { @class = "text-danger" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Higher Secondary Subjects <span>*</span></strong></div>
+            @Html.TextBoxFor(m => m.hsecondary.hSecondarySubjects, new { placeholder = "Higher Secondary Subjects", maxlength = "100" })
+            @Html.ValidationMessageFor(m => m.hsecondary.hSecondarySubjects, "", new { @class = "text-danger" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Percentage Obtained <span>*</span></strong></div>
+            @Html.TextBoxFor(m => m.hsecondary.hSecondaryPercentage, new { placeholder = "Percentage Obtained", maxlength = "2" })
+            @Html.ValidationMessageFor(m => m.hsecondary.hSecondaryPercentage, "", new { @class = "text-danger" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Year Of Passing <span>*</span></strong></div>
+            @Html.TextBoxFor(m => m.hsecondary.hSecondaryPassYear, new { placeholder = "Year Of Passing", maxlength = "4" })
+            @Html.ValidationMessageFor(m => m.hsecondary.hSecondaryPassYear, "", new { @class = "text-danger" })
+        </div>
+        <div class="col_1 tleft"><strong style="color: #107aaf;">Enter your Graduation Details</strong></div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Enter College Name</strong></div>
+            @Html.TextBoxFor(m => m.graduation.collegeName, new { placeholder = "Enter College Name", maxlength = "100" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Enter University Name </strong></div>
+            @Html.TextBoxFor(m => m.graduation.collegeUniversity, new { placeholder = "Enter University Name", maxlength = "100" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Enter Course Name</strong></div>
+            @Html.TextBoxFor(m => m.graduation.courseName, new { placeholder = "Enter Course Name", maxlength = "100" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Enter Course Field</strong></div>
+            @Html.TextBoxFor(m => m.graduation.courseField, new { placeholder = "Enter Course Field", maxlength = "100" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Enter Subjects</strong></div>
+            @Html.TextBoxFor(m => m.graduation.subjects, new { placeholder = "Enter Subjects", maxlength = "100" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Percentage Obtained </strong></div>
+            @Html.TextBoxFor(m => m.graduation.gradPercentage, new { id = "gradpercentage", placeholder = "Percentage Obtained" })
+            @Html.ValidationMessageFor(m => m.graduation.gradPercentage, "", new { @class = "text-danger", maxlength = "3" })
+        </div>
+
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Year of obtaining degree </strong></div>
+            @Html.TextBoxFor(m => m.pgraduation.YearPassing, new { id = "gradpassyear", placeholder = "Year of obtaining degree" })
+            @Html.ValidationMessageFor(m => m.graduation.YearPassing, "", new { @class = "text-danger", maxlength = "4" })
+        </div>
+
+        <div class="col_1 tleft"><strong style="color: #107aaf;">Enter Your Post Graduation Details </strong></div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Enter College Name </strong></div>
+            @Html.TextBoxFor(m => m.pgraduation.collegeName, new { placeholder = "Enter Name of college", maxlength = "100" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Enter University Name </strong></div>
+            @Html.TextBoxFor(m => m.pgraduation.collegeUniversity, new { placeholder = "Enter University Name", maxlength = "100" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Enter Course Name</strong></div>
+            @Html.TextBoxFor(m => m.pgraduation.courseName, new { placeholder = "Enter Course Name", maxlength = "100" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Enter Course Field</strong></div>
+            @Html.TextBoxFor(m => m.pgraduation.courseField, new { placeholder = "Enter Course Field", maxlength = "100" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Enter Subjects</strong></div>
+            @Html.TextBoxFor(m => m.pgraduation.subjects, new { placeholder = "Enter Subjects", maxlength = "100" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Percentage Obtained</strong></div>
+            @Html.TextBoxFor(m => m.pgraduation.pGradPercentage, new { placeholder = "Obtained Percentage", maxlength = "3" })
+        </div>
+        <div class="col_2">
+            <div class="col_1 tleft"><strong>Year Of Passing </strong></div>
+            @Html.TextBoxFor(m => m.pgraduation.YearPassing, new { placeholder = "Year of obtaining degree", maxlength = "4" })
+        </div>
+        <div class="fclear"></div>
+        <input type="submit" name="Previous" class="previous action-button" value="Previous" />
+        <input type="submit" name="Next" class="next action-button" value="Next" />
+    </fieldset>
+}
+
+
+
+
+
+

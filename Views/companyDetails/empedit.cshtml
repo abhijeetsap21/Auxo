@@ -1,0 +1,99 @@
+﻿@using NewLetter.Models;
+
+@{
+    ViewBag.Title = "empedit";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+@{var qenID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.UserID.ToString())); }
+
+
+@if (TempData["saveResult"] != null)
+{
+    var result = Convert.ToString(TempData["saveResult"]);
+    if (result == "Success")
+    {
+        <div style="width:100%" class="alert alert-success">Company Details Saved SuccessFully</div>
+    }
+    else if (result == "empSuccess")
+    {
+        <div style="width:100%" class="alert alert-success">Employer Details Saved SuccessFully</div>
+    }
+    else
+    {
+        <div style="width:100%" class="alert alert-danger">@result</div>
+    }
+}
+<div class="container">
+<div class="form-horizontal">
+    <ul class="nav nav-tabs" id="rowTab">
+        <li class="active"><a data-toggle="tab" href="#Employer">Employer</a></li>
+        <li><a data-toggle="tab" href="#Company">Company</a></li>
+
+    </ul>
+
+    <div class="tab-content">
+        <div id="Employer" class="tab-pane fade in active">
+            <div id="EmployerDetails">
+                @Html.Action("_partialEditEmployer", "companyDetails")
+            </div>
+        </div>
+
+        <div id="Company" class="tab-pane fade">
+            
+            <div id="CompanyDetails">
+                @Html.Action("_partialEditCompany", "companyDetails")
+            </div>
+        </div>
+
+    	</div>
+	</div>
+</div>
+
+
+
+@{
+    if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+             alert(@Html.Raw(Json.Encode(TempData["message"])));
+        </script>
+    }
+}
+
+
+
+<script>
+
+    if (location.hash) {
+        debugger
+        $('a[href=\'' + location.hash + '\']').tab('show');
+    }
+    var activeTab = localStorage.getItem('activeTab');
+    if (activeTab) {
+
+        $('a[href="' + activeTab + '"]').tab('show');
+    }
+
+    $('body').on('click', 'a[data-toggle=\'tab\']', function (e) {
+        debugger
+        e.preventDefault()
+        var tab_name = this.getAttribute('href')
+        if (history.pushState) {
+            history.pushState(null, null, tab_name)
+        }
+        else {
+            location.hash = tab_name
+        }
+        localStorage.setItem('activeTab', tab_name)
+    debugger
+        $(this).tab('show');
+        return false;
+    });
+    $(window).on('popstate', function () {
+        debugger
+        var anchor = location.hash ||
+          $('a[data-toggle=\'tab\']').first().attr('href');
+        $('a[href=\'' + anchor + '\']').tab('show');
+    });
+</script>

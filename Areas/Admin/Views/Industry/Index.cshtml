@@ -1,0 +1,64 @@
+﻿@model IEnumerable<NewLetter.Models.sp_IndustryList_Result>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.industryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dataIsCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dataIsUpdated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isActive)
+        </th>        
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.industryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dataIsCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dataIsUpdated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isActive)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name1)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.industryID }) |
+            
+        </td>
+    </tr>
+}
+
+</table>

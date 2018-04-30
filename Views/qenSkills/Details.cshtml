@@ -1,0 +1,43 @@
+﻿@model NewLetter.Models.qenSkill
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>qenSkill</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.yearOfExp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.yearOfExp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.qendidateList.qenName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.qendidateList.qenName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.skill.skillName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.skill.skillName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.qenSkillsID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

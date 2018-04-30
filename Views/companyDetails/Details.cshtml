@@ -1,0 +1,147 @@
+﻿@model NewLetter.Models.companyDetail
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>companyDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.companyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.companyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.website)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.website)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.companyIndustry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.companyIndustry)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.companyDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.companyDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gstNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gstNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tinNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tinNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ctsNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ctsNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.logo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.logo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.createdDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.createdDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isDeleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modifiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.city.city1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.city.city1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployerDetail.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployerDetail.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.employerType.employerType1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employerType.employerType1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.companyID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

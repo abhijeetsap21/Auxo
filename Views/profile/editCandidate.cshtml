@@ -1,0 +1,120 @@
+﻿@using NewLetter.Models;
+
+@{
+    ViewBag.Title = "editCandidate";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+@{var qenID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.UserID.ToString())); }
+
+
+
+<script>
+   
+    var jqOld = jQuery.noConflict(); var $ = jqOld.noConflict();
+    $(window).on('load',function () {
+        debugger
+        if (location.hash) {
+            $('a[href=\'' + location.hash + '\']').tab('show');
+        }
+        var activeTab = localStorage.getItem('activeTab');
+        if (activeTab) {
+            $('a[href="' + activeTab + '"]').tab('show');
+        }
+    });
+    $('body').on('click', 'a[data-toggle=\'tab\']', function (e) {
+        e.preventDefault()
+        debugger
+        var tab_name = this.getAttribute('href')
+        if (history.pushState) {
+            history.pushState(null, null, tab_name)
+        }
+        else {
+            location.hash = tab_name
+        }
+        localStorage.setItem('activeTab', tab_name)
+
+        $(this).tab('show');
+        return false;
+    });
+    $(window).on('popstate', function () {
+        debugger
+        var anchor = location.hash ||
+          $('a[data-toggle=\'tab\']').first().attr('href');
+        $('a[href=\'' + anchor + '\']').tab('show');
+    });
+</script>
+<h2>editCandidate</h2>
+<div class="container">
+   <ul class="nav nav-tabs" id="myTab">
+        <li class="active"><a data-toggle="tab" href="#home">Personal Detials</a></li>
+        <li><a data-toggle="tab" href="#profile">ACADEMIC Detials</a></li>
+        <li><a data-toggle="tab" href="#messages">CERTIFICATIONS</a></li>
+        <li><a data-toggle="tab" href="#settings">Skills</a></li>       
+        <li><a data-toggle="tab" href="#messages1">EMPLOYMENT</a></li>
+       <li><a data-toggle="tab" href="#profile1">REFERENCES</a></li>
+        <li><a data-toggle="tab" href="#settings1">Career High light</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active  fade in" id="home">
+            @Html.Action("_partialPInfo", "profile", new { qenID })
+        </div>
+        <div class="tab-pane" id="profile">
+            @Html.Action("_partialacadInfo", "profile", new { qenID })
+        </div>
+        <div class="tab-pane" id="messages">
+          @Html.Action("_partialCertifications", "profile", new { qenID })
+        </div>
+        <div class="tab-pane" id="settings">
+            @Html.Action("_partialSkills", "profile", new { qenID })
+        </div>
+        <div class="tab-pane" id="messages1">
+         @Html.Action("_partialEmpInfo", "profile", new { qenID })
+        </div>
+        <div class="tab-pane" id="profile1">
+            @Html.Action("_partialRefInfo", "profile", new { qenID })
+        </div>
+       
+        <div class="tab-pane" id="settings1">
+            @Html.Action("_careerHighLights", "profile", new { qenID })
+        </div>
+    </div>
+    
+
+    </div>
+        <input type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" value="View" onclick="return dispalyResume(@qenID);" />
+
+
+        @{
+            if (TempData["message"] != null)
+            {
+                <script type="text/javascript">
+                    {
+                        debugger
+                        bootbox.alert({
+                            title: 'Alert Success  !',
+                            message: '@Html.Raw(Json.Encode(TempData["message"]))'
+                        });
+
+                    }
+                   
+                </script>
+            }
+        }
+
+        <div class="modal fade" id="myModal" role="dialog">   </div>
+
+
+        <script>
+            function dispalyResume(qenID) {
+                debugger
+                var URL = '@Url.Action("_partialPreviewCV", "profile")?qenID=' + qenID;
+                jqOld.get(URL, function (data) {
+                    jqOld("#myModal").html(data);
+                });
+            }
+        </script>
+
+
+
