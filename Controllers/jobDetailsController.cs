@@ -563,13 +563,13 @@ namespace NewLetter.Controllers
                     var fileName = Guid.NewGuid() + "_" + Path.GetFileName(files.FileName);
                     path = Path.Combine(Server.MapPath("~/newspaper"), fileName);
                     files.SaveAs(path);
-                    newadlist.advertisementimageURL = "https://newsletter.qendidate.com/stagingns/newspaper/" + fileName;
+                    newadlist.advertisementimageURL = "https://newsletter.qendidate.com/newspaper/" + fileName;
                     newadlist.dataIsCreated = BaseUtil.GetCurrentDateTime();
                     newadlist.dataIsUpdated = BaseUtil.GetCurrentDateTime();
                     db.advertisementLists.Add(newadlist);
                     db.SaveChanges();
                     string advtID = BaseUtil.encrypt((newadlist.advertisementRefID).ToString());
-                    newadlist.advertisementURL = "https://newsletter.qendidate.com/stagingns/jobDetails/advertisementApplyHome/?refid=" + advtID;
+                    newadlist.advertisementURL = "https://newsletter.qendidate.com/jobDetails/advertisementApplyHome/?refid=" + advtID;
                     newadlist.isComplePosted = true;
                     db.SaveChanges();
                     return RedirectToAction("adPostSuccess", new { ID = newadlist.advertisementRefID });
@@ -590,9 +590,9 @@ namespace NewLetter.Controllers
                     var fileName = Guid.NewGuid() + "_" + Path.GetFileName(files.FileName);
                     path = Path.Combine(Server.MapPath("~/newspaper"), fileName);
                     files.SaveAs(path);
-                    oadvertisementList.advertisementimageURL = "https://newsletter.qendidate.com/stagingns/newspaper/" + fileName;
+                    oadvertisementList.advertisementimageURL = "https://newsletter.qendidate.com/newspaper/" + fileName;
                     oadvertisementList.dataIsUpdated = BaseUtil.GetCurrentDateTime();
-                    oadvertisementList.advertisementURL = "https://newsletter.qendidate.com/stagingns/jobDetails/advertisementApplyHome/?refid=" + id;
+                    oadvertisementList.advertisementURL = "https://newsletter.qendidate.com/jobDetails/advertisementApplyHome/?refid=" + id;
                     oadvertisementList.isComplePosted = true;
                     db.Entry(oadvertisementList).State = EntityState.Modified;
                     db.SaveChanges();
@@ -680,17 +680,17 @@ namespace NewLetter.Controllers
             ViewBag.currency = db.currencies.Where(e => e.isActive == true);
             ViewBag.EducationReq = db.Educations;
             ViewBag.ComapnyDetails = db.companyDetails.Where(e => e.isActive == true).Select(e=>new { e.companyID,e.companyName});
+            ViewBag.isLink = "";
             if (islink == 1)
             {
-                ViewBag.isLink = "True";
+                ViewBag.isLink = "3";
             }
             return View(jobDetailsModel);
         }
 
 
         public ActionResult NewJob(jobDetail jobDetailsModel, HttpPostedFileBase files)
-        {
-            
+        {          
          
             jobDetailsModel.city = jobDetailsModel.city;
             //newjobDetailModel.EducationReq = "Not Available";           
@@ -709,14 +709,14 @@ namespace NewLetter.Controllers
                 var fileName = Guid.NewGuid() + "_" + Path.GetFileName(files.FileName);
                 path = Path.Combine(Server.MapPath("~/Logo"), fileName);
                 files.SaveAs(path);
-                jobDetailsModel.CompanyLogo = "http://stagingns.qendidate.com/Logo/" + fileName;
+                jobDetailsModel.CompanyLogo = "http://qendidate.com/Logo/" + fileName;
             }
             var roleID = BaseUtil.RoleID();
             string emailID = string.Empty; string  conName=string.Empty;
             if (roleID != "4" && roleID != "1")
             {
                 jobDetailsModel.companyID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.companyID.ToString()));
-                emailID = BaseUtil.GetSessionValue(AdminInfo.EmailID.ToString());
+                emailID = BaseUtil.GetSessionValue(AdminInfo.LoginID.ToString());
                 conName = BaseUtil.GetSessionValue(AdminInfo.FullName.ToString());
             }
             else
@@ -734,14 +734,13 @@ namespace NewLetter.Controllers
                 if (jobDetailsModel.jobID == 0)
                 {
                     db.jobDetails.Add(jobDetailsModel);                 
-                    db.SaveChanges();
-                    if (jobDetailsModel.jobURL == "Some")
-                    {
+                    //db.SaveChanges();
+                   
                         jobDetailsModel.jobURL = "http://localhost:51126/jobDetails/Apply?jobID=" + jobDetailsModel.jobID;
                         var url = jobDetailsModel.jobURL;
                         db.Entry(jobDetailsModel).State = EntityState.Modified;
-                        db.SaveChanges();
-                    }
+                        //db.SaveChanges();
+                    
                     
                 }
                 else
@@ -755,15 +754,15 @@ namespace NewLetter.Controllers
                 StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toEmployerAfterjobPost.html"));
                 string HTML_Body = sr.ReadToEnd();
                 string final_Html_Body_Link= "";
-                string final_Html_Body = HTML_Body.Replace("#name", emailID);
+                string final_Html_Body = HTML_Body.Replace("#name",conName );
                 if (jobDetailsModel.jobURL != null)
                 {
                     final_Html_Body_Link = final_Html_Body.Replace("#Link", jobDetailsModel.jobURL);
                 }
                 sr.Close();
-                string To = conName;
+                string To = emailID;
                 string mail_Subject = "Job Posted Successfully ";
-                string result = BaseUtil.sendEmailer(To, mail_Subject, final_Html_Body_Link, "");
+               // string result = BaseUtil.sendEmailer(To, mail_Subject, final_Html_Body_Link, "");
             }
             catch (DbEntityValidationException ex)
             {
@@ -782,6 +781,11 @@ namespace NewLetter.Controllers
                 throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
             }
             TempData["refID"] = jobDetailsModel.advertisementRefID;
+            var i = Request.Form["jobPOstType"].ToString();
+            if (i == "3")
+            {
+                TempData["jobURL"] = jobDetailsModel.jobURL;
+            }            
             return RedirectToAction("ThankYou");
         }
         
@@ -903,7 +907,7 @@ namespace NewLetter.Controllers
                 doc.Close();
                 FileResult fileResult = new FileContentResult(pdf, "application/pdf");
                 fileResult.FileDownloadName = empdetails.Name.ToString()+ Guid.NewGuid().ToString() + "news.pdf";
-                adlist.advertisementPDFUrk = "https://newsletter.qendidate.com/stagingns/newspaper_created/" + fileResult.FileDownloadName;
+                adlist.advertisementPDFUrk = "https://newsletter.qendidate.com/newspaper_created/" + fileResult.FileDownloadName;
                 var filename = fileResult.FileDownloadName;
                 db.SaveChanges();
                 uploadPDF(GridHtml, filename);                

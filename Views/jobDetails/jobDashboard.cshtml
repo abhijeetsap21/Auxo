@@ -16,7 +16,7 @@
             window.location.href = 'createAdvertisement';
         }
         if (selectedradio == "t-option") {
-            window.location.href = 'NewJob';
+            window.location.href = 'NewJob?islink=1';
         }
     }
 </script>
@@ -37,7 +37,7 @@
                 </div>
             </li>
             <li>
-                <input type="radio" id="t-option" name="selector">
+                <input type="radio" id="t-option" name="selector" onclick="return pageredirect('t-option');">
                 <label for="t-option"><img src="~/images/icon3.jpg">Post on other portal</label>
                 <div class="check">
                     <div class="inside"></div>

@@ -37,7 +37,7 @@ namespace NewLetter.jobSchedulers
                     {
                         var jobID_ = qenIDList.Where(e => e.qenid == qen.qenid && e.top10 == i).Select(e => new { e.jobID }).FirstOrDefault();
                         var jobTitle_ = qenIDList.Where(e => e.qenid == qen.qenid && e.top10 == i).Select(e => new { e.jobTitle }).FirstOrDefault();
-                        rows = MvcHtmlString.Create("<tr><td><a href='http://newsletter.qendidate.com/stagingns/jobDetails/JobView?jobID='" + jobID_.jobID + "'>'" + i + "'.)'" + jobTitle_.jobTitle + "'</a></td></tr><br />").ToString();
+                        rows = MvcHtmlString.Create("<tr><td><a href='http://newsletter.qendidate.com/jobDetails/JobView?jobID='" + jobID_.jobID + "'>'" + i + "'.)'" + jobTitle_.jobTitle + "'</a></td></tr><br />").ToString();
                         rownew = rows + rownew;
                         i++;
                     }
