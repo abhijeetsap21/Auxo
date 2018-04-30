@@ -3,6 +3,9 @@
     ViewBag.Title = "createAdvertisement";
     Layout = "~/Views/Shared/_Layout_Employer.cshtml";
 } 
+@{ 
+    var jobID = Request.Params["jobID"];
+}
   
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
@@ -21,6 +24,11 @@
     @using (Html.BeginForm("createAdvertisement", "jobDetails", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+
+	if (jobID != null)
+        {
+            <input type="hidden" value= @jobID name="hdnjobID">
+        }
     <div class="form-horizontal">
   <h4>Create Advertisement</h4>
   <div class="col-lg-12 col-md-12">
@@ -97,7 +105,7 @@
         </script>
       <div class="form-group">
             
-            <img id="pic" src="http://newsletter.qendidate.com/images/Dummy-Text-Featured.jpg" alt="your image" /> </div>
+            <img id="pic" src="http://newsletter.qendidate.com/stagingns/images/Dummy-Text-Featured.jpg" alt="your image" /> </div>
     </div>
         <div class="col-lg-6 col-md-6">
 			<div class="form-group">

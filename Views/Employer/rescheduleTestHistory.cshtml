@@ -1,109 +1,109 @@
 ﻿@model IEnumerable<NewLetter.Models.qendidateTestSchedule>
+    @{
+        ViewBag.Title = "rescheduleTestHistory";
+        Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+    }
+    @{ long jid = 0;}
+    <div class="form-horizontal">
+        <h4>Scheduled Details</h4>
+        <div class="col-lg-12 col-md-12 col-xs-12 table-das">
+            <div class="table-responsive">
+                <table id="myDataTable" class="table table-striped table-bordered table-hover col-md-12 display">
+                    <thead>
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Mail Sent
+                            </th>
+                            <th>
+                                Mail Received
+                            </th>
+                            <th>
+                                Test Scheduled
+                            </th>
+                            <th>
+                                Process Date
+                            </th>
+                            <th>
+                                Reschedule Reason
+                            </th>
+                            <th>Exam Attemped</th>
+                            <th>Exam Submitted</th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+            {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.qendidateList.qenName)
+                            </td>
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.jobDetail.jobTitle)
+                                </td>*@
 
-@{
-    ViewBag.Title = "rescheduleTestHistory";
-    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
-}
-
-<table class="table">
-    <tr>
-        <th>
-           Name
-        </th>      
-        <th>
-            Mail Sent
-        </th>
-        <th>
-          Mail Received
-        </th>
-        <th>
-           Test Scheduled
-        </th>
-        <th>
-         Process Date
-        </th>
-        <th>
-          Reschedule Reason
-        </th>      
-        <th>Exam Attemped</th>
-        <th>Exam Submitted</th>
-    </tr>
-
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.qendidateList.qenName)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.jobDetail.jobTitle)
-        </td>*@
-       
-        <td>
-            @{if (item.mailSentTestScheduled)
+                            <td>
+                                @{if (item.mailSentTestScheduled)
                 {
-                <input type="checkbox" checked />
-                }
-                else
-                {  <input type="checkbox" />}
-           }
-
-        </td>
-        <td>
-            @{if (item.mailReceivedscheduled)
+                                        <input type="checkbox" checked />
+                                    }
+                                    else
+                                    {  <input type="checkbox" />}
+                                }
+                            </td>
+                            <td>
+                                @{if (item.mailReceivedscheduled)
                 {
-                    <input type="checkbox" checked />
-                }
-                else
-                {  <input type="checkbox" />}
-            }
+                                        <input type="checkbox" checked />
+                                    }
+                                    else
+                                    {  <input type="checkbox" />}
+                                }
 
-         
-           
-        </td>
-        
-        <td>
-            @{ if (item.mailReceivedscheduled)
+
+                            </td>
+
+                            <td>
+                                @{ if (item.mailReceivedscheduled)
                 {
-                    @Html.DisplayFor(modelItem => item.testScheduledDateTime)
-                }
-            }           
-        </td>
+                                        @item.testScheduledDateTime.Value.ToString("dd/MM/yyyy hh:MM tt")
+                                    }
+                                }
+                            </td>
+                            <td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.dataIsCreated)
-        <br />
-           @{if (item.mailReceivedscheduled)
-               {
-                    @Html.DisplayFor(modelItem => item.dataIsUpdated)
-                   }
-               }
-
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReasonReschedule)
-        </td>
-        <td>
-
-            @Html.DisplayFor(modelItem => item.isExamAttempted)
-            @{if (item.isExamAttempted)
+                                @{if (item.mailReceivedscheduled)
+                                    {
+                                        @item.dataIsUpdated.ToString("dd/MM/yyyy")
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReasonReschedule)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.isExamAttempted)
+                                @{if (item.isExamAttempted)
                 {
-                    @Html.DisplayFor(modelItem => item.examAttemptedDateTime)
-                }
-            }
-          
-        </td> 
-        <td>
+                                        @item.examAttemptedDateTime.Value.ToString("dd/MM/yyyy hh:MM tt")
+                                    }
+                                }
 
-            @Html.DisplayFor(modelItem => item.isExamSubmitted)
-            @{if (item.isExamSubmitted)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.isExamSubmitted)
+                                @{if (item.isExamSubmitted)
                 {
-                    @Html.DisplayFor(modelItem => item.examSubmittedDateTime)
-                }
-            }
-
-        </td> 
-    </tr>
-}
-
-</table>
+                                        @item.examSubmittedDateTime.Value.ToString("dd/MM/yyyy hh:MM tt")
+                                    }
+                                }
+                            </td>
+                        </tr>
+                                        { jid = @item.jobID; }
+                                    }
+                </table>
+            </div>
+            <a class="hired-btn-defult" href='@Url.Action("scheduleTestDashboard", "Employer",new {jobID= @jid })'>Back to test Schedule</a>
+        </div>
+    </div>

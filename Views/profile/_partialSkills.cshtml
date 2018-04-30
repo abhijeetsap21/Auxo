@@ -21,7 +21,6 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="right-box">
                     @*<div class="form" id="content-1">*@
-                        <h1>Skills</h1>
                         @if (Model.Count() > 0)
                         {
                             <table class="table">
@@ -29,7 +28,7 @@
                                     <tr>
                                         <th>Skill</th>
                                         <th>Exp.</th>
-                                        <th> </th>
+                                        <th>Edit</th>
                                     </tr>
                                 </thead>
 
@@ -95,7 +94,7 @@
             source: function (request, response) {
                 debugger
                 jqOld.ajax({
-                    url: "/jobDetails/select_fillSkills",
+                    url: "/stagingns/jobDetails/select_fillSkills",
                     dataType: "json",
                     data: { term: request.term },
                     success: function (data) {

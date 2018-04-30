@@ -1,37 +1,37 @@
 ﻿@model IEnumerable<NewLetter.Models.mailReceivedInterested>
 
-<table id="tblcat3" class="table table-striped table-bordered table-hover col-md-12 display">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Sr</th>
-            <th>Name</th>
-            <th>Interested</th>
-            <th></th>
-        </tr>
+    <table id="tblcat3" class="table table-striped table-bordered table-hover col-md-12 display">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Sr</th>
+                <th>Name</th>
+                <th>Interested</th>
+                <th></th>
+            </tr>
         </thead>
         @{int rowNo = 0;}
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td><input type="checkbox" id="@item.qenID" onclick="return cat1selected(@item.qenID);" />
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><input type="checkbox" id="@item.qenID" onclick="return cat1selected(@item.qenID);" />
 
-                <td>@(rowNo += 1) </td>
-                <td>@item.qenName</td>
-                <td><input type="checkbox" id='chkReceived@(rowNo += 1)' @(Convert.ToBoolean(item.mailReceivedjobChancgeInterested) == true ? "checked='checked'" : string.Empty) /></td>
+                    <td>@(rowNo += 1) </td>
+                    <td>@item.qenName</td>
+                    <td><input type="checkbox" id='chkReceived@(rowNo += 1)' @(Convert.ToBoolean(item.mailReceivedjobChancgeInterested) == true ? "checked='checked'" : string.Empty) /></td>
 
-                <td><input type="hidden" id="hdn_@item.qenID" value="@item.qenEmail" /> <input type="button"  class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" value="View" onclick="return dispalyResume(@item.qenID);" /> </td>
+                    <td class="text-center cate-btn"><input type="hidden" id="hdn_@item.qenID" value="@item.qenEmail" /> <input type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" value="View" onclick="return dispalyResume(@item.qenID);" /> </td>
 
-            </tr>
-        }
+                </tr>
+            }
         </tbody>
-</table>
-<br /><br />
-<div class="row">
-    <input type="button" value="Notify Candidates" onclick="return notifyCat3();" />
-</div>
-<div>
+    </table>
+    <div class="col-md-6 text-right cate-btn">
+        <div class="row">
+            <input type="button" value="Notify Candidates" class="btn btn-default" onclick="return notifyCat3();" />
+        </div>
+    </div>
     <script>
         var arr = []
         var x = document.getElementById("tblcat3").rows.length;
@@ -54,7 +54,7 @@
 
 
         function notifyCat3() {
-
+            var jobID = document.getElementById("hid_jobid").value;
             debugger
             var arr_3 = arr.slice();
             var length = arr_3.length
@@ -63,43 +63,45 @@
                 $.ajax({
                     type: 'post',
                     url: '@Url.Action("notify3", "Employer")',
-                    data: JSON.stringify({ 'arrnew3': arr_3 }),
+                    data: JSON.stringify({ 'arrnew3': arr_3, 'jobID': jobID }),
                     contentType: 'application/json; charset=utf-8',
                     success: function (data) {
-                        alert(data);
+                        bootbox.alert({
+                            title: "Alert Success!",
+                            message: '<p>Mail send</p>'
+                        });
                     }
                 });
             }
 
         }
     </script>
-</div>
 
-<script>
+    <script>
 
-    var jqOld = jQuery.noConflict();
-    jqOld(document).ready(function () {
-        jqOld('#tblcat3').DataTable({
-            initComplete: function () {
-                this.api().columns().every(function () {
-                    var column = this;
-                    var select = jqOld('<select><option value=""></option></select>')
-                        .appendTo(jqOld(column.footer()).empty())
-                        .on('change', function () {
-                            var val = jqOld.fn.dataTable.util.escapeRegex(
-                                jqOld(this).val()
-                            );
-                            //to select and search from grid
-                            column
-                                .search(val ? '^' + val + 'jqOld' : '', true, false)
-                                .draw();
+        var jqOld = jQuery.noConflict();
+        jqOld(document).ready(function () {
+            jqOld('#tblcat3').DataTable({
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = jqOld('<select><option value=""></option></select>')
+                            .appendTo(jqOld(column.footer()).empty())
+                            .on('change', function () {
+                                var val = jqOld.fn.dataTable.util.escapeRegex(
+                                    jqOld(this).val()
+                                );
+                                //to select and search from grid
+                                column
+                                    .search(val ? '^' + val + 'jqOld' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
                         });
-
-                    column.data().unique().sort().each(function (d, j) {
-                        select.append('<option value="' + d + '">' + d + '</option>')
                     });
-                });
-            }
+                }
+            });
         });
-    });
-</script>
+    </script>

@@ -6,7 +6,7 @@
 
 
 @{  var roleID = BaseUtil.RoleID(); var loginID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString()); int totalpages = Convert.ToInt32(ViewBag.totalpages);}
-
+<div class="form-horizontal edit-candidate-cv">
 <div class="div_table table-responsive">
     <table id="MyTable" class="table table-striped table-bordered table-hover col-md-12 display">
         <thead>
@@ -18,26 +18,23 @@
                 <td>
                     <div class="bs-example">
                         <div class="media">
-                            <div class="media-left  media-top">
+                            @*<div class="media-left  media-top">
                                 <a href="#">
-                                    <img src='@item.CompanyLogo' class="media-object" style="width:60px" alt='@item.CompanyName'>
+                                    @*<img src='@item.CompanyLogo' class="media-object" style="width:60px" alt='@item.CompanyName'>
+                                    <img src="https://newsletter.qendidate.com/stagingns/images/Dummy-Text-Featured.jpg" class="media-object" style="width:60px;max-width:none;" alt='@item.CompanyName' />
                                 </a>
-                            </div>
+                            </div>*@
                             <div class="media-body">
-                                <h4 class="media-heading">@item.CompanyName <small><i>Posted on @item.dataIsCreated</i></small></h4>
+                                <h4>@item.CompanyName <small><i>Posted on @item.dataIsCreated.ToString("dd/MM/yyyy")</i></small></h4>
                                 <p>@item.jobTitle</p>
-                                <div class="col-sm-12">
-                                    <div class="col-sm-1" style="font-size:13px"> Skills : </div>                                   
-                                    <div class="col-sm-11" style="font-size:13px">  @item.skillset</div>
-                                </div>
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 job-table">
 
-                                    <table style="width:100%">
+                                    <table style="width:auto">
                                         <tr>
-                                            <td style="font-size:13px">Openings : </td>
-                                            <td>@item.NoOfOpenings</td>
+                                            <td>Openings : </td>
+                                            <td>@item.NoOfOpenings<b>|</b></td>
 
-                                            <td style="font-size:13px">Work Experience : </td>
+                                            <td>Work Experience : </td>
                                             @{ string exp = "";
                                                 if (@item.workExpMin == 0)
                                                 {
@@ -45,32 +42,42 @@
                                                 }
                                                 else { exp = @item.workExpMin + "year"; }
                                             }
-                                            <td>@exp</td>
-                                            <td style="font-size:13px">Location : </td>
-                                            <td>@item.city</td>
+                                            <td>@exp<b>|</b></td>
+                                            <td>Location : </td>
+                                            <td>@item.city<b>|</b></td>
 
-                                            <td style="font-size:13px">Education : </td>
-                                            <td>@item.EducationReq</td>
+                                            <td>Education : </td>
+                                            <td>@item.EducationReq<b>|</b></td>
 
-                                            <td style="font-size:13px">Industry : </td>
+                                            <td>Industry : </td>
                                             <td>@item.industryName</td>
                                         </tr>
                                     </table>
                                 </div>
-                                <div class="col-sm-12">
-                                    @{if (@roleID == "1" || @roleID == "2" || @roleID == "3" || @roleID == "4")
-                                        {
-                                        <input type="button" name="Edit" class="previous action-button" value="Edit" onclick="location.href='@Url.Action("NewJob", "jobDetails", new { jobID = @item.jobID })'" />
-                                        <input type="button" name="Candidates" class="previous action-button" value="Candidates " onclick="location.href='@Url.Action("cvShortlisted", "companyDetails", new { jobID = @item.jobID })'" />
-                                            var pass = BaseUtil.encrypt(BaseUtil.GetSessionValue(AdminInfo.password.ToString()));
-                                            var email = BaseUtil.encrypt(BaseUtil.GetSessionValue(AdminInfo.EmailID.ToString()));
+                                <div class="col-md-12 job-table des-job">
+                                    <div class="col-sm-1 padding-none">Description:</div>
+                                    <div class="col-sm-11 padding-none"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scra</div>
+                                </div>
+                                <div class="col-md-12 padding-none flex-btn">
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-1 padding-none jobTitle"> Skills : </div>
+                                        <div class="col-sm-11 padding-none jobTitle">  @item.skillset</div>
+                                    </div>
+                                    <div class="col-sm-6 view-candi text-right">
+                                        @{if (@roleID == "1" || @roleID == "2" || @roleID == "3" || @roleID == "4")
+                                            {
+                                                <input type="button" name="Edit" class="previous action-button" value="Edit" onclick="location.href='@Url.Action("NewJob", "jobDetails", new { jobID = @item.jobID })'" />
+                                                <input type="button" name="Candidates" class="previous action-button" value="Candidates " onclick="location.href='@Url.Action("cvShortlisted", "companyDetails", new { jobID = @item.jobID })'" />
+                                                var pass = BaseUtil.encrypt(BaseUtil.GetSessionValue(AdminInfo.password.ToString()));
+                                                var email = BaseUtil.encrypt(BaseUtil.GetSessionValue(AdminInfo.EmailID.ToString()));
 
 
-                                        <input type="button" name="Auxopass" class="previous action-button" value="Auxo Pass" onclick="location.href = 'http://localhost:49319/Login.aspx?uid=' + @email + '&key='+ @pass" />
+                                                <input type="button" name="Auxopass" class="previous action-button" value="Auxo Pass" onclick="location.href = 'https://newsletter.qendidate.com/stagingns/Login.aspx?uid=' + @email + '&key='+ @pass" />
+                                            }
                                         }
-                                    }
-                                    @Html.ActionLink("View", "JobView", "jobDetails", new { jobID = BaseUtil.encrypt(@item.jobID.ToString()) }, null)
-                                    
+                                        @Html.ActionLink("View", "JobView", "jobDetails", new { jobID = BaseUtil.encrypt(@item.jobID.ToString()) }, null)
+                                        <a href="#">Apply Now</a>
+                                    </div>
                                 </div>
 
 
@@ -83,12 +90,16 @@
               }
         </tbody>
     </table>
-   @{ if (Model != null) { 
-    <input type="button" onclick="return searchA();" value="See More JObs" id="btnmore" />
-    <input type="hidden" id="pagecount" value='@totalpages' />
+   @{ if (Model != null)
+       {
+        <div class="col-md-12 text-right academic job">
+            <input type="button" onclick="return searchA();" value="See More JObs" id="btnmore" class="academic-create-btn btn btn-default" />
+            <input type="hidden" id="pagecount" value='@totalpages' />
+        </div>
        }
 }
 
+        </div>
 </div>
 
 

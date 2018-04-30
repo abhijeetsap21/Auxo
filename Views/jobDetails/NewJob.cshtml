@@ -23,7 +23,7 @@
             .autocomplete({
                 minLength: 2,
                 source: function( request, response ) {
-                    jqOld.getJSON("/jobDetails/select_fillSkills", {
+                    jqOld.getJSON("http://newsletter.qendidate.com/stagingns/jobDetails/select_fillSkills", {
                         term: extractLast( request.term )
                     }, response );
                 },
@@ -123,14 +123,14 @@ $(document).ready(function(){
                     @Html.ValidationMessageFor(model => model.advertisementRefID, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <input type="hidden" name="jobPOstType" value='@ViewBag.isLink'   /> 
-          </div>
+
+        </div>
 
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="form-group">
                 @Html.LabelFor(model => model.requiredSkills, htmlAttributes: new { @class = "control-label col-md-6 col-sm-6 col-xs-12" })
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    @Html.EditorFor(model => model.requiredSkills, new { htmlAttributes = new { @class = "form-control", @placeHolder="ex1, ex2, ex3" } })
+                    @Html.EditorFor(model => model.requiredSkills, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.requiredSkills, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -173,11 +173,11 @@ $(document).ready(function(){
                     <div class="col-md-3 col-sm-3 col-xs-5">
                         @{ if (@Model.jobID == 0)
                             {
-                                @Html.DropDownListFor(model => model.currency, new SelectList(ViewBag.currency, "currencyID", "currency1"),   new { @class = "form-control" })
+                                @Html.DropDownListFor(model => model.currency, new SelectList(ViewBag.currency, "currencyID", "currency1"),  "-- select currency --", new { @class = "form-control" })
                             }
                             else
                             {
-                                @Html.DropDownListFor(model => model.currency, new SelectList(ViewBag.currency, "currencyID", "currency1", new { @class = "form-control" }))
+                                @Html.DropDownListFor(model => model.currency, new SelectList(ViewBag.currency, "currencyID", "currency1"), new { @class = "form-control" })
                             }
 
                         }                       
@@ -264,7 +264,7 @@ $(document).ready(function(){
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     @{ if (@Model.jobID == 0)
                         {
-                            @Html.DropDownListFor(model => model.gender, new SelectList(ViewBag.gender, "genderID", "genderName",3), new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.gender, new SelectList(ViewBag.gender, "genderID", "genderName"), "-- select gender --", new { @class = "form-control" })
                         }
                         else
                         {
@@ -283,7 +283,7 @@ $(document).ready(function(){
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     @{ if (@Model.jobID == 0)
                         {
-                            @Html.DropDownListFor(model => model.industryID, new SelectList(ViewBag.industryID, "industryID", "industryName"), "-- Industry --", new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.industryID, new SelectList(ViewBag.industryID, "industryID", "industryName"), "-- select industry --", new { @class = "form-control" })
                         }
                         else
                         {
@@ -302,7 +302,7 @@ $(document).ready(function(){
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     @{ if (@Model.jobID == 0)
                         {
-                            @Html.DropDownListFor(model => model.EducationReq, new SelectList(ViewBag.EducationReq, "EducationID", "educationName"), "-- Education --", new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.EducationReq, new SelectList(ViewBag.EducationReq, "EducationID", "educationName"), "-- select education --", new { @class = "form-control" })
                         }
                         else
                         {
@@ -322,7 +322,7 @@ $(document).ready(function(){
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     @{ if (@Model.jobID == 0)
                         {
-                            @Html.DropDownListFor(model => model.EmploymentTypeID, new SelectList(ViewBag.EmploymentTypeID, "EmploymentTypeID", "EmploymentType1"), "-- Employment type --", new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.EmploymentTypeID, new SelectList(ViewBag.EmploymentTypeID, "EmploymentTypeID", "EmploymentType1"), "-- select employment type --", new { @class = "form-control" })
                         }
                         else
                         {

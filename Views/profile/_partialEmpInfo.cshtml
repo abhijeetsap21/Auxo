@@ -26,7 +26,6 @@
 
                     @*<div class="form" id="content-1">*@
 
-                        <h1>EMPLOYMENT</h1>
 
                         @{ if (Model.employers.Count != 0)
                             {
@@ -38,8 +37,7 @@
                                             <th>Company Name</th>
                                             <th>Designation</th>
                                             <th>Date</th>
-
-                                            <th></th>
+                                            <th>Edit</th>
                                         </tr>
                                     </thead>
                                     <tbody id="certificatelistbody">
@@ -51,7 +49,7 @@
 
                                                 <td>@data.CompanyName</td>
                                                 <td>@data.qenPosition</td>
-                                                <td>@data.qenEmpFrom.Value.ToString("dd MMM yyyy") <br>@data.qenEmpTo.Value.ToString("dd MMM yyyy")</td>
+                                                <td>@data.qenEmpFrom.Value.ToString("dd/MM/yyyy") <b>To</b> @data.qenEmpTo.Value.ToString("dd/MM/yyyy")</td>
 
                                                 <td>
                                                     <a onclick="return editemployment(@data.qenEmploymentNum);"><i class="glyphicon glyphicon-edit"></i></a>
@@ -74,7 +72,7 @@
 
         </div>
 
-    @*</div>*@
+    
     <script>
         function editemployment(empno)
        {

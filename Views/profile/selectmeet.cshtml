@@ -1,8 +1,8 @@
-﻿@model  IEnumerable<NewLetter.Models.slotsInfo>
+﻿@model  IEnumerable<NewLetter.Models.sp_AvailableSlotsForCandidate_Result>
 
 @{
     ViewBag.Title = "selectmeet";
-    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+    Layout = "~/Views/Shared/_Layout_ExternalUser.cshtml";
 }
 @{
     long id = 0;
@@ -10,17 +10,9 @@
 }
 
 
-
-<script type="text/javascript">
-    var jqOld = jQuery.noConflict();
-    jqOld(document).ready(function () {
-        jqOld(".datepicker").datepicker();
-    });
-</script>
-
 <h2>Select Meeting Date and Time</h2>
 
-@using (Html.BeginForm("selectmeet", "profile", FormMethod.Post, new { id = "msform", qenID= id,jobID = jid }))
+@using (Html.BeginForm("selectmeet", "profile", FormMethod.Post, new { id = "msform", qenID = id, jobID = jid }))
 {
     @Html.AntiForgeryToken()
     <div class="col-lg-12">
@@ -29,7 +21,7 @@
         @{ if (dAt != "")
             {
                 @Html.TextBox("txt_date", (string)dAt, new { @class = "datepicker", Placeholder = "Date", id = "txt_date", maxLength = "10" })
-                
+
 
             }
             else
@@ -70,18 +62,7 @@
                         {
                             <span class="greenColor">@item.blocked</span>
                         }
-                        else if (item.blocked == "booked by HR")
-                        {
-                            <span class="blueColor">@item.blocked</span>
-                        }
-                        else if (item.blocked == "blocked by HR")
-                        {
-                            <span class="redColor">@item.blocked</span>
-                        }
-                        else
-                        {
-                            @Html.ActionLink(item.blocked, "", "", new { qenID = item.qenID })
-                        }
+                        
                     }
 
                 </td>
@@ -90,35 +71,24 @@
                         {
                             <input value="Book Meeting" type="button" onclick="return block(@item.slotID);" />
                         }
-                        else if (item.blocked == "booked by HR")
-                        {
-                            <input value="Not Avaiable" type="button"/>
-                        }
-                        else if (item.blocked == "blocked by HR")
-                        {
-
-                        }
-                        else
-                        {
-                            <input type="button" value="View" onclick="location.href='@Url.Action("CandidateComm", "Employer", new { jobID = item.jobID, qenID = item.qenID })'" />
-                        }
+                        
                     }
 
                 </td>
-                @{id = @item.qenID;}@{jid = @item.jobID;}
-                   
+                @{id = (long)@item.qenID;}@{jid = (long)@item.jobID;}
+
             </tr>
-            
-            
-                        }
-        
+
+
+                    }
+
 
     </table>
     <input type="hidden" value="@id" name="qenID" id="qenID" />
-    <input type="hidden" value="@jid" name="jobID" id="jobID"/>
+    <input type="hidden" value="@jid" name="jobID" id="jobID" />
 
 
-                        }
+                    }
 <style>
     .redColor {
         color: red;
@@ -150,34 +120,10 @@
             });
             return o;
         }
-        var form = jqOld("#msform").serializeObject();
-        function Get_Available(slotID) {
-            dat = document.getElementById('txt_date').value;
-
-            if (dat == "undefined") dat = "";
-            debugger
-            jqOld.ajax({
-
-                url: "Get_Available",
-                data: { 'slotID': slotID, 'dat': dat },
-
-                success: function (data) {
-                    debugger
-                    if (data == "OK") {
-                        debugger
-                        alert("Record updated");
-                        location.href = 'http://localhost:51126/TimeSlots/SlotsInformation?dat=' + dat;
-                    }
-                    else {
-                        alert("Error occured, Record not updated");
-                    }
-                }
-            });
-        }
-    
+        var form = jqOld("#msform").serializeObject();       
 
         function block(slotID) {
-            debugger 
+            debugger
             dat= document.getElementById('txt_date').value;
             ID = document.getElementById("qenID").value;
             JID = document.getElementById("jobID").value;
@@ -191,11 +137,19 @@
                     debugger
                     if (data == "OK") {
                         debugger
-                        alert("Record updated");
-                        location.href = 'http://localhost:51126/profile/SlotsInformation?dat=' + dat;
+                        bootbox.alert({
+                            title: 'Alert Success  !',
+                            message: 'Meating has been created as per your selected data time, kindly be present on time.'
+                        });
+                        location.href = 'https://newsletter.qendidate.com/stagingns/TimeSlots/SlotsInformation?dat=' + dat;
+
                     }
                     else {
-                        alert("Error occured, Record not updated");
+                        bootbox.alert({
+                            title: 'Alert  !',
+                            message: 'Error occured, Record not updated.'
+                        });
+
                     }
                 }
             });

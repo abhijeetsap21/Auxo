@@ -1,100 +1,70 @@
-﻿@model IEnumerable<NewLetter.Models.jobDetail>
-@{
-    ViewBag.Title = "advertisementApplyHome";
-    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
-}
-
-<h2>advertisement Apply Home</h2>
-@{ var advtImg1 = ViewBag.advtImg1;}
-
-<div class="col-lg-12">
-    <div class="col-lg-3">
-        @{ if (advtImg1 != "" || advtImg1 != null)
-            {
-                <img src='@advtImg1' alt="img" style="width:35px">
-            }
-            else
-            {
-                <img src='' alt="img" style="width:35px">
-            }
-        }
-    </div>
-    <div class="col-lg-9">
-        <div class="col-lg-12">
-            <div class="col-lg-3">@{ if (ViewBag.companyLogo != "" || ViewBag.companyLogo != null)
-                {
-                    <img src='@ViewBag.companyLogo' alt="img" style="width:100px">
-                }
-                else
-                {
-                    <img src='~/Logo/EmptyLogo.jpg' alt="img" style="width:100px">
-                }
-            }     
-           </div>
-            <div class="col-lg-9">               @ViewBag.company_name </div>
-            </div>
-        <table class="table">
-            @{ int i = 1;
-
-                foreach (var item in Model)
-                {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelitem => item.city)<br />
-                        @Html.DisplayFor(modelitem => item.jobTitle)
-                    </td>                   
-                   
-                    <td>
-                        <input type="button" value="view" id='view_@i' onclick="return ViewJobScreenShot('div_'+@i);"/>     <input type="button" onclick="@("window.location.href='" + @Url.Action("jobView", "jobDetails", new { jobID = item.jobID }) + "'");" value="Apply" />
-                    </td>
-                    <div id='div_@i' style="display:none">
-                       @Html.Partial("_partialJobScreenShot",item)
-                    </div> 
-                </tr>                
-                       i = i + 1;
-                    }
-                }
-
-        </table>
-    </div>
-</div>
+﻿
+@model IEnumerable<NewLetter.Models.sp_AdvertisementList_Result>
+@using NewLetter.Models;
 
 
-
-<div id="dialog-edit" style="display: none;"></div>
-
-<script>
-    $(document).ready(function () {
-    $("#dialog-edit").dialog({
-        title: "Job Details",
-        autoOpen: false,
-        resizable: false,
-        height: 500,
-        width: 700,        
-        show: { effect: 'drop', direction: "up" },
-        modal: true,
-        draggable: true,
-        open: function (event, ui) {
-            $("#dialog-edit").css("z-index","900");
-            $(this).dialog("open");
-          
-        },
-        buttons: {
-            "Close": function () {
-                $(this).dialog("close");
-            }
-        }
-    });
-    return false;
-    })
-    ;
-    function ViewJobScreenShot(msgdiv)
-    {
-        debugger
-        
-        
-       
-        $('#dialog-edit').html(document.getElementById(msgdiv).innerHTML);
-        $("#dialog-edit").dialog("open");
+<style type="text/css">
+    body {
+        font-family: Arial;
+        font-size: 10pt;
     }
-</script>
+
+    table {
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+        background-color: #fff;
+    }
+
+        table th {
+            background-color: #B8DBFD;
+            color: #333;
+            font-weight: bold;
+        }
+
+        table th, table td {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+
+        table, table table td {
+            border: 0px solid #ccc;
+        }
+</style>
+
+
+<div>
+    @if (ViewBag.data == "Yes")
+    {
+        <table class="table">
+            <tr>
+                <th>Advertisement ID</th>
+                <th>Advertisement Image URL</th>
+                <th>Data Created </th>
+                <th>Data Updated</th>              
+           </tr>
+
+            @foreach (var a in Model)
+            {
+                <tr>
+                    @{ 
+                        string _id = a.advertisementRefID.ToString();
+                        string id = BaseUtil.encrypt(_id);
+
+                        }
+                    <td>@a.advertisementRefID<br /> <a href='https://newsletter.qendidate.com/stagingns/jobDetails/advertisementApplyHome/?refid=@id&&val=1'>Access</a></td>
+                    <td><a href="@a.advertisementimageURL">Link To Image</a></td>
+                    <td>@a.dataIsCreated</td>
+                    <td>@a.dataIsUpdated</td>
+                </tr>
+            }
+        </table>
+            <br />
+
+    }
+
+    
+    @if (ViewBag.data == "Nodata")
+    {
+        <div>No Data Avaiable</div>
+    }
+</div>

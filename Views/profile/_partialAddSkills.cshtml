@@ -4,31 +4,46 @@
 @using (Html.BeginForm("AddSkills", "profile", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(m=>m.qenSkillsID)
+    @Html.HiddenFor(m => m.qenSkillsID)
     @Html.HiddenFor(m => m.qenID)
 
-    <div class="col_2">
-        <div class="col_1 tleft"><strong>Skill</strong></div>
-        @Html.TextBoxFor(model =>model.skillName, new { placeholder = "skill name here", maxlength = "100" })
-        @Html.ValidationMessageFor(model => model.skillName, "", new { @class = "text-danger" })
-    </div>
-        <div class="col_2">
-            <div class="col_1 tleft"><strong>year of experience </strong></div>
-            @Html.TextBoxFor(model => model.yearOfExp, new { placeholder = "year of Exp", maxlength = "100" })
-            @Html.ValidationMessageFor(model => model.yearOfExp, "", new { @class = "text-danger" })
+    <div class="col-md-12 col-sm-12 margin-20">
+        <div class="col-md-6 col-sm-12">
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">skill:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.TextBoxFor(model => model.skillName, new { maxlength = "100" })
+                        @Html.ValidationMessageFor(model => model.skillName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
         </div>
-        
+        <div class="col-md-6 col-sm-12">
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">year of Exp:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.TextBoxFor(model => model.yearOfExp, new { maxlength = "100" })
+                        @Html.ValidationMessageFor(model => model.yearOfExp, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
 
 
-        
-    if (Model.qenSkillsID > 0)
-    {
-        <input type="submit" name="save" class="previous action-button" value="Update" id="btnsaveempinfo" style="margin-top:40px" />
-    }
-    else
-    {
-        <input type="submit" name="save" class="previous action-button" value="Submit" id="btnsaveempinfo" style="margin-top:40px" />
-    }
-}
-
-
+            @{if (Model.qenSkillsID > 0)
+                {
+                    <div class="col-md-12 text-right academic">
+                        <input type="submit" name="save" class="previous action-button academic-create-btn btn btn-default" value="Update" id="btnsaveempinfo" />
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-12 text-right academic">
+                        <input type="submit" name="save" class="previous action-button academic-create-btn btn btn-default" value="Submit" id="btnsaveempinfo" />
+                    </div>
+                }
+            }
+        </div>
+    </div>
+                }

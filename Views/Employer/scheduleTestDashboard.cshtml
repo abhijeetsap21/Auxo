@@ -55,7 +55,7 @@
                 <td>
                     @{ if (item.mailReceivedscheduled)
                         {
-                    @Html.DisplayFor(modelItem => item.testScheduledDateTime)
+                    @item.testScheduledDateTime.Value.ToString("dd/MM/yyyy hh:MM tt")
                         }
 
                     }

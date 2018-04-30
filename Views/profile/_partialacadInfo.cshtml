@@ -3,27 +3,27 @@
 @{
     ViewBag.Title = "AcademicInfo";
 }
-    <style>
-        span.col_1.tleft.text-danger.field-validation-error :before {
-            content: " Warning ! ";
-            color: red;
-            font-weight: bold;
-        }
-        .text-danger {
-            color: red;
-        }
-    </style>
+<style>
+    span.col_1.tleft.text-danger.field-validation-error :before {
+        content: " Warning ! ";
+        color: red;
+        font-weight: bold;
+    }
 
-<div id="ad">
+    .text-danger {
+        color: red;
+    }
+</style>
+
+<div id="pd">
     <div class="container">
-        <div class="row sub-container">           
-
-            @{ var qenid = ViewBag.qenid;}
+        <div class="row sub-container">
             <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="right-box">
-                    @*<div class="form" id="content-1">*@
+                <div class="row">
+                    <div class="right-box form-horizontal">
+                        @{ var qenid = ViewBag.qenid;}
+                        @*<div class="form" id="content-1">*@
 
-                        <h1>academic information</h1>
                         <div class="panel-group" id="accordion">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -87,9 +87,10 @@
 
 
                     </div>
-                    </div>
+                </div>
             </div>
         </div>
+    </div>
 
     @*</div>*@
 
@@ -141,4 +142,4 @@
                 });
             }
         </script>*@
-</div>  
+</div>

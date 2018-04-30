@@ -24,6 +24,7 @@
                             @Html.ValidationMessageFor(model => model.ExpectedSalaryMonthly, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                    
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.ExpectedSalaryGross, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -34,8 +35,8 @@
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.joinningDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.joinningDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                        <div class="col-md-10">						
+                            @Html.TextBoxFor(model => model.joinningDate,"{0:MM/dd/yyyy}", new {@class = "datepicker"})
                             @Html.ValidationMessageFor(model => model.joinningDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -100,7 +101,10 @@
             success: function (data) {
                 debugger
                 if (data == "ok") {
-                    alert();
+                    bootbox.alert({
+                        title: 'Alert Success  !',
+                        message: 'Record updated and mail send to candidate.'
+                    });
                 }
             }
         });
@@ -108,8 +112,31 @@
 </script>
 
 <script type="text/javascript">
-   
-  $(function () {
-        $(".datepicker").datepicker();
-    })
+    var jqOld = jQuery.noConflict();
+    jqOld(document).ready(function () {
+        jqOld(".datepicker").datepicker();
+    });
 </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.js"></script>  
+
+	<script type="text/javascript">
+    var jold = jQuery.noConflict();
+    jold(function () {
+        jold.validator.addMethod('date',
+        function (value, element) {
+            if (this.optional(element)) {
+                return true;
+            }
+            var ok = true;
+            try {
+                jold.datepicker.parseDate('dd/mm/yy', value);
+            }
+            catch (err) {
+                ok = false;
+            }
+            return ok;
+        });
+        jold(".datepicker").datepicker({ dateFormat: 'dd/mm/yy', changeYear: true });
+    });
+	</script>

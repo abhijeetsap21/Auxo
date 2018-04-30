@@ -34,7 +34,7 @@
     <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
 
 
-    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script src="~/Scripts/nicEdit-latest.js"></script>
 
     <script>
     $(function () {
@@ -83,7 +83,7 @@
                         <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown"><img src="~/images/profile-icon.jpg"></button>
 
                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" onclick="location.href='@Url.Action("Logout", "Account")'">Sign Out</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" onclick="location.href='@Url.Action("Logout", "Account", new { Area = "" })'">Sign Out</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
                             <li role="presentation" class="divider"></li>
@@ -105,7 +105,7 @@
                     <div class="navbar-collapse collapse padding-none">
                         <ul class="nav navbar-nav navbar-left">
 
-                            @{ if (roleID == "2")
+                            @{ if (roleID == "2" || roleID == "3")
                                 {
                                     <li>@Html.ActionLink(" Post ", "jobDashboard", "jobDetails")</li>
                                     <li><a href="#about">View Candidates</a></li>
@@ -115,7 +115,10 @@
                                     <li>@Html.ActionLink(" Dashboard ", "cvShortlisted", "companyDetails")</li>
                                     <li>@Html.ActionLink(" Pending Jobs ", "pendingJobs", "jobDetails")</li>
                                     <li>@Html.ActionLink(" Created Advertisements ", "jobPluginList", "jobDetails")</li>
-                                    <li><a href="#about">Roles & Rights</a></li>
+                                    <li>@Html.ActionLink(" Add New Colleague ", "#", "#")</li>
+                                    <li>@Html.ActionLink(" Colleague List ", "Index", "NewEmployee")</li>
+                                    <li>@Html.ActionLink(" Add Colleague ", "create", "NewEmployee")</li>
+                                    
 
                                 }
                                 if (roleID == "5")
@@ -126,13 +129,34 @@
                                     <li>@Html.ActionLink("Applied Job", "AppliedJobs", "profile")</li>
 
                                 }
-                                if (roleID == "1")
+                                if (roleID == "1" || roleID == "4")
                                 {
                                     <li>@Html.ActionLink("Education", "Index", "Education", new { area = "Admin" }, null)</li>
-                                    <li>@Html.ActionLink("Candidate Status", "Index", "CandidateStatus", new { area = "Admin" }, null)</li>
-                                    <li>@Html.ActionLink("Interview Slots", "Index", "Slots", new { area = "Admin" }, null)</li>
-                                    <li>@Html.ActionLink("Skills", "Index", "Skills", new { area = "Admin" }, null)</li>
-                                    <li>@Html.ActionLink("Employment Type", "Index", "EmploymentTypes", new { area = "Admin" }, null)</li>
+									<li>@Html.ActionLink("Candidate Status", "Index", "CandidateStatus", new { area = "Admin" }, null)</li>
+									<li>@Html.ActionLink("Interview Slots", "Index", "Slots", new { area = "Admin" }, null)</li>
+									<li>@Html.ActionLink("Slots Information  ", "SlotsInformation", "TimeSlots", new { area = "Admin" }, null)</li>
+									<li>@Html.ActionLink("BlockSlots  ", "BlockSlots", "TimeSlots", new { area = "Admin" }, null)</li>                                  
+									<li>@Html.ActionLink("tempBlockSlots  ", "tempBlockSlots", "TimeSlots", new { area = "Admin" }, null)</li>
+									<li>@Html.ActionLink("Edit Your Details", "empedit", "companyDetails",new { area = "" }, null)</li>
+									<li>@Html.ActionLink(" View Posted Jobs ", "Myjobs", "jobDetails",new { area = "" }, null)</li>
+									if (roleID == "1")
+                                    {
+										<li>@Html.ActionLink(" Add New Colleague ", "#", "#")</li>
+										<li>@Html.ActionLink(" Colleague List ", "Index", "NewEmployee",new { area = "" }, null)</li>
+										<li>@Html.ActionLink(" Add Colleague ", "create", "NewEmployee",new { area = "" }, null)</li>
+										<li>@Html.ActionLink(" Pending Jobs ", "pendingJobs", "jobDetails",new { area = "" }, null)</li>
+										<li>@Html.ActionLink(" Created Advertisements ", "jobPluginList", "jobDetails",new { area = "" }, null)</li>
+                                    }
+									<li>@Html.ActionLink("Skills", "Index", "Skills", new { area = "Admin" }, null)</li>
+									<li>@Html.ActionLink("Roles", "Index", "Roles", new { area = "Admin" }, null)</li>
+									<li>@Html.ActionLink("Job Status", "Index", "JobStatus", new { area = "Admin" }, null)</li>
+									<li>@Html.ActionLink("Industry", "Index", "Industry", new { area = "Admin" }, null)</li>
+									<li>@Html.ActionLink("Employer Master", "Index", "EmployerMaster", new { area = "Admin" }, null)</li>
+									<li>@Html.ActionLink("Candidate Master", "Index", "CandidateMaster", new { area = "Admin" }, null)</li>
+									<li>@Html.ActionLink("Company Master", "Index", "CompanyMaster", new { area = "Admin" }, null)</li>
+									<li>@Html.ActionLink("Employment Type", "Index", "EmploymentTypes", new { area = "Admin" }, null)</li>
+									<li>@Html.ActionLink("Advertisements", "Index", "AdvertisementList", new { area = "Admin" }, null)</li>
+
                                 }
                             }
                         </ul>
@@ -211,10 +235,7 @@ var jqOld = jQuery.noConflict();
 </style>
 
 
-
-
-
-
+</html>
 <script>
     function DateCheck()
 {
@@ -236,4 +257,172 @@ var jqOld = jQuery.noConflict();
     }
 }
 </script>
-</html>
+
+
+
+<script>
+    var jqOld = jQuery.noConflict();
+    jqOld(function () {
+        debugger
+            // Click on notification icon for show notification
+        jqOld('div.n-green').click(function (e) {
+            debugger
+                e.stopPropagation();
+                jqOld('.noti-content').show();
+                debugger
+                var count = 0;
+                count = parseInt(jqOld('span.count_contact').html()) || 0;
+                //only load notification if not already loaded
+                if (count >0) {
+                    updateNotification();
+                }
+                jqOld('span.count_contact', this).html('&nbsp;');
+            })
+            // hide notifications
+            jqOld('html').click(function () {
+                jqOld('.noti-content').hide();
+            })
+            // update notification
+            function updateNotification() {
+                debugger
+                jqOld('#notiContent').empty();
+                jqOld('#notiContent').append('<li>Loading...</li>');
+
+                var uri = '@Url.Action("GetNotificationContacts", "Account")';
+
+                jqOld.getJSON(uri, function (data) {
+                    debugger
+                    jqOld('#notiContent').empty();
+                    if (data.length == 0) {
+                        jqOld('#notiContent').append(jqOld('<li>No data available</li>'));
+                    }
+                    jqOld.each(data, function (index, value) {
+                        jqOld('#notiContent').append(jqOld('<li>' + value.companyName + ' send you message regarding job</li>'));
+                    })
+                })
+
+            }
+            // update notification count
+
+        })
+</script>
+<script>
+    debugger
+
+    //var firstVisist = localStorage.getItem("someVarName");
+    //if (firstVisist == null) {
+    //    firstVisist = 0;
+    //}
+    //if (firstVisist == 0) {
+        var jqOld = jQuery.noConflict();
+        var count = 0;
+        debugger
+        if ('@roleID' == "5") {
+            function loadNotification() {
+                var URL = '@Url.Action("NotificationCount", "Account")';
+                jqOld.getJSON(URL, function (data) {
+                    debugger
+                    jqOld('span.count_contact').html(data[0].Column1);
+                    jqOld('span.count_download').html(data[0].Column2);
+                    jqOld('span.count_view').html(data[0].Column3);
+                });
+            }
+        }
+
+</script>
+<script>
+    var jqOld = jQuery.noConflict();
+    jqOld(function () {
+        debugger
+            // Click on notification icon for show notification
+        jqOld('div.n-red').click(function (e) {
+            debugger
+                e.stopPropagation();
+                jqOld('.noti-content').show();
+                debugger
+                var count = 0;
+                count = parseInt(jqOld('span.count_download').html()) || 0;
+                //only load notification if not already loaded
+                if (count >0) {
+                    updateNotification();
+                }
+                jqOld('span.count_download', this).html('&nbsp;');
+            })
+            // hide notifications
+            jqOld('html').click(function () {
+                jqOld('.noti-content').hide();
+            })
+            // update notification
+            function updateNotification() {
+                debugger
+                jqOld('#notiContent').empty();
+                jqOld('#notiContent').append('<li>Loading...</li>');
+
+                var uri = '@Url.Action("getNotificationDownload", "Account")';
+
+                jqOld.getJSON(uri, function (data) {
+                    debugger
+                    jqOld('#notiContent').empty();
+                    if (data.length == 0) {
+                        jqOld('#notiContent').append(jqOld('<li>No data available</li>'));
+                    }
+                    jqOld.each(data, function (index, value) {
+                        jqOld('#notiContent').append(jqOld('<li>' + value+ ' send you message regarding job</li>'));
+                    })
+                })
+
+            }
+            // update notification count
+
+        })
+</script>
+<script>
+    var jqOld = jQuery.noConflict();
+    jqOld(function () {
+        debugger
+            // Click on notification icon for show notification
+        jqOld('div.n-yellow').click(function (e) {
+            debugger
+                e.stopPropagation();
+                jqOld('.noti-content').show();
+                debugger
+                var count = 0;
+                count = parseInt(jqOld('span.count_view').html()) || 0;
+                //only load notification if not already loaded
+                if (count >0) {
+                    updateNotification();
+                }
+                jqOld('span.count_view', this).html('&nbsp;');
+            })
+            // hide notifications
+            jqOld('html').click(function () {
+                jqOld('.noti-content').hide();
+            })
+            // update notification
+            function updateNotification() {
+                debugger
+                jqOld('#notiContent').empty();
+                jqOld('#notiContent').append('<li>Loading...</li>');
+
+                var uri = '@Url.Action("getNotificationView", "Account")';
+
+                jqOld.getJSON(uri, function (data) {
+                    debugger
+                    jqOld('#notiContent').empty();
+                    if (data.length == 0) {
+                        jqOld('#notiContent').append(jqOld('<li>No data available</li>'));
+                    }
+                    jqOld.each(data, function (index, value) {
+                        jqOld('#notiContent').append(jqOld('<li>' + value + ' send you message regarding job</li>'));
+                    })
+                })
+
+            }
+            // update notification count
+
+        })
+</script>
+
+
+
+

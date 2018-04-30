@@ -4,9 +4,7 @@
     ViewBag.Title = "JobView";
     Layout = "~/Views/Shared/_Layout_Employer.cshtml";
 }
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<link href="~/Content/jquery-ui.css" rel="stylesheet" />
 <style>
     i {
     float: right;
@@ -30,291 +28,347 @@
         var roleID = '@roleID';
         if (isAuthenticated_=="False")
         {
-            $('div.alert').addClass("alert-danger"); $("#divmsg").css("display", "block");
-            $("#divmsg").html("Please login to apply this job.");
+
+            bootbox.confirm({
+                     title: "Alert Warning  !",
+                     message: '<p>Please login to apply this job.</p>',
+                     buttons: {
+                            confirm: {
+                                label: 'Yes',
+                                className: 'btn-success'
+
+                            },
+                            cancel: {
+                                label: 'No',
+                                className: 'btn-danger'
+                            }
+                        },
+                        callback: function (result,URL) {
+                              if(result)
+                              {
+                                  debugger
+                                 var URL = 'https://newsletter.qendidate.com/stagingns/Account/login';
+                                  location.href = URL;
+
+                              }
+                           else
+                            {
+                            @*debugger
+                            var URL = window.location.href;
+                            location.href = URL;*@
+                         }
+                        }
+
+                 })
+
         return;
     }
     else if(roleID!=5)
     {
-        $('div.alert').addClass("alert-danger"); $("#divmsg").css("display", "block");
-        $("#divmsg").html("You are not authorised to apply this job.");
+        bootbox.alert({
+            title: "Alert Warning  !",
+            message: '<p>You are not authorised to apply this job.</p>'
+        })
+
         return;
     }
     else
-    {
-     $.ajax({
-         url: 'http://localhost:51126/jobDetails/Apply',
-         type: 'POST',
-         data: {'jobID':jobID},
-         success: function (data) {
+    {        var URL = '@Url.Action("Apply", "jobDetails")?jobID=' + jobID;
+        $.get(URL, function (data) {
+
+
              debugger
              if (data == "login") {
-                 $('div.alert').addClass("alert-danger");
-                 $("#divmsg").css("display", "block");
-                 $("#divmsg").html("Please login to apply this job.");
+                bootbox.confirm({
+                     title: "Alert Warning  !",
+                     message: '<p>Please login to apply this job.</p>',
+                     buttons: {
+                            confirm: {
+                                label: 'Yes',
+                                className: 'btn-success'
+
+                            },
+                            cancel: {
+                                label: 'No',
+                                className: 'btn-danger'
+                            }
+                        },
+                        callback: function (result,URL) {
+                              if(result)
+                              {
+                                  debugger
+                                 var URL = 'https://newsletter.qendidate.com/stagingns/Account/login';
+                                  location.href = URL;
+
+                              }
+                           else
+                            {
+                            @*debugger
+                            var URL = window.location.href;
+                            location.href = URL;*@
+                         }
+                        }
+
+                 })
+
              }
              if (data == "alreadyApplied") {
-                 $('div.alert').addClass("alert-danger"); $("#divmsg").css("display", "block");
-                 $("#divmsg").html("You have already applied at this job.");
+
+                 bootbox.alert({
+                  title: "Alert Warning  !",
+                  message: '<p>You have already applied at this job.</p>'
+              });
              }
              if (data == "access") {
-                 $('div.alert').addClass("alert-danger"); $("#divmsg").css("display", "block");
-                 $("#divmsg").html("You are not authorised to apply this job.");
+
+                 bootbox.alert({
+                     title: "Alert Warning  !",
+                     message: '<p>You are not authorised to apply this job.</p>'
+                 });
              }
-             if (data == "Applied") {
+             if (data == "mail sent and applied") {
                  $('div.alert').addClass("alert-success"); $("#divmsg").css("display", "block");
-                 $("#divmsg").html("You have appled successfuly to this job.");
+                 $("#divmsg").html("You have applied successfuly to this job.");
+                 bootbox.alert({
+                  title: "Alert Success  !",
+                  message: '<p>You have applied successfuly to this job.</p>'
+              });
 
              }
 
          }
-     });
+     );
     }
     }
 
 
     //----------------share with friend------------------
-    function ShareWF() {
-       debugger
-        $("#dialog-sendmail").dialog({
-            title: "Job Details",
-            autoOpen: false,
-            resizable: false,
-            height: 500,
-            width: 700,
-            show: { effect: 'drop', direction: "up" },
-            modal: true,
-            draggable: true,
-            open: function (event, ui) {
-                $(this).dialog("open");
-            },
-            buttons: {
-                "Close": function () {
-                    $(this).dialog("close");
-                }
-            }
-        });
 
 
-        $("#dialog-sendmail").dialog("open");
-    }
+
+
 </script>
 
+<div class="form-horizontal job-view-padd">
+    @using (Html.BeginForm("Skills", "jobDetails", FormMethod.Post, new { id = "msform" }))
+    {
+
+        <i>Posted on @Model.dataIsCreated.ToString("dd/MM/yyyy")</i><br />
+        <i>
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                    Action
+                    <span class="caret"></span>
+                </button>
 
 
-@using (Html.BeginForm("Skills", "jobDetails", FormMethod.Post, new { id = "msform" }))
-{
-<fieldset>
-    <div class="row">
-        <div class="alert" style="display:none" id="divmsg"></div>
-    </div>
-    <i>Posted on @Model.dataIsCreated</i><br />
-    <i>
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-                Action
-                <span class="caret"></span>
-            </button>
-            @{
-                if (roleID == "")
-                {
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" onclick="return callApply();">Apply here</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" onclick="return ShareWF();">Share with friend</a></li>
-                     
-                    </ul>}
-             else if (roleID == "5")
-                 {
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" onclick="return callApply(@Model.jobID);">Apply here</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" onclick="return ShareWF();">Share with friend</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Add to favorite</a></li>
-                    </ul>
-                }
-                else if (roleID == "1")
-                {
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">                      
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Share with friend</a></li>
-                       
-                    </ul>
-                }
-                else
-                {
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href='@Url.Action("postJob", "jobDetails", new { jobID = @Model.jobID })'>Edit Job</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Search Candidate</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href='@Url.Action("JobHold", "jobDetails", new { jobID = @Model.jobID })' onclick="return confirm('Are you sure you want to hold this Job?');">Hold Job</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href='@Url.Action("JobDelete", "jobDetails", new { jobID = @Model.jobID })' onclick="return confirm('Are you sure you want to close this Job?');">Close Job</a></li>
-                    </ul>}
-            }
-        </div>
-    </i>
-    <p>
-       <img src='@Model.CompanyLogo' style="width:60px" alt='@Model.CompanyName'><span style="font-size:18px">@Model.CompanyName</span>       
-    </p>
-    <h5> @Model.jobTitle</h5>
-    <table>
-           <tr>
-            <td style="font-size:13px">Openings : </td>
-            <td>@Model.NoOfOpenings</td>
-        </tr>
-       
-        <tr>
-            <td style="font-size:13px">Salary : </td>
-            <td>
-                @{if (Model.salaryVisibleToEmployee)
-                    {
-                        <span> @Model.salary</span><span>@Model.currency</span><span>@Model.unit</span>
+
+                @{
+                    if (roleID == "")
+                    { <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+
+
+                    <li role="presentation"><a role="menuitem" tabindex="-1" onclick="return callApply();">Apply here</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" data-toggle="modal" data-target="#dialog-sendmail">Share with friend</a></li>
+                </ul>
                     }
-                    else
+                    if (roleID == "5")
                     {
-                        <span>As per industry standard</span>
-                    } }
-            </td>
-        </tr>
-        <tr>
-            <td style="font-size:13px">Work Experience : </td>
-            <td>@Model.workExpMin <span>year</span></td>
-        </tr>
-        <tr>
-            <td style="font-size:13px">Job Type : </td>
-            <td>@Model.EmploymentType.EmploymentType1</td>
-        </tr>
-        <tr>
-            <td style="font-size:13px">Location : </td>
-            <td style="width:100%">@Model.city</td>
-        </tr>
-        <tr>
-            <td style="font-size:13px">Education : </td>
-            <td>@Model.EducationReq</td>
-        </tr>
-        <tr>
-            <td style="font-size:13px">Industry : </td>
-            <td>@Model.industry.industryName</td>
-        </tr>
-        <tr>
-            <td style="font-size:13px">Skills : </td>
-            <td style=""></td>
-        </tr>
-        <tr>
-            <td style="font-size:13px">
-                Job Description
-            </td>
-       
-            <td style="font-size:13px;">
-                @Html.Raw(Model.jobDescription)
-            </td>
-        </tr>
-        <tr>
-            <td style="font-size:13px">
-                Additional Information
-            </td>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" onclick="return callApply(@Model.jobID);">Apply here</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" data-toggle="modal" data-target="#dialog-sendmail">Share with friend</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Add to favorite</a></li>
+                        </ul>
+                    }
 
-            <td style="font-size:13px;">
-                @Html.Raw(Model.otherinformation)
-            </td>
-        </tr>
-        <tr><td></td>
-       <td style="font-size:15px;"><p>Company Information</p></td>
-        </tr> 
-        <tr>
-            <td style="font-size:13px">Name : </td>
-            <td>@Model.CompanyName</td>
-        </tr>
-        <tr>
-            <td style="font-size:13px">Website : </td>
-            <td><a href='@Model.CompanyWebsite'>@Model.CompanyWebsite</a></td>
-        </tr>
-        <tr>
-            <td style="font-size:13px">About Company : </td>           
-            <td style=""> @Html.Raw(Model.CompanyDescription)</td>
-        </tr>
-        <tr><td></td><td style="font-size:15px;"><p>Contact Information</p></td></tr>
-<tr>
-            <td style="font-size:13px">Name: </td>
-            <td>@Model.jobContactPersonName</td>
-        </tr>
-        <tr>
-            <td style="font-size:13px"> Phone No : </td>
-            <td>@Model.jobContactPersonMobile</td>
-        </tr>
-        <tr>
-            <td style="font-size:13px">  Send Resume at : </td>
-            <td>@Model.responsesEmailID</td>
-        </tr>
-    </table>
-
+                    if (roleID == "1" || roleID == "2" || roleID == "3" || roleID == "4")
+                    {
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href='@Url.Action("postJob", "jobDetails", new { jobID = @Model.jobID })'>Edit Job</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href='@Url.Action("cvShortlisted", "companyDetails", new { jobID = @Model.jobID })'>Search Candidate</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href='@Url.Action("JobHold", "jobDetails", new { jobID = @Model.jobID })' onclick="return confirm('Are you sure you want to hold this Job?');">Hold Job</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href='@Url.Action("JobDelete", "jobDetails", new { jobID = @Model.jobID })' onclick="return confirm('Are you sure you want to close this Job?');">Close Job</a></li>
+                        </ul>}
+                }
+            </div>
+        </i>
 
         <p>
-            @Html.ActionLink("Edit", "Edit", new { JobID = Model.jobID }) |
-            @Html.ActionLink("Back to List", "Jobs")
+            <!--<img src='@Model.CompanyLogo' style="width:60px" alt='@Model.CompanyName'><span style="font-size:18px">@Model.CompanyName</span>-->
+            <img src='https://newsletter.qendidate.com/stagingns/images/Dummy-Text-Featured.jpg' style="width:60px" alt='@Model.CompanyName'><span class="job-view-title">@Model.CompanyName</span>
         </p>
- 
-    
-</fieldset>
-}
+        <h5 class="job-title"> @Model.jobTitle</h5>
+        <table>
+            <tr>
+                <td style="font-size:13px">Openings : </td>
+                <td>@Model.NoOfOpenings</td>
+            </tr>
 
-<div id="dialog-sendmail" style="display: none">
-    <div class="row">
-        <div class="alert" id="divmsgemail" style="display:none"></div>
-    </div>
-    <div class="row">
-        <div class="col-sm-2 col-sm-offset-2">Email ID</div>
-        <div class="col-sm-5"><input type="text" id="txtEmail" value=""/></div>
-    </div>
+            <tr>
+                <td style="font-size:13px">Salary : </td>
+                <td>
+                    @{if (Model.salaryVisibleToEmployee)
+                        {
+                            <span> @Model.salary</span><span>@Model.currency</span><span>@Model.unit</span>
+                        }
+                        else
+                        {
+                            <span>As per industry standard</span>
+                        } }
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:13px">Work Experience : </td>
+                <td>@Model.workExpMin <span>year</span></td>
+            </tr>
+            <tr>
+                <td style="font-size:13px">Job Type : </td>
+                <td>@Model.EmploymentType.EmploymentType1</td>
+            </tr>
+            <tr>
+                <td style="font-size:13px">Location : </td>
+                <td style="width:100%">@Model.city</td>
+            </tr>
+            <tr>
+                <td style="font-size:13px">Education : </td>
+                <td>@Model.EducationReq</td>
+            </tr>
+            <tr>
+                <td style="font-size:13px">Industry : </td>
+                <td>@Model.industry.industryName</td>
+            </tr>
+            <tr>
+                <td style="font-size:13px">Skills : </td>
+                <td style=""></td>
+            </tr>
+            <tr>
+                <td style="font-size:13px">
+                    Job Description
+                </td>
 
-    <div class="row">
-        <div class="col-sm-offset-4">
-            <span style="color:red">NOTE : Please enter single mail id.</span>
+                <td style="font-size:13px;">
+                    @Html.Raw(Model.jobDescription)
+                </td>
+            </tr>
+            <tr class="brdr-btm">
+                <td style="font-size:13px">
+                    Additional Information
+                </td>
+
+                <td style="font-size:13px;">
+                    @Html.Raw(Model.otherinformation)
+                </td>
+            </tr>
+            <tr>
+                <td class="job-title"><h5>Company Information</h5></td>
+            </tr>
+            <tr>
+                <td style="font-size:13px">Name : </td>
+                <td>@Model.CompanyName</td>
+            </tr>
+            <tr>
+                <td style="font-size:13px">Website : </td>
+                <td><a href='@Model.CompanyWebsite'>@Model.CompanyWebsite</a></td>
+            </tr>
+            <tr class="brdr-btm">
+                <td style="font-size:13px" class="abt-cmpny">About Company : </td>
+                <td style="" class="cmpny"> @Html.Raw(Model.CompanyDescription)</td>
+            </tr>
+            <tr><td class="job-title"><h5>Contact Information</h5></td></tr>
+            <tr>
+                <td style="font-size:13px">Name: </td>
+                <td>@Model.jobContactPersonName</td>
+            </tr>
+            <tr>
+                <td style="font-size:13px"> Phone No : </td>
+                <td>@Model.jobContactPersonMobile</td>
+            </tr>
+            <tr>
+                <td style="font-size:13px">  Send Resume at : </td>
+                <td>@Model.responsesEmailID</td>
+            </tr>
+        </table>
+
+                        }
+
+    <div class="modal fade" id="dialog-sendmail" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"> Share job with friends</h4>
+                </div>
+                <div class="modal-body" style="overflow:auto">
+                    <div class="row">
+                        <div class="alert" id="divmsgemail" style="display:none"></div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <label class="col-md-3">Email ID</label>
+                            <div class="col-md-9">
+                                <input type="text" id="txtEmail" value="" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="row">
+                            <div class="col-sm-offset-4 popup-error">
+                                <span style="color:red">NOTE : Please enter single mail id.</span>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                <div class="modal-footer">
+                    <input type="button" name="sendmail" class="next action-button btn btn-default" value="Send" id="btnsend" onclick="return sendMail();" /><button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+    <script>
+        function sendMail() {
+            debugger
+            var url = window.location.href;
+            var email = $('#txtEmail').val();
+            if (email != "" || email != "") {
+                var filter = /^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/;
 
-    <div class="row">
-        <div class="col-sm-offset-4">
-            <input type="button" name="sendmail" class="next action-button" value="Send" id="btnsend" onclick="return sendMail();"  />
-        </div>
-        </div>
-    </div>
-<script>
-    function sendMail()
-    {
-        debugger
-        var url=window.location.href;
-        var email = $('#txtEmail').val();
-        if (email != "" || email != "")
-        {
-            var filter = /^[a-zA-Z0-9_.-]+@@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{0,4}$/;
-
-             if (filter.test(email))
-            {
-                $.ajax({
-                    url: 'http://localhost:51126/jobDetails/ShareWF',
-                    type: 'POST',
-                    data: { 'jobUrl': url, 'email': email },
-                    success: function (data) {
-                        debugger
-                        alert(data);
-                    }
-                });
+                if (filter.test(email)) {
+                    $.ajax({
+                        url: '/jobDetails/ShareWF',
+                        type: 'POST',
+                        data: { 'jobUrl': url, 'email': email },
+                        success: function (data) {
+                            debugger
+                            alert(data);
+                        }
+                    });
+                }
+                else {
+                    $('div.alert').addClass("alert-danger");
+                    $("#divmsgemail").css("display", "block");
+                    $("#divmsgemail").html("Please enter valid email Id.");
+                }
             }
-            else
-            {
+            else {
+
                 $('div.alert').addClass("alert-danger");
                 $("#divmsgemail").css("display", "block");
                 $("#divmsgemail").html("Please enter valid email Id.");
             }
-        }
-        else
-        {
 
-            $('div.alert').addClass("alert-danger");
-            $("#divmsgemail").css("display", "block");
-            $("#divmsgemail").html("Please enter valid email Id.");
+
         }
 
-
-    }
-
-</script>
+    </script>
 
 
+    <script>
+    $(document).ready(function () {
+        $('.dropdown-toggle').dropdown();
+    });
+    </script>

@@ -9,52 +9,126 @@
 
 
 
-    <div class="group">
-        @Html.TextBoxFor(m => m.courseField, new { placeholder = "Certificate Name", maxlength = "100" })
-        <div class="alert alert-warning error-custom" role="alert">
-            @Html.ValidationMessageFor(model => model.courseField, "", new { @class = "col_1 tleft text-danger" })
-        </div>
-    </div>
-    <div class="group">
+    <div class="col-md-12 col-sm-12 margin-20">
+        <div class="col-md-6 col-sm-12">
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Certificate Name:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.TextBoxFor(m => m.courseField, new { maxlength = "100" })
+                        @Html.ValidationMessageFor(model => model.courseField, "", new { @class = "col_1 tleft text-danger" })
+                    </div>
+                </div>
+            </div>
 
-        @Html.TextBoxFor(m => m.collegeUniversity, new { placeholder = "Certificate Authority", maxlength = "100" })
-        <div class="alert alert-warning error-custom" role="alert">
-            @Html.ValidationMessageFor(model => model.collegeUniversity, "", new { @class = "col_1 tleft text-danger" })
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Certificate Authority:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.TextBoxFor(m => m.collegeUniversity, new { maxlength = "100" })
+                        @Html.ValidationMessageFor(model => model.collegeUniversity, "", new { @class = "col_1 tleft text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Licence Number:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.TextBoxFor(m => m.phdTitle, new { maxlength = "100" })
+                        @Html.ValidationMessageFor(model => model.phdTitle, "", new { @class = "col_1 tleft text-danger" })
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="group">
-        @Html.TextBoxFor(m => m.phdTitle, new { placeholder = "Licence Number", maxlength = "100" })
-        <div class="alert alert-warning error-custom" role="alert">
-            @Html.ValidationMessageFor(model => model.phdTitle, "", new { @class = "col_1 tleft text-danger" })
+        <div class="col-md-6 col-sm-12">
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Start Date:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.TextBoxFor(m => m.phdStart, "{0:dd/MM/yyyy}", new { @class = "datepicker", onchange = "return DateCheck1();" })
+                        @Html.ValidationMessageFor(model => model.phdStart, "", new { @class = "col_1 tleft text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">End Date:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.TextBoxFor(m => m.phdEnd, "{0:dd/MM/yyyy}", new { @class = "datepicker", onchange = "return DateCheck1();" })
+                        @Html.ValidationMessageFor(model => model.phdEnd, "", new { @class = "col_1 tleft text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Remarks:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.TextBoxFor(m => m.phdRemarks, new { maxlength = "100" })
+                        @Html.ValidationMessageFor(model => model.phdRemarks, "", new { @class = "col_1 tleft text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 text-right academic">
+                <input type="submit" name="save" class="plus-btn academic-create-btn btn btn-default" value="Save" />
+            </div>
         </div>
     </div>
 
-    <div class="group">
-        @Html.TextBoxFor(m => m.phdStart, new { placeholder = "Start Date", @class = "datepicker", id= "txtStartDate" })
-        <div class="alert alert-warning error-custom" role="alert">
-            @Html.ValidationMessageFor(model => model.phdStart, "", new { @class = "col_1 tleft text-danger" })
-        </div>
-    </div>
-    <div class="group">
-        @Html.TextBoxFor(m => m.phdEnd, "{0:d MMM yyyy}", new { placeholder = "End Date", @class = "datepicker" })
-        <div class="alert alert-warning error-custom" role="alert">
-            @Html.ValidationMessageFor(model => model.phdEnd, "", new { @class = "col_1 tleft text-danger" })
-        </div>
-    </div>
-    <div class="group">
-        @Html.TextBoxFor(m => m.phdRemarks, new { placeholder = "Remarks", maxlength = "100" })
-        <div class="alert alert-warning error-custom" role="alert">
-            @Html.ValidationMessageFor(model => model.phdRemarks, "", new { @class = "col_1 tleft text-danger" })
-        </div>
-    </div>
-
-    <input type="submit" name="save" class="plus-btn" style="background:url(/images/plus-btn.png) no-repeat center" value="Save" />
         <br /><br /><br />
-}
+        }
 
-<script type="text/javascript">
-    var jqOld = jQuery.noConflict();
-    jqOld(function () {
-        jqOld(".datepicker").datepicker();
-    })
-</script>
+        <script type="text/javascript">
+            var jold = jQuery.noConflict();
+            jold(function () {
+                jold.validator.addMethod('date',
+                function (value, element) {
+                    if (this.optional(element)) {
+                        return true;
+                    }
+                    var ok = true;
+                    try {
+                        jold.datepicker.parseDate('dd/mm/yy', value);
+                    }
+                    catch (err) {
+                        ok = false;
+                    }
+                    return ok;
+                });
+                jold(".datepicker").datepicker({ dateFormat: 'dd/mm/yy', changeYear: true });
+            });
+
+
+
+            function DateCheck1() {
+                debugger
+                var StartDate = document.getElementById('phdStart').value;
+                var EndDate = document.getElementById('phdEnd').value;
+                if (StartDate != '')
+                { var sDate = convertToDate(StartDate); }
+                if (StartDate != '') {
+                    var eDate = convertToDate(EndDate);
+                }
+
+                if (StartDate != '' && EndDate != '' && sDate > eDate) {
+                    debugger
+                    bootbox.alert({
+                        title: 'Alert Success  !',
+                        message: 'Please ensure that the End Date is greater than or equal to the Start Date.'
+                    });
+
+                    return false;
+                }
+            }
+        </script>
+        <script>
+            function convertToDate(str) {
+                debugger
+                var dd = str.substring(0, 2);
+                var mm = str.substring(3, 5);
+                var yy = str.substring(6, 11);
+                var dat = mm + "/" + dd + "/" + yy;
+                var dt = new Date(dat);
+                return dt;
+            }
+
+        </script>

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<NewLetter.Models.AuxoDashBoard>
+﻿@model IEnumerable<NewLetter.Models.sp_EmployerDashborad_Result>
+@using NewLetter.Models;
     @{
         ViewBag.Title = "Dashbord";
         Layout = "~/Views/Shared/_Layout_Employer.cshtml";
@@ -21,7 +22,7 @@
           <tr>
               <th>Sr.</th>
               <th>
-                  @Html.DisplayNameFor(model => model.JobID)
+                  @Html.DisplayNameFor(model => model.jobid)
               </th>
               <th>
                   @Html.DisplayNameFor(model => model.jobTitle)
@@ -30,7 +31,10 @@
                   @Html.DisplayNameFor(model => model.orionCV)
               </th>
               <th>
-                  @Html.DisplayNameFor(model => model.orionCOMM)
+                  @Html.DisplayNameFor(model => model.orionCOM)
+              </th>
+              <th>
+                 Test Schedule
               </th>
               <th>
                   @Html.DisplayNameFor(model => model.orionPASS)
@@ -39,36 +43,46 @@
                   @Html.DisplayNameFor(model => model.orionMEET)
               </th>
               <th>
-                  @Html.DisplayNameFor(model => model.shortList)
+                  @Html.DisplayNameFor(model => model.ShortListed)
+              </th>
+              <th>
+                  @Html.DisplayNameFor(model => model.hired)
               </th>
           </tr>
           </thead>
           @{int rowNo = 0;}
           @foreach (var item in Model)
           {
-              <tr class="dashboard-left-text">
+              <tr class="dashboard-left-text">                  
                   <td>@(rowNo += 1) </td>
                   <td>
-                      <a href='@Url.Action("JobView", "jobDetails",new { jobID=@item.JobID })'>JOB#@item.JobID</a>  
+                      <a href='@Url.Action("JobView", "jobDetails",new { jobID=BaseUtil.encrypt( @item.jobid.ToString()) })'>#@item.jobid</a>  
                   </td>
                   <td>
                       @Html.DisplayFor(modelItem => item.jobTitle)
                   </td>
                   <td>
-                      <a href='@Url.Action("cvShortlisted", "companyDetails",new { jobID=@item.JobID })'>@item.orionCV</a>
+                      <a href='@Url.Action("cvShortlisted", "companyDetails",new { jobID=@item.jobid })'>@item.orionCV</a>
                       
                   </td>
                   <td>
-                      <a href='@Url.Action("scheduleTestDashboard", "Employer",new { jobID=@item.JobID })'>@item.orionCOMM</a>
+                      <a href='@Url.Action("Comm", "Employer",new { jobID=@item.jobid })'>@item.orionCOM</a>
+                  </td>
+                  
+                  <td>
+                      <a href='@Url.Action("scheduleTestDashboard", "Employer",new { jobID=@item.jobid })'>@item.orionExamScheduled</a>
                   </td>
                   <td>
-                      <a href='@Url.Action("ProceedToMeetSchedule", "Employer",new { jobID=@item.JobID })'>@item.orionPASS</a>
+                      <a href='@Url.Action("ProceedToMeetSchedule", "Employer",new { jobID=@item.jobid })'>@item.orionPASS</a>
                   </td>
                   <td>
-                      <a href='@Url.Action("CandidateComm", "Employer",new { jobID=@item.JobID })'>@item.orionMEET</a>
+                      <a href='@Url.Action("CandidateComm", "Employer",new { jobID=@item.jobid })'>@item.orionMEET</a>
                   </td>
                   <td>
-                      <a href='@Url.Action("ShortlistedCadidates", "Employer",new { jobID=@item.JobID })'>@item.shortList</a>
+                      <a href='@Url.Action("ShortlistedCadidates", "Employer",new { jobID=@item.jobid })'>@item.ShortListed</a>
+                  </td>
+                  <td>
+                      <a href='@Url.Action("HiredCandidateList", "Employer",new { jobID=@item.jobid })'>@item.hired</a>
                   </td>
               </tr>
           }

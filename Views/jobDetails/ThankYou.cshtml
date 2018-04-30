@@ -3,14 +3,7 @@
     Layout = "~/Views/Shared/_Layout_Employer.cshtml";
 }
 
-@{ var refID = ""; if (TempData["refID"] != null) { refID = TempData["refID"].ToString();
-    }
-    var jobURL = (dynamic)null;
-    if (TempData["jobURL"] != null)
-    {
-        jobURL = TempData["jobURL"].ToString();
-    }
-   }
+@{ var refID = ""; if (TempData["refID"] != null) { refID = TempData["refID"].ToString(); } }
 <fieldset>
     <h2 class="fs-title">Thank You.</h2><br />
     <h2 class="fs-title">Job Posted successfully.</h2><br />
@@ -27,11 +20,5 @@
         }
        
         <input type="submit" name="Next" class="next action-button" value="Search Resume" id="btnnext" onclick="location.href='#'" style="width:150px" />
-
-        @{ if (jobURL != null)
-            {
-                <div > Job URL : @jobURL </div>
-            }
-        }
     </div>
 </fieldset>
