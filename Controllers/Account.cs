@@ -18,6 +18,7 @@ using System.Collections.Specialized;
 using Facebook;
 using System.Web.Security;
 using System.IO;
+using System.Web.Configuration;
 
 namespace NewLetter.Controllers
 {
@@ -492,12 +493,29 @@ namespace NewLetter.Controllers
                     gmailUser.isActive = true;
                     gmailUser.password = baseClass.GetRandomPasswordString(10);
                     //gmailUser.qenImage = linkedINResVM.pictureurl;
-                    gmailUser.qenPhone = "0000000000";
+                    gmailUser.qenPhone = "+919999999999";
                     gmailUser.qenAddress = "some address";
                     gmailUser.qenAddress = null;
                     db.qendidateLists.Add(gmailUser);
+                    try { 
                     db.SaveChanges();
+                }
+                    catch (DbEntityValidationException ex)
+                    {
+                        // Retrieve the error messages as a list of strings.
+                        var errorMessages = ex.EntityValidationErrors
+                                .SelectMany(x => x.ValidationErrors)
+                                .Select(x => x.ErrorMessage);
 
+                        // Join the list to a single string.
+                        var fullErrorMessage = string.Join("; ", errorMessages);
+
+                        // Combine the original exception message with the new one.
+                        var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+
+                        // Throw a new DbEntityValidationException with the improved exception message.
+                        throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+                    }
                     //----------------------------use below code to send emailer------------------------------------------------------------
 
                     StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toCandidateRegistrationSuccess.html"));
@@ -567,8 +585,8 @@ namespace NewLetter.Controllers
             var fb = new FacebookClient();
             var loginUrl = fb.GetLoginUrl(new
             {
-                client_id = "1484503554920573",
-                client_secret = "dbe3b963bd866da2f3cdb22848774411",
+                client_id = WebConfigurationManager.AppSettings["FACEBOOK_CLIENT_ID"],
+                client_secret = WebConfigurationManager.AppSettings["FACEBOOK_CLIENT_SECRET"],
                 redirect_uri = RedirectUri.AbsoluteUri,
                 response_type = "code",
                 scope = "email"
@@ -616,10 +634,10 @@ namespace NewLetter.Controllers
                 list.dataIsUpdated = BaseUtil.GetCurrentDateTime();
                 list.roleID = 5;
                 list.isDelete = false;
-                list.isActive = false;
+                list.isActive = true;
                 list.password = baseClass.GetRandomPasswordString(10);
                 //list.qenImage = linkedINResVM.pictureurl;
-                list.qenPhone = "0000000000";
+                list.qenPhone = "+919999999999";
                 list.qenAddress = "some address";
                 list.qenAddress = null;
                 db.qendidateLists.Add(list);
@@ -698,7 +716,7 @@ namespace NewLetter.Controllers
 
             //----------------------------use below code to send emailer------------------------------------------------------------
 
-            StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toCandidateRegistrationSuccess.html"));
+            StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toCandidateRegistrationSuccess_withActivationLink.html"));
             string HTML_Body = sr.ReadToEnd();
             string newString = HTML_Body.Replace("#name", emailresult.qenName).Replace("#qenid", encryptedID).Replace("#password", emailresult.password);
             sr.Close();
