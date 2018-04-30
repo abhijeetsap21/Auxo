@@ -5,7 +5,7 @@
 }
 
 <div class="form-horizontal">
-    <h4>CV Shortlisted</h4>
+    <h4>Search Candidates</h4>
     <div class="col-lg-12 col-md-12 col-xs-12 table-das">
         <div class="table-responsive">
 
@@ -27,10 +27,10 @@
             @{ var jobid = ViewBag.jobID;}
 
 
-            <script type="text/javascript">
+<script type="text/javascript">
     var jqOld = jQuery.noConflict();
     jqOld(document).ready(function () {
-        jqOld("#viewResult").load('@Url.Action("candidateSearch", "companyDetails", new { jobid = jobid })')
+        jqOld("#viewResult").load('@Url.Action("_partialCandidateResultList", "companyDetails", new { jobid })')
           });
 
     jqOld.fn.serializeObject = function () {
@@ -49,24 +49,70 @@
                return o;
            }
 
-
+    var form ="";
            function searchResult() {
-               var form = jqOld("#msform").serializeObject();
+              
+               form = jqOld("#msform").serializeObject();
                debugger
                jqOld.ajax({
-                   url: 'http://newsletter.qendidate.com/companyDetails/candidateSearch/',
+                   url: '/companyDetails/candidateSearch/',
                    type: 'POST',
-                   data: form,
+                   data: { 'frm': form,'jobid':@jobid },
                    success: function (data) {
                        debugger
                        jqOld("#viewResult").html(data);
                    }
                });
            }
-            </script>
 
 
-            <script type="text/javascript">
+
+
+           var id=1;
+           function searchA() {
+               id=id+1;             
+               var job = @jobid;
+
+               debugger
+               var jobtitle = document.getElementById('txtJobTitle').value;
+               var city = document.getElementById('locality').value;
+
+               var txtskill = document.getElementById('txtskill').value;
+              
+               
+               var sel = document.getElementById('ddl_update');
+               var ddl_update = sel.options[sel.selectedIndex].value;
+               if (ddl_update == "") {
+                   ddl_update = 0;
+               }
+
+               var defaultsearch = document.getElementById('defaultsearch').value;
+               debugger
+               jqOld.ajax({
+                   url: '/companyDetails/loadMore/',
+                   type: 'POST',
+                   data:  { 'jobtitle': jobtitle, 'city': city, 'txtskill': txtskill, 'ddl_update':ddl_update,'jobid':job , 'currentPageIndex': id,'defaultsearch':defaultsearch },  
+                   success: function (data) {
+                       debugger
+               
+                       $('#myDataTable tbody').append(data);
+
+                   }
+               });
+        
+               var r=  document.getElementById('pagecount').value;
+               if( id >= r)
+               {
+                   var a = document.getElementById('btnmore');
+                   a.style.display = "none"
+               }
+           }
+
+
+</script>
+
+
+<script type="text/javascript">
     jqOld(function () {
         debugger
         jqOld("#txtskill")
@@ -118,13 +164,14 @@
         return split(term).pop();
     }
 
+
             </script>
 
 
 
             @using (Html.BeginForm("cvShortlisted", "companyDetails", FormMethod.Post, new { id = "msform" }))
             {
-                <input type="hidden" name="jobid" value='@jobid' />
+                
 				<div class="col-md-12 col-sm-12 col-xs-12 dashboard">
                 <div class="row">
                     <div class="col-md-3 padding-none flex">
@@ -143,7 +190,7 @@
 
                     <div class="col-md-2 padding-none flex">
                         <label>Exp.</label>
-                        <select name="ddl_update">
+                        <select name="ddl_update" id = "ddl_update">
                             <option value="1">1 Month</option>
                             <option value="2">1 Week </option>
                             <option value="3">3 Month</option>
@@ -249,3 +296,38 @@
 
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDGhqKFgJrrhrXFGFHRzuPJ84hK7GbtAno"></script>
+
+<script>
+    function proceedComm() {
+        debugger
+
+        var arr = []
+        var x = document.getElementById("myDataTable").rows.length;
+       
+        for (i = 1 ; i < x ; i++) {
+
+            var id = "item_qencategory_" + i;
+            var qenID="qen_"+i;
+            var qenid = document.getElementById(qenID).value;
+            var hdnFld = document.getElementById(id).value;
+            arr.push([qenid,hdnFld]);
+        }
+
+
+        $.ajax({
+            type: 'post',
+            url: '@Url.Action("saveToOrionComm", "companyDetails")',
+            data: JSON.stringify({ searchmodel: arr, jobid : @jobid }),
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                debugger
+                if (data != "no") {
+                    debugger
+                    var URL = '@Url.Action("category", "Employer")?jobID=' + data;
+                    window.location.href = URL;
+                }
+            }
+        });
+
+    }
+</script>

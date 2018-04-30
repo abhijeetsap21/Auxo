@@ -1,7 +1,11 @@
 ﻿@model IEnumerable<NewLetter.Models.ExamHistory>
+@using NewLetter.Models;
 @{
     ViewBag.Title = "ProceedToMeetSchedule";
     Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+    var userID = BaseUtil.GetSessionValue(AdminInfo.LoginID.ToString());
+    string encr = BaseUtil.Decrypt((BaseUtil.GetSessionValue(AdminInfo.password.ToString())));
+}
 }
 
 @section head{
@@ -30,7 +34,7 @@
             <th>Test Submitted</th>
             <th>Marks</th>
             <th>Skills</th>
-            <th></th>
+            <th>Re-Schedule</th>
         </tr>
         </thead>
     <tbody>
@@ -73,14 +77,15 @@
 </table>
 </div>
     <a href='@Url.Action("CandidateComm", "Employer",new {jobID= @jid })' class="hired-btn-defult">GO TO ORION MEET</a>
+	<a href="~/Login.aspx?uid=@userID&key=@encr" class="hired-btn-defult">GO TO ORION PASS</a>
 </div>
 </div>
 <script>
-    function ProceedToMeet(qenID, jobID, qenName, qenEmail, msgdiv, IsMeetScheduled, mailSendID)
+    function ProceedToMeet(qenID, jobID, qenName, qenEmail, msgdiv, IsMeetScheduled, mailSendID, examMarks)
     {
         debugger
 
-        var data = { 'qenID': qenID, 'qenName': qenName, 'qenEmail': qenEmail, 'jobID': jobID, 'IsMeetScheduled': IsMeetScheduled, 'mailSendID': mailSendID }
+        var data = { 'qenID': qenID, 'qenName': qenName, 'qenEmail': qenEmail, 'jobID': jobID, 'IsMeetScheduled': IsMeetScheduled, 'mailSendID': mailSendID, 'examMarks': examMarks }
         $.post('/Employer/ProceedToMeet', data,
          function (data) {
              if(data=="ok")

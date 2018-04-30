@@ -3,7 +3,8 @@
     ViewBag.Title = "ShortlistedCadidates";
     Layout = "~/Views/Shared/_Layout_Employer.cshtml";
 }
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script><div class="form-horizontal">
+
+<div class="form-horizontal">
 <h4>Shortlisted Cadidates</h4>
 <div class="col-lg-12 col-md-12 col-xs-12 table-das">
 <div class="table-responsive">
@@ -14,9 +15,10 @@
             <th>@Html.DisplayNameFor(model => model.QenName)</th>
             <th>@Html.DisplayNameFor(model => model.ExamMark)</th>
             <th>Skill Match</th>
-            <th>Salary</th>
+            <th>Monthly Salary</th>
+            <th>CTC Salary</th>
             <th>Comment</th>
-            <th>Status</th>
+			 <th>Status</th>
         </tr>
     </thead>
     <tbody>
@@ -25,7 +27,7 @@
         {
             row += 1;
             <tr>
-                <td>
+               <td>
                     @Html.DisplayFor(modelItem => item.QenName)
                 <td>
                     @Html.DisplayFor(modelItem => item.ExamMark)
@@ -35,12 +37,14 @@
                 </td>
 
                 <td>
-                    @Html.DisplayFor(modelItem => item.ExpectedSalaryMonthly) - @Html.DisplayFor(modelItem => item.ExpectedSalaryGross)
+                    @Html.DisplayFor(modelItem => item.ExpectedSalaryMonthly)
                 </td>
+                
+                <td>@Html.DisplayFor(modelItem => item.ExpectedSalaryGross)</td>
                 <td>
                     <a onclick="return Comments(@item.jobID,@item.qenID);" data-toggle="modal" data-target="#myModal">Comment</a>
                 </td>
-                <td>@Html.DropDownList("Candidate_status", null, item.status.ToString(), new { id = "Candidate_status_" + @row, @onchange = "changeStatus('Candidate_status_" + @row + "','" + @item.jobID + "','" + @item.qenID + "')" })</td>
+                <td>@Html.DropDownList("Candidate_status", null, item.status.ToString(), new { @class="form-control", id = "Candidate_status_" + @row, @onchange = "changeStatus('Candidate_status_" + @row + "','" + @item.jobID + "','" + @item.qenID + "')" })</td>
             </tr>
             { jid = @item.jobID; }
         }
@@ -55,12 +59,11 @@
     <div id="popid"></div>
    
 </div>
-</div>
-</div>
-</div>
+
 <div class="modal fade" id="myModal2" role="dialog">
     <div id="addSalary"></div>
     </div>
+
     <script>
        
         function changeStatus(ddl, jobID, qenID) {
@@ -73,44 +76,56 @@
                     data: { 'selectedVal': selectedVal, 'jobID': jobID, 'qenID': qenID },
                     success: function (evt) {
                         if (evt == "OK") {
-                            alert("updated");
+                            debugger
+                            bootbox.alert({
+                                title: 'Alert Success  !',
+                                message: 'Record updated',
+                                callback: function () {
+								debugger
+                                        openPOPForHiredCandiate(selectedVal,qenID,jobID);
+                                    
+                                }
+                            });
+
                         }
 
                     },
                     error: function (req, status, error) {
                         alert("Error Occured");
                     }
-                });
-                if (selectedVal == 4) {
-                    $.ajax({
-                        type: "GET",
-                        url: "HiredCandidatesComment",
-                        data: { 'jobID': jobID, 'qenID': qenID },
-                        success: function (evt) {
-                            debugger
-                            $('#addSalary').html(evt);
-                           
-                            $("#myModal2").modal('show');
-                          
-
-                        },
-                        error: function (req, status, error) {
-                            alert("Error Occured");
-                        }
-                    });
-                }
-                if (selectedVal == 1) {
-                    $.ajax({
-                        type: 'post',
-                        url: 'candidateShortlisted',
-                        data: { 'jobID': jobID, 'qenID': qenID },
-                        success: function (data) {
-                            alert("Mail sent.");
-                        }
-                    });
-                }
+                });         
             }
         }
+
+
+
+        function openPOPForHiredCandiate(selectedVal,qenID,jobID){
+		
+		debugger
+            if (selectedVal == 4) {
+                debugger
+                $.ajax({
+                    type: "GET",
+                    url: "HiredCandidatesComment",
+                    data: { 'jobID': jobID, 'qenID': qenID },
+                    success: function (evt) {
+                        debugger
+                        $('#addSalary').html(evt);
+                           
+                        $("#myModal2").modal('show');
+                          
+
+                    },
+                    error: function (req, status, error) {
+                        bootbox.alert({
+                            title: 'Alert  !',
+                            message: 'Record not saved, some error occured'
+                        });
+                    }
+                });
+            }
+        }
+
     </script>
 
     <script>
@@ -186,3 +201,7 @@
             $('a[href=\'' + anchor + '\']').tab('show');
         });
     </script>
+
+
+
+	

@@ -5,51 +5,124 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="group">
-        @Html.TextBoxFor(ex => ex.CompanyName, new { placeholder = "Employer", maxlength = "100" })
-        <div class="alert alert-warning error-custom" role="alert">
-            @Html.ValidationMessageFor(ex => ex.CompanyName, "", new { @class = "col_1 tleft text-danger" })
+    <div class="col-md-12 col-sm-12 margin-20">
+        <div class="col-md-6 col-sm-12">
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Employer:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.TextBoxFor(ex => ex.CompanyName, new { maxlength = "100" })
+                        @Html.ValidationMessageFor(ex => ex.CompanyName, "", new { @class = "col_1 tleft text-danger" })
+                    </div>
+                </div>
+            </div>
+            @Html.HiddenFor(ex => ex.qenID) @Html.HiddenFor(ex => ex.qenEmploymentNum)
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">salary:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.TextBoxFor(ex => ex.qenSalary, new { maxlength = "100" })
+                        @Html.ValidationMessageFor(ex => ex.qenSalary, "", new { @class = "col_1 tleft text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Position:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.TextBoxFor(ex => ex.qenPosition, new { maxlength = "100" })
+                        @Html.ValidationMessageFor(ex => ex.qenPosition, "", new { @class = "col_1 tleft text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Job Description:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.TextBoxFor(ex => ex.jobDescription, new { maxlength = "100" })
+                        @Html.ValidationMessageFor(ex => ex.jobDescription, "", new { @class = "col_1 tleft text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Start Date:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.TextBoxFor(ex => ex.qenEmpFrom, "{0:dd/MM/yyyy}", new { maxlength = "10", @class = "datepicker", onchange = "return DateCheck1();" })
+                        @Html.ValidationMessageFor(ex => ex.qenEmpFrom, "", new { @class = "col_1 tleft text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">End Date:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.TextBoxFor(ex => ex.qenEmpTo, "{0:dd/MM/yyyy}", new { maxlength = "10", @class = "datepicker", onchange = "return DateCheck1();" })
+                        @Html.ValidationMessageFor(ex => ex.qenEmpTo, "", new { @class = "col_1 tleft text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 text-right academic">
+                <input type="submit" name="save" class="plus-btn academic-create-btn btn btn-default" />
+            </div>
         </div>
     </div>
-        @Html.HiddenFor(ex => ex.qenID) @Html.HiddenFor(ex => ex.qenEmploymentNum)
-        <div class="group">
-            @Html.TextBoxFor(ex => ex.qenSalary, new { placeholder = "salary", maxlength = "100" })
-            <div class="alert alert-warning error-custom" role="alert">
-                @Html.ValidationMessageFor(ex => ex.qenSalary, "", new { @class = "col_1 tleft text-danger" })
-            </div>
-        </div>
-        <div class="group">
-            @Html.TextBoxFor(ex => ex.qenPosition, new { placeholder = "Position", maxlength = "100" })
-            <div class="alert alert-warning error-custom" role="alert">
-                @Html.ValidationMessageFor(ex => ex.qenPosition, "", new { @class = "col_1 tleft text-danger" })
-            </div>
-        </div>
-        <div class="group">
-            @Html.TextBoxFor(ex => ex.jobDescription, new { placeholder = "Job Description", maxlength = "100" })
-            <div class="alert alert-warning error-custom" role="alert">
-                @Html.ValidationMessageFor(ex => ex.jobDescription, "", new { @class = "col_1 tleft text-danger" })
-            </div>
-        </div>
-        <div class="group">
-            @Html.TextBoxFor(ex => ex.qenEmpFrom, "{0:d MMM yyyy}", new { placeholder = "Start Date", maxlength = "10", @class = "datepicker" })
-            <div class="alert alert-warning error-custom" role="alert">
-                @Html.ValidationMessageFor(ex => ex.qenEmpFrom, "", new { @class = "col_1 tleft text-danger" })
-            </div>
-        </div>
-        <div class="group">
-            @Html.TextBoxFor(ex => ex.qenEmpTo, "{0:d MMM yyyy}", new { placeholder = "End Date", maxlength = "10", @class = "datepicker" })
-            <div class="alert alert-warning error-custom" role="alert">
-                @Html.ValidationMessageFor(ex => ex.qenEmpTo, "", new { @class = "col_1 tleft text-danger" })
-            </div>
-        </div>
-        <div class="group plus-btn-wrap m-top">
-            <input type="submit" name="save" class="plus-btn" style="background:url(/images/plus-btn.png) no-repeat center" value="Save" />
-        </div>
-        <br /><br />
-}
-<script type="text/javascript">
-    var jqOld = jQuery.noConflict();
-    jqOld(function () {
-        jqOld(".datepicker").datepicker();
-    })
-</script>
+                    <br /><br />
+                    }
+                    <script type="text/javascript">
+                        var jold = jQuery.noConflict();
+                        jold(function () {
+                            jold.validator.addMethod('date',
+                            function (value, element) {
+                                if (this.optional(element)) {
+                                    return true;
+                                }
+                                var ok = true;
+                                try {
+                                    jold.datepicker.parseDate('dd/mm/yy', value);
+                                }
+                                catch (err) {
+                                    ok = false;
+                                }
+                                return ok;
+                            });
+                            jold(".datepicker").datepicker({ dateFormat: 'dd/mm/yy', changeYear: true });
+                        });
+
+
+
+
+                        function DateCheck1() {
+                            debugger
+                            var StartDate = document.getElementById('qenEmpFrom').value;
+                            var EndDate = document.getElementById('qenEmpTo').value;
+                            if (StartDate != '')
+                            { var sDate = convertToDate(StartDate); }
+                            if (StartDate != '') {
+                                var eDate = convertToDate(EndDate);
+                            }
+
+                            if (StartDate != '' && EndDate != '' && sDate > eDate) {
+                                debugger
+                                bootbox.alert({
+                                    title: 'Alert Success  !',
+                                    message: 'Please ensure that the End Date is greater than or equal to the Start Date.'
+                                });
+
+                                return false;
+                            }
+                        }
+                    </script>
+                    <script>
+                        function convertToDate(str) {
+                            debugger
+                            var dd = str.substring(0, 2);
+                            var mm = str.substring(3, 5);
+                            var yy = str.substring(6, 11);
+                            var dat = mm + "/" + dd + "/" + yy;
+                            var dt = new Date(dat);
+                            return dt;
+                        }
+                    </script>

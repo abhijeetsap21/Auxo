@@ -113,7 +113,7 @@ $(document).ready(function(){
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>create Job</h4>
+        <h4>Post Job</h4>
         
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="form-group">
@@ -123,8 +123,8 @@ $(document).ready(function(){
                     @Html.ValidationMessageFor(model => model.advertisementRefID, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <input type="hidden" name="jobPOstType" value='@ViewBag.isLink'   /> 
-          </div>
+            <input type="hidden" name="jobPOstType" value='@ViewBag.isLink' /> 
+        </div>
 
         <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="form-group">
@@ -177,7 +177,7 @@ $(document).ready(function(){
                             }
                             else
                             {
-                                @Html.DropDownListFor(model => model.currency, new SelectList(ViewBag.currency, "currencyID", "currency1", new { @class = "form-control" }))
+                                @Html.DropDownListFor(model => model.currency, new SelectList(ViewBag.currency, "currencyID", "currency1"), new { @class = "form-control" })
                             }
 
                         }                       
@@ -264,7 +264,7 @@ $(document).ready(function(){
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     @{ if (@Model.jobID == 0)
                         {
-                            @Html.DropDownListFor(model => model.gender, new SelectList(ViewBag.gender, "genderID", "genderName",3), new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.gender, new SelectList(ViewBag.gender, "genderID", "genderName"), "-- Gender --", new { @class = "form-control" })
                         }
                         else
                         {
@@ -318,11 +318,11 @@ $(document).ready(function(){
         <div class="col-md-6 col-sm-6 col-xs-12">
 
             <div class="form-group">
-                @Html.LabelFor(model => model.EmploymentType.EmploymentType1, htmlAttributes: new { @class = "control-label col-md-6 col-sm-6 col-xs-12" })
+                @Html.LabelFor(model => model.EmploymentTypeID, htmlAttributes: new { @class = "control-label col-md-6 col-sm-6 col-xs-12" })
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     @{ if (@Model.jobID == 0)
                         {
-                            @Html.DropDownListFor(model => model.EmploymentTypeID, new SelectList(ViewBag.EmploymentTypeID, "EmploymentTypeID", "EmploymentType1"), "-- Employment type --", new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.EmploymentTypeID, new SelectList(ViewBag.EmploymentTypeID, "EmploymentTypeID", "EmploymentType1"), "-- Employment Type --", new { @class = "form-control" })
                         }
                         else
                         {

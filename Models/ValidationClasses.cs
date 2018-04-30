@@ -73,6 +73,7 @@ namespace NewLetter.Models
         public int NoOfOpenings { get; set; }
 
         [Required(ErrorMessage = "please enterrequired skills ")]
+        [Display(Name = "Required Skills")]
         public string requiredSkills { get; set; }
 
         [Display(Name = "Experience(year)")]
@@ -80,7 +81,7 @@ namespace NewLetter.Models
         [Required(ErrorMessage = "year of experience required")]
         public int workExpMin { get; set; }
 
-        [Display(Name = "Salary")]
+        [Display(Name = "Salary(Monthly)")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "numeric allowed only")]
         [Required(ErrorMessage = "salary (gross salary) required")]
         public int salary { get; set; }
@@ -90,16 +91,14 @@ namespace NewLetter.Models
         public int industryID { get; set; }
 
         [Required(ErrorMessage = "please select Education")]
-        [Display(Name = "Minimum education")]
+        [Display(Name = "Education")]
         public string EducationReq { get; set; }
 
         [Display(Name = "Currency")]
         [Required(ErrorMessage = "please select currency")]
         public string currency { get; set; }
 
-        [Display(Name = "Job Type")]
-        [Required(ErrorMessage = "job type required")]
-        public int EmploymentTypeID { get; set; }
+       
 
         [Required(ErrorMessage = "please enter your city")]
         public string city { get; set; }
@@ -110,9 +109,13 @@ namespace NewLetter.Models
         [Required(ErrorMessage = "please enter your country")]
         public string country { get; set; }
 
+        [Display(Name = "Zip Code")]
         [DataType(DataType.PostalCode)]
         [Required(ErrorMessage = "please enter your zipCode")]
         public string zipCode { get; set; }
+
+        [Display(Name = "Street No")]
+        public string streetNo { get; set; }
 
         [Display(Name = "Salry visible to employee")]
         public bool salaryVisibleToEmployee { get; set; }
@@ -147,7 +150,18 @@ namespace NewLetter.Models
         public string responsesEmailID { get; set; }
 
         [AllowHtml]
+        [Display(Name = "Company Description")]
         public string CompanyDescription { get; set; }
+
+      
+        [Display(Name = "Contact Email")]
+        public string jobContactPersonEmail { get; set; }
+
+        [Display(Name = "Employment Type")]
+        [Required(ErrorMessage = "Employment Type required ")]
+        public string EmploymentTypeID { get; set; }
+        
+
     }
     public class ValidateSecondary
     {

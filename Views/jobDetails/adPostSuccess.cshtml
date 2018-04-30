@@ -52,8 +52,8 @@
            
             @Html.ActionLink("Continue to post jod...", "NewJob", "jobDetails", new { @refID = advID},null)
 
-            @Html.ActionLink("post job via operator", "#", new { onclick = "return sendMailToOperator("+ advID+");" })
-
+             @Html.ActionLink("post job via operator", "sendMailToOperator", "jobDetails", new {advID },null)
+                @*<input type="button" value="job via operator" , onclick="sendMailToOperator(@advID)" />*@
             @Html.ActionLink("post jod without refrence..", "NewJob", "jobDetails")
            
            

@@ -15,6 +15,7 @@ using System.Data.Entity.Validation;
 using SelectPdf;
 using System.Web.Script.Serialization;
 using System.Diagnostics;
+using System.Web.Configuration;
 
 namespace NewLetter.Controllers
 {
@@ -713,12 +714,12 @@ namespace NewLetter.Controllers
             }
             var roleID = BaseUtil.RoleID();
             string emailID = string.Empty; string  conName=string.Empty;
-            if (roleID != "4" && roleID != "1")
+            conName = jobDetailsModel.CompanyName;
+            if (roleID == "2" || roleID == "3" || roleID == "6" )
             {
                 jobDetailsModel.companyID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.companyID.ToString()));
-                emailID = BaseUtil.GetSessionValue(AdminInfo.LoginID.ToString());
-                conName = BaseUtil.GetSessionValue(AdminInfo.FullName.ToString());
-            }
+                emailID = BaseUtil.GetSessionValue(AdminInfo.LoginID.ToString());                
+            }           
             else
             {
                 jobDetailsModel.companyID = Convert.ToInt64(jobDetailsModel.CompanyName);
@@ -734,12 +735,12 @@ namespace NewLetter.Controllers
                 if (jobDetailsModel.jobID == 0)
                 {
                     db.jobDetails.Add(jobDetailsModel);                 
-                    //db.SaveChanges();
+                    db.SaveChanges();
                    
                         jobDetailsModel.jobURL = "http://localhost:51126/jobDetails/Apply?jobID=" + jobDetailsModel.jobID;
                         var url = jobDetailsModel.jobURL;
                         db.Entry(jobDetailsModel).State = EntityState.Modified;
-                        //db.SaveChanges();
+                        db.SaveChanges();
                     
                     
                 }
@@ -762,7 +763,7 @@ namespace NewLetter.Controllers
                 sr.Close();
                 string To = emailID;
                 string mail_Subject = "Job Posted Successfully ";
-               // string result = BaseUtil.sendEmailer(To, mail_Subject, final_Html_Body_Link, "");
+                string result = BaseUtil.sendEmailer(To, mail_Subject, final_Html_Body_Link, "");
             }
             catch (DbEntityValidationException ex)
             {
@@ -808,7 +809,7 @@ namespace NewLetter.Controllers
             string HTML_Body = sr.ReadToEnd();
             string final_Html_Body = HTML_Body.Replace("#name", "Admin").Replace("#refID",advID.ToString()).Replace("#companyname", compdet.companyName).Replace("#empname", empdet.Name).Replace("#pdfurl", adlist.advertisementPDFUrk).Replace("#imgurl", adlist.advertisementimageURL);
             sr.Close();
-            string To = "abbyastro@gmail.com";
+            string To = WebConfigurationManager.AppSettings["AdminEmail"].ToString();
             string mail_Subject = "Request Received For Newspaper Advertisement Creation";
             string result = BaseUtil.sendEmailer(To, mail_Subject, final_Html_Body, "");
             return RedirectToAction("ThankYou");

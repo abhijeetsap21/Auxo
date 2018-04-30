@@ -5,198 +5,209 @@
     ViewBag.Title = "ProfilePerformance";
     Layout = "~/Views/Shared/_Layout_Employer.cshtml";
 }
+<div class="form-horizontal edit-candidate-cv profile-performance">
+    <h4>ProfilePerformance</h4>
 
-<h2>ProfilePerformance</h2>
-      
-        @{            
+    @{
 
-            var LSTProfilePerformanceCount = (List<ProfilePerformanceCount>)ViewData["LSTProfilePerformanceCount"];
-            var itemList_1 = new ProfilePerformanceCount(); var itemList_2 = new ProfilePerformanceCount();
-            var itemList_3 = new ProfilePerformanceCount(); var itemList_4 = new ProfilePerformanceCount();
-            var itemList_5 = new ProfilePerformanceCount(); var itemList_6 = new ProfilePerformanceCount();
-            int i = 1;
+        var LSTProfilePerformanceCount = (List<ProfilePerformanceCount>)ViewData["LSTProfilePerformanceCount"];
+        var itemList_1 = new ProfilePerformanceCount(); var itemList_2 = new ProfilePerformanceCount();
+        var itemList_3 = new ProfilePerformanceCount(); var itemList_4 = new ProfilePerformanceCount();
+        var itemList_5 = new ProfilePerformanceCount(); var itemList_6 = new ProfilePerformanceCount();
+        int i = 1;
 
-            var av = 0; var bv = 0; var cv = 0; var dv = 0; var ev = 0; var fv = 0;
-            var ad = 0; var bd = 0; var cd = 0; var dd = 0; var ed = 0; var fd = 0;
-            var ac = 0; var bc = 0; var cc = 0; var dc = 0; var ec = 0; var fc = 0;
-            var m1 = ""; var m2 = ""; var m3 = ""; var m4 =""; var m5 = ""; var m6 ="";
-            foreach (var item in LSTProfilePerformanceCount)
+        var av = 0; var bv = 0; var cv = 0; var dv = 0; var ev = 0; var fv = 0;
+        var ad = 0; var bd = 0; var cd = 0; var dd = 0; var ed = 0; var fd = 0;
+        var ac = 0; var bc = 0; var cc = 0; var dc = 0; var ec = 0; var fc = 0;
+        var m1 = ""; var m2 = ""; var m3 = ""; var m4 = ""; var m5 = ""; var m6 = "";
+        foreach (var item in LSTProfilePerformanceCount)
+        {
+
+            if (i == 1)
             {
-
-                if (i == 1) { itemList_1 = item;
-                    av = itemList_1.viewCount;
-                    ad = itemList_1.DownloadCount;
-                    ac = itemList_1.contactCount;
-                    m1 = itemList_1.MonthName;
-                }
-                if (i == 2) { itemList_2 = item;
-                    bv = itemList_2.viewCount;
-                    bd = itemList_2.DownloadCount;
-                    bc = itemList_2.contactCount;
-                    m2 = itemList_2.MonthName;
-                }
-                if (i == 3) { itemList_3 = item;
-                    cv = itemList_3.viewCount;
-                    cd = itemList_3.DownloadCount;
-                    cc = itemList_3.contactCount;
-                    m3 = itemList_3.MonthName;
-                }
-                if (i == 4) { itemList_4 = item;
-                    dv = itemList_4.viewCount;
-                    dd = itemList_4.DownloadCount;
-                    dc = itemList_4.contactCount;
-                    m4 = itemList_4.MonthName;
-                }
-                if (i == 5) { itemList_5 = item;
-                    ev = itemList_5.viewCount;
-                    ed = itemList_5.DownloadCount;
-                    ec = itemList_5.contactCount;
-                    m5 = itemList_5.MonthName;
-                }
-                if (i == 6) { itemList_6 = item;
-                    fv = itemList_6.viewCount;
-                    fd = itemList_6.DownloadCount;
-                    fc = itemList_6.contactCount;
-                    m6 = itemList_6.MonthName;
-                }
-                i = i + 1;
+                itemList_1 = item;
+                av = itemList_1.viewCount;
+                ad = itemList_1.DownloadCount;
+                ac = itemList_1.contactCount;
+                m1 = itemList_1.MonthName;
             }
-
+            if (i == 2)
+            {
+                itemList_2 = item;
+                bv = itemList_2.viewCount;
+                bd = itemList_2.DownloadCount;
+                bc = itemList_2.contactCount;
+                m2 = itemList_2.MonthName;
+            }
+            if (i == 3)
+            {
+                itemList_3 = item;
+                cv = itemList_3.viewCount;
+                cd = itemList_3.DownloadCount;
+                cc = itemList_3.contactCount;
+                m3 = itemList_3.MonthName;
+            }
+            if (i == 4)
+            {
+                itemList_4 = item;
+                dv = itemList_4.viewCount;
+                dd = itemList_4.DownloadCount;
+                dc = itemList_4.contactCount;
+                m4 = itemList_4.MonthName;
+            }
+            if (i == 5)
+            {
+                itemList_5 = item;
+                ev = itemList_5.viewCount;
+                ed = itemList_5.DownloadCount;
+                ec = itemList_5.contactCount;
+                m5 = itemList_5.MonthName;
+            }
+            if (i == 6)
+            {
+                itemList_6 = item;
+                fv = itemList_6.viewCount;
+                fd = itemList_6.DownloadCount;
+                fc = itemList_6.contactCount;
+                m6 = itemList_6.MonthName;
+            }
+            i = i + 1;
         }
-        <script type="text/javascript">
-           
-            window.onload = function () {
-                debugger
-             
-                var aav = parseInt('@av'); var bbv = parseInt('@bv'); var ccv = parseInt('@cv'); var ddv = parseInt('@dv'); var eev = parseInt('@ev'); var ffv = parseInt('@fv');
-                var aad = parseInt('@ad'); var bbd = parseInt('@bd'); var ccd = parseInt('@cd'); var ddd = parseInt('@dd'); var eed = parseInt('@ed'); var ffd= parseInt('@fd');
-                var aac = parseInt('@ac'); var bbc = parseInt('@bc'); var ccc = parseInt('@cc'); var ddc = parseInt('@dc'); var eec = parseInt('@ec'); var ffc = parseInt('@fc');
-                var chart = new CanvasJS.Chart("chartContainer",
+
+    }
+    <script type="text/javascript">
+
+        window.onload = function () {
+            debugger
+
+            var aav = parseInt('@av'); var bbv = parseInt('@bv'); var ccv = parseInt('@cv'); var ddv = parseInt('@dv'); var eev = parseInt('@ev'); var ffv = parseInt('@fv');
+            var aad = parseInt('@ad'); var bbd = parseInt('@bd'); var ccd = parseInt('@cd'); var ddd = parseInt('@dd'); var eed = parseInt('@ed'); var ffd = parseInt('@fd');
+            var aac = parseInt('@ac'); var bbc = parseInt('@bc'); var ccc = parseInt('@cc'); var ddc = parseInt('@dc'); var eec = parseInt('@ec'); var ffc = parseInt('@fc');
+            var chart = new CanvasJS.Chart("chartContainer",
+            {
+                animationEnabled: true,
+                title: {
+
+                    text: "Profile Performance"
+
+                },
+                axisX: {
+                    minimum: 0,
+                    maximum: 6,
+                    includeZero: false
+                },
+                axisY: {
+                    minimum: 0,
+                    maximum: 20,
+                    includeZero: false
+                },
+                legend: {
+                    verticalAlign: "top",
+                    horizontalAlign: "right",
+                    dockInsidePlotArea: true
+                },
+                toolTip: {
+                    shared: true
+                },
+                data: [
                 {
-                    animationEnabled: true,
-                    title: {
 
-                        text: "Profile Performance"
-
-                    },
-                    axisX: {
-                        minimum: 0,
-                        maximum: 6,
-                        includeZero: false
-                    },
-                    axisY: {
-                        minimum: 0,
-                        maximum: 20,
-                        includeZero: false
-                    },
-                    legend: {
-		                verticalAlign: "top",
-		                horizontalAlign: "right",
-		                dockInsidePlotArea: true
-	                },
-	                toolTip: {
-		                shared: true
-	                },
-                    data: [
-                    {
-
-                        type: "spline",
-                        name: "View",
-                        showInLegend: true,
-                        legendMarkerType: "square",
-                        color: "rgba(255,255,0,0.7)",
-                        markerSize: 0,
-                        dataPoints: [
-                           { x: 1, y: aav },
-                           { x: 2, y: bbv },
-                           { x: 3, y: ccv },
-                           { x: 4, y: ddv },
-                           { x: 5, y: eev },
-                           { x: 6, y: ffv }
-                        ]
-                    },
-                     {
-                         type: "spline",
-                         name: "Contact",
-                         showInLegend: true,
-                         legendMarkerType: "square",
-                         color: "rgba(0,0,255,0.6)",
-                         markerSize: 0,
-                         dataPoints: [
-                           { x: 1, y: aac },
-                           { x: 2, y: bbc },
-                           { x: 3, y: ccc },
-                           { x: 4, y: ddc },
-                           { x: 5, y: eec },
-                           { x: 6, y: ffc }
-                         ]
-                     }
-                     ,
-                     {
-                         type: "spline",
-                         name: "DownLoad",
-                         showInLegend: true,
-                         legendMarkerType: "square",
-                         color: "rgba(0,128,0,0.7)",
-                         markerSize: 0,
-                         dataPoints: [
-                           { x: 1, y: aad },
-                           { x: 2, y: bbd },
-                           { x: 3, y: ccd },
-                           { x: 4, y: ddd },
-                           { x: 5, y: eed },
-                           { x: 6, y: ffd }
-                         ]
-                     }
+                    type: "spline",
+                    name: "View",
+                    showInLegend: true,
+                    legendMarkerType: "square",
+                    color: "rgba(255,255,0,0.7)",
+                    markerSize: 0,
+                    dataPoints: [
+                       { x: 1, y: aav },
+                       { x: 2, y: bbv },
+                       { x: 3, y: ccv },
+                       { x: 4, y: ddv },
+                       { x: 5, y: eev },
+                       { x: 6, y: ffv }
                     ]
-                });
-                chart.render();
-            }
-        </script>
-        <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                },
+                 {
+                     type: "spline",
+                     name: "Contact",
+                     showInLegend: true,
+                     legendMarkerType: "square",
+                     color: "rgba(0,0,255,0.6)",
+                     markerSize: 0,
+                     dataPoints: [
+                       { x: 1, y: aac },
+                       { x: 2, y: bbc },
+                       { x: 3, y: ccc },
+                       { x: 4, y: ddc },
+                       { x: 5, y: eec },
+                       { x: 6, y: ffc }
+                     ]
+                 }
+                 ,
+                 {
+                     type: "spline",
+                     name: "DownLoad",
+                     showInLegend: true,
+                     legendMarkerType: "square",
+                     color: "rgba(0,128,0,0.7)",
+                     markerSize: 0,
+                     dataPoints: [
+                       { x: 1, y: aad },
+                       { x: 2, y: bbd },
+                       { x: 3, y: ccd },
+                       { x: 4, y: ddd },
+                       { x: 5, y: eed },
+                       { x: 6, y: ffd }
+                     ]
+                 }
+                ]
+            });
+            chart.render();
+        }
+    </script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
+    <div class="chart-main">
+        <div id="chartContainer"></div>
+        <div class="chart-month-label">
 
-        <div id="chartContainer" style="height: 370px; width: 50%;" ></div>
-<div> 
-    
-  <label><i class="badge">1</i> @m6 </label><label><i class="badge">2</i> @m5 </label> 
-    <label><i class="badge">3</i> @m4 </label> <label> <label><i class="badge">4</i> @m3 </label> <i class="badge">5</i> @m2 </label><label><i class="badge">6</i> @m1 </label>
- </div>
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
-
-
-
-        @{var oProfilePerformanceCount = (ProfilePerformanceCount)ViewData["oProfilePerformanceCount"]; }
-        <div>
-
-            <h4>ProfilePerformance</h4>
-            <hr />
-            <dl class="dl-horizontal">
-                <dt>
-                    Viewed :
-                </dt>
-
-                <dd>
-                    @oProfilePerformanceCount.viewCount;
-                </dd>
-
-                <dt>
-                    Download:
-                </dt>
-
-                <dd>
-                    @oProfilePerformanceCount.DownloadCount;
-                </dd>
-
-                <dt>
-                    Contacted:
-                </dt>
-
-                <dd>
-                    @oProfilePerformanceCount.contactCount;
-                </dd>
-
-            </dl>
+            <label><i class="badge">1</i> @m6 </label><label><i class="badge">2</i> @m5 </label>
+            <label><i class="badge">3</i> @m4 </label> <label> <label><i class="badge">4</i> @m3 </label> <i class="badge">5</i> @m2 </label><label><i class="badge">6</i> @m1 </label>
         </div>
+    </div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
+
+
+    @{var oProfilePerformanceCount = (ProfilePerformanceCount)ViewData["oProfilePerformanceCount"]; }
+    <div class="chat-ratio">
+        <dl class="dl-horizontal">
+            <dt>
+                Viewed :
+            </dt>
+
+            <dd>
+                @oProfilePerformanceCount.viewCount;
+            </dd>
+
+            <dt>
+                Download:
+            </dt>
+
+            <dd>
+                @oProfilePerformanceCount.DownloadCount;
+            </dd>
+
+            <dt>
+                Contacted:
+            </dt>
+
+            <dd>
+                @oProfilePerformanceCount.contactCount;
+            </dd>
+
+        </dl>
+    </div>
+</div>
 

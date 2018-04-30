@@ -3,62 +3,65 @@
     ViewBag.Title = "category";
     Layout = "~/Views/Shared/_Layout_Employer.cshtml";
 }
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>  
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<h2>category</h2>
-@{var jobID = ViewBag.jobID;}
-<script>
-    var URL = '@Url.Action("categoryC1", "Employer")?jobID=' + '@jobID';
-    $.get(URL, function (data) {
-        $("#dicCat1").html(data);
-    });
+<div class="form-horizontal">
+    <h4>category</h4>
+    <div class="col-lg-12 col-md-12 col-xs-12 table-das">
+        @{var jobID = ViewBag.jobID;}
+        <script>
+            debugger
+            var URL = '@Url.Action("categoryC1", "Employer")?jobID=' + '@jobID';
+            $.get(URL, function (data) {
+                $("#dicCat1").html(data);
+            });
 
-    var URL = '@Url.Action("categoryC2", "Employer")?jobID=' + '@jobID';
-    $.get(URL, function (data) {
-        $("#dicCat2").html(data);
-    });
+            var URL = '@Url.Action("categoryC2", "Employer")?jobID=' + '@jobID';
+            $.get(URL, function (data) {
+                $("#dicCat2").html(data);
+            });
 
-    var URL = '@Url.Action("categoryC3", "Employer")?jobID=' + '@jobID';
-    $.get(URL, function (data) {
-        $("#dicCat3").html(data);
-    });
-</script>
+            var URL = '@Url.Action("categoryC3", "Employer")?jobID=' + '@jobID';
+            $.get(URL, function (data) {
+                $("#dicCat3").html(data);
+            });
+        </script>
+        <div class="col-md-12">
+            <div class="w3-bar custom-color">
+                <button class="w3-bar-item w3-button" onclick="openDiv('dicCat1')">category 1</button>
+                <button class="w3-bar-item w3-button" onclick="openDiv('dicCat2')">category 2</button>
+                <button class="w3-bar-item w3-button" onclick="openDiv('dicCat3')">category 3</button>
+            </div>
+        </div>
+        <input type="hidden" value='@jobID' id="hid_jobid" />
 
-<div class="w3-bar w3-black">
-    <button class="w3-bar-item w3-button" onclick="openDiv('dicCat1')">category 1</button>
-    <button class="w3-bar-item w3-button" onclick="openDiv('dicCat2')">category 2</button>
-    <button class="w3-bar-item w3-button" onclick="openDiv('dicCat3')">category 3</button>
+        <div id="dicCat1" class="w3-container city">
+
+        </div>
+        <div id="dicCat2" class="w3-container city" style="display:none">
+
+        </div>
+        <div id="dicCat3" class="w3-container city" style="display:none">
+
+        </div>
+        <div class="col-md-12">
+            <a href='@Url.Action("scheduleTestDashboard", "Employer",new { @ViewBag.jobID })' class="hired-btn-defult">GO TO Schedule Test</a>
+        </div>
     </div>
-<a href='@Url.Action("scheduleTestDashboard", "Employer",new { @ViewBag.jobID })'>GO TO Schedule Test</a>
-
-<div id="dicCat1" class="w3-container city">
-    @Html.Action("categoryC1", "Employer", new { @jobID })
 </div>
-
-<div id="dicCat2" class="w3-container city" style="display:none">
-    @Html.Action("categoryC2", "Employer", new { @jobID })
-</div>
-
-<div id="dicCat3" class="w3-container city" style="display:none">
-    @Html.Action("categoryC3", "Employer", new { @jobID })
-</div>
-   
 <script>
 
-function openDiv(divName) {
-    var i;
-    var x = document.getElementsByClassName("city");
-    for (i = 0; i < x.length; i++) {
-       x[i].style.display = "none";
+    function openDiv(divName) {
+        var i;
+        var x = document.getElementsByClassName("city");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        document.getElementById(divName).style.display = "block";
     }
-    document.getElementById(divName).style.display = "block";
-}
 </script>
-
-
 
 <div class="modal fade" id="myModal" role="dialog">   </div>
-
 
 <script>
     function dispalyResume(qenID) {

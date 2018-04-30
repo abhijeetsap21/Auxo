@@ -4,87 +4,69 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout_Employer.cshtml";
 }
+<div class="form-horizontal">
+    <div class="col-lg-12 col-md-12 col-xs-12 table-das">
+        <h4>Employer Detail</h4>
+        <dl class="dl-horizontal emp-details">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
 
-<h2>Details</h2>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
 
-<div>
-    <h4>EmployerDetail</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Mobile)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Mobile)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Mobile)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Mobile)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
 
 
-        <dt>
-            @Html.DisplayNameFor(model => model.dataIsCreated)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.dataIsCreated)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.dataIsCreated)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.dataIsCreated)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.isActive)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.isActive)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.isActive)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.isActive)
+            </dd>
 
-     
+            <dt>
+                Role
+            </dt>
 
-       
+            <dd>
+                @ViewBag.role
+            </dd>
 
-        <dt>
-            Role
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.dataIsUpdated)
+            </dt>
 
-        <dd>
-            @ViewBag.role
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.dataIsUpdated)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dataIsUpdated)
-        </dd>
-
-        <dt>
-            @*@Html.DisplayNameFor(model => model.companyDetail.companyName)*@
-        </dt>
-
-        <dd>
-            @*@Html.DisplayFor(model => model.companyDetail.companyName)*@
-        </dd>
-
-   
-
-    </dl>
+            <dd>
+                @Html.DisplayFor(model => model.dataIsUpdated)
+            </dd>
+        </dl>
+        <p class="col-md-12">
+            @Html.ActionLink("Edit", "Edit", "", new { @class = "btn btn-default", id = Model.EmployerID })
+        </p>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.EmployerID }) 
- 
-</p>

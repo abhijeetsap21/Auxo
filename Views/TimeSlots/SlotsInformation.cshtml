@@ -4,11 +4,11 @@
     ViewBag.Title = "SlotsInformation";
     Layout = "~/Views/Shared/_Layout_Employer.cshtml";
 }
-<script type="text/javascript">
+@*<script type="text/javascript">
     $(document).ready(function () {
         $(".datepicker").datepicker();
     });
-</script>
+</script>*@
 <h2>Slots Information</h2>
 @using (Html.BeginForm("SlotsInformation", "TimeSlots", FormMethod.Post,new { id = "msform" }))
 {
@@ -148,7 +148,7 @@
                     if (data == "OK") {
                         debugger
                         alert("Record updated");
-                        location.href = 'http://localhost:51126/TimeSlots/SlotsInformation?dat=' + dat;
+                        location.href = 'https://newsletter.qendidate.com/stagingns/TimeSlots/SlotsInformation?dat=' + dat;
                       
                        
                     }
@@ -172,7 +172,7 @@
                     if (data == "OK") {
                         debugger
                         alert("Record updated");
-                        location.href = 'http://localhost:51126/TimeSlots/SlotsInformation?dat=' + dat;
+                        location.href = 'https://newsletter.qendidate.com/stagingns/TimeSlots/SlotsInformation?dat=' + dat;
                       
 
                     }

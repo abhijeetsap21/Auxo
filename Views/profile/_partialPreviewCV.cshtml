@@ -12,7 +12,7 @@
 
 
 
-<div class="modal-dialog">
+<div class="modal-dialog cv-profile">
     <!-- Modal content-->
     <div class="modal-content">
         <div class="modal-header">
@@ -20,8 +20,8 @@
             <h4 class="modal-title">Resume</h4>
         </div>
         <div class="modal-body" style="overflow:auto">
-            <div id="Grid" style="width:595px;height:842px;">
-                <div style="width:1000px; margin:20px auto; overflow:hidden; border:6px solid #e4e4e6;">
+            <div id="Grid" style="width:100%;height:100%;">
+                <div style="width:100%; margin:0 auto; overflow:hidden; border:6px solid #e4e4e6;">
                     <div style="background:#20b08f; -webkit-print-color-adjust: exact; padding:8px 0; font-size:13px; color:#fff; text-align:center;">@Model.personainfo.zipCode&nbsp;&nbsp;|&nbsp;&nbsp;Call - @Model.personainfo.qenPhone&nbsp;&nbsp;|&nbsp;&nbsp;Email - @Model.personainfo.qenEmail</div>
                     <div style="width:100px;  border-radius:100px; overflow: hidden; margin:17px auto 0;"><img src="@Model.personainfo.qenImage" width="100" height="93" /></div>
                     <div style="padding:25px 0; width:100%; float:left; font-size:32px; text-align:center; line-height:35px;">
@@ -181,7 +181,7 @@
             @using (Html.BeginForm("Export", "profile", FormMethod.Post))
             {
                 <input type="hidden" name="GridHtml" /><input type="hidden" name="qenID_" value='@Model.personainfo.qenID' />
-                   <input type="submit" id="btnSubmit" value="Export" /><button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                   <input type="submit" id="btnSubmit" value="Export" class="btn btn-default" /><button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             } 
         </div>
     </div>

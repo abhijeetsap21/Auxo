@@ -46,8 +46,8 @@
     @Html.HiddenFor(e=>e.qenID)
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="form-group">
-            @Html.LabelFor(model => model.careerObj, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
-            <div class="col-md-9 col-sm-9 col-xs-12">
+            <label class="control-label col-md-12 col-sm-12 col-xs-12 left-label">Career Objective:</label>
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 @Html.TextAreaFor(m => m.careerObj, new { @class = "form-control", placeholder = "" })
               @Html.ValidationMessageFor(m => m.careerObj, "", new { @class = "text-danger" })
             </div>
@@ -56,16 +56,15 @@
 
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="form-group">
-            @Html.LabelFor(model => model.careerHighLights, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
-            <div class="col-md-9 col-sm-9 col-xs-12">
+            <label class="control-label col-md-12 col-sm-12 col-xs-12 left-label">Career Highlights:</label>
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 @Html.TextAreaFor(m => m.careerHighLights, new { @class = "form-control", placeholder = "" })
                 @Html.ValidationMessageFor(m => m.careerHighLights, "", new { @class = "text-danger" })
             </div>
         </div>
+        <div class="col-md-12 text-right academic">
+            <input type="submit" value="Update" class="academic-create-btn btn btn-default" />
+        </div>
     </div>
-       
-            <div class="col-md-4 col-xs-4 col-xs-4 padding-none">
-                <button type="submit" class="btn">Save</button>
-            </div>
 }
 

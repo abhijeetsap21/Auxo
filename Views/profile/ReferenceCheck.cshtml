@@ -1,17 +1,10 @@
 ﻿@model NewLetter.Models.referenceCheck
 @{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <script src="~/Scripts/jquery-1.10.2.js"></script>
-    <meta name="viewport" content="width=device-width" />
+    Layout = "~/Views/Shared/_Layout_ExternalUser.cshtml";
+}   
     <title>ReferenceCheck</title>
-</head>
-<body>
+
+
 @using (Html.BeginForm("ReferenceCheck", "profile", FormMethod.Post, new { id = "msform" }))
 {
     <div>
@@ -37,15 +30,16 @@
         @Html.HiddenFor(m => m.isCheckComplete)
     </div>
 }
-</body>
-</html>
 <script>
     $(document).ready(function () {
-
+        debugger
         if ('@ViewBag.result' == "ok")
         {
-
-            alert('Thank you for providing your valuable time.');
+            bootbox.alert({
+                title: 'Alert Success  !',
+                message: 'Thank you for providing your valuable time.'
+            });
+          
         }
         $("form").submit(function (e) {
             debugger

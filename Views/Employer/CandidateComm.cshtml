@@ -16,14 +16,15 @@
     <thead>
         <tr>
            
-            <th>Name</th>
+            <th>     Name     </th>
             <th>reScheduled</th>
             <th>Meet Accepted</th>
             <th>Preferred Medium</th>
             <th>Scheduled Date</th>
             <th> Time</th>
-            <th></th>
-            <th></th>
+            <th>Meeing URL</th>
+            <th>Re-Schedule</th>
+			<th>Comments</th>
         </tr>
         </thead>
     <tbody>
@@ -45,16 +46,20 @@
                 </td>
                 <td>
                     @{if (item.meetScheduledMailRecieved)
-                        {@Html.DisplayFor(modelItem => item.meetScheduledDateTime)}
+                        {@item.meetScheduledDateTime.ToString("dd/MM/yyyy")}
                     }
                 </td>
 
                 <td>
                     @Html.DisplayFor(modelItem => item.slotTime)
                 </td>
+        <td>
+                        
+            <a href="@item.meetURL"><img src="~/images/Skype.ico" style="height:30px;width:30px"/></a>
+        </td>
        
-                <td>
-                    <input type="button" id="btn_" onclick="return ProceedToMeet(@item.qenID,@item.jobID,'@item.qenName','@item.qenEmail','msg_@item.qenID','@item.meetID','-');" value="Re-Schedule Meet" />
+                <td class="text-center cate-btn">
+                    <input type="button" id="btn_" class="btn btn-default" onclick="return ProceedToMeet(@item.qenID,@item.jobID,'@item.qenName','@item.qenEmail','msg_@item.qenID','@item.meetID','-');" value="Re-Schedule Meet" />
                     <span id='msg_@item.qenID'></span>
                 </td>
 
@@ -64,7 +69,7 @@
     </tbody>
 
 </table>
-<a href='@Url.Action("HiredCandidateList", "Employer",new {jobID= @jid })' class="hired-btn-defult">GO TO Hired List</a>
+<a href='@Url.Action("ShortlistedCadidates", "Employer",new {jobID= @jid })' class="hired-btn-defult">GO TO Shortlisted Candidates</a>
 </div>
 </div>
 
@@ -73,8 +78,8 @@
     <input type="hidden" id="QenID" />
     <div id="popid"></div>
 </div>
-</div>
 
+</div>
 
 
 
