@@ -17,7 +17,6 @@ namespace NewLetter.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public qendidateList()
         {
-            this.finalQendidateLists = new HashSet<finalQendidateList>();
             this.HiredCandidates = new HashSet<HiredCandidate>();
             this.InterViewerComments = new HashSet<InterViewerComment>();
             this.jobSavedQendidates = new HashSet<jobSavedQendidate>();
@@ -28,7 +27,6 @@ namespace NewLetter.Models
             this.qendidatePHDs = new HashSet<qendidatePHD>();
             this.qenHigherSecondaries = new HashSet<qenHigherSecondary>();
             this.qenReferences = new HashSet<qenReference>();
-            this.qenResumes = new HashSet<qenResume>();
             this.qenSecondaries = new HashSet<qenSecondary>();
             this.qendidateListInJobs = new HashSet<qendidateListInJob>();
             this.qendidateProfileSharedWiths = new HashSet<qendidateProfileSharedWith>();
@@ -71,9 +69,8 @@ namespace NewLetter.Models
         public string zipCode { get; set; }
         public string CareerHighlight { get; set; }
         public Nullable<System.DateTime> lastLoginTime { get; set; }
+        public bool uploadFromExternalResource { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<finalQendidateList> finalQendidateLists { get; set; }
         public virtual genderList genderList { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HiredCandidate> HiredCandidates { get; set; }
@@ -95,8 +92,6 @@ namespace NewLetter.Models
         public virtual ICollection<qenHigherSecondary> qenHigherSecondaries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<qenReference> qenReferences { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<qenResume> qenResumes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<qenSecondary> qenSecondaries { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
