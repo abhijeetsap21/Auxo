@@ -18,6 +18,7 @@ using System.Collections.Specialized;
 using Facebook;
 using System.Web.Security;
 using System.IO;
+using System.Web.Configuration;
 
 namespace NewLetter.Controllers
 {
@@ -584,8 +585,8 @@ namespace NewLetter.Controllers
             var fb = new FacebookClient();
             var loginUrl = fb.GetLoginUrl(new
             {
-                client_id = "1484503554920573",
-                client_secret = "dbe3b963bd866da2f3cdb22848774411",
+                client_id = WebConfigurationManager.AppSettings["FACEBOOK_CLIENT_ID"],
+                client_secret = WebConfigurationManager.AppSettings["FACEBOOK_CLIENT_SECRET"],
                 redirect_uri = RedirectUri.AbsoluteUri,
                 response_type = "code",
                 scope = "email"
@@ -633,10 +634,10 @@ namespace NewLetter.Controllers
                 list.dataIsUpdated = BaseUtil.GetCurrentDateTime();
                 list.roleID = 5;
                 list.isDelete = false;
-                list.isActive = false;
+                list.isActive = true;
                 list.password = baseClass.GetRandomPasswordString(10);
                 //list.qenImage = linkedINResVM.pictureurl;
-                list.qenPhone = "0000000000";
+                list.qenPhone = "+919999999999";
                 list.qenAddress = "some address";
                 list.qenAddress = null;
                 db.qendidateLists.Add(list);
