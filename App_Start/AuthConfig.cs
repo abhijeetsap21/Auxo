@@ -11,7 +11,7 @@ namespace NewLetter.App_Start
     {
         public static void RegisterAuth()
         {
-            GoogleOAuth2Client clientGoog = new GoogleOAuth2Client("960677902616-epsthers63eti97dncc299auh2spm2kh.apps.googleusercontent.com", "_TEIES4fkOXsamJXlPmmByCZ");
+            GoogleOAuth2Client clientGoog = new GoogleOAuth2Client("1012224335701-5k6q9ho24c9cvm8mofu2vrpormc1eecc.apps.googleusercontent.com", "cfDVpTl5RxJVe8qxP8lkLU3j");
             IDictionary<string, string> extraData = new Dictionary<string, string>();
             OpenAuth.AuthenticationClients.Add("google", () => clientGoog, extraData);
         }
