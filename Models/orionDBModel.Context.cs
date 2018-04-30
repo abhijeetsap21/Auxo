@@ -37,7 +37,6 @@ namespace NewLetter.Models
         public virtual DbSet<EmployerDetail> EmployerDetails { get; set; }
         public virtual DbSet<employerType> employerTypes { get; set; }
         public virtual DbSet<EmploymentType> EmploymentTypes { get; set; }
-        public virtual DbSet<finalQendidateList> finalQendidateLists { get; set; }
         public virtual DbSet<genderList> genderLists { get; set; }
         public virtual DbSet<HiredCandidate> HiredCandidates { get; set; }
         public virtual DbSet<industry> industries { get; set; }
@@ -61,7 +60,6 @@ namespace NewLetter.Models
         public virtual DbSet<qenInterviewSchedule> qenInterviewSchedules { get; set; }
         public virtual DbSet<qenMialSendInterested> qenMialSendInteresteds { get; set; }
         public virtual DbSet<qenReference> qenReferences { get; set; }
-        public virtual DbSet<qenResume> qenResumes { get; set; }
         public virtual DbSet<qenSecondary> qenSecondaries { get; set; }
         public virtual DbSet<qenSkill> qenSkills { get; set; }
         public virtual DbSet<role> roles { get; set; }
@@ -539,6 +537,24 @@ namespace NewLetter.Models
                 new ObjectParameter("companyID", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_EmployerDashborad_Result>("sp_EmployerDashborad", companyIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_AvailableSlotsForCandidate_Result> sp_AvailableSlotsForCandidate(Nullable<System.DateTime> dt, Nullable<long> jobID)
+        {
+            var dtParameter = dt.HasValue ?
+                new ObjectParameter("dt", dt) :
+                new ObjectParameter("dt", typeof(System.DateTime));
+    
+            var jobIDParameter = jobID.HasValue ?
+                new ObjectParameter("jobID", jobID) :
+                new ObjectParameter("jobID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_AvailableSlotsForCandidate_Result>("sp_AvailableSlotsForCandidate", dtParameter, jobIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_sendNewsletter_Result> sp_sendNewsletter()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_sendNewsletter_Result>("sp_sendNewsletter");
         }
     }
 }

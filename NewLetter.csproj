@@ -415,9 +415,6 @@
     <Compile Include="Models\EmploymentType.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\finalQendidateList.cs">
-      <DependentUpon>orionDBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\genderList.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
@@ -504,9 +501,6 @@
     <Compile Include="Models\qenReference.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\qenResume.cs">
-      <DependentUpon>orionDBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\qenSecondary.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
@@ -536,6 +530,9 @@
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_AdvertisementList_Result.cs">
+      <DependentUpon>orionDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_AvailableSlotsForCandidate_Result.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_candidateStatusTypeList_Result.cs">
@@ -587,6 +584,9 @@
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_selectEducationTypeList_Result.cs">
+      <DependentUpon>orionDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_sendNewsletter_Result.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_skillsList_Result.cs">

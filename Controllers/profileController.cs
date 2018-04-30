@@ -75,7 +75,7 @@ namespace NewLetter.Controllers
                 }
 
                 qendidateList data = null;
-                if (ModelState.IsValid)
+                //if (ModelState.IsValid)
                 {
                     data = db.qendidateLists.Where(ex => ex.qenID == model.qenID).FirstOrDefault();
                     if (data != null)
@@ -1120,7 +1120,10 @@ namespace NewLetter.Controllers
         {
             long qenID = Convert.ToInt64(qenID_);
             //eventName : 1 for view, 2 for contact, 3 for download
-            UpdateProfilePerformance(qenID, 3);
+            if (Convert.ToInt16(BaseUtil.GetSessionValue(AdminInfo.role_id.ToString())) == 2)
+            {
+                UpdateProfilePerformance(qenID, 3);
+            }
             using (MemoryStream stream = new System.IO.MemoryStream())
             {
                 HtmlToPdf converter = new HtmlToPdf();

@@ -21,8 +21,8 @@ namespace NewLetter.Models
         public string Department { get; set; }
         public string Comment { get; set; }
         public int Candidate_status { get; set; }
-        public int ExpectedSalaryMonthly { get; set; }
-        public int ExpectedSalaryGross { get; set; }
+        public long ExpectedSalaryMonthly { get; set; }
+        public long ExpectedSalaryGross { get; set; }
     
         public virtual Candidate_status Candidate_status1 { get; set; }
         public virtual EmployerDetail EmployerDetail { get; set; }

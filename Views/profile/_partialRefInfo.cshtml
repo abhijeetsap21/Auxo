@@ -184,7 +184,10 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if (data == "ok") {
-                    alert("Mail sent.");
+                    bootbox.alert({
+                        title: "Confirmation !",
+                        message: 'Mail Sent'
+                    })
                 }
                 else { alert("There is some technical problem to send mail."); }
             }
@@ -205,7 +208,10 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if (data == "ok") {
-                    alert("Mail sent.");
+                    bootbox.alert({
+                        title: "Confirmation !",
+                        message: 'Mail Sent'
+                    })
                 }
                 else { alert("There is some technical problem to send mail."); }
             }

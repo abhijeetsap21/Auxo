@@ -687,8 +687,8 @@ namespace NewLetter.Controllers
                 if (commentID != null)
                 {
                     var InterViewerComment = db.InterViewerComments.Where(e => e.commentID == commentID).Select(e => new { e.ExpectedSalaryGross, e.ExpectedSalaryMonthly, e.Department }).FirstOrDefault();
-                    oHiredCandidate.ExpectedSalaryGross = InterViewerComment.ExpectedSalaryMonthly;
-                    oHiredCandidate.ExpectedSalaryMonthly = InterViewerComment.ExpectedSalaryGross;
+                    oHiredCandidate.ExpectedSalaryGross = Convert.ToInt16(InterViewerComment.ExpectedSalaryMonthly);
+                    oHiredCandidate.ExpectedSalaryMonthly = Convert.ToInt16(InterViewerComment.ExpectedSalaryGross);
                     oHiredCandidate.Designtion = InterViewerComment.Department;
                     oHiredCandidate.Designtion = InterViewerComment.Department;
                 }

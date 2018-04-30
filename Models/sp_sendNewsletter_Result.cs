@@ -10,15 +10,11 @@
 namespace NewLetter.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class qenResume
+    public partial class sp_sendNewsletter_Result
     {
+        public Nullable<long> total { get; set; }
+        public string qenEmail { get; set; }
         public long qenID { get; set; }
-        public int qenResumeID { get; set; }
-        public string qenResumeName { get; set; }
-        public string qenResume1 { get; set; }
-    
-        public virtual qendidateList qendidateList { get; set; }
     }
 }

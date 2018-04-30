@@ -89,7 +89,7 @@
             <PropertyRef Name="currencyID" />
           </Key>
           <Property Name="currencyID" Type="int" Nullable="false" />
-          <Property Name="currency" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="currency" Type="nvarchar" MaxLength="80" Nullable="false" />
           <Property Name="dataIsCreated" Type="datetime" Nullable="false" />
           <Property Name="dataIsUpdated" Type="datetime" Nullable="false" />
           <Property Name="isActive" Type="bit" Nullable="false" />
@@ -153,25 +153,12 @@
           <Property Name="createdBy" Type="bigint" Nullable="false" />
           <Property Name="modifiedBy" Type="bigint" Nullable="false" />
         </EntityType>
-        <EntityType Name="finalQendidateList">
-          <Key>
-            <PropertyRef Name="finalCandidateID" />
-          </Key>
-          <Property Name="finalCandidateID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="jobID" Type="bigint" Nullable="false" />
-          <Property Name="qenID" Type="bigint" Nullable="false" />
-          <Property Name="candidateSalary" Type="nvarchar" MaxLength="50" />
-          <Property Name="candidatePosition" Type="nvarchar" MaxLength="200" />
-          <Property Name="expectedJoiningDate" Type="datetime" />
-          <Property Name="dataIsCreated" Type="datetime" />
-          <Property Name="dataIsUpdated" Type="datetime" />
-        </EntityType>
         <EntityType Name="genderList">
           <Key>
             <PropertyRef Name="genderID" />
           </Key>
           <Property Name="genderID" Type="int" Nullable="false" />
-          <Property Name="genderName" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="genderName" Type="varchar" MaxLength="19" Nullable="false" />
           <Property Name="isSelected" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="HiredCandidate">
@@ -212,8 +199,8 @@
           <Property Name="Department" Type="varchar" MaxLength="100" />
           <Property Name="Comment" Type="text" Nullable="false" />
           <Property Name="Candidate_status" Type="int" Nullable="false" />
-          <Property Name="ExpectedSalaryMonthly" Type="int" Nullable="false" />
-          <Property Name="ExpectedSalaryGross" Type="int" Nullable="false" />
+          <Property Name="ExpectedSalaryMonthly" Type="bigint" Nullable="false" />
+          <Property Name="ExpectedSalaryGross" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="jobDetails">
           <Key>
@@ -371,6 +358,7 @@
           <Property Name="zipCode" Type="varchar" MaxLength="6" />
           <Property Name="CareerHighlight" Type="text" />
           <Property Name="lastLoginTime" Type="datetime" />
+          <Property Name="uploadFromExternalResource" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="qendidateListInJob">
           <Key>
@@ -545,16 +533,6 @@
           <Property Name="dataIsUpdated" Type="datetime" />
           <Property Name="isDelete" Type="bit" Nullable="false" />
           <Property Name="isCheckComplete" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="qenResume">
-          <Key>
-            <PropertyRef Name="qenID" />
-            <PropertyRef Name="qenResumeID" />
-          </Key>
-          <Property Name="qenID" Type="bigint" Nullable="false" />
-          <Property Name="qenResumeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="qenResumeName" Type="nvarchar" MaxLength="40" />
-          <Property Name="qenResume" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="qenSecondary">
           <Key>
@@ -777,18 +755,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__qenResume__qenID__145C0A3F">
-          <End Role="qendidateList" Type="Self.qendidateList" Multiplicity="1" />
-          <End Role="qenResume" Type="Self.qenResume" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="qendidateList">
-              <PropertyRef Name="qenID" />
-            </Principal>
-            <Dependent Role="qenResume">
-              <PropertyRef Name="qenID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__qenSecond__qenID__15502E78">
           <End Role="qendidateList" Type="Self.qendidateList" Multiplicity="1" />
           <End Role="qenSecondary" Type="Self.qenSecondary" Multiplicity="*" />
@@ -990,18 +956,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Principal>
             <Dependent Role="EmploymentType">
               <PropertyRef Name="modifiedBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_finalQendidateList_qendidateList">
-          <End Role="qendidateList" Type="Self.qendidateList" Multiplicity="1" />
-          <End Role="finalQendidateList" Type="Self.finalQendidateList" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="qendidateList">
-              <PropertyRef Name="qenID" />
-            </Principal>
-            <Dependent Role="finalQendidateList">
-              <PropertyRef Name="qenID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1740,6 +1694,10 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Parameter Name="version" Type="int" Mode="In" />
           <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
         </Function>
+        <Function Name="sp_AvailableSlotsForCandidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dt" Type="datetime" Mode="In" />
+          <Parameter Name="jobID" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="sp_candidateSearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="jobID" Type="bigint" Mode="In" />
           <Parameter Name="modifiedDate" Type="date" Mode="In" />
@@ -1853,6 +1811,7 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Parameter Name="companyID" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_selectEducationTypeList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_sendNewsletter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_skillsetFromWordArrayTointgerArray" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="skillSet" Type="varchar(max)" Mode="In" />
         </Function>
@@ -1878,7 +1837,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <EntitySet Name="EmployerDetails" EntityType="Self.EmployerDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="employerType" EntityType="Self.employerType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmploymentType" EntityType="Self.EmploymentType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="finalQendidateList" EntityType="Self.finalQendidateList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="genderList" EntityType="Self.genderList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HiredCandidate" EntityType="Self.HiredCandidate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="industry" EntityType="Self.industry" Schema="dbo" store:Type="Tables" />
@@ -1902,7 +1860,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <EntitySet Name="qenInterviewSchedule" EntityType="Self.qenInterviewSchedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="qenMialSendInterested" EntityType="Self.qenMialSendInterested" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="qenReference" EntityType="Self.qenReference" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="qenResume" EntityType="Self.qenResume" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="qenSecondary" EntityType="Self.qenSecondary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="qenSkills" EntityType="Self.qenSkills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
@@ -1968,10 +1925,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <AssociationSet Name="FK__qenRefere__qenID__1367E606" Association="Self.FK__qenRefere__qenID__1367E606">
             <End Role="qendidateList" EntitySet="qendidateList" />
             <End Role="qenReference" EntitySet="qenReference" />
-          </AssociationSet>
-          <AssociationSet Name="FK__qenResume__qenID__145C0A3F" Association="Self.FK__qenResume__qenID__145C0A3F">
-            <End Role="qendidateList" EntitySet="qendidateList" />
-            <End Role="qenResume" EntitySet="qenResume" />
           </AssociationSet>
           <AssociationSet Name="FK__qenSecond__qenID__15502E78" Association="Self.FK__qenSecond__qenID__15502E78">
             <End Role="qendidateList" EntitySet="qendidateList" />
@@ -2040,10 +1993,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <AssociationSet Name="FK_EmploymentType_EmployerDetails1" Association="Self.FK_EmploymentType_EmployerDetails1">
             <End Role="EmployerDetails" EntitySet="EmployerDetails" />
             <End Role="EmploymentType" EntitySet="EmploymentType" />
-          </AssociationSet>
-          <AssociationSet Name="FK_finalQendidateList_qendidateList" Association="Self.FK_finalQendidateList_qendidateList">
-            <End Role="qendidateList" EntitySet="qendidateList" />
-            <End Role="finalQendidateList" EntitySet="finalQendidateList" />
           </AssociationSet>
           <AssociationSet Name="FK_HiredCandidate_EmployerDetails" Association="Self.FK_HiredCandidate_EmployerDetails">
             <End Role="EmployerDetails" EntitySet="EmployerDetails" />
@@ -2432,7 +2381,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <EntitySet Name="EmployerDetails" EntityType="oriondbModel.EmployerDetail" />
           <EntitySet Name="employerTypes" EntityType="oriondbModel.employerType" />
           <EntitySet Name="EmploymentTypes" EntityType="oriondbModel.EmploymentType" />
-          <EntitySet Name="finalQendidateLists" EntityType="oriondbModel.finalQendidateList" />
           <EntitySet Name="genderLists" EntityType="oriondbModel.genderList" />
           <EntitySet Name="HiredCandidates" EntityType="oriondbModel.HiredCandidate" />
           <EntitySet Name="industries" EntityType="oriondbModel.industry" />
@@ -2456,7 +2404,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <EntitySet Name="qenInterviewSchedules" EntityType="oriondbModel.qenInterviewSchedule" />
           <EntitySet Name="qenMialSendInteresteds" EntityType="oriondbModel.qenMialSendInterested" />
           <EntitySet Name="qenReferences" EntityType="oriondbModel.qenReference" />
-          <EntitySet Name="qenResumes" EntityType="oriondbModel.qenResume" />
           <EntitySet Name="qenSecondaries" EntityType="oriondbModel.qenSecondary" />
           <EntitySet Name="qenSkills" EntityType="oriondbModel.qenSkill" />
           <EntitySet Name="roles" EntityType="oriondbModel.role" />
@@ -2640,10 +2587,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             <End Role="EmploymentType" EntitySet="EmploymentTypes" />
             <End Role="jobDetail" EntitySet="jobDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_finalQendidateList_qendidateList" Association="oriondbModel.FK_finalQendidateList_qendidateList">
-            <End Role="qendidateList" EntitySet="qendidateLists" />
-            <End Role="finalQendidateList" EntitySet="finalQendidateLists" />
-          </AssociationSet>
           <AssociationSet Name="FK_qendidateList_genderList" Association="oriondbModel.FK_qendidateList_genderList">
             <End Role="genderList" EntitySet="genderLists" />
             <End Role="qendidateList" EntitySet="qendidateLists" />
@@ -2740,10 +2683,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             <End Role="qendidateList" EntitySet="qendidateLists" />
             <End Role="qenReference" EntitySet="qenReferences" />
           </AssociationSet>
-          <AssociationSet Name="FK__qenResume__qenID__145C0A3F" Association="oriondbModel.FK__qenResume__qenID__145C0A3F">
-            <End Role="qendidateList" EntitySet="qendidateLists" />
-            <End Role="qenResume" EntitySet="qenResumes" />
-          </AssociationSet>
           <AssociationSet Name="FK__qenSecond__qenID__15502E78" Association="oriondbModel.FK__qenSecond__qenID__15502E78">
             <End Role="qendidateList" EntitySet="qendidateLists" />
             <End Role="qenSecondary" EntitySet="qenSecondaries" />
@@ -2800,6 +2739,11 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             <End Role="slot" EntitySet="slots" />
             <End Role="slotTempBlocked" EntitySet="slotTempBlockeds" />
           </AssociationSet>
+          <FunctionImport Name="sp_AvailableSlotsForCandidate" ReturnType="Collection(oriondbModel.sp_AvailableSlotsForCandidate_Result)">
+            <Parameter Name="dt" Mode="In" Type="DateTime" />
+            <Parameter Name="jobID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="sp_sendNewsletter" ReturnType="Collection(oriondbModel.sp_sendNewsletter_Result)" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -3153,7 +3097,7 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             <PropertyRef Name="currencyID" />
           </Key>
           <Property Name="currencyID" Type="Int32" Nullable="false" />
-          <Property Name="currency1" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="currency1" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
           <Property Name="dataIsCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="dataIsUpdated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="isActive" Type="Boolean" Nullable="false" />
@@ -3261,26 +3205,12 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <NavigationProperty Name="EmployerDetail1" Relationship="oriondbModel.FK_EmploymentType_EmployerDetails1" FromRole="EmploymentType" ToRole="EmployerDetail" />
           <NavigationProperty Name="jobDetails" Relationship="oriondbModel.FK_jobDetails_EmploymentType" FromRole="EmploymentType" ToRole="jobDetail" />
         </EntityType>
-        <EntityType Name="finalQendidateList">
-          <Key>
-            <PropertyRef Name="finalCandidateID" />
-          </Key>
-          <Property Name="finalCandidateID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="jobID" Type="Int64" Nullable="false" />
-          <Property Name="qenID" Type="Int64" Nullable="false" />
-          <Property Name="candidateSalary" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="candidatePosition" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="expectedJoiningDate" Type="DateTime" Precision="3" />
-          <Property Name="dataIsCreated" Type="DateTime" Precision="3" />
-          <Property Name="dataIsUpdated" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="qendidateList" Relationship="oriondbModel.FK_finalQendidateList_qendidateList" FromRole="finalQendidateList" ToRole="qendidateList" />
-        </EntityType>
         <EntityType Name="genderList">
           <Key>
             <PropertyRef Name="genderID" />
           </Key>
           <Property Name="genderID" Type="Int32" Nullable="false" />
-          <Property Name="genderName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="genderName" Type="String" Nullable="false" MaxLength="19" FixedLength="false" Unicode="false" />
           <Property Name="isSelected" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="qendidateLists" Relationship="oriondbModel.FK_qendidateList_genderList" FromRole="genderList" ToRole="qendidateList" />
         </EntityType>
@@ -3329,8 +3259,8 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Name="Department" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Candidate_status" Type="Int32" Nullable="false" />
-          <Property Name="ExpectedSalaryMonthly" Type="Int32" Nullable="false" />
-          <Property Name="ExpectedSalaryGross" Type="Int32" Nullable="false" />
+          <Property Name="ExpectedSalaryMonthly" Type="Int64" Nullable="false" />
+          <Property Name="ExpectedSalaryGross" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Candidate_status1" Relationship="oriondbModel.FK_InterViewerComment_Candidate_status" FromRole="InterViewerComment" ToRole="Candidate_status" />
           <NavigationProperty Name="EmployerDetail" Relationship="oriondbModel.FK_InterViewerComment_EmployerDetails" FromRole="InterViewerComment" ToRole="EmployerDetail" />
           <NavigationProperty Name="jobDetail" Relationship="oriondbModel.FK_InterViewerComment_jobDetails" FromRole="InterViewerComment" ToRole="jobDetail" />
@@ -3522,7 +3452,7 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Name="zipCode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Name="CareerHighlight" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="lastLoginTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="finalQendidateLists" Relationship="oriondbModel.FK_finalQendidateList_qendidateList" FromRole="qendidateList" ToRole="finalQendidateList" />
+          <Property Name="uploadFromExternalResource" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="genderList" Relationship="oriondbModel.FK_qendidateList_genderList" FromRole="qendidateList" ToRole="genderList" />
           <NavigationProperty Name="HiredCandidates" Relationship="oriondbModel.FK_HiredCandidate_qendidateList" FromRole="qendidateList" ToRole="HiredCandidate" />
           <NavigationProperty Name="InterViewerComments" Relationship="oriondbModel.FK_InterViewerComment_qendidateList" FromRole="qendidateList" ToRole="InterViewerComment" />
@@ -3534,7 +3464,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <NavigationProperty Name="qendidatePHDs" Relationship="oriondbModel.FK__qendidate__qenID__286302EC" FromRole="qendidateList" ToRole="qendidatePHD" />
           <NavigationProperty Name="qenHigherSecondaries" Relationship="oriondbModel.FK__qenHigher__qenID__1273C1CD" FromRole="qendidateList" ToRole="qenHigherSecondary" />
           <NavigationProperty Name="qenReferences" Relationship="oriondbModel.FK__qenRefere__qenID__1367E606" FromRole="qendidateList" ToRole="qenReference" />
-          <NavigationProperty Name="qenResumes" Relationship="oriondbModel.FK__qenResume__qenID__145C0A3F" FromRole="qendidateList" ToRole="qenResume" />
           <NavigationProperty Name="qenSecondaries" Relationship="oriondbModel.FK__qenSecond__qenID__15502E78" FromRole="qendidateList" ToRole="qenSecondary" />
           <NavigationProperty Name="qendidateListInJobs" Relationship="oriondbModel.FK_qendidateListInJob_qendidateList" FromRole="qendidateList" ToRole="qendidateListInJob" />
           <NavigationProperty Name="qendidateProfileSharedWiths" Relationship="oriondbModel.FK_qendidateProfileSharedWith_qendidateList" FromRole="qendidateList" ToRole="qendidateProfileSharedWith" />
@@ -3736,17 +3665,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Name="isDelete" Type="Boolean" Nullable="false" />
           <Property Name="isCheckComplete" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="qendidateList" Relationship="oriondbModel.FK__qenRefere__qenID__1367E606" FromRole="qenReference" ToRole="qendidateList" />
-        </EntityType>
-        <EntityType Name="qenResume">
-          <Key>
-            <PropertyRef Name="qenID" />
-            <PropertyRef Name="qenResumeID" />
-          </Key>
-          <Property Name="qenID" Type="Int64" Nullable="false" />
-          <Property Name="qenResumeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="qenResumeName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="qenResume1" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="qendidateList" Relationship="oriondbModel.FK__qenResume__qenID__145C0A3F" FromRole="qenResume" ToRole="qendidateList" />
         </EntityType>
         <EntityType Name="qenSecondary">
           <Key>
@@ -4447,18 +4365,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_finalQendidateList_qendidateList">
-          <End Type="oriondbModel.qendidateList" Role="qendidateList" Multiplicity="1" />
-          <End Type="oriondbModel.finalQendidateList" Role="finalQendidateList" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="qendidateList">
-              <PropertyRef Name="qenID" />
-            </Principal>
-            <Dependent Role="finalQendidateList">
-              <PropertyRef Name="qenID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_qendidateList_genderList">
           <End Type="oriondbModel.genderList" Role="genderList" Multiplicity="0..1" />
           <End Type="oriondbModel.qendidateList" Role="qendidateList" Multiplicity="*" />
@@ -4747,18 +4653,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__qenResume__qenID__145C0A3F">
-          <End Type="oriondbModel.qendidateList" Role="qendidateList" Multiplicity="1" />
-          <End Type="oriondbModel.qenResume" Role="qenResume" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="qendidateList">
-              <PropertyRef Name="qenID" />
-            </Principal>
-            <Dependent Role="qenResume">
-              <PropertyRef Name="qenID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__qenSecond__qenID__15502E78">
           <End Type="oriondbModel.qendidateList" Role="qendidateList" Multiplicity="1" />
           <End Type="oriondbModel.qenSecondary" Role="qenSecondary" Multiplicity="*" />
@@ -4927,6 +4821,18 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="sp_AvailableSlotsForCandidate_Result">
+          <Property Type="Int32" Name="slotID" Nullable="false" />
+          <Property Type="String" Name="slotTime" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="blocked" Nullable="false" MaxLength="9" />
+          <Property Type="Int64" Name="qenID" Nullable="true" />
+          <Property Type="Int64" Name="jobID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_sendNewsletter_Result">
+          <Property Type="Int64" Name="total" Nullable="true" />
+          <Property Type="String" Name="qenEmail" Nullable="true" MaxLength="320" />
+          <Property Type="Int64" Name="qenID" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5430,20 +5336,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="finalQendidateLists">
-            <EntityTypeMapping TypeName="oriondbModel.finalQendidateList">
-              <MappingFragment StoreEntitySet="finalQendidateList">
-                <ScalarProperty Name="dataIsUpdated" ColumnName="dataIsUpdated" />
-                <ScalarProperty Name="dataIsCreated" ColumnName="dataIsCreated" />
-                <ScalarProperty Name="expectedJoiningDate" ColumnName="expectedJoiningDate" />
-                <ScalarProperty Name="candidatePosition" ColumnName="candidatePosition" />
-                <ScalarProperty Name="candidateSalary" ColumnName="candidateSalary" />
-                <ScalarProperty Name="qenID" ColumnName="qenID" />
-                <ScalarProperty Name="jobID" ColumnName="jobID" />
-                <ScalarProperty Name="finalCandidateID" ColumnName="finalCandidateID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="genderLists">
             <EntityTypeMapping TypeName="oriondbModel.genderList">
               <MappingFragment StoreEntitySet="genderList">
@@ -5628,6 +5520,7 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <EntitySetMapping Name="qendidateLists">
             <EntityTypeMapping TypeName="oriondbModel.qendidateList">
               <MappingFragment StoreEntitySet="qendidateList">
+                <ScalarProperty Name="uploadFromExternalResource" ColumnName="uploadFromExternalResource" />
                 <ScalarProperty Name="lastLoginTime" ColumnName="lastLoginTime" />
                 <ScalarProperty Name="CareerHighlight" ColumnName="CareerHighlight" />
                 <ScalarProperty Name="zipCode" ColumnName="zipCode" />
@@ -5846,16 +5739,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="qenResumes">
-            <EntityTypeMapping TypeName="oriondbModel.qenResume">
-              <MappingFragment StoreEntitySet="qenResume">
-                <ScalarProperty Name="qenResume1" ColumnName="qenResume" />
-                <ScalarProperty Name="qenResumeName" ColumnName="qenResumeName" />
-                <ScalarProperty Name="qenResumeID" ColumnName="qenResumeID" />
-                <ScalarProperty Name="qenID" ColumnName="qenID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="qenSecondaries">
             <EntityTypeMapping TypeName="oriondbModel.qenSecondary">
               <MappingFragment StoreEntitySet="qenSecondary">
@@ -6022,6 +5905,26 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_AvailableSlotsForCandidate" FunctionName="oriondbModel.Store.sp_AvailableSlotsForCandidate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="oriondbModel.sp_AvailableSlotsForCandidate_Result">
+                <ScalarProperty Name="slotID" ColumnName="slotID" />
+                <ScalarProperty Name="slotTime" ColumnName="slotTime" />
+                <ScalarProperty Name="blocked" ColumnName="blocked" />
+                <ScalarProperty Name="qenID" ColumnName="qenID" />
+                <ScalarProperty Name="jobID" ColumnName="jobID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_sendNewsletter" FunctionName="oriondbModel.Store.sp_sendNewsletter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="oriondbModel.sp_sendNewsletter_Result">
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="qenEmail" ColumnName="qenEmail" />
+                <ScalarProperty Name="qenID" ColumnName="qenID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
