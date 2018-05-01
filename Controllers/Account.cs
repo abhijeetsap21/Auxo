@@ -19,6 +19,7 @@ using Facebook;
 using System.Web.Security;
 using System.IO;
 using System.Web.Configuration;
+using HtmlAgilityPack;
 
 namespace NewLetter.Controllers
 {
@@ -344,8 +345,10 @@ namespace NewLetter.Controllers
 
                 jsonSerializer = new JavaScriptSerializer();
                 LinkedINResVM linkedINResVM = jsonSerializer.Deserialize<LinkedINResVM>(content);
+               
                 //linkedINResVM.emailaddress= content.
-                //return RedirectToAction("login");
+                //return RedirectToAction("login");               
+
                 var result = BaseUtil.checkSocialProfile(linkedINResVM.emailaddress);
                 if (result == "NotExists")
                 {
@@ -361,7 +364,7 @@ namespace NewLetter.Controllers
                     list.isActive = true;
                     list.password = baseClass.GetRandomPasswordString(10);
                     list.qenImage = linkedINResVM.pictureurl;
-                    list.qenPhone = "0000000000";
+                    list.qenPhone = "+919999999999";
                     list.qenAddress = "some address";
                     list.qenAddress = null;
                     list.socialCheck = true;
