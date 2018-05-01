@@ -50,7 +50,7 @@
         form = jqOld("#msform").serializeObject();
         debugger
         jqOld.ajax({
-            url: 'https://newsletter.qendidate.com/stagingns/jobDetails/Jobsearch',
+            url: '/jobDetails/Jobsearch',
             type: 'POST',
             data: form,
             success: function (data) {
@@ -82,7 +82,7 @@
         debugger
         jqOld.ajax({
 
-            url: 'http://newsletter.qendidate.com/stagingns/jobDetails/LoadMoreJobs',
+            url: '/jobDetails/LoadMoreJobs',
             type: 'POST',
             data: { 'jobtitle': jobtitle, 'city': city, 'employmentType': employmentType, 'ddl_update': ddl_update, 'currentPageIndex': id },
             success: function (data) {
