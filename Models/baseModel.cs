@@ -784,22 +784,7 @@ namespace NewLetter.Models
         public static string sendEmailer(string ToEmail, string Mail_Subject, string HTML_Body, string attachment)
         {
             string result = "no";
-            //var apiKey = Environment.GetEnvironmentVariable("Auxo_SendGrid", EnvironmentVariableTarget.User);
-            //var client = new SendGridClient(apiKey);
-            //var from = new EmailAddress("info@qendidate.com", "Qendidate");
-            //var to = new EmailAddress(ToEmail);
-            //var plainTextContent = "";
-            //var msg = MailHelper.CreateSingleEmail(from, to, Mail_Subject, plainTextContent, HTML_Body);
-            //try { var response = client.SendEmailAsync(msg);
-            //    result= "ok";
-            //}
-            //catch(Exception e)
-            //{
-            //    result = "no";
-            //}
-            //HTML_Body = null;
-
-            // 30 /4/2018 New SMTP details 
+            
             MailMessage mail = new MailMessage();
             mail.To.Add(ToEmail);
             mail.From = new MailAddress("info@qendidate.com");
@@ -812,7 +797,7 @@ namespace NewLetter.Models
             smtp.Port = 587;
             smtp.UseDefaultCredentials = false;
             smtp.Credentials = new System.Net.NetworkCredential(WebConfigurationManager.AppSettings["SMTP_EMAIL_ADDRESS"], WebConfigurationManager.AppSettings["SMTP_EMAIL_PASSWORD"]); // Using web config app settingkeys 
-            smtp.EnableSsl = true;
+            smtp.EnableSsl = false;
             try
             {
                 smtp.Send(mail);

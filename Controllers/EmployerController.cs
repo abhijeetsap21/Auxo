@@ -47,14 +47,14 @@ namespace NewLetter.Controllers
 
         public ActionResult categoryC1(int? jobID)
         {
-            string q = "select '0',qenName,qenEmail,qendidateList.qenID,case when qenMialSendInterested.mailReceivedjobChancgeInterested is null then '0'  else mailReceivedjobChancgeInterested end as mailReceivedjobChancgeInterested  from qendidateListInJob left outer join qendidateList on qendidateListInJob.qenID = qendidateList.qenID left outer join qenMialSendInterested on qendidateListInJob.qenID =qenMialSendInterested.qenID where qendidateListInJob.jobID = '" + jobID + "' AND category = 1";
+            string q = "select '0',qenName,qenEmail,qendidateList.qenID,case when qenMialSendInterested.mailReceivedjobChancgeInterested is null then '0'  else mailReceivedjobChancgeInterested end as mailReceivedjobChancgeInterested  from qendidateListInJob left outer join qendidateList on qendidateListInJob.qenID = qendidateList.qenID left outer join qenMialSendInterested on qendidateListInJob.qenID =qenMialSendInterested.qenID  and qendidateListInJob.jobID =qenMialSendInterested.jobID where qendidateListInJob.jobID = '" + jobID + "' AND category = 1";
             var qenList = db.Database.SqlQuery<mailReceivedInterested>(q).ToList();
             return PartialView("_partialCategory1", qenList);
         }
 
         public ActionResult categoryC2(int? jobID)
         {
-            string q = "select '0',qenName,qenEmail,qendidateList.qenID,case when qenMialSendInterested.mailReceivedjobChancgeInterested is null then '0'  else mailReceivedjobChancgeInterested end as mailReceivedjobChancgeInterested  from qendidateListInJob left outer join qendidateList on qendidateListInJob.qenID = qendidateList.qenID left outer join qenMialSendInterested on qendidateListInJob.qenID =qenMialSendInterested.qenID  where qendidateListInJob.jobID = '" + jobID + "' AND category = 2";
+            string q = "select '0',qenName,qenEmail,qendidateList.qenID,case when qenMialSendInterested.mailReceivedjobChancgeInterested is null then '0'  else mailReceivedjobChancgeInterested end as mailReceivedjobChancgeInterested  from qendidateListInJob left outer join qendidateList on qendidateListInJob.qenID = qendidateList.qenID left outer join qenMialSendInterested on qendidateListInJob.qenID =qenMialSendInterested.qenID   and qendidateListInJob.jobID =qenMialSendInterested.jobID where qendidateListInJob.jobID = '" + jobID + "' AND category = 2";
             var qenList = db.Database.SqlQuery<mailReceivedInterested>(q).ToList();
             return PartialView("_partialCategory2", qenList);
         }
@@ -194,7 +194,7 @@ namespace NewLetter.Controllers
         }
         public ActionResult categoryC3(int? jobID)
         {
-            string q = "select '0',qenName,qenEmail,qendidateList.qenID,case when qenMialSendInterested.mailReceivedjobChancgeInterested is null then '0'  else mailReceivedjobChancgeInterested end as mailReceivedjobChancgeInterested  from qendidateListInJob left outer join qendidateList on qendidateListInJob.qenID = qendidateList.qenID left outer join qenMialSendInterested on qendidateListInJob.qenID =qenMialSendInterested.qenID where qendidateListInJob.jobID = '" + jobID + "' AND category = 3";
+            string q = "select '0',qenName,qenEmail,qendidateList.qenID,case when qenMialSendInterested.mailReceivedjobChancgeInterested is null then '0'  else mailReceivedjobChancgeInterested end as mailReceivedjobChancgeInterested  from qendidateListInJob left outer join qendidateList on qendidateListInJob.qenID = qendidateList.qenID left outer join qenMialSendInterested on qendidateListInJob.qenID =qenMialSendInterested.qenID  and qendidateListInJob.jobID =qenMialSendInterested.jobID where qendidateListInJob.jobID = '" + jobID + "' AND category = 3";
             var qenList = db.Database.SqlQuery<mailReceivedInterested>(q).ToList();
             return PartialView("_partialCategory3", qenList);
         }
