@@ -714,29 +714,46 @@ namespace NewLetter.Models
         public static string sendEmailer(string ToEmail, string Mail_Subject, string HTML_Body, string attachment)
         {
             string result = "no";
-            
-            MailMessage mail = new MailMessage();
-            mail.To.Add(ToEmail);
-            mail.From = new MailAddress("info@qendidate.com");
-            mail.Subject = Mail_Subject;
-            string Body = HTML_Body;
-            mail.Body = Body;
-            mail.IsBodyHtml = true;
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = "secure.emailsrvr.com";
-            smtp.Port = 587;
-            smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new System.Net.NetworkCredential(WebConfigurationManager.AppSettings["SMTP_EMAIL_ADDRESS"], WebConfigurationManager.AppSettings["SMTP_EMAIL_PASSWORD"]); // Using web config app settingkeys 
-            smtp.EnableSsl = false;
+            var apiKey = db.sendGridDetails.Select(e => e.APIKEY).FirstOrDefault();
+            var client = new SendGridClient(apiKey.ToString());
+            var from = new EmailAddress("info@qendidate.com", "Qendidate");
+            var subject = Mail_Subject;
+            var to = new EmailAddress(ToEmail);
+            var plainTextContent = "";
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, HTML_Body);
             try
             {
-                smtp.Send(mail);
-                return result = "ok";
+                var response = client.SendEmailAsync(msg);
+                result = "ok";
             }
             catch (Exception e)
             {
-
+                result = "no";
             }
+            HTML_Body = null;
+
+            //MailMessage mail = new MailMessage();
+            //mail.To.Add(ToEmail);
+            //mail.From = new MailAddress("info@qendidate.com");
+            //mail.Subject = Mail_Subject;
+            //string Body = HTML_Body;
+            //mail.Body = Body;
+            //mail.IsBodyHtml = true;
+            //SmtpClient smtp = new SmtpClient();
+            //smtp.Host = "secure.emailsrvr.com";
+            //smtp.Port = 587;
+            //smtp.UseDefaultCredentials = false;
+            //smtp.Credentials = new System.Net.NetworkCredential(WebConfigurationManager.AppSettings["SMTP_EMAIL_ADDRESS"], WebConfigurationManager.AppSettings["SMTP_EMAIL_PASSWORD"]); // Using web config app settingkeys 
+            //smtp.EnableSsl = false;
+            //try
+            //{
+            //    smtp.Send(mail);
+            //    return result = "ok";
+            //}
+            //catch (Exception e)
+            //{
+
+            //}
 
             return result;
         }

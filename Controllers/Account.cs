@@ -19,6 +19,7 @@ using Facebook;
 using System.Web.Security;
 using System.IO;
 using System.Web.Configuration;
+using HtmlAgilityPack;
 
 namespace NewLetter.Controllers
 {
@@ -324,7 +325,7 @@ namespace NewLetter.Controllers
                 var request = new RestRequest(Method.POST);
                 request.AddParameter("grant_type", "authorization_code");
                 request.AddParameter("code", code);
-                request.AddParameter("redirect_uri", "http://localhost:51126/Account/linkdInReg");
+                request.AddParameter("redirect_uri", "http://spotaneedle.com//Account/linkdInReg");
                 request.AddParameter("client_id", "772sds0w0tvipg");
                 request.AddParameter("client_secret", "6F2xR3Sn93vR0VQX");
                 //request.AddParameter("scope", "r_emailaddress");
@@ -344,8 +345,10 @@ namespace NewLetter.Controllers
 
                 jsonSerializer = new JavaScriptSerializer();
                 LinkedINResVM linkedINResVM = jsonSerializer.Deserialize<LinkedINResVM>(content);
+               
                 //linkedINResVM.emailaddress= content.
-                //return RedirectToAction("login");
+                //return RedirectToAction("login");               
+
                 var result = BaseUtil.checkSocialProfile(linkedINResVM.emailaddress);
                 if (result == "NotExists")
                 {
@@ -361,7 +364,7 @@ namespace NewLetter.Controllers
                     list.isActive = true;
                     list.password = baseClass.GetRandomPasswordString(10);
                     list.qenImage = linkedINResVM.pictureurl;
-                    list.qenPhone = "0000000000";
+                    list.qenPhone = "+919999999999";
                     list.qenAddress = "some address";
                     list.qenAddress = null;
                     list.socialCheck = true;
@@ -428,7 +431,7 @@ namespace NewLetter.Controllers
         public ActionResult googleReg()
         {
             string provider = "google";
-            string returnUrl = "http://localhost:51126/Account/ExternalLoginCallback";
+            string returnUrl = "http://spotaneedle.com/Account/ExternalLoginCallback";
             return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
 
         }
