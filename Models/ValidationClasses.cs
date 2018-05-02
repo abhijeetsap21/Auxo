@@ -62,8 +62,7 @@ namespace NewLetter.Models
         public string jobTitle { get; set; }
 
         [AllowHtml]
-        [Display(Name = "Job Description")]
-        [StringLength(5000, MinimumLength = 10, ErrorMessage = "5000 charectar max")]
+        [Display(Name = "Job Description")]       
         [Required(ErrorMessage = "job description required")]
         public string jobDescription { get; set; }
 
@@ -351,8 +350,7 @@ namespace NewLetter.Models
         public string jobTitle { get; set; }
 
         [AllowHtml]
-        [Display(Name = "Job Description")]
-        [StringLength(5000, MinimumLength = 10, ErrorMessage = "5000 charectar max")]
+        [Display(Name = "Job Description")]      
         [Required(ErrorMessage = "job description required")]
         public string jobDescription { get; set; }
 
@@ -415,8 +413,7 @@ namespace NewLetter.Models
         [Required(ErrorMessage = "Company name required")]
         public string companyName { get; set; }
 
-        [AllowHtml]
-        [StringLength(500, MinimumLength = 3, ErrorMessage = "500 charectar max")]
+        [AllowHtml]        
         [Display(Name = "About Company")]
         [Required(ErrorMessage = "About company is required")]
         public string aboutCompany { get; set; }
