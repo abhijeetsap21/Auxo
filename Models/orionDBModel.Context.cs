@@ -71,6 +71,7 @@ namespace NewLetter.Models
         public virtual DbSet<slotTempBlocked> slotTempBlockeds { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<view_qenlist> view_qenlist { get; set; }
+        public virtual DbSet<sendGridDetail> sendGridDetails { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

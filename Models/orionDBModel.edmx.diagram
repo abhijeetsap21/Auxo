@@ -130,6 +130,7 @@
         <AssociationConnector Association="oriondbModel.FK_role_action_role" />
         <AssociationConnector Association="oriondbModel.FK_slotsBlocked_slots" />
         <AssociationConnector Association="oriondbModel.FK_slotTempBlocked_slots" />
+        <EntityTypeShape EntityType="oriondbModel.sendGridDetail" Width="1.5" PointX="0.75" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

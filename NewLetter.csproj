@@ -517,6 +517,9 @@
     <Compile Include="Models\salaryUnit.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sendGridDetail.cs">
+      <DependentUpon>orionDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\skill.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>

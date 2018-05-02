@@ -591,6 +591,14 @@
           <Property Name="createdBy" Type="bigint" />
           <Property Name="modifiedBy" Type="bigint" />
         </EntityType>
+        <EntityType Name="sendGridDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="project" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="APIKEY" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="skills">
           <Key>
             <PropertyRef Name="skillsID" />
@@ -1865,6 +1873,7 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="role_action" EntityType="Self.role_action" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="salaryUnit" EntityType="Self.salaryUnit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sendGridDetails" EntityType="Self.sendGridDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="skills" EntityType="Self.skills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="slots" EntityType="Self.slots" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="slotsBlocked" EntityType="Self.slotsBlocked" Schema="dbo" store:Type="Tables" />
@@ -2744,6 +2753,7 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             <Parameter Name="jobID" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="sp_sendNewsletter" ReturnType="Collection(oriondbModel.sp_sendNewsletter_Result)" />
+          <EntitySet Name="sendGridDetails" EntityType="oriondbModel.sendGridDetail" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -4833,6 +4843,14 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Type="String" Name="qenEmail" Nullable="true" MaxLength="320" />
           <Property Type="Int64" Name="qenID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="sendGridDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="project" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="APIKEY" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5925,6 +5943,15 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="sendGridDetails">
+            <EntityTypeMapping TypeName="oriondbModel.sendGridDetail">
+              <MappingFragment StoreEntitySet="sendGridDetails">
+                <ScalarProperty Name="APIKEY" ColumnName="APIKEY" />
+                <ScalarProperty Name="project" ColumnName="project" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
