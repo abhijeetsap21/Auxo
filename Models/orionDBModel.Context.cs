@@ -65,6 +65,7 @@ namespace NewLetter.Models
         public virtual DbSet<role> roles { get; set; }
         public virtual DbSet<role_action> role_action { get; set; }
         public virtual DbSet<salaryUnit> salaryUnits { get; set; }
+        public virtual DbSet<sendGridDetail> sendGridDetails { get; set; }
         public virtual DbSet<skill> skills { get; set; }
         public virtual DbSet<slot> slots { get; set; }
         public virtual DbSet<slotsBlocked> slotsBlockeds { get; set; }
@@ -555,6 +556,11 @@ namespace NewLetter.Models
         public virtual ObjectResult<sp_sendNewsletter_Result> sp_sendNewsletter()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_sendNewsletter_Result>("sp_sendNewsletter");
+        }
+    
+        public virtual int sp_QendidateTestSchedule_Insert_ExamMark()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_QendidateTestSchedule_Insert_ExamMark");
         }
     }
 }

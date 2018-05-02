@@ -517,6 +517,9 @@
     <Compile Include="Models\salaryUnit.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sendGridDetail.cs">
+      <DependentUpon>orionDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\skill.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
@@ -1047,6 +1050,7 @@
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Properties\PublishProfiles\ftp.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />

@@ -14,6 +14,7 @@ using Supremes;
 
 namespace NewLetter.Controllers
 {
+    [CustomErrorHandling]
     public class EmployerController : BaseClass
     {
         //

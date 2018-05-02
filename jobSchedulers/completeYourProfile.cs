@@ -7,9 +7,7 @@ using Quartz.Impl;
 using System.IO;
 using System.Data;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using NewLetter.Models;
 
@@ -26,8 +24,8 @@ namespace NewLetter.jobSchedulers
             var qendetails = db.qendidateLists.Where(l => l.IsReferenceCleared != true || l.dataIsUpdated >= updatbefore).ToList();
             foreach (var item in qendetails)
             {
-               // StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toCandidateCompleteYourProfile.html"));
-                StreamReader sr = new StreamReader(@"D:\\git\\Auxo\\Emailer\\toCandidateCompleteYourProfile.html");
+                StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toCandidateCompleteYourProfile.html"));
+               // StreamReader sr = new StreamReader(@"D:\\git\\Auxo\\Emailer\\toCandidateCompleteYourProfile.html");
                 string HTML_Body = sr.ReadToEnd();
                 string final_Html_Body = HTML_Body.Replace("#name", item.qenName).Replace("qenid",BaseUtil.encrypt(item.qenID.ToString()));
                 sr.Close();

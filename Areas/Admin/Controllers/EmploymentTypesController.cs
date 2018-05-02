@@ -11,6 +11,7 @@ using NewLetter.Areas.Admin.Models;
 
 namespace NewLetter.Areas.Admin.Controllers
 {
+    [CustomErrorHandling]
     public class EmploymentTypesController : BaseClass
     {
         private IUnitOfWork uow = null;

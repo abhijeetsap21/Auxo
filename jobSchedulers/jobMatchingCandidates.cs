@@ -25,7 +25,7 @@ namespace NewLetter.jobSchedulers
             int cout = 0;
             string rows;
             string rownew = "";
-            StreamReader sr = new StreamReader(@"D:\\Project\\abhijeet25_08_2017\\NewsLetter\\Emailer\\toCandidateRecomendedJob.html");
+            StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toCandidateRecomendedJob.html"));
             foreach (var qen in qenIDList)
             {
                 if (qenid == 0 || qenid != qen.qenid)
@@ -37,7 +37,7 @@ namespace NewLetter.jobSchedulers
                     {
                         var jobID_ = qenIDList.Where(e => e.qenid == qen.qenid && e.top10 == i).Select(e => new { e.jobID }).FirstOrDefault();
                         var jobTitle_ = qenIDList.Where(e => e.qenid == qen.qenid && e.top10 == i).Select(e => new { e.jobTitle }).FirstOrDefault();
-                        rows = MvcHtmlString.Create("<tr><td><a href='http://newsletter.qendidate.com/jobDetails/JobView?jobID='" + jobID_.jobID + "'>'" + i + "'.)'" + jobTitle_.jobTitle + "'</a></td></tr><br />").ToString();
+                        rows = MvcHtmlString.Create("<tr><td><a href='http://spotaneedle.com/jobDetails/JobView?jobID='" + jobID_.jobID + "'>'" + i + "'.)'" + jobTitle_.jobTitle + "'</a></td></tr><br />").ToString();
                         rownew = rows + rownew;
                         i++;
                     }

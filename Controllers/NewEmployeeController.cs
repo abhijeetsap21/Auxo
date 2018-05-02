@@ -12,6 +12,7 @@ using System.IO;
 
 namespace NewLetter.Controllers
 {
+    [CustomErrorHandling]
     public class NewEmployeeController : BaseClass
     {
         private oriondbEntities db = new oriondbEntities();

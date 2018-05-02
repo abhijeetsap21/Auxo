@@ -15,6 +15,7 @@ using System.Globalization;
 
 namespace NewLetter.Controllers
 {
+    [CustomErrorHandling]
     public class profileController : BaseClass
     {
         oriondbEntities db = null;

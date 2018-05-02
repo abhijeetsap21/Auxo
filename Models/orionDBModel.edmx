@@ -22,13 +22,13 @@
         </EntityType>
         <EntityType Name="app_error_log">
           <Key>
-            <PropertyRef Name="error_log_id" />
+            <PropertyRef Name="ErrorID" />
           </Key>
-          <Property Name="error_log_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="error_message" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="user_id" Type="int" />
-          <Property Name="created_date" Type="datetime" Nullable="false" />
-          <Property Name="ApplicationName" Type="varchar" MaxLength="100" />
+          <Property Name="ErrorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ErrorMsg" Type="varchar" MaxLength="100" />
+          <Property Name="datelog" Type="datetime" />
+          <Property Name="innerException" Type="varchar" MaxLength="100" />
+          <Property Name="stackTrace" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="App_status">
           <Key>
@@ -62,10 +62,10 @@
           </Key>
           <Property Name="companyID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="companyName" Type="varchar" MaxLength="500" Nullable="false" />
-          <Property Name="address" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="website" Type="varchar(max)" />
           <Property Name="companyIndustry" Type="int" />
-          <Property Name="companyDescription" Type="varchar(max)" Nullable="false" />
+          <Property Name="companyDescription" Type="nvarchar(max)" Nullable="false" />
           <Property Name="gstNo" Type="varchar" MaxLength="500" />
           <Property Name="tinNo" Type="varchar" MaxLength="500" />
           <Property Name="ctsNo" Type="varchar" MaxLength="500" />
@@ -207,14 +207,14 @@
             <PropertyRef Name="jobID" />
           </Key>
           <Property Name="jobID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="jobTitle" Type="varchar" MaxLength="500" Nullable="false" />
-          <Property Name="jobDescription" Type="text" Nullable="false" />
+          <Property Name="jobTitle" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="jobDescription" Type="nvarchar(max)" Nullable="false" />
           <Property Name="workExpMin" Type="int" Nullable="false" />
           <Property Name="salary" Type="int" Nullable="false" />
-          <Property Name="currency" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="unit" Type="varchar" MaxLength="100" />
+          <Property Name="currency" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="unit" Type="nvarchar" MaxLength="100" />
           <Property Name="industryID" Type="int" Nullable="false" />
-          <Property Name="city" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="EmploymentTypeID" Type="int" Nullable="false" />
           <Property Name="EducationReq" Type="varchar" MaxLength="500" />
           <Property Name="NoOfOpenings" Type="int" Nullable="false" />
@@ -228,23 +228,23 @@
           <Property Name="jobContactPersonEmail" Type="varchar" MaxLength="100" />
           <Property Name="isActive" Type="bit" Nullable="false" />
           <Property Name="isDelete" Type="bit" Nullable="false" />
-          <Property Name="CompanyName" Type="varchar" MaxLength="500" />
-          <Property Name="CompanyDescription" Type="varchar" MaxLength="1000" />
-          <Property Name="CompanyWebsite" Type="varchar" MaxLength="1000" />
-          <Property Name="responsesEmailID" Type="varchar" MaxLength="100" />
-          <Property Name="CompanyLogo" Type="varchar" MaxLength="1000" />
+          <Property Name="CompanyName" Type="nvarchar(max)" />
+          <Property Name="CompanyDescription" Type="nvarchar(max)" />
+          <Property Name="CompanyWebsite" Type="nvarchar(max)" />
+          <Property Name="responsesEmailID" Type="nvarchar(max)" />
+          <Property Name="CompanyLogo" Type="nvarchar(max)" />
           <Property Name="compeletPosted" Type="bit" Nullable="false" />
           <Property Name="salaryVisibleToEmployee" Type="bit" Nullable="false" />
-          <Property Name="otherinformation" Type="text" />
+          <Property Name="otherinformation" Type="nvarchar(max)" />
           <Property Name="companyID" Type="bigint" Nullable="false" />
-          <Property Name="gender" Type="varchar" MaxLength="6" />
+          <Property Name="gender" Type="varchar" MaxLength="20" />
           <Property Name="advertisementRefID" Type="bigint" />
           <Property Name="jobURL" Type="nvarchar(max)" />
-          <Property Name="state" Type="varchar" MaxLength="100" />
-          <Property Name="country" Type="varchar" MaxLength="100" />
-          <Property Name="streetNo" Type="varchar" MaxLength="500" />
-          <Property Name="Address" Type="varchar" MaxLength="500" />
-          <Property Name="zipCode" Type="varchar" MaxLength="6" />
+          <Property Name="state" Type="nvarchar(max)" />
+          <Property Name="country" Type="nvarchar(max)" />
+          <Property Name="streetNo" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="zipCode" Type="nvarchar(max)" />
           <Property Name="latitude" Type="float" />
           <Property Name="longitude" Type="float" />
           <Property Name="assessmentID" Type="bigint" />
@@ -590,6 +590,14 @@
           <Property Name="dataIsUpdated" Type="datetime" />
           <Property Name="createdBy" Type="bigint" />
           <Property Name="modifiedBy" Type="bigint" />
+        </EntityType>
+        <EntityType Name="sendGridDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="project" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="APIKEY" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="skills">
           <Key>
@@ -1789,6 +1797,7 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Parameter Name="QendidateId" Type="bigint" Mode="In" />
           <Parameter Name="IsSuccess" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="sp_QendidateTestSchedule_Insert_ExamMark" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -1865,6 +1874,7 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="role_action" EntityType="Self.role_action" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="salaryUnit" EntityType="Self.salaryUnit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sendGridDetails" EntityType="Self.sendGridDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="skills" EntityType="Self.skills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="slots" EntityType="Self.slots" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="slotsBlocked" EntityType="Self.slotsBlocked" Schema="dbo" store:Type="Tables" />
@@ -2371,6 +2381,12 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <FunctionImport Name="sp_EmployerDashborad" ReturnType="Collection(oriondbModel.sp_EmployerDashborad_Result)">
           <Parameter Name="companyID" Mode="In" Type="Int64" />
           </FunctionImport>
+          <FunctionImport Name="sp_AvailableSlotsForCandidate" ReturnType="Collection(oriondbModel.sp_AvailableSlotsForCandidate_Result)">
+            <Parameter Name="dt" Mode="In" Type="DateTime" />
+            <Parameter Name="jobID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="sp_sendNewsletter" ReturnType="Collection(oriondbModel.sp_sendNewsletter_Result)" />
+          <FunctionImport Name="sp_QendidateTestSchedule_Insert_ExamMark" />
           <EntitySet Name="advertisementLists" EntityType="oriondbModel.advertisementList" />
           <EntitySet Name="app_error_log" EntityType="oriondbModel.app_error_log" />
           <EntitySet Name="App_status" EntityType="oriondbModel.App_status" />
@@ -2409,6 +2425,7 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <EntitySet Name="roles" EntityType="oriondbModel.role" />
           <EntitySet Name="role_action" EntityType="oriondbModel.role_action" />
           <EntitySet Name="salaryUnits" EntityType="oriondbModel.salaryUnit" />
+          <EntitySet Name="sendGridDetails" EntityType="oriondbModel.sendGridDetail" />
           <EntitySet Name="skills" EntityType="oriondbModel.skill" />
           <EntitySet Name="slots" EntityType="oriondbModel.slot" />
           <EntitySet Name="slotsBlockeds" EntityType="oriondbModel.slotsBlocked" />
@@ -2739,11 +2756,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             <End Role="slot" EntitySet="slots" />
             <End Role="slotTempBlocked" EntitySet="slotTempBlockeds" />
           </AssociationSet>
-          <FunctionImport Name="sp_AvailableSlotsForCandidate" ReturnType="Collection(oriondbModel.sp_AvailableSlotsForCandidate_Result)">
-            <Parameter Name="dt" Mode="In" Type="DateTime" />
-            <Parameter Name="jobID" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="sp_sendNewsletter" ReturnType="Collection(oriondbModel.sp_sendNewsletter_Result)" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -2999,6 +3011,18 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Type="Int32" Name="ShortListed" Nullable="true" />
           <Property Type="Int32" Name="hired" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="sp_AvailableSlotsForCandidate_Result">
+          <Property Type="Int32" Name="slotID" Nullable="false" />
+          <Property Type="String" Name="slotTime" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="blocked" Nullable="false" MaxLength="9" />
+          <Property Type="Int64" Name="qenID" Nullable="true" />
+          <Property Type="Int64" Name="jobID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_sendNewsletter_Result">
+          <Property Type="Int64" Name="total" Nullable="true" />
+          <Property Type="String" Name="qenEmail" Nullable="true" MaxLength="320" />
+          <Property Type="Int64" Name="qenID" Nullable="false" />
+        </ComplexType>
         <EntityType Name="advertisementList">
           <Key>
             <PropertyRef Name="advertisementRefID" />
@@ -3017,13 +3041,13 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
         </EntityType>
         <EntityType Name="app_error_log">
           <Key>
-            <PropertyRef Name="error_log_id" />
+            <PropertyRef Name="ErrorID" />
           </Key>
-          <Property Name="error_log_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="error_message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="user_id" Type="Int32" />
-          <Property Name="created_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ApplicationName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ErrorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ErrorMsg" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="datelog" Type="DateTime" Precision="3" />
+          <Property Name="innerException" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="stackTrace" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="App_status">
           <Key>
@@ -3063,10 +3087,10 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           </Key>
           <Property Name="companyID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="companyName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="address" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="website" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="companyIndustry" Type="Int32" />
-          <Property Name="companyDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="companyDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="gstNo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="tinNo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="ctsNo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
@@ -3271,14 +3295,14 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             <PropertyRef Name="jobID" />
           </Key>
           <Property Name="jobID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="jobTitle" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="jobDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="jobTitle" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="jobDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="workExpMin" Type="Int32" Nullable="false" />
           <Property Name="salary" Type="Int32" Nullable="false" />
-          <Property Name="currency" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="unit" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="currency" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="unit" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="industryID" Type="Int32" Nullable="false" />
-          <Property Name="city" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="EmploymentTypeID" Type="Int32" Nullable="false" />
           <Property Name="EducationReq" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="NoOfOpenings" Type="Int32" Nullable="false" />
@@ -3292,23 +3316,23 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Name="jobContactPersonEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="isActive" Type="Boolean" Nullable="false" />
           <Property Name="isDelete" Type="Boolean" Nullable="false" />
-          <Property Name="CompanyName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="CompanyDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="CompanyWebsite" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="responsesEmailID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CompanyLogo" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyWebsite" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="responsesEmailID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyLogo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="compeletPosted" Type="Boolean" Nullable="false" />
           <Property Name="salaryVisibleToEmployee" Type="Boolean" Nullable="false" />
-          <Property Name="otherinformation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="otherinformation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="companyID" Type="Int64" Nullable="false" />
-          <Property Name="gender" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="advertisementRefID" Type="Int64" />
           <Property Name="jobURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="state" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="streetNo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="zipCode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="streetNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="zipCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="latitude" Type="Double" />
           <Property Name="longitude" Type="Double" />
           <Property Name="assessmentID" Type="Int64" />
@@ -3731,6 +3755,14 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Name="modifiedBy" Type="Int64" />
           <NavigationProperty Name="EmployerDetail" Relationship="oriondbModel.FK_salaryUnit_EmployerDetails" FromRole="salaryUnit" ToRole="EmployerDetail" />
           <NavigationProperty Name="EmployerDetail1" Relationship="oriondbModel.FK_salaryUnit_EmployerDetails1" FromRole="salaryUnit" ToRole="EmployerDetail" />
+        </EntityType>
+        <EntityType Name="sendGridDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="project" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="APIKEY" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="skill">
           <Key>
@@ -4821,18 +4853,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="sp_AvailableSlotsForCandidate_Result">
-          <Property Type="Int32" Name="slotID" Nullable="false" />
-          <Property Type="String" Name="slotTime" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="blocked" Nullable="false" MaxLength="9" />
-          <Property Type="Int64" Name="qenID" Nullable="true" />
-          <Property Type="Int64" Name="jobID" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_sendNewsletter_Result">
-          <Property Type="Int64" Name="total" Nullable="true" />
-          <Property Type="String" Name="qenEmail" Nullable="true" MaxLength="320" />
-          <Property Type="Int64" Name="qenID" Nullable="false" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5178,6 +5198,27 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_AvailableSlotsForCandidate" FunctionName="oriondbModel.Store.sp_AvailableSlotsForCandidate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="oriondbModel.sp_AvailableSlotsForCandidate_Result">
+                <ScalarProperty Name="slotID" ColumnName="slotID" />
+                <ScalarProperty Name="slotTime" ColumnName="slotTime" />
+                <ScalarProperty Name="blocked" ColumnName="blocked" />
+                <ScalarProperty Name="qenID" ColumnName="qenID" />
+                <ScalarProperty Name="jobID" ColumnName="jobID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_sendNewsletter" FunctionName="oriondbModel.Store.sp_sendNewsletter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="oriondbModel.sp_sendNewsletter_Result">
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="qenEmail" ColumnName="qenEmail" />
+                <ScalarProperty Name="qenID" ColumnName="qenID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_QendidateTestSchedule_Insert_ExamMark" FunctionName="oriondbModel.Store.sp_QendidateTestSchedule_Insert_ExamMark" />
           <EntitySetMapping Name="advertisementLists">
             <EntityTypeMapping TypeName="oriondbModel.advertisementList">
               <MappingFragment StoreEntitySet="advertisementList">
@@ -5197,11 +5238,11 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <EntitySetMapping Name="app_error_log">
             <EntityTypeMapping TypeName="oriondbModel.app_error_log">
               <MappingFragment StoreEntitySet="app_error_log">
-                <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
-                <ScalarProperty Name="created_date" ColumnName="created_date" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="error_message" ColumnName="error_message" />
-                <ScalarProperty Name="error_log_id" ColumnName="error_log_id" />
+                <ScalarProperty Name="stackTrace" ColumnName="stackTrace" />
+                <ScalarProperty Name="innerException" ColumnName="innerException" />
+                <ScalarProperty Name="datelog" ColumnName="datelog" />
+                <ScalarProperty Name="ErrorMsg" ColumnName="ErrorMsg" />
+                <ScalarProperty Name="ErrorID" ColumnName="ErrorID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5801,6 +5842,15 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sendGridDetails">
+            <EntityTypeMapping TypeName="oriondbModel.sendGridDetail">
+              <MappingFragment StoreEntitySet="sendGridDetails">
+                <ScalarProperty Name="APIKEY" ColumnName="APIKEY" />
+                <ScalarProperty Name="project" ColumnName="project" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="skills">
             <EntityTypeMapping TypeName="oriondbModel.skill">
               <MappingFragment StoreEntitySet="skills">
@@ -5905,26 +5955,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_AvailableSlotsForCandidate" FunctionName="oriondbModel.Store.sp_AvailableSlotsForCandidate">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="oriondbModel.sp_AvailableSlotsForCandidate_Result">
-                <ScalarProperty Name="slotID" ColumnName="slotID" />
-                <ScalarProperty Name="slotTime" ColumnName="slotTime" />
-                <ScalarProperty Name="blocked" ColumnName="blocked" />
-                <ScalarProperty Name="qenID" ColumnName="qenID" />
-                <ScalarProperty Name="jobID" ColumnName="jobID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_sendNewsletter" FunctionName="oriondbModel.Store.sp_sendNewsletter">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="oriondbModel.sp_sendNewsletter_Result">
-                <ScalarProperty Name="total" ColumnName="total" />
-                <ScalarProperty Name="qenEmail" ColumnName="qenEmail" />
-                <ScalarProperty Name="qenID" ColumnName="qenID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

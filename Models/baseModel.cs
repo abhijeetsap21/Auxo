@@ -175,6 +175,7 @@ namespace NewLetter.Models
 
     public static class BaseUtil
     {
+
         private static baseClass db = new baseClass();
         // private static CommonUtil commonUtil = new CommonUtil();
         public static string JobpostOption { get; set; }
@@ -251,93 +252,22 @@ namespace NewLetter.Models
         #endregion
 
         #region Capture Error
-        public static int CaptureErrorValues(Exception exception)
+        public static void CaptureErrorValues(Exception exception)
         {
-            int errorLogID = 0;
-            #region Capture the Values
-            StringBuilder errrorMessage = new StringBuilder();
-
-            string FormValues = String.Empty;
-
-            string SessionValues = String.Empty;
-            if (HttpContext.Current.Session != null)
-            {
-                foreach (var item in HttpContext.Current.Session.Keys)
-                {
-                    SessionValues = SessionValues + item.ToString() + " : " + HttpContext.Current.Session[item.ToString()] + "<br>";
-                }
-            }
-
-            string RawUrl = HttpContext.Current.Request.RawUrl;
-            string RequestType = HttpContext.Current.Request.RequestType;
-            string UserAgent = HttpContext.Current.Request.UserAgent;
-            string BrowserName = ((System.Web.Configuration.HttpCapabilitiesBase)(HttpContext.Current.Request.Browser)).Browser;
-
-
-            errrorMessage.Append("<b>Simplysafe Tech Support Error</b><br><br>");
-
-            errrorMessage.Append("<b>Error Date  :</b>" + System.DateTime.Now + "<br>");
-            errrorMessage.Append("<b>Server Name  :</b>" + System.Environment.MachineName + "<br>");
-            errrorMessage.Append("<b>Application Url :</b>" + RawUrl + "<br>");
-            errrorMessage.Append("<b>Request Type :</b>" + RequestType + "<br>");
-            errrorMessage.Append("<b>User Agent :</b>" + UserAgent + "<br><br>");
-            errrorMessage.Append("<b>BrowserName :</b>" + BrowserName + "<br><br>");
-
-            errrorMessage.Append("<b>Exception InnerException :</b>" + exception.InnerException + "<br><br>");
-            errrorMessage.Append("<b>Exception Message :</b>" + exception.Message + "<br><br>");
-            errrorMessage.Append("<b>Exception Source :</b>" + exception.Source + "<br><br>");
-
-            errrorMessage.Append("<u><b>Posted Form Values</b></u><br>");
-            errrorMessage.Append(FormValues);
-
-            errrorMessage.Append("<br><br><u><b>Session Values Values</b></u><br>");
-            errrorMessage.Append(SessionValues);
-
-            errrorMessage.Append("<br><br><u><b>Exception Stack Trace:</b></u><br>" + exception.StackTrace);
-
-            #endregion
-
             try
             {
-                Int32 userID = 0;
-                if (HttpContext.Current.Session != null)
+                var AppErrorLog = new app_error_log();
+                AppErrorLog.ErrorMsg = exception.Message;
+                AppErrorLog.datelog = BaseUtil.GetCurrentDateTime();
+                if (exception.InnerException != null)
                 {
-                    userID = HttpContext.Current.Session[AdminInfo.UserID.ToString()] != null ? Convert.ToInt32(HttpContext.Current.Session[AdminInfo.UserID.ToString()].ToString()) : 0;
+                    AppErrorLog.innerException = exception.InnerException.Message;
+                    AppErrorLog.stackTrace = exception.StackTrace;
                 }
-                DateTime currDateTime = GetCurrentDateTime();
-
-                #region Insert Into APP_ERROR_LOG
-
-                app_error_log errorlog = new app_error_log();
-                errorlog.error_message = errrorMessage.ToString();
-                if (userID > 0)
-                {
-                    errorlog.user_id = userID;
-                }
-                else
-                {
-                    errorlog.user_id = null;
-
-                }
-                errorlog.created_date = currDateTime;
-
-                db.app_error_log.Add(errorlog);
+                db.app_error_log.Add(AppErrorLog);
                 db.SaveChanges();
-
-                errorLogID = errorlog.error_log_id;
-                #endregion
-
             }
-            catch (Exception ex)
-            {
-                //throw ex;
-            }
-            finally
-            {
-
-            }
-            return errorLogID;
-
+            catch { }           
         }
         public static string GetValidationMessage(ModelStateDictionary modelState)
         {
@@ -977,4 +907,40 @@ namespace NewLetter.Models
     //    }
     //}
     #endregion
+
+    public class CustomErrorHandling : HandleErrorAttribute
+    {
+
+        public override void OnException(ExceptionContext exceptionContext)
+        {
+            if (!exceptionContext.ExceptionHandled)
+            {
+                string controllerName = (string)exceptionContext.RouteData.Values["controller"];
+                string actionName = (string)exceptionContext.RouteData.Values["action"];
+
+                Exception custException = new Exception("There is some error");
+                 var  db = new baseClass();
+              try { 
+                var AppErrorLog = new app_error_log();
+                AppErrorLog.ErrorMsg = exceptionContext.Exception.Message;
+                db.app_error_log.Add(AppErrorLog);
+                db.SaveChanges();
+                }
+                catch { }
+            var a = exceptionContext.Exception.Message + " in " + controllerName;
+
+                var model = new HandleErrorInfo(custException, controllerName, actionName);
+
+                exceptionContext.Result = new ViewResult
+                {
+                    ViewName = "~/Views/Shared/Error.cshtml",
+                    ViewData = new ViewDataDictionary<HandleErrorInfo>(model),
+                    TempData = exceptionContext.Controller.TempData
+                };
+
+                exceptionContext.ExceptionHandled = true;
+
+            }
+        }
+    }
 }

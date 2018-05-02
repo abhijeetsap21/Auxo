@@ -12,12 +12,10 @@ namespace NewLetter.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class app_error_log
+    public partial class sendGridDetail
     {
-        public int ErrorID { get; set; }
-        public string ErrorMsg { get; set; }
-        public Nullable<System.DateTime> datelog { get; set; }
-        public string innerException { get; set; }
-        public string stackTrace { get; set; }
+        public int ID { get; set; }
+        public string project { get; set; }
+        public string APIKEY { get; set; }
     }
 }

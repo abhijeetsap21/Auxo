@@ -22,7 +22,7 @@ using System.Web.Configuration;
 
 namespace NewLetter.Controllers
 {
-
+    [CustomErrorHandling]
     public class AccountController : BaseClass
     {
         private oriondbEntities db = new oriondbEntities();

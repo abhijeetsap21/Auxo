@@ -19,8 +19,10 @@ using System.Web.Configuration;
 
 namespace NewLetter.Controllers
 {
+    [CustomErrorHandling]
     public class jobDetailsController : BaseClass
     {
+
         private oriondbEntities db = new oriondbEntities();
 
         // GET: jobDetails

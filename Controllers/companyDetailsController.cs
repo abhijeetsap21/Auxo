@@ -17,6 +17,7 @@ using System.Diagnostics;
 namespace NewLetter.Controllers
 
 {
+    [CustomErrorHandling]
     public class companyDetailsController : BaseClass
     {
 

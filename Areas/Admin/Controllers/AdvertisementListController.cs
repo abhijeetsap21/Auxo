@@ -13,16 +13,10 @@ using System.Data.SqlClient;
 
 namespace NewLetter.Areas.Admin.Controllers
 {
+    [CustomErrorHandling]
     public class AdvertisementListController : BaseClass
     {
-        private IUnitOfWork uow = null;
-        private AdvertisementList repo = null;
-
-        public AdvertisementListController()
-        {
-            uow = new UnitOfWork();
-            repo = new AdvertisementList(uow);
-        }
+        oriondbEntities db = new oriondbEntities();
         // GET: Admin/AdvertisementList
         public ActionResult Index()
         {
@@ -32,12 +26,20 @@ namespace NewLetter.Areas.Admin.Controllers
         //GET :Admin : Partial View Candidate Result 
         [Route("", Name = "Admin")]
         public ActionResult _partialAdvertisementList()
-        {
-            oriondbEntities db = new oriondbEntities();
+        {           
             string spExecute = "sp_AdvertisementList";
-            var result = db.Database.SqlQuery<sp_AdvertisementList_Result>(spExecute).ToList();
-            sp_AdvertisementList_Result sp = new sp_AdvertisementList_Result();
-            ViewBag.data = "Yes";
+            var result = (dynamic)null;
+            try
+            {
+                result = db.Database.SqlQuery<sp_AdvertisementList_Result>(spExecute).ToList();
+                ViewBag.data = "Yes";
+            }
+            catch (Exception e)
+            {
+                ViewBag.data = "";
+                BaseUtil.CaptureErrorValues(e);
+            }
+           
             return PartialView(result);
         }
 
@@ -45,9 +47,9 @@ namespace NewLetter.Areas.Admin.Controllers
         [Route("", Name = "Admin")]
         public ActionResult advertisementResult(FormCollection frm)
         {
-            oriondbEntities db = new oriondbEntities();
-            string spExecute = "";
-            
+           
+            string spExecute = ""; var result = (dynamic)null;
+            try { 
             if (frm["frm[fromdate]"] != "")
             {
                 DateTime fd = Convert.ToDateTime(frm["frm[fromdate]"]);
@@ -73,11 +75,17 @@ namespace NewLetter.Areas.Admin.Controllers
             }           
                        
 
-            var result = db.Database.SqlQuery<sp_AdvertisementList_Result>(spExecute).ToList();
-            sp_AdvertisementList_Result sp = new sp_AdvertisementList_Result();           
+             result = db.Database.SqlQuery<sp_AdvertisementList_Result>(spExecute).ToList();           
             if(result.Count == 0)
             {
                 ViewBag.data = "Nodata";
+            }
+           
+            }
+            catch (Exception e)
+            {
+                ViewBag.data = "";
+                BaseUtil.CaptureErrorValues(e);
             }
             return PartialView("_partialAdvertisementList", result);
         }

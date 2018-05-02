@@ -13,6 +13,7 @@ using System.Data.SqlClient;
 
 namespace NewLetter.Areas.Admin.Controllers
 {
+    [CustomErrorHandling]
     public class CompanyMasterController : BaseClass
     {
         private IUnitOfWork uow = null;

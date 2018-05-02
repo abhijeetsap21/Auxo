@@ -12,6 +12,7 @@ using NewLetter.Areas.Admin.Models;
 
 namespace NewLetter.Areas.Admin.Controllers
 {
+    [CustomErrorHandling]
     public class RolesController : BaseClass
     {        
 

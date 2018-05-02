@@ -11,6 +11,7 @@ using NewLetter.Models;
 
 namespace NewLetter.Controllers
 {
+    [CustomErrorHandling]
     public class qenSkillsController : BaseClass
     {
         private oriondbEntities db = new oriondbEntities();
