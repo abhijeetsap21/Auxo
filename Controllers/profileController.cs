@@ -42,13 +42,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(qenid);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "Auxo";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
@@ -120,13 +114,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(model.qenID);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "NewsLetter";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
@@ -143,13 +131,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(qenid);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "NewsLetter";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
@@ -175,13 +157,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(qenid);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "NewsLetter";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
@@ -225,13 +201,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(oqenSecondary.qenID);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "NewsLetter";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
@@ -257,13 +227,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(qenid);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "NewsLetter";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
@@ -307,13 +271,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(oqenSecondary.qenID);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "NewsLetter";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
@@ -339,13 +297,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(qenid);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "NewsLetter";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
@@ -392,13 +344,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(oqenSecondary.qenID);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "NewsLetter";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
@@ -424,13 +370,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(qenid);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "NewsLetter";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
@@ -476,13 +416,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(oqenSecondary.qenID);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "NewsLetter";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
@@ -500,13 +434,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(qenid);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "NewsLetter";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
@@ -545,13 +473,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(qenid);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "NewsLetter";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
@@ -591,13 +513,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(qenid);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "NewsLetter";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
@@ -672,13 +588,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(refinfo.qenid);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "NewsLetter";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
@@ -755,13 +665,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(model.qenID);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "NewsLetter";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
@@ -853,13 +757,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(model.qenID);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "NewsLetter";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
@@ -933,13 +831,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(model.qenID);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "NewsLetter";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
@@ -1033,13 +925,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(qenid);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "NewsLetter";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
@@ -1061,13 +947,7 @@ namespace NewLetter.Controllers
             catch (Exception ex)
             {
                 TempData["msg"] = ex.Message.ToString();
-                app_error_log oapp_error_log = new app_error_log();
-                oapp_error_log.user_id = Convert.ToInt32(frm["hdn_qenID"]);
-                oapp_error_log.error_message = ex.Message.ToString();
-                oapp_error_log.ApplicationName = "NewsLetter";
-                oapp_error_log.created_date = DateTime.Now;
-                db.app_error_log.Add(oapp_error_log);
-                db.SaveChanges();
+                BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
         }
