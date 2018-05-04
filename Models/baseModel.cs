@@ -451,7 +451,8 @@ namespace NewLetter.Models
                        // SetSessionValue(AdminInfo.socialCheck.ToString(), Convert.ToString(user.socialCheck));
                         SetSessionValue(AdminInfo.FullName.ToString(), Convert.ToString(user.qenName));
                         SetSessionValue(AdminInfo.IP.ToString(), IP);
-                        SetSessionValue(AdminInfo.IPTrackerID.ToString(), Convert.ToString(IPTrackerID));                        
+                        SetSessionValue(AdminInfo.IPTrackerID.ToString(), Convert.ToString(IPTrackerID));
+                        SetSessionValue(AdminInfo.logo.ToString(), Convert.ToString(user.qenImage));           
                         result = "PASS";
                     }
                     else

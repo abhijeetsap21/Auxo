@@ -351,7 +351,7 @@ namespace NewLetter.Controllers
                 var request = new RestRequest(Method.POST);
                 request.AddParameter("grant_type", "authorization_code");
                 request.AddParameter("code", code);
-                request.AddParameter("redirect_uri", "http://spotaneedle.com//Account/linkdInReg");
+                request.AddParameter("redirect_uri", "https://spotaneedle.com/Account/linkdInReg");
                 request.AddParameter("client_id", "772sds0w0tvipg");
                 request.AddParameter("client_secret", "6F2xR3Sn93vR0VQX");
                 //request.AddParameter("scope", "r_emailaddress");
@@ -394,7 +394,9 @@ namespace NewLetter.Controllers
                     list.qenAddress = "some address";
                     list.qenAddress = null;
                     list.socialCheck = true;
+                    list.registeredFrom = "LinkedIN";
                     list.CareerObjective = linkedINResVM.summary;
+                    list.CareerHighlight = linkedINResVM.headline;
                     db.qendidateLists.Add(list);
                     db.SaveChanges();
 
@@ -422,6 +424,7 @@ namespace NewLetter.Controllers
                     user.qenLinkdInUrl = linkedINResVM.publicprofileurl;
                     user.dataIsUpdated = BaseUtil.GetCurrentDateTime();
                     user.qenName = linkedINResVM.firstName + " " + linkedINResVM.lastName;
+                    user.registeredFrom = "LinkedIN";
                     db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
                     BaseUtil.SetSessionValue(AdminInfo.UserID.ToString(), Convert.ToString(user.qenID));
@@ -517,6 +520,7 @@ namespace NewLetter.Controllers
                         gmailUser.qenPhone = "+919999999999";
                         gmailUser.qenAddress = "some address";
                         gmailUser.qenAddress = null;
+                        gmailUser.registeredFrom = "Google";
                         db.qendidateLists.Add(gmailUser);
                         try
                         {
@@ -656,6 +660,7 @@ namespace NewLetter.Controllers
                     list.qenPhone = "+919999999999";
                     list.qenAddress = "some address";
                     list.qenAddress = null;
+                    list.registeredFrom = "FaceBook";
                     db.qendidateLists.Add(list);
                     db.SaveChanges();
 
@@ -722,6 +727,7 @@ namespace NewLetter.Controllers
             candidateReg.password = qenlist.password;
             qenlist.dataIsCreated = BaseUtil.GetCurrentDateTime();
             qenlist.dataIsUpdated = BaseUtil.GetCurrentDateTime();
+            qenlist.registeredFrom = "SpotANeedle";
             db.qendidateLists.Add(qenlist);
             try
             {

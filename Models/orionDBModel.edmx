@@ -359,6 +359,7 @@
           <Property Name="CareerHighlight" Type="text" />
           <Property Name="lastLoginTime" Type="datetime" />
           <Property Name="uploadFromExternalResource" Type="bit" Nullable="false" />
+          <Property Name="registeredFrom" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="qendidateListInJob">
           <Key>
@@ -3477,6 +3478,7 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Name="CareerHighlight" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="lastLoginTime" Type="DateTime" Precision="3" />
           <Property Name="uploadFromExternalResource" Type="Boolean" Nullable="false" />
+          <Property Name="registeredFrom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="genderList" Relationship="oriondbModel.FK_qendidateList_genderList" FromRole="qendidateList" ToRole="genderList" />
           <NavigationProperty Name="HiredCandidates" Relationship="oriondbModel.FK_HiredCandidate_qendidateList" FromRole="qendidateList" ToRole="HiredCandidate" />
           <NavigationProperty Name="InterViewerComments" Relationship="oriondbModel.FK_InterViewerComment_qendidateList" FromRole="qendidateList" ToRole="InterViewerComment" />
@@ -5561,6 +5563,7 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <EntitySetMapping Name="qendidateLists">
             <EntityTypeMapping TypeName="oriondbModel.qendidateList">
               <MappingFragment StoreEntitySet="qendidateList">
+                <ScalarProperty Name="registeredFrom" ColumnName="registeredFrom" />
                 <ScalarProperty Name="uploadFromExternalResource" ColumnName="uploadFromExternalResource" />
                 <ScalarProperty Name="lastLoginTime" ColumnName="lastLoginTime" />
                 <ScalarProperty Name="CareerHighlight" ColumnName="CareerHighlight" />
