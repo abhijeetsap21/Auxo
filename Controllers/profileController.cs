@@ -66,7 +66,7 @@ namespace NewLetter.Controllers
                     fileName = Guid.NewGuid() + "_" + Path.GetFileName(files.FileName);
                     var path = Path.Combine(Server.MapPath("~/Logo/"), fileName);
                     files.SaveAs(path);
-                    fileName = "http://newsletter.qendidate.com/Logo/" + fileName;
+                    fileName = "https://spotaneedle.com/Logo/" + fileName;
                 }
 
                 qendidateList data = null;

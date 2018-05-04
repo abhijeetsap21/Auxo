@@ -629,13 +629,13 @@ namespace NewLetter.Controllers
                         var fileName = Guid.NewGuid() + "_" + Path.GetFileName(files.FileName);
                         path = Path.Combine(Server.MapPath("~/newspaper"), fileName);
                         files.SaveAs(path);
-                        newadlist.advertisementimageURL = "https://newsletter.qendidate.com/newspaper/" + fileName;
+                        newadlist.advertisementimageURL = "https://spotaneedle.com/newspaper/" + fileName;
                         newadlist.dataIsCreated = BaseUtil.GetCurrentDateTime();
                         newadlist.dataIsUpdated = BaseUtil.GetCurrentDateTime();
                         db.advertisementLists.Add(newadlist);
                         db.SaveChanges();
                         string advtID = BaseUtil.encrypt((newadlist.advertisementRefID).ToString());
-                        newadlist.advertisementURL = "https://newsletter.qendidate.com/jobDetails/advertisementApplyHome/?refid=" + advtID;
+                        newadlist.advertisementURL = "https://spotaneedle.com/jobDetails/advertisementApplyHome/?refid=" + advtID;
                         newadlist.isComplePosted = true;
                         db.SaveChanges();
                         return RedirectToAction("adPostSuccess", new { ID = newadlist.advertisementRefID });
@@ -656,9 +656,9 @@ namespace NewLetter.Controllers
                         var fileName = Guid.NewGuid() + "_" + Path.GetFileName(files.FileName);
                         path = Path.Combine(Server.MapPath("~/newspaper"), fileName);
                         files.SaveAs(path);
-                        oadvertisementList.advertisementimageURL = "https://newsletter.qendidate.com/newspaper/" + fileName;
+                        oadvertisementList.advertisementimageURL = "https://spotaneedle.com/newspaper/" + fileName;
                         oadvertisementList.dataIsUpdated = BaseUtil.GetCurrentDateTime();
-                        oadvertisementList.advertisementURL = "https://newsletter.qendidate.com/jobDetails/advertisementApplyHome/?refid=" + id;
+                        oadvertisementList.advertisementURL = "https://spotaneedle.com/jobDetails/advertisementApplyHome/?refid=" + id;
                         oadvertisementList.isComplePosted = true;
                         db.Entry(oadvertisementList).State = EntityState.Modified;
                         db.SaveChanges();
@@ -690,7 +690,7 @@ namespace NewLetter.Controllers
                 jd.advertisementRefID = item.advertisementRefID;
                 jd.dataIsCreated = Convert.ToDateTime(item.dataIsCreated);
                 string id = BaseUtil.encrypt(jd.advertisementRefID.ToString());
-                jd.advertisementJobsUrl = "http://localhost:51126/jobDetails/advertisementApplyHome/?refid=" + id + "&&val=1";
+                jd.advertisementJobsUrl = "https://spotaneedle.com/jobDetails/advertisementApplyHome/?refid=" + id + "&&val=1";
 
                 jl.Add(jd);
             }
@@ -792,7 +792,7 @@ namespace NewLetter.Controllers
                 var fileName = Guid.NewGuid() + "_" + Path.GetFileName(files.FileName);
                 path = Path.Combine(Server.MapPath("~/Logo"), fileName);
                 files.SaveAs(path);
-                jobDetailsModel.CompanyLogo = "http://qendidate.com/Logo/" + fileName;
+                jobDetailsModel.CompanyLogo = "https://spotaneedle.com/Logo/" + fileName;
             }
             var roleID = BaseUtil.RoleID();
             string emailID = string.Empty; string conName = string.Empty;
@@ -818,7 +818,7 @@ namespace NewLetter.Controllers
                     db.jobDetails.Add(jobDetailsModel);
                     db.SaveChanges();
 
-                    jobDetailsModel.jobURL = "http://localhost:51126/jobDetails/Apply?jobID=" + jobDetailsModel.jobID;
+                    jobDetailsModel.jobURL = "https://spotaneedle.com/jobDetails/Apply?jobID=" + jobDetailsModel.jobID;
                     var url = jobDetailsModel.jobURL;
                     db.Entry(jobDetailsModel).State = EntityState.Modified;
                     db.SaveChanges();

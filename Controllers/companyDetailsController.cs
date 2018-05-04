@@ -224,7 +224,7 @@ namespace NewLetter.Controllers
                 fileName = Guid.NewGuid() + "_" + Path.GetFileName(files.FileName);
                 var path = Path.Combine(Server.MapPath("~/Logo/"), fileName);
                 files.SaveAs(path);
-                cmpdetail.logo = "http://newsletter.qendidate.com/Logo/" + fileName;
+                cmpdetail.logo = "https://spotaneedle.com/Logo/" + fileName;
             }
 
             cmpdetail.city = companyDetail.city;
