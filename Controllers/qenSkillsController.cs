@@ -19,23 +19,41 @@ namespace NewLetter.Controllers
         // GET: qenSkills
         public async Task<ActionResult> Index()
         {
-            var qenSkills = db.qenSkills.Include(q => q.qendidateList).Include(q => q.skill);
-            return View(await qenSkills.ToListAsync());
+            try
+            {
+                var qenSkills = db.qenSkills.Include(q => q.qendidateList).Include(q => q.skill);
+                return View(await qenSkills.ToListAsync());
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message.ToString();
+                BaseUtil.CaptureErrorValues(ex);
+                return RedirectToAction("Error");
+            }
         }
 
         // GET: qenSkills/Details/5
         public async Task<ActionResult> Details(long? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                qenSkill qenSkill = await db.qenSkills.FindAsync(id);
+                if (qenSkill == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(qenSkill);
             }
-            qenSkill qenSkill = await db.qenSkills.FindAsync(id);
-            if (qenSkill == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                TempData["msg"] = ex.Message.ToString();
+                BaseUtil.CaptureErrorValues(ex);
+                return RedirectToAction("Error");
             }
-            return View(qenSkill);
         }
 
         // GET: qenSkills/Create
@@ -53,11 +71,20 @@ namespace NewLetter.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "qenSkillsID,qenID,skillsID,yearOfExp")] qenSkill qenSkill)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.qenSkills.Add(qenSkill);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.qenSkills.Add(qenSkill);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message.ToString();
+                BaseUtil.CaptureErrorValues(ex);
+                return RedirectToAction("Error");
             }
 
             ViewBag.qenID = new SelectList(db.qendidateLists, "qenID", "qenName", qenSkill.qenID);
@@ -89,11 +116,20 @@ namespace NewLetter.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "qenSkillsID,qenID,skillsID,yearOfExp")] qenSkill qenSkill)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(qenSkill).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(qenSkill).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message.ToString();
+                BaseUtil.CaptureErrorValues(ex);
+                return RedirectToAction("Error");
             }
             ViewBag.qenID = new SelectList(db.qendidateLists, "qenID", "qenName", qenSkill.qenID);
             ViewBag.skillsID = new SelectList(db.skills, "skillsID", "skillName", qenSkill.skillsID);
