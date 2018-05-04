@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Job Description:</label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                        @Html.TextBoxFor(ex => ex.jobDescription, new { maxlength = "100" })
+                        @Html.TextBoxFor(ex => ex.jobDescription)
                         @Html.ValidationMessageFor(ex => ex.jobDescription, "", new { @class = "col_1 tleft text-danger" })
                     </div>
                 </div>

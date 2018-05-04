@@ -42,6 +42,18 @@
         $('#notifi[onload]').trigger('onload');
     });
     </script>
+	<style>
+		.form-horizontal.middle-text.full-page {
+			max-width: 65%;
+			height:70vh;
+		}
+		.thankyou-btns.login-btn input {
+			margin: 0;
+		}
+		.thankyou-btns.login-btn {
+			text-align: right;
+		}
+	</style>
 </head>
 <body>
     <div class="container-fluid padding-none">
@@ -78,19 +90,10 @@
             </div>
             <div class="col-md-6 col-sm-4 col-xs-12 common-qe-logo-block">
                 <div class="col-md-12 common-right-block">
-                    <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src="~/images/user-img.jpg" alt="img"></span><span class="common-user-loggedin-name">@fullName</span></div>
-                    <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src=@logo alt="img" style="width:35px"></span><span class="common-user-loggedin-comp">@companyname</span></div>
-                    <div class="dropdown common-top-dropdown">
-                        <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown"><img src="~/images/profile-icon.jpg"></button>
-
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" onclick="location.href='@Url.Action("Logout", "Account", new { Area = "" })'">Sign Out</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
-                            <li role="presentation" class="divider"></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
-                        </ul>
-
+                    <!--<div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src="~/images/user-img.jpg" alt="img"></span><span class="common-user-loggedin-name">@fullName</span></div>
+                    <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src="~/images/Dummy-Text-Featured.jpg" alt="img" style="width:35px"></span><span class="common-user-loggedin-comp">@companyname</span></div>-->
+                    <div class="thankyou-btns login-btn">
+						<input type="button" name="Previous" class="previous action-button" value="Login" onclick="location.href='https://spotaneedle.com/'">
                     </div>
                 </div>
             </div>
@@ -98,78 +101,7 @@
     </div>
     <div class="container-fluid padding-none gry">
         <div class="row-eq-height">
-            <div class="col-md-2 col-sm-2 col-xs-12 padding-none left-nav">
-                <nav class="navbar navbar-default" role="navigation">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                    </div>
-                    <div class="navbar-collapse collapse padding-none">
-                        <ul class="nav navbar-nav navbar-left">
-
-                            @{ if (roleID == "2" || roleID == "3")
-                                {
-                                    <li>@Html.ActionLink(" Dashboard", "Dashbord", "Employer")</li>
-
-                                    <li class="dropdown custom-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Jobs</a>
-										<ul class="dropdown-menu forAnimate" role="menu">
-											<li>@Html.ActionLink(" New Job", "jobDashboard", "jobDetails")</li>
-											<li>@Html.ActionLink(" Posted Jobs", "Myjobs", "jobDetails")</li>
-											<li>@Html.ActionLink(" Pending Jobs", "pendingJobs", "jobDetails")</li>
-											<li>@Html.ActionLink(" Advertisements", "jobPluginList", "jobDetails")</li>
-										</ul>
-									</li>
-                                    <li>@Html.ActionLink(" Profile", "empedit", "companyDetails")</li>
-                                   
-                                    <li class="dropdown custom-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Add Colleague</a>
-										<ul class="dropdown-menu forAnimate" role="menu">
-											<li>@Html.ActionLink(" Colleague List", "Index", "NewEmployee")</li>
-											<li>@Html.ActionLink(" Add Colleague", "create", "NewEmployee")</li>
-										<ul>
-									</li>
-                                }
-                                if (roleID == "5")
-                                {
-                                    <li>@Html.ActionLink("Profile", "editCandidate", "profile")</li>
-                                    <li>@Html.ActionLink("Find Jobs ", "jobs", "jobDetails")</li>
-                                    <li>@Html.ActionLink("Profile Summary", "ProfilePerformance", "profile")</li>
-                                    <li>@Html.ActionLink("Applied Job", "AppliedJobs", "profile")</li>
-
-                                }
-                                if (roleID == "1" || roleID == "4")
-                                {
-                                    <li>@Html.ActionLink("Education", "Index", "Education", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Candidate Status", "Index", "CandidateStatus", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Interview Slots", "Index", "Slots", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Slots Information  ", "SlotsInformation", "TimeSlots", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("BlockSlots  ", "BlockSlots", "TimeSlots", new { area = "Admin" }, null)</li>                                  
-									<li>@Html.ActionLink("tempBlockSlots  ", "tempBlockSlots", "TimeSlots", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Edit Your Details", "empedit", "companyDetails",new { area = "" }, null)</li>
-									<li>@Html.ActionLink(" View Posted Jobs ", "Myjobs", "jobDetails",new { area = "" }, null)</li>
-									if (roleID == "1")
-                                    {
-										<li>@Html.ActionLink(" Add Colleague ", "#", "#")</li>
-										<li>@Html.ActionLink(" Colleague List ", "Index", "NewEmployee",new { area = "" }, null)</li>
-										<li>@Html.ActionLink(" Add Colleague ", "create", "NewEmployee",new { area = "" }, null)</li>
-										<li>@Html.ActionLink(" Pending Jobs ", "pendingJobs", "jobDetails",new { area = "" }, null)</li>
-										<li>@Html.ActionLink(" Created Advertisements ", "jobPluginList", "jobDetails",new { area = "" }, null)</li>
-                                    }
-									<li>@Html.ActionLink("Skills", "Index", "Skills", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Roles", "Index", "Roles", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Job Status", "Index", "JobStatus", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Industry", "Index", "Industry", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Employer Master", "Index", "EmployerMaster", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Candidate Master", "Index", "CandidateMaster", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Company Master", "Index", "CompanyMaster", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Employment Type", "Index", "EmploymentTypes", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Advertisements", "Index", "AdvertisementList", new { area = "Admin" }, null)</li>
-
-                                }
-                            }
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-            <div class="col-md-10 col-sm-10 col-xs-12 padding-none right-form-panel">
+            <div class="col-md-12 col-sm-12 col-xs-12 padding-none right-form-panel">
                 @RenderBody()
             </div>
         </div>

@@ -20,9 +20,14 @@
         <div class="row sub-container">            
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="right-box">
+                    <div id="AddSkillscan">
+                        @Html.Action("skillsAddPop", new { qenid = @id })
+                    </div>
+
                     @*<div class="form" id="content-1">*@
                         @if (Model.Count() > 0)
                         {
+                            <br /><br />
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -48,11 +53,7 @@
                                     </tr>
                                 }
                             </table>
-                        }
-                        <div id="AddSkillscan">
-                            @Html.Action("skillsAddPop", new { qenid = @id })
-                        </div>
-
+                        }   
 
                     </div>                    
                 </div>
@@ -94,7 +95,7 @@
             source: function (request, response) {
                 debugger
                 jqOld.ajax({
-                    url: "/stagingns/jobDetails/select_fillSkills",
+                    url: "/jobDetails/select_fillSkills",
                     dataType: "json",
                     data: { term: request.term },
                     success: function (data) {

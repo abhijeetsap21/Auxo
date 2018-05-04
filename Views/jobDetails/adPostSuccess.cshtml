@@ -8,75 +8,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        #Grid {
-            height: 400px;
-            width: 400px;
-            text-align: center;
-        }
+</head>
+	<body>   
+		<div class="form-horizontal">
+			<h4>adPostSuccess</h4>
+				@{ var advID = ViewBag.refID;}
+					<div class="col-sm-12 full-page-2">
+                        <div id=Grid>
+                            <div class="col-sm-6 text-center">
+                                <img id="adimage" src="@Model.advertisementimageURL" alt="Newspaper Ad" />
+                                <div class="col-md-12 text-center"><p id="urlclass">@Model.advertisementURL</p></div>
+                            </div>
+						</div>
+						<div class="col-sm-6 text-center">
+							<div class="job-status">Advt Posted successfully</div>
+							<div class="col-md-12 text-center">
+							@using (Html.BeginForm("Exportnews", "jobDetails", FormMethod.Post))
+								{
+									<input type="hidden" name="GridHtml" />
+									<input type="hidden" name="advID" value='@advID'/>
+									<input type="submit" class="btn btn-default" id="btnSubmit" value="Download and Mail" />
+									
+								}
+							</div>
+							<div class="job-link-1">@Html.ActionLink("Continue to post jod...", "NewJob", "jobDetails", new { @refID = advID},null)</div>
+							<div class="job-link-1">@Html.ActionLink("post job via operator...", "sendMailToOperator", "jobDetails", new {advID },null)</div>
+							@*<div class="job-link-1"><input type="button" value="job via operator" , onclick="sendMailToOperator(@advID)" /></div>*@
+							<div class="job-link-1">@Html.ActionLink("post jod without refrence...", "NewJob", "jobDetails")</div>
+						</div>
+					</div>
 
-        #urlclass {
-            
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 10px;
-            width: 300px;
-        }
-
-        #adimage {
-            height: 300px;
-            width: 300px;
-            
-        }
-    </style>
-    </head>
-<body>   
-    
-        <h2>adPostSuccess</h2>
-    
-
-@{ var advID = ViewBag.refID;}
-    iv class="col-sm-12">
-        <div class="col-sm-6">
-            <div id="Grid">
-                <img id="adimage" src="@Model.advertisementimageURL" />
-                <p id="urlclass">@Model.advertisementURL</p>
-            </div>
-            <div id="editor"></div>
-            
-            </div>
-            <div class="col-sm-6">
-            ok
-            <br />
-            job saved successfully
-            <br />
-           
-            @Html.ActionLink("Continue to post jod...", "NewJob", "jobDetails", new { @refID = advID},null)
-
-             @Html.ActionLink("post job via operator", "sendMailToOperator", "jobDetails", new {advID },null)
-                @*<input type="button" value="job via operator" , onclick="sendMailToOperator(@advID)" />*@
-            @Html.ActionLink("post jod without refrence..", "NewJob", "jobDetails")
-           
-           
-           
-            </div>
-        </iv>
-
-    @*<p>
-            @Html.ActionLink(" Go to Home Page ? ", "jobDashboard", "jobDetails")
-        </p>*@
-    </body>
-    
+					@*<p>
+							@Html.ActionLink(" Go to Home Page ? ", "jobDashboard", "jobDetails")
+					</p>*@
+				
+		</div>
+	</body>
 </html>
-@using (Html.BeginForm("Exportnews", "jobDetails", FormMethod.Post))
-{
-    <input type="hidden" name="GridHtml" />    <input type="hidden" name="advID" value='@advID'/>
-    <input type="submit" id="btnSubmit" value="Download and Mail" />
-    
-}
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript">
+    debugger
         $(function () {
             $("#btnSubmit").click(function () {
+                debugger
                 $("input[name='GridHtml']").val($("#Grid").html());
             });
         });

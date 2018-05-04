@@ -332,9 +332,10 @@ namespace NewLetter.Models
             List<string> list = new List<string>() { "BASE", "JSON", "HOME", "ACCOUNT", "JOBDETAILS","EMPLOYER","PROFILE" };
             return list;
         }
-       public static List<string> accesiblePages = null;
+        
         public static bool CheckAuthentication(ActionExecutingContext filterContext)
         {
+            List<string> accesiblePages = null;
             bool result = false;
 
             string actionName = filterContext.ActionDescriptor.ActionName;

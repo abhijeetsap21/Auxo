@@ -440,7 +440,7 @@ $(document).ready(function(){
 							}
 							else
 							{
-								<img id="pic" src='https://trackback.net/wp-content/uploads/2015/02/Dummy-profile-picture.png' alt="company logo" width="100px" height="100px" />
+								<img id="pic" src= 'https://trackback.net/wp-content/uploads/2015/02/Dummy-profile-picture.png' alt="company logo" width="100px" height="100px" />
 							}
 						}
 					</div>
@@ -666,67 +666,62 @@ $(document).ready(function(){
 </script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDGhqKFgJrrhrXFGFHRzuPJ84hK7GbtAno"></script>
               
-                    <script type="text/javascript">
-                        jqOld(document).ready(function () {
-                            jqOld("form").submit(function (e) {
-                                debugger
-                                e.preventDefault();
-                                Upload();
-                                if (jqOld(this).valid()) {
-                                    jqOld("form").unbind('submit').submit();
-                                }
-
-                            });
-                        });
-                        ///
-
-                        function readURL(input) {
-                            if (input.files && input.files[0]) {
-                                var reader = new FileReader();
-
-                                reader.onload = function (e) {
-                                    jqOld('#pic').attr('src', e.target.result);
-                                }
-
-                                reader.readAsDataURL(input.files[0]);
-                            }
-                        }
-
-                        jqOld("#photoA").change(function () {
-                            readURL(this);
-                        });
-
-                        function Upload() {
+              <script>
+    function readURL(input) {
+        debugger
+        if (input.files && input.files[0]) {
+            //Get reference of FileUpload.
+            var fileUpload = document.getElementById("photoA");
+            if (fileUpload.value.length > 0) {
+                //Check whether the file is valid Image.
+                var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(.jpg|.png|.gif)$");
+                if (regex.test(fileUpload.value.toLowerCase())) {
+                    var reader = new FileReader();
+                    var s = fileUpload.files[0];
+                    reader.readAsDataURL(s);
+                    reader.onload = function (e) {
+                        var image = new Image();
+                        image.src = e.target.result;
+                        image.onload = function () {
                             debugger
-                            //Get reference of FileUpload.
-                            var fileUpload = document.getElementById("photoA");
-                            if (typeof (fileUpload.files[0]) != "undefined") {
-                                //Check whether the file is valid Image.
-                                var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(.jpg|.png|.gif)jqOld");
-                                if (regex.test(fileUpload.value.toLowerCase())) {
-                                    var reader = new FileReader();
-                                    reader.readAsDataURL(fileUpload.files[0]);
-                                    reader.onload = function (e) {
-                                        var image = new Image();
-                                        image.src = e.target.result;
-                                        image.onload = function () {
-                                            debugger
-                                            var height = this.height;
-                                            var width = this.width;
-                                            if (height > 300 || width > 300) {
-                                                debugger
-                                                alert("Height and Width must not exceed 100px.");
-                                                return false;
-                                            }
-                                        };
-                                    }
-                                }
-                                else {
-                                    alert("Please select .jpg,.png,.gif");
-                                    return false;
-                                }
-                            }
+                            var height = this.height;
+                            var width = this.width;
+                            if (height > 100 || width > 100) {
+                                debugger
 
-                        }
-                    </script>
-                
+                                bootbox.alert({
+                                    title: "Alert !",
+                                    message: 'Height and Width must not exceed 100px.'
+                                });
+                                return false;
+                            }
+                            else {
+
+                                var reader1 = new FileReader();
+
+                                reader1.onload = function (e) {
+                                    $('#pic').attr('src', e.target.result);
+                                }
+
+                                reader1.readAsDataURL(input.files[0]);
+                            }
+                        };
+                    }
+                }
+                else {
+
+                    bootbox.alert({
+                        title: "Alert !",
+                        message: 'Please select .jpg,.png,.gif'
+                    });
+                    return false;
+                }
+            }
+
+        }
+    }
+
+    $("#photoA").change(function () {
+        readURL(this);
+    });
+</script>

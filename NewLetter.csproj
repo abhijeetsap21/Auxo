@@ -851,6 +851,7 @@
     <Content Include="images\pdate.gif" />
     <Content Include="images\pdate_old.gif" />
     <Content Include="images\powerby.png" />
+    <Content Include="images\processing.gif" />
     <Content Include="images\profile-icon.jpg" />
     <Content Include="images\profile-pic.jpg" />
     <Content Include="images\qendidate-inner.png" />

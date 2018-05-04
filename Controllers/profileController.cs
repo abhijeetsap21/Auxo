@@ -621,7 +621,7 @@ namespace NewLetter.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+         [ValidateAntiForgeryToken]
         public ActionResult SaveEmploymentDetails(qenEmpDetail model,FormCollection frm)
         {
             try

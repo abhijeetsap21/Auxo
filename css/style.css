@@ -663,3 +663,5 @@ input[type="checkbox"], input[type="radio"]{line-height: normal; margin: 0;}
    .register-main{ padding: 54px 0px;}
    .social-login-buttons {    margin-bottom: 20px;    margin-top: 0;}
 }
+
+#loading {display: none;position: fixed;left: 0px;top: 0px;width: 100%;height: 100%;z-index: 9999;background: url('/Images/processing.gif') 50% 50% no-repeat;}

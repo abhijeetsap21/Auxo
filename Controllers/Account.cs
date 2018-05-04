@@ -234,7 +234,7 @@ namespace NewLetter.Controllers
 
         public ActionResult Logout()
         {
-            BaseUtil.accesiblePages = null; 
+            
             Session.Abandon();
             return RedirectToAction("Login", "Account");
         }

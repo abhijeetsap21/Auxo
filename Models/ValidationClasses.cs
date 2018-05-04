@@ -198,7 +198,11 @@ namespace NewLetter.Models
         public string CompanyName { get; set; }
         [Required(ErrorMessage = "please enter employment start date")]
         public System.Nullable<System.DateTime> qenEmpFrom { get; set; }
+
+        [AllowHtml]
+        [Display(Name = "Responsibilities")]
         public string jobDescription { get; set; }
+
         [Required(ErrorMessage = "please enter employment end date")]
         public System.Nullable<System.DateTime> qenEmpTo { get; set; }
         [Required(ErrorMessage = "please enter salary")]
