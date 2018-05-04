@@ -19,14 +19,14 @@ var nonbreaking = (function () {
     editor.insertContent(stringRepeat(nbsp, times));
     editor.dom.setAttrib(editor.dom.select('span.mce-nbsp'), 'data-mce-bogus', '1');
   };
-  var $_cwy81eh0jfuw8pru = { insertNbsp: insertNbsp };
+  var $_1dqky4h7jgqkx0fm = { insertNbsp: insertNbsp };
 
   var register = function (editor) {
     editor.addCommand('mceNonBreaking', function () {
-      $_cwy81eh0jfuw8pru.insertNbsp(editor, 1);
+      $_1dqky4h7jgqkx0fm.insertNbsp(editor, 1);
     });
   };
-  var $_buxrv5gzjfuw8prt = { register: register };
+  var $_1q6qtnh6jgqkx0fl = { register: register };
 
   var global$1 = tinymce.util.Tools.resolve('tinymce.util.VK');
 
@@ -38,10 +38,10 @@ var nonbreaking = (function () {
       return spaces;
     }
   };
-  var $_f5rvddh3jfuw8prx = { getKeyboardSpaces: getKeyboardSpaces };
+  var $_100dylhajgqkx0fp = { getKeyboardSpaces: getKeyboardSpaces };
 
   var setup = function (editor) {
-    var spaces = $_f5rvddh3jfuw8prx.getKeyboardSpaces(editor);
+    var spaces = $_100dylhajgqkx0fp.getKeyboardSpaces(editor);
     if (spaces > 0) {
       editor.on('keydown', function (e) {
         if (e.keyCode === global$1.TAB && !e.isDefaultPrevented()) {
@@ -50,12 +50,12 @@ var nonbreaking = (function () {
           }
           e.preventDefault();
           e.stopImmediatePropagation();
-          $_cwy81eh0jfuw8pru.insertNbsp(editor, spaces);
+          $_1dqky4h7jgqkx0fm.insertNbsp(editor, spaces);
         }
       });
     }
   };
-  var $_6lsd92h1jfuw8prv = { setup: setup };
+  var $_csm843h8jgqkx0fn = { setup: setup };
 
   var register$1 = function (editor) {
     editor.addButton('nonbreaking', {
@@ -69,12 +69,12 @@ var nonbreaking = (function () {
       context: 'insert'
     });
   };
-  var $_9wbdylh4jfuw8pry = { register: register$1 };
+  var $_8k058whbjgqkx0fq = { register: register$1 };
 
   global.add('nonbreaking', function (editor) {
-    $_buxrv5gzjfuw8prt.register(editor);
-    $_9wbdylh4jfuw8pry.register(editor);
-    $_6lsd92h1jfuw8prv.setup(editor);
+    $_1q6qtnh6jgqkx0fl.register(editor);
+    $_8k058whbjgqkx0fq.register(editor);
+    $_csm843h8jgqkx0fn.setup(editor);
   });
   function Plugin () {
   }

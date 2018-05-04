@@ -70,6 +70,7 @@ namespace NewLetter.Models
         public string CareerHighlight { get; set; }
         public Nullable<System.DateTime> lastLoginTime { get; set; }
         public bool uploadFromExternalResource { get; set; }
+        public string registeredFrom { get; set; }
     
         public virtual genderList genderList { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
