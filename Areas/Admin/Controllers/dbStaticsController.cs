@@ -33,8 +33,16 @@ namespace NewLetter.Areas.Admin.Controllers
         }
 
         public JsonResult dbStatics_()
-        {           
-           var a= repo.SQLQuery<sp_dbStatics_Result>("sp_dbStatics").FirstOrDefault();
+        {
+            var a = (dynamic)null;
+            try
+            {
+                a = repo.SQLQuery<sp_dbStatics_Result>("sp_dbStatics").FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+            }
             return Json(a,JsonRequestBehavior.AllowGet);
         }
 

@@ -20,24 +20,27 @@ namespace NewLetter.Areas.Admin.Controllers
         private Education_ repo = null;
 
         public EducationController()
-        {          
-             uow = new UnitOfWork();
-            repo = new Education_(uow);           
+        {
+            uow = new UnitOfWork();
+            repo = new Education_(uow);
         }
-        
         // GET: Admin/Education
         public ActionResult Index()
-        {           
-            var educations= repo.SQLQuery<sp_selectEducationTypeList_Result>("sp_selectEducationTypeList").ToList();
-            //db.Educations.Include(e => e.EmployerDetail).Include(e => e.EmployerDetail1);
+        {
+            var educations = (dynamic)null;
+            try
+            {
+                educations = repo.SQLQuery<sp_selectEducationTypeList_Result>("sp_selectEducationTypeList").ToList();
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+            }
             return View(educations);
         }
-
-      
-
         // GET: Admin/Education/Create
         public ActionResult Create()
-        {          
+        {
             return View();
         }
 
@@ -48,17 +51,23 @@ namespace NewLetter.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(NewLetter.Models.Education education)
         {
-            education.createdBy =Convert.ToInt64( BaseUtil.GetSessionValue(AdminInfo.UserID.ToString()));
-            education.modifiedBy = Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.UserID.ToString()));
-            education.dataIsCreated = BaseUtil.GetCurrentDateTime();
-            education.dataIsUpdated= BaseUtil.GetCurrentDateTime();
-           
-            if (ModelState.IsValid)
+            try
             {
-                repo.Insert(education);
-                return RedirectToAction("Index");
+                education.createdBy = Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.UserID.ToString()));
+                education.modifiedBy = Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.UserID.ToString()));
+                education.dataIsCreated = BaseUtil.GetCurrentDateTime();
+                education.dataIsUpdated = BaseUtil.GetCurrentDateTime();
+
+                if (ModelState.IsValid)
+                {
+                    repo.Insert(education);
+                    return RedirectToAction("Index");
+                }
             }
-            
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+            }
             return View(education);
         }
 
@@ -69,12 +78,16 @@ namespace NewLetter.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Education education = repo.Single(id);
-            if (education == null)
+            var education = (dynamic)null;
+            try
             {
-                return HttpNotFound();
+                education = repo.Single(id);
             }
-            
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+            }
+
             return View(education);
         }
 
@@ -85,27 +98,31 @@ namespace NewLetter.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(NewLetter.Models.Education education)
         {
-            var s = repo.Single(education.EducationID);
-            if (s == null)
+            try
             {
-                return HttpNotFound();
+                var s = repo.Single(education.EducationID);
+                if (s == null)
+                {
+                    return HttpNotFound();
+                }
+                s.educationName = education.educationName;
+                s.dataIsUpdated = BaseUtil.GetCurrentDateTime();
+                s.isActive = education.isActive;
+                s.isSelected = education.isSelected;
+                s.modifiedBy = Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.employerID.ToString()));
+
+                if (ModelState.IsValid)
+                {
+                    repo.Update(s);
+                    return RedirectToAction("Index");
+                }
             }
-            s.educationName = education.educationName;
-            s.dataIsUpdated = BaseUtil.GetCurrentDateTime();
-            s.isActive = education.isActive;
-            s.isSelected = education.isSelected;
-            s.modifiedBy= Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.employerID.ToString()));
-            
-            if (ModelState.IsValid)
+            catch (Exception e)
             {
-                repo.Update(s);
-                return RedirectToAction("Index");
+                BaseUtil.CaptureErrorValues(e);
             }
-            
             return View(education);
         }
 
-      
-       
     }
 }

@@ -28,7 +28,15 @@ namespace NewLetter.Areas.Admin.Controllers
         // GET: Admin/CandidateStatus
         public ActionResult Index()
         {
-            var status = repo.SQLQuery<sp_candidateStatusTypeList_Result>("sp_candidateStatusTypeList").ToList();
+            var status = (dynamic)null;
+            try
+            {
+                 status = repo.SQLQuery<sp_candidateStatusTypeList_Result>("sp_candidateStatusTypeList").ToList();                
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+            }
             return View(status);
         }   
 
@@ -45,17 +53,23 @@ namespace NewLetter.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Candidate_status1,status")] Candidate_status candidate_status)
         {
-            candidate_status.createdBy =Convert.ToInt64( BaseUtil.GetSessionValue(AdminInfo.UserID.ToString()));
-            candidate_status.modifiedBy= Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.UserID.ToString()));
-            candidate_status.dataIsCreated = BaseUtil.GetCurrentDateTime();
-            candidate_status.dataIsUpdated = BaseUtil.GetCurrentDateTime();
-            candidate_status.isActive = true;
-            if (ModelState.IsValid)
+            try
             {
-                repo.Insert(candidate_status);               
-                return RedirectToAction("Index");
+                candidate_status.createdBy = Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.UserID.ToString()));
+                candidate_status.modifiedBy = Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.UserID.ToString()));
+                candidate_status.dataIsCreated = BaseUtil.GetCurrentDateTime();
+                candidate_status.dataIsUpdated = BaseUtil.GetCurrentDateTime();
+                candidate_status.isActive = true;
+                if (ModelState.IsValid)
+                {
+                    repo.Insert(candidate_status);
+                    return RedirectToAction("Index");
+                }
             }
-
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+            }
             return View(candidate_status);
         }
 
@@ -66,7 +80,9 @@ namespace NewLetter.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var candidate_status =repo.Single(id);
+            var candidate_status =
+                
+                repo.Single(id);
            
             if (candidate_status == null)
             {

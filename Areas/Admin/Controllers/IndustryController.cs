@@ -28,7 +28,15 @@ namespace NewLetter.Areas.Admin.Controllers
         // GET: Admin/Industry
         public ActionResult Index()
         {
-            var industries = repo.SQLQuery<sp_IndustryList_Result>("sp_IndustryList").ToList();
+            var industries = (dynamic)null;
+            try {
+                industries = repo.SQLQuery<sp_IndustryList_Result>("sp_IndustryList").ToList();
+            }
+            catch (Exception e)
+            {
+
+                BaseUtil.CaptureErrorValues(e);
+            }
             return View(industries.ToList());
         }
 
@@ -46,6 +54,7 @@ namespace NewLetter.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "industryName,isActive")] industry industry)
         {
+            try { 
             if (ModelState.IsValid)
             {
                 industry.createdBy = Convert.ToInt64((BaseUtil.GetSessionValue(AdminInfo.employerID.ToString())));
@@ -55,7 +64,13 @@ namespace NewLetter.Areas.Admin.Controllers
                 industry.dataIsUpdated = BaseUtil.GetCurrentDateTime();
                 repo.Insert(industry);
                 return RedirectToAction("Index");
-            }            
+            }
+            }
+            catch (Exception e)
+            {
+
+                BaseUtil.CaptureErrorValues(e);
+            }
             return View(industry);
         }
 
@@ -66,13 +81,15 @@ namespace NewLetter.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            var industry = repo.Single(id);
-            if (industry == null)
-            {
-                return HttpNotFound();
+            var industry  =(dynamic)null;
+            try { 
+                 industry = repo.Single(id);
             }
-            
+            catch (Exception e)
+            {
+
+                BaseUtil.CaptureErrorValues(e);
+            }
             return View(industry);
         }
 
@@ -83,6 +100,7 @@ namespace NewLetter.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "industryID,industryName,isActive")] industry industry)
         {
+            try { 
             var i = repo.Single(industry.industryID);
             if (i == null)
             {
@@ -98,7 +116,12 @@ namespace NewLetter.Areas.Admin.Controllers
                 repo.Update(i);
                 return RedirectToAction("Index");
             }
-            
+            }
+            catch (Exception e)
+            {
+
+                BaseUtil.CaptureErrorValues(e);
+            }
             return View(industry);
         }
 

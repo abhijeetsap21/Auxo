@@ -25,8 +25,16 @@ namespace NewLetter.Areas.Admin.Controllers
 
         // GET: Admin/Slots
         public ActionResult Index()
-        {            
-            var status = repo.SQLQuery<sp_slotlist_Result>("sp_slotlist").ToList();
+        {
+            var status=(dynamic)null;
+            try
+            {
+                 status = repo.SQLQuery<sp_slotlist_Result>("sp_slotlist").ToList();            
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+            }
             return View(status);                       
         }
 
@@ -44,6 +52,7 @@ namespace NewLetter.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "slotTime,isActive")] slot Slot)
         {
+            try { 
             if (ModelState.IsValid)
             {
                 Slot.createdBy = Convert.ToInt64((BaseUtil.GetSessionValue(AdminInfo.employerID.ToString()))); 
@@ -53,7 +62,11 @@ namespace NewLetter.Areas.Admin.Controllers
                 repo.Insert(Slot);
                 return RedirectToAction("Index");
             }
-
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+            }
             return View(Slot);
         }
 
@@ -64,10 +77,13 @@ namespace NewLetter.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            slot slots = repo.Single(id);
-            if (slots == null)
+            slot slots = null;
+              try {
+                slots = repo.Single(id);
+            }
+            catch (Exception e)
             {
-                return HttpNotFound();
+                BaseUtil.CaptureErrorValues(e);
             }
             return View(slots);
         }
@@ -80,6 +96,7 @@ namespace NewLetter.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "SlotID,slotTime,isActive")] slot slots)
         {
+            try { 
             var s = repo.Single(slots.SlotID);
             if (s == null)
             {
@@ -95,6 +112,11 @@ namespace NewLetter.Areas.Admin.Controllers
                 slots.dataIsUpdated = BaseUtil.GetCurrentDateTime();
                 repo.Update(s);
                 return RedirectToAction("Index");
+            }
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
             }
             return View(slots);
         }

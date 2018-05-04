@@ -26,7 +26,15 @@ namespace NewLetter.Areas.Admin.Controllers
         // GET: Admin/Currency
         public async Task<ActionResult> Index()
         {
-            var currency = repo.SQLQuery<sp_currencyTypeList_Result>("sp_currencyTypeList").ToList();
+            var currency = (dynamic)null;
+            try
+            {
+                currency = repo.SQLQuery<sp_currencyTypeList_Result>("sp_currencyTypeList").ToList();
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);               
+            }
             return View(currency);
         }
       
@@ -43,16 +51,21 @@ namespace NewLetter.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "currencyID,currency1,isActive")] currency currency)
         {
-            currency.dataIsCreated = BaseUtil.GetCurrentDateTime();
-            currency.dataIsUpdated= BaseUtil.GetCurrentDateTime();
-           
-            if (ModelState.IsValid)
+            try
             {
+                currency.dataIsCreated = BaseUtil.GetCurrentDateTime();
+                currency.dataIsUpdated = BaseUtil.GetCurrentDateTime();
 
-                 repo.Insert(currency);
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    repo.Insert(currency);
+                    return RedirectToAction("Index");
+                }
             }
-
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+            }
             return View(currency);
         }
 
@@ -63,10 +76,19 @@ namespace NewLetter.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            currency currency = repo.Single(id);
-            if (currency == null)
+
+            var currency = (dynamic)null;
+            try
             {
-                return HttpNotFound();
+                currency = repo.Single(id);
+                if (currency == null)
+                {
+                    return HttpNotFound();
+                }
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
             }
             return View(currency);
         }
@@ -78,22 +100,29 @@ namespace NewLetter.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "currencyID,currency1,isActive")] currency currency)
         {
-            var s = repo.Single(currency.currencyID);
-
-            if (s == null)
+            try
             {
-                return HttpNotFound();
+                var s = repo.Single(currency.currencyID);
+
+                if (s == null)
+                {
+                    return HttpNotFound();
+                }
+                s.currency1 = currency.currency1;
+                s.dataIsUpdated = BaseUtil.GetCurrentDateTime();
+                s.isActive = currency.isActive;
+                s.isSelected = currency.isSelected;
+                s.modifiedBy = Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.employerID.ToString()));
+
+                if (ModelState.IsValid)
+                {
+                    repo.Update(s);
+                    return RedirectToAction("Index");
+                }
             }
-            s.currency1 = currency.currency1;
-            s.dataIsUpdated = BaseUtil.GetCurrentDateTime();
-            s.isActive = currency.isActive;
-            s.isSelected = currency.isSelected;
-            s.modifiedBy = Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.employerID.ToString()));
-
-            if (ModelState.IsValid)
+            catch (Exception e)
             {
-                repo.Update(s);
-                return RedirectToAction("Index");
+                BaseUtil.CaptureErrorValues(e);
             }
             return View(currency);
         }

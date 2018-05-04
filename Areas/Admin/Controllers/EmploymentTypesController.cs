@@ -25,13 +25,18 @@ namespace NewLetter.Areas.Admin.Controllers
         // GET: Admin/EmploymentTypes
         public ActionResult Index()
         {
-            var employmentTypes = repo.GetAll().ToList();
-            return View(employmentTypes);
+            var employmentTypes = (dynamic)null;
+             try
+            {
+                 employmentTypes = repo.GetAll().ToList();
+            }
+            catch (Exception e)
+            {
+
+                BaseUtil.CaptureErrorValues(e);
+            }
+                return View(employmentTypes);
         }
-
-        // GET: Admin/EmploymentTypes/Details/5
-     
-
         // GET: Admin/EmploymentTypes/Create
         public ActionResult Create()
         {           
@@ -45,16 +50,22 @@ namespace NewLetter.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "EmploymentTypeID,EmploymentType1,dataIsCreated,dataIsUpdated,isActive,isSelected,createdBy,modifiedBy")] NewLetter.Models.EmploymentType employmentType)
         {
-            employmentType.createdBy= Convert.ToInt64((BaseUtil.GetSessionValue(AdminInfo.employerID.ToString())));
-            employmentType.modifiedBy= Convert.ToInt64((BaseUtil.GetSessionValue(AdminInfo.employerID.ToString())));
-            employmentType.dataIsCreated= BaseUtil.GetCurrentDateTime();
-            employmentType.dataIsUpdated= BaseUtil.GetCurrentDateTime();
-            if (ModelState.IsValid)
+            try
             {
-                repo.Insert(employmentType);
-                return RedirectToAction("Index");
+                employmentType.createdBy = Convert.ToInt64((BaseUtil.GetSessionValue(AdminInfo.employerID.ToString())));
+                employmentType.modifiedBy = Convert.ToInt64((BaseUtil.GetSessionValue(AdminInfo.employerID.ToString())));
+                employmentType.dataIsCreated = BaseUtil.GetCurrentDateTime();
+                employmentType.dataIsUpdated = BaseUtil.GetCurrentDateTime();
+                if (ModelState.IsValid)
+                {
+                    repo.Insert(employmentType);
+                    return RedirectToAction("Index");
+                }
             }
-           
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+            }
             return View(employmentType);
         }
 
@@ -65,11 +76,15 @@ namespace NewLetter.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-          EmploymentType employmentType = repo.Single(id);
-            if (employmentType == null)
+            EmploymentType employmentType = null;
+                try {
+                employmentType = repo.Single(id);
+            }
+            catch (Exception e)
             {
-                return HttpNotFound();
-            }           
+
+                BaseUtil.CaptureErrorValues(e);
+            }
             return View(employmentType);
         }
 
@@ -80,22 +95,30 @@ namespace NewLetter.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "EmploymentTypeID,EmploymentType1,dataIsCreated,dataIsUpdated,isActive,isSelected,createdBy,modifiedBy")] NewLetter.Models.EmploymentType employmentType)
         {
-            var s = repo.Single(employmentType.EmploymentTypeID);
-            if (s == null)
+            try
             {
-                return HttpNotFound();
+                var s = repo.Single(employmentType.EmploymentTypeID);
+                if (s == null)
+                {
+                    return HttpNotFound();
+                }
+                s.EmploymentType1 = employmentType.EmploymentType1;
+                s.dataIsUpdated = BaseUtil.GetCurrentDateTime();
+                s.isActive = employmentType.isActive;
+                s.isSelected = employmentType.isSelected;
+                s.modifiedBy = Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.employerID.ToString()));
+                if (ModelState.IsValid)
+                {
+                    repo.Update(s);
+                    return RedirectToAction("Index");
+                }
             }
-            s.EmploymentType1 = employmentType.EmploymentType1;
-            s.dataIsUpdated = BaseUtil.GetCurrentDateTime();
-            s.isActive = employmentType.isActive;
-            s.isSelected = employmentType.isSelected;
-            s.modifiedBy = Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.employerID.ToString()));
-            if (ModelState.IsValid)
+            catch (Exception e)
             {
-                repo.Update(s);
-                return RedirectToAction("Index");
+
+                BaseUtil.CaptureErrorValues(e);
             }
-           
+
             return View(employmentType);
         }
         

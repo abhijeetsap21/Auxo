@@ -29,7 +29,15 @@ namespace NewLetter.Areas.Admin.Controllers
         // GET: Admin/JobStatus
         public ActionResult Index()
         {
-            var jobs = repo.SQLQuery<sp_jobStatus_List_Result>("sp_jobStatus_List").ToList();
+            var jobs = (dynamic)null;
+            try
+            {
+                 jobs = repo.SQLQuery<sp_jobStatus_List_Result>("sp_jobStatus_List").ToList();
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+            }
             return View(jobs.ToList());
         }
 
@@ -47,18 +55,25 @@ namespace NewLetter.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "statuts,isActive")] jobStatu jobStatu)
         {
-            if (ModelState.IsValid)
+            try
             {
-                jobStatu.dataIsCreated = BaseUtil.GetCurrentDateTime();
-                jobStatu.dataIsUpdated = BaseUtil.GetCurrentDateTime();
-                jobStatu.isActive = jobStatu.isActive;
-                jobStatu.createdBy = Convert.ToInt64((BaseUtil.GetSessionValue(AdminInfo.employerID.ToString())));
-                jobStatu.modifiedBy = Convert.ToInt64((BaseUtil.GetSessionValue(AdminInfo.employerID.ToString())));
+                if (ModelState.IsValid)
+                {
+                    jobStatu.dataIsCreated = BaseUtil.GetCurrentDateTime();
+                    jobStatu.dataIsUpdated = BaseUtil.GetCurrentDateTime();
+                    jobStatu.isActive = jobStatu.isActive;
+                    jobStatu.createdBy = Convert.ToInt64((BaseUtil.GetSessionValue(AdminInfo.employerID.ToString())));
+                    jobStatu.modifiedBy = Convert.ToInt64((BaseUtil.GetSessionValue(AdminInfo.employerID.ToString())));
 
-                repo.Insert(jobStatu);
-                return RedirectToAction("Index");
+                    repo.Insert(jobStatu);
+                    return RedirectToAction("Index");
+                }
             }
-                        
+            catch (Exception e)
+            {
+
+                BaseUtil.CaptureErrorValues(e);
+            }          
             return View(jobStatu);
         }
 
@@ -68,13 +83,17 @@ namespace NewLetter.Areas.Admin.Controllers
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }           
-
-            var jobStatu = repo.Single(id);
-            if (jobStatu == null)
+            }
+            var jobStatu=(dynamic)null;
+            try
             {
-                return HttpNotFound();
-            }            
+                 jobStatu = repo.Single(id);
+            }
+            catch (Exception e)
+            {
+
+                BaseUtil.CaptureErrorValues(e);
+            }
             return View(jobStatu);
         }
 
@@ -85,7 +104,9 @@ namespace NewLetter.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "statuts,isActive")] jobStatu jobStatu)
         {
-            var j = repo.Single(jobStatu.jobStatusID);
+            try
+            {
+                var j = repo.Single(jobStatu.jobStatusID);
             if (j == null)
             {
                 return HttpNotFound();
@@ -99,7 +120,12 @@ namespace NewLetter.Areas.Admin.Controllers
                 repo.Update(j);
                 return RedirectToAction("Index");
             }
-            
+            }
+            catch (Exception e)
+            {
+
+                BaseUtil.CaptureErrorValues(e);
+            }
             return View(jobStatu);
         }       
 

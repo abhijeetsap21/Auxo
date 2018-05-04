@@ -20,18 +20,22 @@ namespace NewLetter.Controllers
     [CustomErrorHandling]
     public class companyDetailsController : BaseClass
     {
-
-
         private oriondbEntities db = new oriondbEntities();
         private string r;
-
-
 
         // GET: companyDetails
         public ActionResult Index()
         {
-            var companyDetails = db.companyDetails.Include(c => c.city).Include(c => c.EmployerDetails).Include(c => c.employerType);
-            return View(companyDetails.ToList());
+            var companyDetails = (dynamic)null;
+            try
+            {
+                companyDetails = db.companyDetails.Include(c => c.city).Include(c => c.EmployerDetails).Include(c => c.employerType).ToList();
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+            }
+            return View(companyDetails);
 
         }
 
@@ -42,32 +46,38 @@ namespace NewLetter.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            companyDetail companyDetail = db.companyDetails.Find(id);
-            if (companyDetail == null)
+            companyDetail companyDetail = null;
+            try
             {
-                return HttpNotFound();
+                companyDetail = db.companyDetails.Find(id);
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
             }
             return View(companyDetail);
         }
-
-
-
-
         // View Candidates 
 
         public async Task<ActionResult> candidates(string qenName, string qenPhone, string qenEmail, string skills)
         {
-
-
-            var jobDetails = db.qendidateLists.Include(e => e.qenSkills);
-            string queryParameter = string.Empty;
-            return View(await jobDetails.ToListAsync());
+            var jobDetails = (dynamic)null;
+            try
+            {
+                jobDetails = db.qendidateLists.Include(e => e.qenSkills).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+            }
+            return View(await jobDetails);
         }
         //View Candidate Resume 
 
         public ActionResult CandidateView(int qenid)
         {
             ResumeModel model = new ResumeModel();
+            try { 
             qendidateList personal = db.qendidateLists.Where(ex => ex.qenID == qenid).FirstOrDefault();
             qenSecondary s = db.qenSecondaries.Where(ex => ex.qenID == qenid).FirstOrDefault();
             qenHigherSecondary hs = db.qenHigherSecondaries.Where(ex => ex.qenID == qenid).FirstOrDefault();
@@ -86,6 +96,11 @@ namespace NewLetter.Controllers
             model.employmentinfo = emp != null ? emp : new List<qenEmpDetail>();
             model.refrences = refrences != null ? refrences : new List<qenReference>();
             model.phdinfo = phd != null ? phd : new List<qendidatePHD>();
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+            }
             return View(model);
         }
 
@@ -96,34 +111,38 @@ namespace NewLetter.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            companyDetail companyDetail = db.companyDetails.Find(id);
-            if (companyDetail == null)
+            companyDetail companyDetail = null;
+            try { 
+                  companyDetail = db.companyDetails.Find(id);
+             }
+            catch (Exception e)
             {
-                return HttpNotFound();
+                BaseUtil.CaptureErrorValues(e);
             }
-
             ViewBag.modifiedBy = new SelectList(db.EmployerDetails, "EmployerID", "Name", companyDetail.modifiedBy);
             ViewBag.employerTypeID = new SelectList(db.employerTypes, "employerTypeID", "employerType1", companyDetail.employerTypeID);
             return View(companyDetail);
         }
 
-        // POST: companyDetails/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "companyID,companyName,cityID,address,website,companyIndustry,companyDescription,gstNo,tinNo,ctsNo,logo,createdDate,isActive,isDeleted,modifiedBy,modifiedDate,employerTypeID")] companyDetail companyDetail)
         {
+            try {
             if (ModelState.IsValid)
             {
                 db.Entry(companyDetail).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
+                }
+             }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
             }
             //ViewBag.cityID = new SelectList(db.cities, "cityID", "city1", companyDetail.cityID);
             ViewBag.modifiedBy = new SelectList(db.EmployerDetails, "EmployerID", "Name", companyDetail.modifiedBy);
-            ViewBag.employerTypeID = new SelectList(db.employerTypes, "employerTypeID", "employerType1", companyDetail.employerTypeID);
+                    ViewBag.employerTypeID = new SelectList(db.employerTypes, "employerTypeID", "employerType1", companyDetail.employerTypeID);
             return View(companyDetail);
         }
 
@@ -134,10 +153,13 @@ namespace NewLetter.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            companyDetail companyDetail = db.companyDetails.Find(id);
-            if (companyDetail == null)
+            companyDetail companyDetail = null;
+            try { 
+             companyDetail = db.companyDetails.Find(id);
+            }
+            catch (Exception e)
             {
-                return HttpNotFound();
+                BaseUtil.CaptureErrorValues(e);
             }
             return View(companyDetail);
         }
@@ -170,11 +192,18 @@ namespace NewLetter.Controllers
         [HttpGet]
         public ActionResult _partialEditCompany()
         {
-            int companyID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.companyID.ToString()));
             companyDetail companyDetail = new companyDetail();
+            try { 
+            int companyID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.companyID.ToString()));
+           
             companyDetail = db.companyDetails.Where(ex => ex.companyID == companyID).FirstOrDefault();
             ViewBag.employerTypeID = new SelectList(db.employerTypes, "employerTypeID", "employerType1", companyDetail.employerTypeID);
             ViewBag.companyIndustry = new SelectList(db.industries, "industryID", "industryName");
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+            }
             return PartialView("_partialEditCompany", companyDetail);
         }
 
@@ -184,7 +213,7 @@ namespace NewLetter.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult savecompanyDetails(companyDetail companyDetail, HttpPostedFileBase files)
         {
-
+            try { 
             int companyID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.companyID.ToString()));
             companyDetail cmpdetail = new companyDetail();
             cmpdetail = db.companyDetails.Where(ex => ex.companyID == companyDetail.companyID).FirstOrDefault();
@@ -226,15 +255,29 @@ namespace NewLetter.Controllers
             ViewBag.companyIndustry = new SelectList(db.industries, "industryID", "industryName");
 
             TempData["saveResult"] = "Success";
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+                TempData["saveResult"] = "";
+            }
             return RedirectToAction("empedit");
         }
 
         [HttpGet]
         public ActionResult _partialEditEmployer()
         {
-            int employerID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.employerID.ToString()));
             EmployerDetail employerDetail = new EmployerDetail();
+            try { 
+            int employerID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.employerID.ToString()));
+           
             employerDetail = db.EmployerDetails.Where(ex => ex.EmployerID == employerID).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+                TempData["saveResult"] = "";
+            }
             return PartialView("_partialEditEmployer", employerDetail);
         }
 
@@ -243,18 +286,28 @@ namespace NewLetter.Controllers
         [HttpPost]
         public ActionResult editEmployer(EmployerDetail employerDetail)
         {
-            int companyID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.companyID.ToString()));
-            int employerID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.employerID.ToString()));
             EmployerDetail empdetail = new EmployerDetail();
-            empdetail = db.EmployerDetails.Where(ex => ex.EmployerID == employerDetail.EmployerID).FirstOrDefault();
-            empdetail.Name = employerDetail.Name;
-            empdetail.Mobile = employerDetail.Mobile;
-            empdetail.Email = employerDetail.Email;
-            empdetail.dataIsUpdated = BaseUtil.GetCurrentDateTime();
-            db.Entry(empdetail).State = EntityState.Modified;
-            db.SaveChanges();
+            try
+            {
+                int companyID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.companyID.ToString()));
+                int employerID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.employerID.ToString()));
 
-            TempData["saveResult"] = "empSuccess";
+                empdetail = db.EmployerDetails.Where(ex => ex.EmployerID == employerDetail.EmployerID).FirstOrDefault();
+                empdetail.Name = employerDetail.Name;
+                empdetail.Mobile = employerDetail.Mobile;
+                empdetail.Email = employerDetail.Email;
+                empdetail.dataIsUpdated = BaseUtil.GetCurrentDateTime();
+                db.Entry(empdetail).State = EntityState.Modified;
+                db.SaveChanges();
+
+                TempData["saveResult"] = "empSuccess";
+            }
+             
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+                TempData["saveResult"] = "";
+            }
             return RedirectToAction("empedit");
         }
 
@@ -282,31 +335,39 @@ namespace NewLetter.Controllers
         {
             oriondbEntities db = new oriondbEntities();
             DateTime updatbefore = BaseUtil.GetCalculatedDateTime(-365);
-            string spExecute = "sp_candidateSearch @defaultSearch =1 , @modifiedDate='" + updatbefore + "',@PageNumber = 1, @jobID ='" + jobid + "'";
-            var result = db.Database.SqlQuery<sp_candidateSearch_result>(spExecute).ToList();
+            string spExecute = ""; var result = (dynamic)null;
+            try { 
+             spExecute = "sp_candidateSearch @defaultSearch =1 , @modifiedDate='" + updatbefore + "',@PageNumber = 1, @jobID ='" + jobid + "'";
+                result = db.Database.SqlQuery<sp_candidateSearch_result>(spExecute).ToList();
             sp_candidateSearch_result sp = new sp_candidateSearch_result();
             if (result != null)
             {
                 sp.PageCount = result[0].PageCount;
             }
-            else {
+            else
+            {
                 sp.PageCount = 1;
             }
             ViewBag.defaultSearch = 1;
             sp.CurrentPageIndex = 1;
             ViewBag.totalpages = sp.PageCount;
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+                TempData["saveResult"] = "";
+            }
             return PartialView("_partialCandidateResult", result);
         }
 
-        public string loadMore(string jobtitle, string city, string txtskill, int ddl_update, Int64? jobid, int currentPageIndex ,int defaultsearch)
+        public string loadMore(string jobtitle, string city, string txtskill, int ddl_update, Int64? jobid, int currentPageIndex, int defaultsearch)
         {
-           DateTime updatbefore;
-            string query = "sp_candidateSearch @PageNumber = '" + currentPageIndex + "',";
-          
-            
-            
-                query = query + " @defaultSearch ="+ defaultsearch + ", ";
-              
+            DateTime updatbefore; string htmlString = "";
+            try
+            {
+                string query = "sp_candidateSearch @PageNumber = '" + currentPageIndex + "',";
+                query = query + " @defaultSearch =" + defaultsearch + ", ";
+
                 if (ddl_update == 2)
                 {
                     updatbefore = BaseUtil.GetCalculatedDateTime(-7);
@@ -333,12 +394,12 @@ namespace NewLetter.Controllers
                     updatbefore = BaseUtil.GetCalculatedDateTime(-30);
 
                 }
-                    query = query + "  @modifiedDate='" + updatbefore + "'";
-                    if (txtskill != "")
+                query = query + "  @modifiedDate='" + updatbefore + "'";
+                if (txtskill != "")
                 {
                     query = query + " ,@skillsSet ='" + txtskill + "' ";
                 }
-                
+
                 if (city != "")
                 {
                     query = query + ",@city ='" + city + "' ";
@@ -348,108 +409,113 @@ namespace NewLetter.Controllers
                 {
                     query = query + ",@title ='" + jobtitle + "' ";
                 }
-            
-           
-         
-
-            long jid = 0;
-            if (jobid != null)
-            {
-                jid = (long)jobid;
-            }
-           
-            query = query + " ,@jobID ='" + jid + "' ";
-
-            var qendidatesearchlist = db.Database.SqlQuery<sp_candidateSearch_result>(query);
-
-            ViewBag.jobID = jobid;
-            string htmlString = "";
-            int index = (currentPageIndex-1) * 1;
-            foreach (var item in qendidatesearchlist)
-            {
-                index = index + 1;
-                 htmlString = htmlString + "<tr> <td><p >"+index+ "</p> <input type = 'hidden' id = 'qen_"+index+"' value = '"+item.qenID+"'></td>";
 
 
-                if (item.SelfApplied == true)
+
+
+                long jid = 0;
+                if (jobid != null)
                 {
-                    if (item.qenLinkdInUrl != null)
+                    jid = (long)jobid;
+                }
+
+                query = query + " ,@jobID ='" + jid + "' ";
+
+                var qendidatesearchlist = db.Database.SqlQuery<sp_candidateSearch_result>(query);
+
+                ViewBag.jobID = jobid;
+
+                int index = (currentPageIndex - 1) * 1;
+                foreach (var item in qendidatesearchlist)
+                {
+                    index = index + 1;
+                    htmlString = htmlString + "<tr> <td><p >" + index + "</p> <input type = 'hidden' id = 'qen_" + index + "' value = '" + item.qenID + "'></td>";
+
+
+                    if (item.SelfApplied == true)
                     {
-                        htmlString = htmlString + "<td> <a href='" + item.qenLinkdInUrl + "'>" + item.qenName + " <span id='ast'>&#42;</span><div id='tooltip'>These candidates applied through Auxo </div></a></td>";
+                        if (item.qenLinkdInUrl != null)
+                        {
+                            htmlString = htmlString + "<td> <a href='" + item.qenLinkdInUrl + "'>" + item.qenName + " <span id='ast'>&#42;</span><div id='tooltip'>These candidates applied through Auxo </div></a></td>";
 
+                        }
+
+                        else
+                        {
+                            htmlString = htmlString + "<td>" + item.qenName + "<span id='ast'>&#42;</span><div id='tooltip'>These candidates applied through Auxo </div></td>";
+
+                        }
                     }
-
                     else
                     {
-                        htmlString = htmlString + "<td>" + item.qenName + "<span id='ast'>&#42;</span><div id='tooltip'>These candidates applied through Auxo </div></td>";
+                        htmlString = htmlString + "<td>" + item.qenName + "</td>";
 
                     }
-                }
-                else
-                {
-                    htmlString = htmlString + "<td>" + item.qenName + "</td>";
-
-                }
 
 
-                htmlString = htmlString + "<td> " + @item.skillset + "</ td >";
-                htmlString = htmlString + " <td><input id='item_qencategory_" + index + "' name='"+item.category+"' type='hidden' value='"+item.category+"'>  <input type = 'button' class='btn btn-info btn-lg' data-toggle='modal' data-target='#myModal' value='View' onclick='return dispalyResume(" + @item.qenID + ");'> </td>";
-                if (item.category == 0)
-                {
-
-                    htmlString = htmlString + " <td><input type = 'radio' name = 'Category_" + item.qenID + "' onclick = 'return categoriesCandidate1(" + index + ",item_qencategory_" + index + ");'></td>";
-
-                    htmlString = htmlString + "<td><input type = 'radio' name = 'Category_" + item.qenID + "' onclick = 'return categoriesCandidate2(" + index + ",item_qencategory_" + index + ");'></td>";
-
-                    htmlString = htmlString + "<td><input type = 'radio' name = 'Category_" + item.qenID + "' onclick = 'return categoriesCandidate3(" + index + ",item_qencategory_" + index + ");'></td>";
-                }
-                else if (item.category == 1)
-                {
-                    htmlString = htmlString + " <td><input type = 'radio' name = 'Category_" + item.qenID + "'checked onclick = 'return categoriesCandidate1(" + index + ",item_qencategory_" + index + ");'></td>";
-
-                    htmlString = htmlString + "<td><input type = 'radio' name = 'Category_" + item.qenID + "' onclick = 'return categoriesCandidate2(" + index + ",item_qencategory_" + index + ");'></td>";
-
-                    htmlString = htmlString + "<td><input type = 'radio' name = 'Category_" + item.qenID + "' onclick = 'return categoriesCandidate3(" + index + ",item_qencategory_" + index + ");'></td>";
-
-                }
-                else if (item.category == 2)
-                {
-                    htmlString = htmlString + " <td><input type = 'radio' name = 'Category_" + item.qenID + "'checked onclick = 'return categoriesCandidate1(" + index + ",item_qencategory_" + index + ");'></td>";
-
-                    htmlString = htmlString + "<td><input type = 'radio' name = 'Category_" + item.qenID + "'checked onclick = 'return categoriesCandidate2(" + index + ",item_qencategory_" + index + ");'></td>";
-
-                    htmlString = htmlString + "<td><input type = 'radio' name = 'Category_" + item.qenID + "' onclick = 'return categoriesCandidate3(" + index + ",item_qencategory_" + index + ");'></td>";
-
-
-                }
-                  else
+                    htmlString = htmlString + "<td> " + @item.skillset + "</ td >";
+                    htmlString = htmlString + " <td><input id='item_qencategory_" + index + "' name='" + item.category + "' type='hidden' value='" + item.category + "'>  <input type = 'button' class='btn btn-info btn-lg' data-toggle='modal' data-target='#myModal' value='View' onclick='return dispalyResume(" + @item.qenID + ");'> </td>";
+                    if (item.category == 0)
                     {
-                    htmlString = htmlString + " <td><input type = 'radio' name = 'Category_" + item.qenID + "'checked onclick = 'return categoriesCandidate1(" + index + ",item_qencategory_" + index + ");'></td>";
 
-                    htmlString = htmlString + "<td><input type = 'radio' name = 'Category_" + item.qenID + "'checked onclick = 'return categoriesCandidate2(" + index + ",item_qencategory_" + index + ");'></td>";
+                        htmlString = htmlString + " <td><input type = 'radio' name = 'Category_" + item.qenID + "' onclick = 'return categoriesCandidate1(" + index + ",item_qencategory_" + index + ");'></td>";
 
-                    htmlString = htmlString + "<td><input type = 'radio' name = 'Category_" + item.qenID + "'checked onclick = 'return categoriesCandidate3(" + index + ",item_qencategory_" + index + ");'></td>";
+                        htmlString = htmlString + "<td><input type = 'radio' name = 'Category_" + item.qenID + "' onclick = 'return categoriesCandidate2(" + index + ",item_qencategory_" + index + ");'></td>";
 
+                        htmlString = htmlString + "<td><input type = 'radio' name = 'Category_" + item.qenID + "' onclick = 'return categoriesCandidate3(" + index + ",item_qencategory_" + index + ");'></td>";
+                    }
+                    else if (item.category == 1)
+                    {
+                        htmlString = htmlString + " <td><input type = 'radio' name = 'Category_" + item.qenID + "'checked onclick = 'return categoriesCandidate1(" + index + ",item_qencategory_" + index + ");'></td>";
 
-                }
+                        htmlString = htmlString + "<td><input type = 'radio' name = 'Category_" + item.qenID + "' onclick = 'return categoriesCandidate2(" + index + ",item_qencategory_" + index + ");'></td>";
 
-
-                        htmlString = htmlString + "</tr>";
+                        htmlString = htmlString + "<td><input type = 'radio' name = 'Category_" + item.qenID + "' onclick = 'return categoriesCandidate3(" + index + ",item_qencategory_" + index + ");'></td>";
 
                     }
-                    var htmlString1 = HttpUtility.HtmlEncode(htmlString);
-            if (htmlString == "")
-            {
-                htmlString = "<tr> <td colspan='9'> No more records found.</td></tr>";
-            }
-            return htmlString;
+                    else if (item.category == 2)
+                    {
+                        htmlString = htmlString + " <td><input type = 'radio' name = 'Category_" + item.qenID + "'checked onclick = 'return categoriesCandidate1(" + index + ",item_qencategory_" + index + ");'></td>";
+
+                        htmlString = htmlString + "<td><input type = 'radio' name = 'Category_" + item.qenID + "'checked onclick = 'return categoriesCandidate2(" + index + ",item_qencategory_" + index + ");'></td>";
+
+                        htmlString = htmlString + "<td><input type = 'radio' name = 'Category_" + item.qenID + "' onclick = 'return categoriesCandidate3(" + index + ",item_qencategory_" + index + ");'></td>";
+
+
+                    }
+                    else
+                    {
+                        htmlString = htmlString + " <td><input type = 'radio' name = 'Category_" + item.qenID + "'checked onclick = 'return categoriesCandidate1(" + index + ",item_qencategory_" + index + ");'></td>";
+
+                        htmlString = htmlString + "<td><input type = 'radio' name = 'Category_" + item.qenID + "'checked onclick = 'return categoriesCandidate2(" + index + ",item_qencategory_" + index + ");'></td>";
+
+                        htmlString = htmlString + "<td><input type = 'radio' name = 'Category_" + item.qenID + "'checked onclick = 'return categoriesCandidate3(" + index + ",item_qencategory_" + index + ");'></td>";
+
+
+                    }
+
+
+                    htmlString = htmlString + "</tr>";
+
                 }
+                var htmlString1 = HttpUtility.HtmlEncode(htmlString);
+                if (htmlString == "")
+                {
+                    htmlString = "<tr> <td colspan='9'> No more records found.</td></tr>";
+                }
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);              
+            }
 
-
+            return htmlString;
+        }
 
         public ActionResult candidateSearch(FormCollection frm, Int64? jobid)
         {
-            string city = string.Empty; string JobTitle = ""; string modifiedDate = "1"; DateTime updatbefore;
+            string city = string.Empty; string JobTitle = ""; string modifiedDate = "1"; DateTime updatbefore; var qendidatesearchlist = (dynamic)null;
+            try { 
             string query = "sp_candidateSearch";
 
             if (frm.Keys.Count > 0)
@@ -523,18 +589,18 @@ namespace NewLetter.Controllers
             }
             query = query + " ,@jobID ='" + jid + "' ";
 
-            var qendidatesearchlist = db.Database.SqlQuery<sp_candidateSearch_result>(query);
+             qendidatesearchlist = db.Database.SqlQuery<sp_candidateSearch_result>(query);
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+            }
 
             ViewBag.jobID = jobid;
             return PartialView("_partialCandidateResult", qendidatesearchlist);
-        }
-
-
-
-
+        }        
         public int checkValuExist(string skill_)
         {
-
             var result = db.skills.Where(e => e.skillName == skill_).Select(x => new { x.skillsID }).SingleOrDefault();
             if (result == null)
             {
@@ -556,6 +622,7 @@ namespace NewLetter.Controllers
         {
             //long jobid = Convert.ToInt64((searchmodel["jobid"].ToString()));
             string result = "no";
+            try { 
             long jid = Convert.ToInt32(jobid);
             int rowcount = 0;
 
@@ -564,12 +631,12 @@ namespace NewLetter.Controllers
             qendidateListInJob newjoblist = new qendidateListInJob();
             for (long i = 0; i < rowcount; i++)
             {
-                long qenid =Convert.ToInt16( searchmodel[i][0]);
+                long qenid = Convert.ToInt16(searchmodel[i][0]);
                 int catid = Convert.ToInt16(searchmodel[i][1]);
                 if (catid != 0)
                 {
                     var qenExists = db.qendidateListInJobs.Where(e => e.qenID == qenid && e.jobID == jid).FirstOrDefault();
-               
+
                     if (qenExists == null)
                     {
                         newjoblist.qenID = qenid;
@@ -588,7 +655,11 @@ namespace NewLetter.Controllers
                 result = jid.ToString();
             }
 
-           
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+            }
             return result;
         }
     }

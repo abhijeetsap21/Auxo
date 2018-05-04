@@ -18,7 +18,7 @@ namespace NewLetter.Areas.Admin.Controllers
     {
         private IUnitOfWork uow = null;
         private CandidateMaster repo = null;
-
+        oriondbEntities db = new oriondbEntities();
         public CandidateMasterController()
         {
             uow = new UnitOfWork();
@@ -35,37 +35,45 @@ namespace NewLetter.Areas.Admin.Controllers
         [Route("",Name ="Admin")]
         public ActionResult _partialCandidateResult ()
         {
-            oriondbEntities db = new oriondbEntities();
-            string spExecute = "sp_QendidateList @PageNumber = 1 ,@filterbyCreatedDateORmodifiedDate = true,";
-            DateTime fd = Convert.ToDateTime(BaseUtil.GetCalculatedDateTime(-30));
-            spExecute += "@fromDate = '" + fd.Date + "',";
-
-
-            DateTime fd1 = Convert.ToDateTime(BaseUtil.GetCurrentDateTime());
-            spExecute += "@tillDate = '" + fd1.Date + "',";
-
-            spExecute += "@isActive = 1 ";
-
-            var result = db.Database.SqlQuery<sp_QendidateList_Result>(spExecute).ToList();
-            sp_QendidateList_Result sp = new sp_QendidateList_Result();
-            decimal pageCount = 0;
-            if (result.Count > 0)
+            var result = (dynamic)null;
+            try
             {
-                pageCount = (decimal)(result[1].total / 4);
-                int a = (int)(result[1].total % 4);
-                if (a > 0) { pageCount = pageCount + 1; }
-                ViewBag.data = "Yes";
+                string spExecute = "sp_QendidateList @PageNumber = 1 ,@filterbyCreatedDateORmodifiedDate = true,";
+                DateTime fd = Convert.ToDateTime(BaseUtil.GetCalculatedDateTime(-30));
+                spExecute += "@fromDate = '" + fd.Date + "',";
 
+
+                DateTime fd1 = Convert.ToDateTime(BaseUtil.GetCurrentDateTime());
+                spExecute += "@tillDate = '" + fd1.Date + "',";
+
+                spExecute += "@isActive = 1 ";
+
+                result = db.Database.SqlQuery<sp_QendidateList_Result>(spExecute).ToList();
+                sp_QendidateList_Result sp = new sp_QendidateList_Result();
+                decimal pageCount = 0;
+                if (result.Count > 0)
+                {
+                    pageCount = (decimal)(result[1].total / 4);
+                    int a = (int)(result[1].total % 4);
+                    if (a > 0) { pageCount = pageCount + 1; }
+                    ViewBag.data = "Yes";
+
+                }
+                else
+                {
+                    ViewBag.data = "Nodata";
+                }
+                sp.PageCount = (int)pageCount;
+                sp.CurrentPageIndex = 1;
+                ViewBag.count = pageCount;
+
+                ViewBag.currindex = sp.CurrentPageIndex;
             }
-            else
-            {
+            catch (Exception e)
+            {               
+                BaseUtil.CaptureErrorValues(e);
                 ViewBag.data = "Nodata";
             }
-            sp.PageCount = (int)pageCount;
-            sp.CurrentPageIndex = 1;
-            ViewBag.count = pageCount;
-           
-            ViewBag.currindex = sp.CurrentPageIndex;
             return PartialView(result);
         }
 
@@ -73,101 +81,105 @@ namespace NewLetter.Areas.Admin.Controllers
         [Route("", Name = "Admin")]
         public ActionResult candidateResult(int currentPageIndex, FormCollection frm)
         {
-            oriondbEntities db = new oriondbEntities();
-            string spExecute = "sp_QendidateList @PageNumber =" + currentPageIndex + ",";
-            
+            var result = (dynamic)null;
+            try
+            {
+                string spExecute = "sp_QendidateList @PageNumber =" + currentPageIndex + ",";
+
                 spExecute += "@filterbyCreatedDateORmodifiedDate = 1 ,";
-            
-            if (frm["frm[fromdate]"] != "" )
-            {                
-                DateTime fd = Convert.ToDateTime(frm["frm[fromdate]"]);
-                spExecute += "@fromDate = '" + fd.Date + "',";
-            }
-            else
-            {
-                DateTime fd = Convert.ToDateTime(BaseUtil.GetCalculatedDateTime(-30));
-                spExecute += "@fromDate = '" + fd.Date + "',";
-            }
 
-            if (frm["frm[todate]"] != "")
-            {
-                
-                
-                DateTime td = Convert.ToDateTime(frm["frm[todate]"]);
-                spExecute += "@tillDate = '" + td.Date + "',";
+                if (frm["frm[fromdate]"] != "")
+                {
+                    DateTime fd = Convert.ToDateTime(frm["frm[fromdate]"]);
+                    spExecute += "@fromDate = '" + fd.Date + "',";
+                }
+                else
+                {
+                    DateTime fd = Convert.ToDateTime(BaseUtil.GetCalculatedDateTime(-30));
+                    spExecute += "@fromDate = '" + fd.Date + "',";
+                }
 
-            }
-            else
-            {
-                DateTime fd = Convert.ToDateTime(BaseUtil.GetCurrentDateTime());
-                spExecute += "@tillDate = '" + fd.Date + "',";
+                if (frm["frm[todate]"] != "")
+                {
+
+
+                    DateTime td = Convert.ToDateTime(frm["frm[todate]"]);
+                    spExecute += "@tillDate = '" + td.Date + "',";
+
+                }
+                else
+                {
+                    DateTime fd = Convert.ToDateTime(BaseUtil.GetCurrentDateTime());
+                    spExecute += "@tillDate = '" + fd.Date + "',";
+                }
+
+                if (frm["frm[name]"] != "")
+                {
+
+
+                    spExecute += "@name = '" + frm["frm[name]"] + "',";
+                }
+                else
+                {
+                    spExecute += "@name = null , ";
+                }
+                if (frm["frm[mobile]"] != "")
+                {
+                    spExecute += "@mobile = '" + frm["frm[mobile]"] + "',";
+
+                }
+                else
+                {
+                    spExecute += "@mobile = null ,";
+                }
+
+                if (frm["frm[email]"] != "")
+                {
+                    spExecute += "@email = '" + frm["frm[email]"] + "',";
+                }
+                else
+                {
+                    spExecute += "@email = null ,";
+
+                }
+                if (frm["frm[isActive]"] != null)
+                {
+                    spExecute += "@isActive = '" + frm["frm[isActive]"] + "'";
+                }
+                else
+                {
+                    spExecute += "@isActive = 1 ";
+                }
+
+                result = db.Database.SqlQuery<sp_QendidateList_Result>(spExecute).ToList();
+                sp_QendidateList_Result sp = new sp_QendidateList_Result();
+                decimal pageCount = 0;
+                if (result.Count > 0)
+                {
+                    pageCount = (decimal)(result[1].total / 4);
+                    int a = (int)(result[1].total % 4);
+                    if (a > 0) { pageCount = pageCount + 1; }
+
+                    ViewBag.data = "Yes";
+                }
+                else
+                {
+                    ViewBag.data = "Nodata";
+                }
+                sp.PageCount = (int)pageCount;
+                sp.CurrentPageIndex = currentPageIndex;
+                ViewBag.count = pageCount;
+
+                ViewBag.currindex = currentPageIndex;
             }
           
-            if (frm["frm[name]"] != "")
-            {                            
-                
-                
-                spExecute += "@name = '" + frm["frm[name]"] + "',";
-            }
-            else
+            catch (Exception e)
             {
-                spExecute += "@name = null , ";
-            }
-            if (frm["frm[mobile]"] != "")
-            {
-                spExecute += "@mobile = '" + frm["frm[mobile]"] + "',";
-
-            }
-            else
-            {
-                spExecute += "@mobile = null ,";
-            }
-            
-            if (frm["frm[email]"] != "")
-            {                
-                spExecute += "@email = '" + frm["frm[email]"] + "',";
-            }
-            else
-            {
-                spExecute += "@email = null ,";
-
-            }
-            if (frm["frm[isActive]"] != null)
-            { 
-                spExecute += "@isActive = '" + frm["frm[isActive]"] + "'";
-            }
-            else
-            {
-                spExecute += "@isActive = 1 ";
-            }
-
-            var result = db.Database.SqlQuery<sp_QendidateList_Result>(spExecute).ToList();
-            sp_QendidateList_Result sp = new sp_QendidateList_Result();
-            decimal pageCount = 0;
-            if (result.Count > 0)
-            {
-                pageCount = (decimal)(result[1].total / 4);
-                int a = (int)(result[1].total % 4);
-                if (a > 0) { pageCount = pageCount + 1; }
-               
- ViewBag.data = "Yes";
-            }
-            else
-            {
+                BaseUtil.CaptureErrorValues(e);
                 ViewBag.data = "Nodata";
-            } sp.PageCount = (int)pageCount;
-            sp.CurrentPageIndex = currentPageIndex;
-                ViewBag.count = pageCount;
-               
-                ViewBag.currindex = currentPageIndex;
-           
+            }
             return PartialView("_partialCandidateResult",result);
-        }
-
-   
-
-
-   
+        }   
 
         public ActionResult _partialEditCandidateMaster(long? id)
         {
@@ -175,10 +187,18 @@ namespace NewLetter.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            qendidateList qenList = repo.Single(id);
-            if (qenList == null)
+            var qenList = (dynamic)null;
+            try
             {
-                return HttpNotFound();
+                    qenList = repo.Single(id);
+                if (qenList == null)
+                {
+                    return HttpNotFound();
+                }
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);               
             }
 
             return View(qenList);
@@ -191,36 +211,48 @@ namespace NewLetter.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult saveCandidateMaster( qendidateList qendidateList)
         {
-            var s = repo.Single(qendidateList.qenID);
-            if (s == null)
+            try
             {
-                return HttpNotFound();
-            }
+                var s = repo.Single(qendidateList.qenID);
+                if (s == null)
+                {
+                    return HttpNotFound();
+                }
 
-            s.dataIsUpdated = BaseUtil.GetCurrentDateTime();
-            s.isActive = qendidateList.isActive;
-            if (ModelState.IsValid)
+                s.dataIsUpdated = BaseUtil.GetCurrentDateTime();
+                s.isActive = qendidateList.isActive;
+                if (ModelState.IsValid)
+                {
+                    repo.Update(s);
+
+                }
+            }
+            catch (Exception e)
             {
-                repo.Update(s);
-                
+                BaseUtil.CaptureErrorValues(e);             
             }
             return PartialView("_partialEditCandidateMaster");
         }
-
        
 
         public string updateDB(bool check, long qenID)
         {
 
             string result = "no";
-            var s = repo.Single(qenID);
-            if (s != null)
+            try
             {
-                s.isActive = check;
-                repo.Update(s);
-                result = "ok";
+                var s = repo.Single(qenID);
+                if (s != null)
+                {
+                    s.isActive = check;
+                    repo.Update(s);
+                    result = "ok";
+                }
             }
-            
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+            }
             return result;
         }
     }
