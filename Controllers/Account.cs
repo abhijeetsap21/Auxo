@@ -53,29 +53,35 @@ namespace NewLetter.Controllers
         [HttpGet]
         public ActionResult _Employerlogin(string qenid)
         {
-           
-            
-            if (qenid != null)
+            try
             {
-                var decryptValue = BaseUtil.Decrypt(qenid);
-                int ID = Convert.ToInt32(decryptValue);
-                ViewBag.qenid = ID != null ? ID : 0;
-                //login ologin = new login();
-                var result = db.EmployerDetails.Where(e => e.EmployerID == ID).FirstOrDefault();
-                result.isActive = true;
-                result.dataIsUpdated = BaseUtil.GetCurrentDateTime();
-                db.Entry(result).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                TempData["result"] = "Activated";
-                // return View("_partialEmploerLogin");
-                return RedirectToAction("Employerlogin");
+                if (qenid != null)
+                {
+                    var decryptValue = BaseUtil.Decrypt(qenid);
+                    int ID = Convert.ToInt32(decryptValue);
+                    ViewBag.qenid = ID != null ? ID : 0;
+                    //login ologin = new login();
+                    var result = db.EmployerDetails.Where(e => e.EmployerID == ID).FirstOrDefault();
+                    result.isActive = true;
+                    result.dataIsUpdated = BaseUtil.GetCurrentDateTime();
+                    db.Entry(result).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["result"] = "Activated";
+                    // return View("_partialEmploerLogin");
+                    return RedirectToAction("Employerlogin");
+                }
+                else
+                {
+                    int ID = Convert.ToInt32(qenid);
+                    ViewBag.qenid = ID != null ? ID : 0;
+                    return View("_partialEmploerLogin");
+                }
             }
-            else
-            {
-                int ID = Convert.ToInt32(qenid);
-                ViewBag.qenid = ID != null ? ID : 0;               
-                return View("_partialEmploerLogin");
+            catch (Exception ex)
+            {                
+                BaseUtil.CaptureErrorValues(ex);                
             }
+            return View("_partialEmploerLogin");
         }
 
         [HttpPost]       
@@ -90,8 +96,9 @@ namespace NewLetter.Controllers
                 }
                 TempData["result"] = LoginResult;
             }
-            catch (Exception c)
+            catch (Exception ex)
             {
+                BaseUtil.CaptureErrorValues(ex);
                 TempData["result"] = "Login failed";
             }
             return RedirectToAction("Employerlogin");
@@ -157,8 +164,9 @@ namespace NewLetter.Controllers
                                 
                 TempData["result"] = "Registred";                
             }
-            catch (DbEntityValidationException ex)
+            catch (Exception ex)
             {
+                BaseUtil.CaptureErrorValues(ex);
                 TempData["result"] = "Registration failed.";
             }
             ViewBag.employerTypeID = new SelectList(db.employerTypes, "employerTypeID", "employerType1");
@@ -171,25 +179,34 @@ namespace NewLetter.Controllers
         [HttpGet]
         public ActionResult logincandidate(string qenid)
         {
-            if (qenid != null)
+            try
             {
-                var decryptValue = BaseUtil.Decrypt(qenid);
-                int ID = Convert.ToInt32(decryptValue);
-                ViewBag.qenid = ID != null ? ID : 0;
-                //login ologin = new login();
-                var result = db.qendidateLists.Where(e => e.qenID == ID).FirstOrDefault();
-                result.isActive = true;
-                result.dataIsUpdated = BaseUtil.GetCurrentDateTime();
-                db.Entry(result).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                TempData["result"] = "Activated";
-                return RedirectToAction("login");
+                if (qenid != null)
+                {
+                    var decryptValue = BaseUtil.Decrypt(qenid);
+                    int ID = Convert.ToInt32(decryptValue);
+                    ViewBag.qenid = ID != null ? ID : 0;
+                    //login ologin = new login();
+                    var result = db.qendidateLists.Where(e => e.qenID == ID).FirstOrDefault();
+                    result.isActive = true;
+                    result.dataIsUpdated = BaseUtil.GetCurrentDateTime();
+                    db.Entry(result).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["result"] = "Activated";
+                    return RedirectToAction("login");
+                }
+                else
+                {
+                    int ID = Convert.ToInt32(qenid);
+                    ViewBag.qenid = ID != null ? ID : 0;
+                    return View("_PartialLoginCandidate");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                int ID = Convert.ToInt32(qenid);
-                ViewBag.qenid = ID != null ? ID : 0;
-                return View("_PartialLoginCandidate");
+                TempData["msg"] = ex.Message.ToString();
+                BaseUtil.CaptureErrorValues(ex);
+                return RedirectToAction("Error");
             }
         }
 
@@ -207,8 +224,9 @@ namespace NewLetter.Controllers
                 }
                 TempData["result"] = LoginResult;
             }
-            catch (Exception c)
+            catch (Exception ex)
             {
+                BaseUtil.CaptureErrorValues(ex);
                 TempData["result"] = "Login failed";
             }
             return RedirectToAction("login");
@@ -231,29 +249,37 @@ namespace NewLetter.Controllers
         public string qforgotPassword(string email)
         {
             qendidateList qenList = new qendidateList();
-            //await db.SaveChangesAsync();
-            qenList = db.qendidateLists.Where(e => e.qenEmail == email).FirstOrDefault();
-            if (qenList != null)
+            try
             {
-                //----------------------------use below code to send emailer------------------------------------------------------------
-
-                StreamReader sr = new StreamReader(Server.MapPath("/Emailer/ForgetPassword.html"));
-                string HTML_Body = sr.ReadToEnd();
-                string final_Html_Body = HTML_Body.Replace("#name", qenList.qenName).Replace("#REFID",BaseUtil.encrypt( qenList.qenID.ToString())).Replace("#role", BaseUtil.encrypt("5"));
-                sr.Close();
-                string To = email.ToString();
-                string mail_Subject = "Reset password request recieved";               
-                string  result= BaseUtil.sendEmailer(To, mail_Subject, final_Html_Body, "");
-                //----------------------------end to send emailer------------------------------------------------------------
-                if (result == "ok")
+                //await db.SaveChangesAsync();
+                qenList = db.qendidateLists.Where(e => e.qenEmail == email).FirstOrDefault();
+                if (qenList != null)
                 {
-                    //ViewBag.success = "ok";
+                    //----------------------------use below code to send emailer------------------------------------------------------------
+
+                    StreamReader sr = new StreamReader(Server.MapPath("/Emailer/ForgetPassword.html"));
+                    string HTML_Body = sr.ReadToEnd();
+                    string final_Html_Body = HTML_Body.Replace("#name", qenList.qenName).Replace("#REFID", BaseUtil.encrypt(qenList.qenID.ToString())).Replace("#role", BaseUtil.encrypt("5"));
+                    sr.Close();
+                    string To = email.ToString();
+                    string mail_Subject = "Reset password request recieved";
+                    string result = BaseUtil.sendEmailer(To, mail_Subject, final_Html_Body, "");
+                    //----------------------------end to send emailer------------------------------------------------------------
+                    if (result == "ok")
+                    {
+                        //ViewBag.success = "ok";
+                    }
+                    return "yes";
                 }
-                return "yes";
+                else
+                {
+                    //ViewBag.message = "User not Found ";
+                    return "no";
+                }
             }
-            else
-            {
-                //ViewBag.message = "User not Found ";
+            catch (Exception ex)
+            {               
+                BaseUtil.CaptureErrorValues(ex);
                 return "no";
             }
         }
@@ -408,21 +434,11 @@ namespace NewLetter.Controllers
 
                 return RedirectToAction("jobs", "jobDetails", new { ID = ID });
             }
-            catch (DbEntityValidationException ex)
+            catch (Exception ex)
             {
-                // Retrieve the error messages as a list of strings.
-                var errorMessages = ex.EntityValidationErrors
-                        .SelectMany(x => x.ValidationErrors)
-                        .Select(x => x.ErrorMessage);
-
-                // Join the list to a single string.
-                var fullErrorMessage = string.Join("; ", errorMessages);
-
-                // Combine the original exception message with the new one.
-                var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
-
-                // Throw a new DbEntityValidationException with the improved exception message.
-                throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+                TempData["msg"] = ex.Message.ToString();
+                BaseUtil.CaptureErrorValues(ex);
+                return RedirectToAction("Error");
             }
         }
 
@@ -482,70 +498,66 @@ namespace NewLetter.Controllers
                 {
                     UEmail = authResult.ExtraData["email"];
                 }
-                var result = BaseUtil.checkSocialProfile(UEmail);
-                if (result == "NotExists")
+                try
                 {
-
-                    gmailUser.qenName = ProviderUName;
-                    gmailUser.qenEmail = UEmail;
-                    gmailUser.qenLinkdInUrl = "www.someurl.com";
-                    gmailUser.dataIsCreated = BaseUtil.GetCurrentDateTime();
-                    gmailUser.dataIsUpdated = BaseUtil.GetCurrentDateTime();
-                    gmailUser.roleID = 5;
-                    gmailUser.isDelete = false;
-                    gmailUser.isActive = true;
-                    gmailUser.password = baseClass.GetRandomPasswordString(10);
-                    //gmailUser.qenImage = linkedINResVM.pictureurl;
-                    gmailUser.qenPhone = "+919999999999";
-                    gmailUser.qenAddress = "some address";
-                    gmailUser.qenAddress = null;
-                    db.qendidateLists.Add(gmailUser);
-                    try { 
-                    db.SaveChanges();
-                }
-                    catch (DbEntityValidationException ex)
+                    var result = BaseUtil.checkSocialProfile(UEmail);
+                    if (result == "NotExists")
                     {
-                        // Retrieve the error messages as a list of strings.
-                        var errorMessages = ex.EntityValidationErrors
-                                .SelectMany(x => x.ValidationErrors)
-                                .Select(x => x.ErrorMessage);
 
-                        // Join the list to a single string.
-                        var fullErrorMessage = string.Join("; ", errorMessages);
+                        gmailUser.qenName = ProviderUName;
+                        gmailUser.qenEmail = UEmail;
+                        gmailUser.qenLinkdInUrl = "www.someurl.com";
+                        gmailUser.dataIsCreated = BaseUtil.GetCurrentDateTime();
+                        gmailUser.dataIsUpdated = BaseUtil.GetCurrentDateTime();
+                        gmailUser.roleID = 5;
+                        gmailUser.isDelete = false;
+                        gmailUser.isActive = true;
+                        gmailUser.password = baseClass.GetRandomPasswordString(10);
+                        //gmailUser.qenImage = linkedINResVM.pictureurl;
+                        gmailUser.qenPhone = "+919999999999";
+                        gmailUser.qenAddress = "some address";
+                        gmailUser.qenAddress = null;
+                        db.qendidateLists.Add(gmailUser);
+                        try
+                        {
+                            db.SaveChanges();
+                        }
+                        catch (Exception ex)
+                        {
+                            BaseUtil.CaptureErrorValues(ex);
+                        }
+                        //----------------------------use below code to send emailer------------------------------------------------------------
 
-                        // Combine the original exception message with the new one.
-                        var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+                        StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toCandidateRegistrationSuccess.html"));
+                        string HTML_Body = sr.ReadToEnd();
+                        string newString = HTML_Body.Replace("#name", gmailUser.qenName).Replace("#password", gmailUser.password);
+                        sr.Close();
+                        string To = gmailUser.qenEmail.ToString();
+                        string mail_Subject = "Candidate Registration Confirmation ";
+                        profileController objprofileController = new profileController();
+                        BaseUtil.sendEmailer(To, mail_Subject, newString, "");
+                        //----------------------------end to send emailer------------------------------------------------------------
 
-                        // Throw a new DbEntityValidationException with the improved exception message.
-                        throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
+                        BaseUtil.SetSessionValue(AdminInfo.UserID.ToString(), Convert.ToString(gmailUser.qenID));
+                        //BaseUtil.SetSessionValue(AdminInfo.Mobile.ToString(), Convert.ToString(user.qenPhone));
+                        BaseUtil.SetSessionValue(AdminInfo.role_id.ToString(), Convert.ToString(gmailUser.roleID));
+                        BaseUtil.SetSessionValue(AdminInfo.FullName.ToString(), Convert.ToString(gmailUser.qenName));
+                        ID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString());
                     }
-                    //----------------------------use below code to send emailer------------------------------------------------------------
+                    else if (result == "Exists")
+                    {
+                        var user = db.qendidateLists.Where(u => u.qenEmail == UEmail).FirstOrDefault();
 
-                    StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toCandidateRegistrationSuccess.html"));
-                    string HTML_Body = sr.ReadToEnd();
-                    string newString = HTML_Body.Replace("#name", gmailUser.qenName).Replace("#password", gmailUser.password);
-                    sr.Close();
-                    string To = gmailUser.qenEmail.ToString();
-                    string mail_Subject = "Candidate Registration Confirmation ";
-                    profileController objprofileController = new profileController();
-                    BaseUtil.sendEmailer(To, mail_Subject, newString, "");
-                    //----------------------------end to send emailer------------------------------------------------------------
-
-                    BaseUtil.SetSessionValue(AdminInfo.UserID.ToString(), Convert.ToString(gmailUser.qenID));
-                    //BaseUtil.SetSessionValue(AdminInfo.Mobile.ToString(), Convert.ToString(user.qenPhone));
-                    BaseUtil.SetSessionValue(AdminInfo.role_id.ToString(), Convert.ToString(gmailUser.roleID));
-                    BaseUtil.SetSessionValue(AdminInfo.FullName.ToString(), Convert.ToString(gmailUser.qenName));
-                    ID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString());
+                        BaseUtil.SetSessionValue(AdminInfo.UserID.ToString(), Convert.ToString(user.qenID));
+                        //BaseUtil.SetSessionValue(AdminInfo.Mobile.ToString(), Convert.ToString(user.qenPhone));
+                        BaseUtil.SetSessionValue(AdminInfo.role_id.ToString(), Convert.ToString(user.roleID));
+                        BaseUtil.SetSessionValue(AdminInfo.FullName.ToString(), Convert.ToString(user.qenName));
+                        ID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString());
+                    }
                 }
-                else if (result == "Exists")
-                {
-                    var user = db.qendidateLists.Where(u => u.qenEmail == UEmail).FirstOrDefault();
-
-                    BaseUtil.SetSessionValue(AdminInfo.UserID.ToString(), Convert.ToString(user.qenID));
-                    //BaseUtil.SetSessionValue(AdminInfo.Mobile.ToString(), Convert.ToString(user.qenPhone));
-                    BaseUtil.SetSessionValue(AdminInfo.role_id.ToString(), Convert.ToString(user.roleID));
-                    BaseUtil.SetSessionValue(AdminInfo.FullName.ToString(), Convert.ToString(user.qenName));
-                    ID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString());
+                catch (Exception ex)
+                {                    
+                    BaseUtil.CaptureErrorValues(ex);                    
                 }
             }
             return RedirectToAction("jobs", "jobDetails", new { ID = ID });
@@ -604,8 +616,8 @@ namespace NewLetter.Controllers
             var ID = "";
             dynamic result = fb.Post("oauth/access_token", new
             {
-                client_id = "1484503554920573",
-                client_secret = "dbe3b963bd866da2f3cdb22848774411",
+                client_id = WebConfigurationManager.AppSettings["FACEBOOK_CLIENT_ID"],
+                client_secret = WebConfigurationManager.AppSettings["FACEBOOK_CLIENT_SECRET"],
                 redirect_uri = RedirectUri.AbsoluteUri,
                 code = code
             });
@@ -625,51 +637,57 @@ namespace NewLetter.Controllers
             string firstname = me.first_name;
             string middlename = me.middle_name;
             string lastname = me.last_name;
-
-            var sresult = BaseUtil.checkSocialProfile(email);
-            if (sresult == "NotExists")
+            try
             {
-                qendidateList list = new qendidateList();
-                list.qenName = firstname + " " + lastname;
-                list.qenEmail = email;
-                //list.qenLinkdInUrl = linkedINResVM.publicprofileurl;
-                list.dataIsCreated = BaseUtil.GetCurrentDateTime();
-                list.dataIsUpdated = BaseUtil.GetCurrentDateTime();
-                list.roleID = 5;
-                list.isDelete = false;
-                list.isActive = true;
-                list.password = baseClass.GetRandomPasswordString(10);
-                //list.qenImage = linkedINResVM.pictureurl;
-                list.qenPhone = "+919999999999";
-                list.qenAddress = "some address";
-                list.qenAddress = null;
-                db.qendidateLists.Add(list);
-                db.SaveChanges();
+                var sresult = BaseUtil.checkSocialProfile(email);
+                if (sresult == "NotExists")
+                {
+                    qendidateList list = new qendidateList();
+                    list.qenName = firstname + " " + lastname;
+                    list.qenEmail = email;
+                    //list.qenLinkdInUrl = linkedINResVM.publicprofileurl;
+                    list.dataIsCreated = BaseUtil.GetCurrentDateTime();
+                    list.dataIsUpdated = BaseUtil.GetCurrentDateTime();
+                    list.roleID = 5;
+                    list.isDelete = false;
+                    list.isActive = true;
+                    list.password = baseClass.GetRandomPasswordString(10);
+                    //list.qenImage = linkedINResVM.pictureurl;
+                    list.qenPhone = "+919999999999";
+                    list.qenAddress = "some address";
+                    list.qenAddress = null;
+                    db.qendidateLists.Add(list);
+                    db.SaveChanges();
 
-                BaseUtil.SetSessionValue(AdminInfo.UserID.ToString(), Convert.ToString(list.qenID));
-                //BaseUtil.SetSessionValue(AdminInfo.Mobile.ToString(), Convert.ToString(user.qenPhone));
-                BaseUtil.SetSessionValue(AdminInfo.role_id.ToString(), Convert.ToString(list.roleID));
-                BaseUtil.SetSessionValue(AdminInfo.FullName.ToString(), Convert.ToString(list.qenName));
-                ID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString());
+                    BaseUtil.SetSessionValue(AdminInfo.UserID.ToString(), Convert.ToString(list.qenID));
+                    //BaseUtil.SetSessionValue(AdminInfo.Mobile.ToString(), Convert.ToString(user.qenPhone));
+                    BaseUtil.SetSessionValue(AdminInfo.role_id.ToString(), Convert.ToString(list.roleID));
+                    BaseUtil.SetSessionValue(AdminInfo.FullName.ToString(), Convert.ToString(list.qenName));
+                    ID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString());
 
-                StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toCandidateRegistrationSuccess.html"));
-                string HTML_Body = sr.ReadToEnd();
-                string newString = HTML_Body.Replace("#name", list.qenName).Replace("#password", list.password);
-                sr.Close();
-                string To = list.qenEmail.ToString();
-                string mail_Subject = "Candidate Registration Confirmation ";
-                profileController objprofileController = new profileController();
-                BaseUtil.sendEmailer(To, mail_Subject, newString, "");
+                    StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toCandidateRegistrationSuccess.html"));
+                    string HTML_Body = sr.ReadToEnd();
+                    string newString = HTML_Body.Replace("#name", list.qenName).Replace("#password", list.password);
+                    sr.Close();
+                    string To = list.qenEmail.ToString();
+                    string mail_Subject = "Candidate Registration Confirmation ";
+                    profileController objprofileController = new profileController();
+                    BaseUtil.sendEmailer(To, mail_Subject, newString, "");
+                }
+                else if (sresult == "Exists")
+                {
+                    var user = db.qendidateLists.Where(u => u.qenEmail == email).FirstOrDefault();
+
+                    BaseUtil.SetSessionValue(AdminInfo.UserID.ToString(), Convert.ToString(user.qenID));
+                    //BaseUtil.SetSessionValue(AdminInfo.Mobile.ToString(), Convert.ToString(user.qenPhone));
+                    BaseUtil.SetSessionValue(AdminInfo.role_id.ToString(), Convert.ToString(user.roleID));
+                    BaseUtil.SetSessionValue(AdminInfo.FullName.ToString(), Convert.ToString(user.qenName));
+                    ID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString());
+                }
             }
-            else if (sresult == "Exists")
-            {
-                var user = db.qendidateLists.Where(u => u.qenEmail == email).FirstOrDefault();
-
-                BaseUtil.SetSessionValue(AdminInfo.UserID.ToString(), Convert.ToString(user.qenID));
-                //BaseUtil.SetSessionValue(AdminInfo.Mobile.ToString(), Convert.ToString(user.qenPhone));
-                BaseUtil.SetSessionValue(AdminInfo.role_id.ToString(), Convert.ToString(user.roleID));
-                BaseUtil.SetSessionValue(AdminInfo.FullName.ToString(), Convert.ToString(user.qenName));
-                ID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString());
+            catch (Exception ex)
+            {               
+                BaseUtil.CaptureErrorValues(ex);                
             }
             FormsAuthentication.SetAuthCookie(email, false);
             return RedirectToAction("jobs", "jobDetails", new { ID = ID });
@@ -712,6 +730,7 @@ namespace NewLetter.Controllers
             }
             catch (DbEntityValidationException ex)
             {
+                BaseUtil.CaptureErrorValues(ex);
                 TempData["result"] = "Registration failed.";
             }
             var emailresult = db.qendidateLists.Where(ex => ex.qenID == candidateReg.candidateID).FirstOrDefault();
@@ -766,8 +785,17 @@ namespace NewLetter.Controllers
                     {
                         emplyoer.password = oCreateNewPassword.password;
                         db.Entry(emplyoer).State= EntityState.Modified;
-                        db.SaveChanges();
-                        ViewBag.success = 2;
+                        try
+                        {
+                            db.SaveChanges();
+                            ViewBag.success = 2;
+                        }
+                        catch (Exception ex)
+                        {
+                            TempData["msg"] = ex.Message.ToString();
+                            BaseUtil.CaptureErrorValues(ex);
+                            return RedirectToAction("Error");
+                        }
                     }
 
             }
@@ -780,8 +808,17 @@ namespace NewLetter.Controllers
                     {
                         emplyoer.password = oCreateNewPassword.password;
                         db.Entry(emplyoer).State = EntityState.Modified;
-                        db.SaveChanges();
-                        ViewBag.success = 5;
+                        try
+                        {
+                            db.SaveChanges();
+                            ViewBag.success = 5;
+                        }
+                        catch (Exception ex)
+                        {
+                            TempData["msg"] = ex.Message.ToString();
+                            BaseUtil.CaptureErrorValues(ex);
+                            return RedirectToAction("Error");
+                        }
                     }
                 }
             }
@@ -805,15 +842,22 @@ namespace NewLetter.Controllers
             long QenID = Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.UserID.ToString()));
             List<qenMialSendInterested_> oqenMialSendInterested_ = new List<qenMialSendInterested_>();
             qenMialSendInterested_ oqenMialSendInterested = new qenMialSendInterested_();
-            var a = db.qenMialSendInteresteds.Where(e => e.dataIsCreated > afterDate && e.qenID== QenID).Select(e => new { e.qenID, e.jobID }).ToList();
-            foreach (var e in a)
+            try
             {
-                oqenMialSendInterested.qenID = e.qenID;
-                oqenMialSendInterested.jobID = e.jobID;
-                var CompanyID_ = db.jobDetails.Where(e1 => e1.jobID == e1.jobID).Select(e1=>new { e1.companyID}).FirstOrDefault();
-                var companyName=db.companyDetails.Where(e1 => e1.companyID == CompanyID_.companyID).Select(e1 => new { e1.companyName }).FirstOrDefault();
-                oqenMialSendInterested.companyName = companyName.companyName;
-                oqenMialSendInterested_.Add(oqenMialSendInterested);
+                var a = db.qenMialSendInteresteds.Where(e => e.dataIsCreated > afterDate && e.qenID == QenID).Select(e => new { e.qenID, e.jobID }).ToList();
+                foreach (var e in a)
+                {
+                    oqenMialSendInterested.qenID = e.qenID;
+                    oqenMialSendInterested.jobID = e.jobID;
+                    var CompanyID_ = db.jobDetails.Where(e1 => e1.jobID == e1.jobID).Select(e1 => new { e1.companyID }).FirstOrDefault();
+                    var companyName = db.companyDetails.Where(e1 => e1.companyID == CompanyID_.companyID).Select(e1 => new { e1.companyName }).FirstOrDefault();
+                    oqenMialSendInterested.companyName = companyName.companyName;
+                    oqenMialSendInterested_.Add(oqenMialSendInterested);
+                }
+            }
+            catch (Exception ex)
+            {                
+                BaseUtil.CaptureErrorValues(ex);               
             }
             return oqenMialSendInterested_;
         }

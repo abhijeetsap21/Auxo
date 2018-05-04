@@ -19,7 +19,16 @@ namespace NewLetter.Controllers
         // GET: TimeSlots
         public async Task<ActionResult> Index()
         {
-            return View(await db.slots.ToListAsync());
+            try
+            {
+                return View(await db.slots.ToListAsync());
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message.ToString();
+                BaseUtil.CaptureErrorValues(ex);
+                return RedirectToAction("Error");
+            }
         }
        
 
@@ -34,11 +43,20 @@ namespace NewLetter.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "SlotID,slotTime")] slot slot)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.slots.Add(slot);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.slots.Add(slot);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message.ToString();
+                BaseUtil.CaptureErrorValues(ex);
+                return RedirectToAction("Error");
             }
 
             return View(slot);
@@ -66,11 +84,20 @@ namespace NewLetter.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "SlotID,slotTime")] slot slot)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(slot).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(slot).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message.ToString();
+                BaseUtil.CaptureErrorValues(ex);
+                return RedirectToAction("Error");
             }
             return View(slot);
         }
@@ -78,40 +105,49 @@ namespace NewLetter.Controllers
 
         public ActionResult BlockSlots()
         {
-            long CompanyID = Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.companyID.ToString()));
-            var blockedSlots = db.slotsBlockeds.Include(e=>e.EmployerDetail).Include(e=>e.slot).Where(e => e.companyID == CompanyID && e.isDeleted==false ).OrderBy(e=>e.SlotID).ToList();
-
-          List<Blockslots> oBlockslotsList= new List<Blockslots>();
-            Blockslots oBlockslots;
-            foreach (var slot in blockedSlots)
+            try
             {
-                oBlockslots = new Blockslots();
-                oBlockslots.blocked = true;
-                oBlockslots.slotID = slot.SlotID;
-                oBlockslots.slotTime = slot.slot.slotTime;
-                oBlockslots.updated_BY = slot.EmployerDetail.Name;
-                oBlockslots.updated_date = slot.dataIsUpdated;
-                oBlockslotsList.Add(oBlockslots);
+                long CompanyID = Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.companyID.ToString()));
+                var blockedSlots = db.slotsBlockeds.Include(e => e.EmployerDetail).Include(e => e.slot).Where(e => e.companyID == CompanyID && e.isDeleted == false).OrderBy(e => e.SlotID).ToList();
 
-            }
-
-            var FreshSlots = db.slots.ToList();
-            foreach (var slot in FreshSlots)
-            {
-                var result = oBlockslotsList.Find(e => e.slotID == slot.SlotID);
-                if (result==null)
+                List<Blockslots> oBlockslotsList = new List<Blockslots>();
+                Blockslots oBlockslots;
+                foreach (var slot in blockedSlots)
                 {
                     oBlockslots = new Blockslots();
-                    oBlockslots.blocked = false;
+                    oBlockslots.blocked = true;
                     oBlockslots.slotID = slot.SlotID;
-                    oBlockslots.slotTime = slot.slotTime;                 
-                   
+                    oBlockslots.slotTime = slot.slot.slotTime;
+                    oBlockslots.updated_BY = slot.EmployerDetail.Name;
+                    oBlockslots.updated_date = slot.dataIsUpdated;
                     oBlockslotsList.Add(oBlockslots);
-                }
-               
-            }
 
-            return View(oBlockslotsList);
+                }
+
+                var FreshSlots = db.slots.ToList();
+                foreach (var slot in FreshSlots)
+                {
+                    var result = oBlockslotsList.Find(e => e.slotID == slot.SlotID);
+                    if (result == null)
+                    {
+                        oBlockslots = new Blockslots();
+                        oBlockslots.blocked = false;
+                        oBlockslots.slotID = slot.SlotID;
+                        oBlockslots.slotTime = slot.slotTime;
+
+                        oBlockslotsList.Add(oBlockslots);
+                    }
+
+                }
+
+                return View(oBlockslotsList);
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message.ToString();
+                BaseUtil.CaptureErrorValues(ex);
+                return RedirectToAction("Error");
+            }
         }
         [HttpGet]
         public string BlockUnblockSlot(int slotID, bool chk)
@@ -138,8 +174,9 @@ namespace NewLetter.Controllers
                     result = "OK";
                     return result;
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
+                    BaseUtil.CaptureErrorValues(ex);
                     return result;
                 }
             }
@@ -155,9 +192,17 @@ namespace NewLetter.Controllers
                 slotExists.modifyBy = Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.employerID.ToString()));
                 slotExists.dataIsCreated = BaseUtil.GetCurrentDateTime();
                 db.Entry(slotExists).State = EntityState.Modified;
-                db.SaveChanges();
-                result = "OK";
-                return result;
+                try
+                {
+                    db.SaveChanges();
+                    result = "OK";
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    BaseUtil.CaptureErrorValues(ex);
+                    return result;
+                }
             }
         }
 
@@ -189,7 +234,16 @@ namespace NewLetter.Controllers
                     oslotTempBlocked.dataIsUpdated = BaseUtil.GetCurrentDateTime();
                     oslotTempBlocked.dataIsCreated = BaseUtil.GetCurrentDateTime();
                     db.slotTempBlockeds.Add(oslotTempBlocked);
-                    db.SaveChanges();
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        TempData["msg"] = ex.Message.ToString();
+                        BaseUtil.CaptureErrorValues(ex);
+                        return RedirectToAction("Error");
+                    }
                 }
             }
            
@@ -250,8 +304,17 @@ namespace NewLetter.Controllers
                           "  union " +
                           " SELECT qenInterviewSchedule.slotID, slotTime,qenName as blocked,  qendidateList.qenID as 'qenID' ,qenInterviewSchedule.jobID FROM qenInterviewSchedule left outer join qendidateList " +
                           " on qenInterviewSchedule.qenID = qendidateList.qenID left outer join slots on qenInterviewSchedule.slotID = slots.slotID where qenInterviewSchedule.companyID = '" + companyID + "'  AND qenInterviewSchedule.slotID is not null AND convert(date, meetScheduledDateTime)= convert(date, '" + dt + "')";
-            var SlotList = db.Database.SqlQuery<slotsInfo>(query).ToList();
-            return View(SlotList);
+            try
+            {
+                var SlotList = db.Database.SqlQuery<slotsInfo>(query).ToList();
+                return View(SlotList);
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message.ToString();
+                BaseUtil.CaptureErrorValues(ex);
+                return RedirectToAction("Error");
+            }
         }
         public string Get_Available(int slotid , string dat)
         {
@@ -278,8 +341,9 @@ namespace NewLetter.Controllers
                 result = "OK";
                 return result;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                BaseUtil.CaptureErrorValues(ex);
                 return result;
             }
         }
@@ -324,8 +388,9 @@ namespace NewLetter.Controllers
                 result = "OK";
                 return result;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                BaseUtil.CaptureErrorValues(ex);
                 return result;
             }
         }

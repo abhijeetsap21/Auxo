@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f81e3f2a2b7443cf908dadaf933b80e5" Name="Diagram1" ZoomLevel="64">
+      <Diagram DiagramId="f81e3f2a2b7443cf908dadaf933b80e5" Name="Diagram1" ZoomLevel="62">
         <EntityTypeShape EntityType="oriondbModel.advertisementList" Width="1.5" PointX="8.25" PointY="43.375" />
         <EntityTypeShape EntityType="oriondbModel.app_error_log" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="oriondbModel.App_status" Width="1.5" PointX="3" PointY="62.25" />

@@ -601,14 +601,21 @@ namespace NewLetter.Controllers
         public PartialViewResult EmploymentAddPop(int? empno, int? qenid)
         {
             qenEmpDetail emp = null;
-            if (empno != null && empno > 0)
+            try
             {
-                emp = db.qenEmpDetails.Where(ex => ex.qenEmploymentNum == empno).FirstOrDefault();
+                if (empno != null && empno > 0)
+                {
+                    emp = db.qenEmpDetails.Where(ex => ex.qenEmploymentNum == empno).FirstOrDefault();
+                }
+                else
+                {
+                    emp = new qenEmpDetail();
+                    emp.qenID = Convert.ToInt32(qenid);
+                }
             }
-            else
-            {
-                emp = new qenEmpDetail();
-                emp.qenID = Convert.ToInt32(qenid);
+            catch (Exception ex)
+            {                
+                BaseUtil.CaptureErrorValues(ex);                
             }
             return PartialView("_PartialPopUpEmployment", emp);
         }
@@ -673,12 +680,19 @@ namespace NewLetter.Controllers
         public ActionResult Deletejob(Int32 empno)
         {
             qenEmpDetail emp = null;
-            emp = db.qenEmpDetails.Where(ex => ex.qenEmploymentNum == empno).FirstOrDefault();
-            if (emp != null)
+            try
             {
-                db.qenEmpDetails.Remove(emp);
-                db.SaveChanges();
-                TempData["message"] = "Employment information deleted";
+                emp = db.qenEmpDetails.Where(ex => ex.qenEmploymentNum == empno).FirstOrDefault();
+                if (emp != null)
+                {
+                    db.qenEmpDetails.Remove(emp);
+                    db.SaveChanges();
+                    TempData["message"] = "Employment information deleted";
+                }
+            }
+            catch (Exception ex)
+            {                
+                BaseUtil.CaptureErrorValues(ex);                
             }
             return RedirectToAction("editCandidate");
         }
@@ -699,6 +713,7 @@ namespace NewLetter.Controllers
             }
             catch (Exception ex)
             {
+                BaseUtil.CaptureErrorValues(ex);
                 TempData["msg"] = "Error : " + ex.Message.ToString();
                 return RedirectToAction("Error");
             }
@@ -707,13 +722,21 @@ namespace NewLetter.Controllers
         public ActionResult DeleteCertifications(long phdid)
         {
             qendidatePHD emp = null;
-            emp = db.qendidatePHDs.Where(ex => ex.phdid == phdid).FirstOrDefault();
-            if (emp != null)
+            try
             {
-                db.qendidatePHDs.Remove(emp);
-                db.SaveChanges();
+                emp = db.qendidatePHDs.Where(ex => ex.phdid == phdid).FirstOrDefault();
+                if (emp != null)
+                {
+                    db.qendidatePHDs.Remove(emp);
+                    db.SaveChanges();
+                }
+                TempData["message"] = "Academic Information Updated Successfully";
             }
-            TempData["message"] = "Academic Information Updated Successfully";
+            catch (Exception ex)
+            {
+                BaseUtil.CaptureErrorValues(ex);                
+            }
+
             return RedirectToAction("editCandidate");
 
         }
@@ -765,14 +788,21 @@ namespace NewLetter.Controllers
         public PartialViewResult certificationsAddPop(int? phdid, int? qenid)
         {
             qendidatePHD emp = null;
-            if (phdid != null && phdid > 0)
+            try
             {
-                emp = db.qendidatePHDs.Where(ex => ex.phdid == phdid).FirstOrDefault();
+                if (phdid != null && phdid > 0)
+                {
+                    emp = db.qendidatePHDs.Where(ex => ex.phdid == phdid).FirstOrDefault();
+                }
+                else
+                {
+                    emp = new qendidatePHD();
+                    emp.qenID = Convert.ToInt32(qenid);
+                }
             }
-            else
-            {
-                emp = new qendidatePHD();
-                emp.qenID = Convert.ToInt32(qenid);
+            catch (Exception ex)
+            {                
+                BaseUtil.CaptureErrorValues(ex);               
             }
             return PartialView("_PartialAddCertifications", emp);
         }
@@ -790,6 +820,7 @@ namespace NewLetter.Controllers
             }
             catch (Exception ex)
             {
+                BaseUtil.CaptureErrorValues(ex);
                 TempData["msg"] = "Error : " + ex.Message.ToString();
                 return RedirectToAction("Error");
             }
@@ -839,17 +870,27 @@ namespace NewLetter.Controllers
         [HttpGet]
         public PartialViewResult skillsAddPop(int? qenSkillsID, int? qenid)
         {
-
+            
             if (qenSkillsID != null && qenSkillsID > 0)
             {
-                var emp = db.qenSkills.Include(e => e.skill).Where(ex => ex.qenSkillsID == qenSkillsID).FirstOrDefault();
-                qenSkillName oqenSkillName = new qenSkillName();
-                oqenSkillName.skillID = emp.skillsID;
-                oqenSkillName.qenID = Convert.ToInt32(emp.qenID);
-                oqenSkillName.qenSkillsID = Convert.ToInt32(emp.skillsID);
-                oqenSkillName.skillName = emp.skill.skillName;
-                oqenSkillName.yearOfExp = emp.yearOfExp;
-                return PartialView("_partialAddSkills", oqenSkillName);
+                try
+                {
+
+                    var emp = db.qenSkills.Include(e => e.skill).Where(ex => ex.qenSkillsID == qenSkillsID).FirstOrDefault();
+                    qenSkillName oqenSkillName = new qenSkillName();
+                    oqenSkillName.skillID = emp.skillsID;
+                    oqenSkillName.qenID = Convert.ToInt32(emp.qenID);
+                    oqenSkillName.qenSkillsID = Convert.ToInt32(emp.skillsID);
+                    oqenSkillName.skillName = emp.skill.skillName;
+                    oqenSkillName.yearOfExp = emp.yearOfExp;
+                    return PartialView("_partialAddSkills", oqenSkillName);
+                }
+                catch (Exception ex)
+                {                   
+                    BaseUtil.CaptureErrorValues(ex);
+                    qenSkillName oqenSkillName = new qenSkillName();
+                    return PartialView("_partialAddSkills", oqenSkillName);
+                }
             }
             else
             {
@@ -862,32 +903,46 @@ namespace NewLetter.Controllers
       
         public int checkValuExist(string skill_)
         {
+            try
+            {
 
-            var result = db.skills.Where(e => e.skillName == skill_).Select(x => new { x.skillsID }).SingleOrDefault();
-            if (result == null)
-            {
-                skill oskill = new skill();
-                oskill.skillName = skill_;
-                db.skills.Add(oskill);
-                db.SaveChanges();
-                return oskill.skillsID;
+                var result = db.skills.Where(e => e.skillName == skill_).Select(x => new { x.skillsID }).SingleOrDefault();
+                if (result == null)
+                {
+                    skill oskill = new skill();
+                    oskill.skillName = skill_;
+                    db.skills.Add(oskill);
+                    db.SaveChanges();
+                    return oskill.skillsID;
+                }
+                else
+                {
+                    return result.skillsID;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return result.skillsID;
+                BaseUtil.CaptureErrorValues(ex);
+                return 0;                
             }
         }
 
         public ActionResult DeleteqenSkills(long qenSkillsID)
         {
-            qenSkill oqenSkill = null;
-            oqenSkill = db.qenSkills.Where(ex => ex.qenSkillsID == qenSkillsID).FirstOrDefault();
-            if (oqenSkill != null)
+            try
             {
-                db.qenSkills.Remove(oqenSkill);
-                db.SaveChanges();
-                TempData["message"] = "Skill Information Updated Successfully";
-
+                qenSkill oqenSkill = null;
+                oqenSkill = db.qenSkills.Where(ex => ex.qenSkillsID == qenSkillsID).FirstOrDefault();
+                if (oqenSkill != null)
+                {
+                    db.qenSkills.Remove(oqenSkill);
+                    db.SaveChanges();
+                    TempData["message"] = "Skill Information Updated Successfully";
+                }
+            }
+            catch (Exception ex)
+            {               
+                BaseUtil.CaptureErrorValues(ex);               
             }
             return RedirectToAction("editCandidate");
         }
@@ -964,31 +1019,38 @@ namespace NewLetter.Controllers
         public ActionResult _partialPreviewCV(Int64 qenID)
         {
             ResumeModel model = new ResumeModel();
-            qendidateList personal = db.qendidateLists.Where(ex => ex.qenID == qenID).FirstOrDefault();
-            qenSecondary s = db.qenSecondaries.Where(ex => ex.qenID == qenID).FirstOrDefault();
-            qenHigherSecondary hs = db.qenHigherSecondaries.Where(ex => ex.qenID == qenID).FirstOrDefault();
-            qendidateGraduation g = db.qendidateGraduations.Where(ex => ex.qenID == qenID).FirstOrDefault();
-            qendidatePGraduation pg = db.qendidatePGraduations.Where(ex => ex.qenID == qenID).FirstOrDefault();
-            List<qenEmpDetail> emp = db.qenEmpDetails.Where(ex => ex.qenID == qenID).ToList();
-            List<qendidatePHD> phd = db.qendidatePHDs.Where(ex => ex.qenID == qenID).ToList();
-            List<qenReference> refrences = db.qenReferences.Where(ex => ex.qenID == qenID).ToList();
-            List<qenSkill> skills = db.qenSkills.Include(ex => ex.skill).Where(ex => ex.qenID == qenID).ToList();
-            model.personainfo = personal;
-            AcademicModel academic = new AcademicModel();
-            academic.graduation = g != null ? g : new qendidateGraduation();
-            academic.hsecondary = hs != null ? hs : new qenHigherSecondary();
-            academic.secondary = s != null ? s : new qenSecondary();
-            academic.pgraduation = pg != null ? pg : new qendidatePGraduation();
-            model.educationinfo = academic;
-            model.employmentinfo = emp != null ? emp : new List<qenEmpDetail>();
-            model.refrences = refrences != null ? refrences : new List<qenReference>();
-            model.phdinfo = phd != null ? phd : new List<qendidatePHD>();
-            model.skills = skills != null ? skills : new List<qenSkill>();
-            //eventName : 1 for view, 2 for contact, 3 for download
-            int roleID= Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.role_id.ToString()));
-            if (roleID != 5)
+            try
             {
-                UpdateProfilePerformance(qenID, 1);
+                qendidateList personal = db.qendidateLists.Where(ex => ex.qenID == qenID).FirstOrDefault();
+                qenSecondary s = db.qenSecondaries.Where(ex => ex.qenID == qenID).FirstOrDefault();
+                qenHigherSecondary hs = db.qenHigherSecondaries.Where(ex => ex.qenID == qenID).FirstOrDefault();
+                qendidateGraduation g = db.qendidateGraduations.Where(ex => ex.qenID == qenID).FirstOrDefault();
+                qendidatePGraduation pg = db.qendidatePGraduations.Where(ex => ex.qenID == qenID).FirstOrDefault();
+                List<qenEmpDetail> emp = db.qenEmpDetails.Where(ex => ex.qenID == qenID).ToList();
+                List<qendidatePHD> phd = db.qendidatePHDs.Where(ex => ex.qenID == qenID).ToList();
+                List<qenReference> refrences = db.qenReferences.Where(ex => ex.qenID == qenID).ToList();
+                List<qenSkill> skills = db.qenSkills.Include(ex => ex.skill).Where(ex => ex.qenID == qenID).ToList();
+                model.personainfo = personal;
+                AcademicModel academic = new AcademicModel();
+                academic.graduation = g != null ? g : new qendidateGraduation();
+                academic.hsecondary = hs != null ? hs : new qenHigherSecondary();
+                academic.secondary = s != null ? s : new qenSecondary();
+                academic.pgraduation = pg != null ? pg : new qendidatePGraduation();
+                model.educationinfo = academic;
+                model.employmentinfo = emp != null ? emp : new List<qenEmpDetail>();
+                model.refrences = refrences != null ? refrences : new List<qenReference>();
+                model.phdinfo = phd != null ? phd : new List<qendidatePHD>();
+                model.skills = skills != null ? skills : new List<qenSkill>();
+                //eventName : 1 for view, 2 for contact, 3 for download
+                int roleID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.role_id.ToString()));
+                if (roleID != 5)
+                {
+                    UpdateProfilePerformance(qenID, 1);
+                }
+            }
+            catch (Exception ex)
+            {               
+                BaseUtil.CaptureErrorValues(ex);                
             }
             return View(model);
         }
@@ -1035,9 +1097,9 @@ namespace NewLetter.Controllers
                     ocareerObjective.qenID = qenid;
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-
+                BaseUtil.CaptureErrorValues(ex);
             }
             return View("_careerHighLights", ocareerObjective);
         }
@@ -1057,9 +1119,10 @@ namespace NewLetter.Controllers
                 db.SaveChanges();
                 TempData["message"] = "Career highligts Updated Successfully";
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                TempData["msg"] = e.Message.ToString();
+                BaseUtil.CaptureErrorValues(ex);
+                TempData["msg"] = ex.Message.ToString();
                 
             }
             return RedirectToAction("editCandidate");
@@ -1077,46 +1140,53 @@ namespace NewLetter.Controllers
         [HttpGet]
         public ActionResult ProfilePerformance()
         {
-            ProfilePerformance oProfilePerformance = new ProfilePerformance();
-            long userID = Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.UserID.ToString()));
-            string updatbefore1 = BaseUtil.GetCalculatedDateTime(-180).ToString("MM/dd/yyyy");
-            DateTime updatbefore = Convert.ToDateTime(updatbefore1);
-            var AppliedJob = db.ProfilePerformances.Where(e => e.dataIsCreated >= updatbefore && e.qenID == userID).OrderByDescending(e => e.dataIsCreated);
-            ProfilePerformanceCount oProfilePerformanceCount = new ProfilePerformanceCount();
-            oProfilePerformanceCount.viewCount = AppliedJob.Where(e => e.ViewedDate != null).Count();
-            oProfilePerformanceCount.DownloadCount = AppliedJob.Where(e => e.Downloaded != null).Count();
-            oProfilePerformanceCount.contactCount = AppliedJob.Where(e => e.Contacted != null).Count();
-            ViewData["oProfilePerformanceCount"] = oProfilePerformanceCount;
-            var lastDate = BaseUtil.GetCurrentDateTime();
-
-
-            //-------------calculation for monthly records--------------------------
-            monthDate omonthDate;
-            List<monthDate> listomonthDate = new List<monthDate>();
-            for (int i = 0; i < 6; i++)
+            try
             {
-                omonthDate = new monthDate();
-                omonthDate.firstDayOfMonth = new DateTime(lastDate.Year, lastDate.Month, 1);
-                omonthDate.lastDayOfMonth = new DateTime(lastDate.Year, lastDate.Month, DateTime.DaysInMonth(lastDate.Year, lastDate.Month));
-                listomonthDate.Add(omonthDate);
-                lastDate = lastDate.AddMonths(-1);
+                ProfilePerformance oProfilePerformance = new ProfilePerformance();
+                long userID = Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.UserID.ToString()));
+                string updatbefore1 = BaseUtil.GetCalculatedDateTime(-180).ToString("MM/dd/yyyy");
+                DateTime updatbefore = Convert.ToDateTime(updatbefore1);
+                var AppliedJob = db.ProfilePerformances.Where(e => e.dataIsCreated >= updatbefore && e.qenID == userID).OrderByDescending(e => e.dataIsCreated);
+                ProfilePerformanceCount oProfilePerformanceCount = new ProfilePerformanceCount();
+                oProfilePerformanceCount.viewCount = AppliedJob.Where(e => e.ViewedDate != null).Count();
+                oProfilePerformanceCount.DownloadCount = AppliedJob.Where(e => e.Downloaded != null).Count();
+                oProfilePerformanceCount.contactCount = AppliedJob.Where(e => e.Contacted != null).Count();
+                ViewData["oProfilePerformanceCount"] = oProfilePerformanceCount;
+                var lastDate = BaseUtil.GetCurrentDateTime();
 
+
+                //-------------calculation for monthly records--------------------------
+                monthDate omonthDate;
+                List<monthDate> listomonthDate = new List<monthDate>();
+                for (int i = 0; i < 6; i++)
+                {
+                    omonthDate = new monthDate();
+                    omonthDate.firstDayOfMonth = new DateTime(lastDate.Year, lastDate.Month, 1);
+                    omonthDate.lastDayOfMonth = new DateTime(lastDate.Year, lastDate.Month, DateTime.DaysInMonth(lastDate.Year, lastDate.Month));
+                    listomonthDate.Add(omonthDate);
+                    lastDate = lastDate.AddMonths(-1);
+
+                }
+                ProfilePerformanceCount objProfilePerformanceCount;
+                List<ProfilePerformanceCount> LSTProfilePerformanceCount = new List<ProfilePerformanceCount>();
+                foreach (var lst in listomonthDate)
+                {
+                    DateTime startDate, endDate;
+                    startDate = lst.firstDayOfMonth.Date;
+                    endDate = lst.lastDayOfMonth.Date;
+                    objProfilePerformanceCount = new ProfilePerformanceCount();
+                    objProfilePerformanceCount.MonthName = startDate.ToString("MMMM");
+                    objProfilePerformanceCount.viewCount = AppliedJob.Where(e => e.ViewedDate != null && e.dataIsCreated >= startDate && e.dataIsCreated <= endDate).Count();
+                    objProfilePerformanceCount.DownloadCount = AppliedJob.Where(e => e.Downloaded != null && e.dataIsCreated >= startDate && e.dataIsCreated <= endDate).Count();
+                    objProfilePerformanceCount.contactCount = AppliedJob.Where(e => e.Contacted != null && e.dataIsCreated >= startDate && e.dataIsCreated <= endDate).Count();
+                    LSTProfilePerformanceCount.Add(objProfilePerformanceCount);
+                }
+                ViewData["LSTProfilePerformanceCount"] = LSTProfilePerformanceCount;
             }
-            ProfilePerformanceCount objProfilePerformanceCount;
-            List<ProfilePerformanceCount> LSTProfilePerformanceCount = new List<ProfilePerformanceCount>();
-            foreach (var lst in listomonthDate)
-            {
-                DateTime startDate, endDate;
-                startDate = lst.firstDayOfMonth.Date;
-                endDate = lst.lastDayOfMonth.Date;
-                objProfilePerformanceCount = new ProfilePerformanceCount();
-                objProfilePerformanceCount.MonthName = startDate.ToString("MMMM");
-                objProfilePerformanceCount.viewCount = AppliedJob.Where(e => e.ViewedDate != null && e.dataIsCreated >= startDate && e.dataIsCreated <= endDate).Count();
-                objProfilePerformanceCount.DownloadCount = AppliedJob.Where(e => e.Downloaded != null && e.dataIsCreated >= startDate && e.dataIsCreated <= endDate).Count();
-                objProfilePerformanceCount.contactCount = AppliedJob.Where(e => e.Contacted != null && e.dataIsCreated >= startDate && e.dataIsCreated <= endDate).Count();
-                LSTProfilePerformanceCount.Add(objProfilePerformanceCount);
+            catch (Exception ex)
+            {                
+                BaseUtil.CaptureErrorValues(ex);               
             }
-            ViewData["LSTProfilePerformanceCount"] = LSTProfilePerformanceCount;
             return View();
         }
 
@@ -1157,63 +1227,78 @@ namespace NewLetter.Controllers
                     dt = Convert.ToDateTime(dat);
                     ViewBag.dAt = dt.ToString().Substring(0, 10);
                 }
-            var companyID_ = db.jobDetails.Where(e=>e.jobID==jid).Select(e=> new {e.companyID }).FirstOrDefault();
-            long companyID = Convert.ToInt64(companyID_.companyID.ToString());
-            string query = "select slotID, slotTime, 'Available' as blocked ,'' as 'qenID' ,''as jobID from slots where " +
-                         " slotID not in (select slotID from slotsBlocked where companyID = '" + companyID + "' AND isDeleted = 0 ) AND " +
-                         " slotID not in (SELECT slotID FROM qenInterviewSchedule where companyID = '" + companyID + "'  AND slotID is not null AND convert(date, meetScheduledDateTime)= convert(date, '" + dt + "') ) AND " +
-                          " slotID not in (SELECT slotID FROM slotTempBlocked where companyID = '" + companyID + "'  AND forDate = convert(date, '" + dt + "') AND isDeleted = 0 )" +
-                          " union " +
-                          " select slotTempBlocked.slotID , slotTime,'booked by HR' as blocked, '' as 'qenID' ,''as jobID from slotTempBlocked left outer join slots on slotTempBlocked.slotID = slots.slotID where companyID = '" + companyID + "'  AND isDeleted = 0 AND forDate = convert(date, '" + dt + "') " +
-                          " union " +
-                          " select slotsBlocked.slotID , slotTime,'blocked by HR' as blocked, '' as 'qenID' ,''as jobID from slotsBlocked left outer join slots on slotsBlocked.slotID = slots.slotID where companyID = '" + companyID + "'  AND isDeleted = 0 " +
-                          "  union " +
-                          " SELECT qenInterviewSchedule.slotID, slotTime,qenName as blocked,  qendidateList.qenID as 'qenID' ,qenInterviewSchedule.jobID FROM qenInterviewSchedule left outer join qendidateList " +
-                          " on qenInterviewSchedule.qenID = qendidateList.qenID left outer join slots on qenInterviewSchedule.slotID = slots.slotID where qenInterviewSchedule.companyID = '" + companyID + "'  AND qenInterviewSchedule.slotID is not null AND convert(date, meetScheduledDateTime)= convert(date, '" + dt + "')";
-            var SlotList = db.Database.SqlQuery<slotsInfo>(query).ToList();
-            foreach (var item in SlotList)
+            try
             {
-                item.qenID = qenid;
-                item.jobID = jid;
+                var companyID_ = db.jobDetails.Where(e => e.jobID == jid).Select(e => new { e.companyID }).FirstOrDefault();
+                long companyID = Convert.ToInt64(companyID_.companyID.ToString());
+                string query = "select slotID, slotTime, 'Available' as blocked ,'' as 'qenID' ,''as jobID from slots where " +
+                             " slotID not in (select slotID from slotsBlocked where companyID = '" + companyID + "' AND isDeleted = 0 ) AND " +
+                             " slotID not in (SELECT slotID FROM qenInterviewSchedule where companyID = '" + companyID + "'  AND slotID is not null AND convert(date, meetScheduledDateTime)= convert(date, '" + dt + "') ) AND " +
+                              " slotID not in (SELECT slotID FROM slotTempBlocked where companyID = '" + companyID + "'  AND forDate = convert(date, '" + dt + "') AND isDeleted = 0 )" +
+                              " union " +
+                              " select slotTempBlocked.slotID , slotTime,'booked by HR' as blocked, '' as 'qenID' ,''as jobID from slotTempBlocked left outer join slots on slotTempBlocked.slotID = slots.slotID where companyID = '" + companyID + "'  AND isDeleted = 0 AND forDate = convert(date, '" + dt + "') " +
+                              " union " +
+                              " select slotsBlocked.slotID , slotTime,'blocked by HR' as blocked, '' as 'qenID' ,''as jobID from slotsBlocked left outer join slots on slotsBlocked.slotID = slots.slotID where companyID = '" + companyID + "'  AND isDeleted = 0 " +
+                              "  union " +
+                              " SELECT qenInterviewSchedule.slotID, slotTime,qenName as blocked,  qendidateList.qenID as 'qenID' ,qenInterviewSchedule.jobID FROM qenInterviewSchedule left outer join qendidateList " +
+                              " on qenInterviewSchedule.qenID = qendidateList.qenID left outer join slots on qenInterviewSchedule.slotID = slots.slotID where qenInterviewSchedule.companyID = '" + companyID + "'  AND qenInterviewSchedule.slotID is not null AND convert(date, meetScheduledDateTime)= convert(date, '" + dt + "')";
+                var SlotList = db.Database.SqlQuery<slotsInfo>(query).ToList();
+                foreach (var item in SlotList)
+                {
+                    item.qenID = qenid;
+                    item.jobID = jid;
+                }
+                return View(SlotList);
             }
-            return View(SlotList);
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message.ToString();
+                BaseUtil.CaptureErrorValues(ex);
+                return RedirectToAction("Error");
+            }
         }
 
         // Book Meeting 
         public string bookMeet(int slotID, long qenID, string dat, long jobID)
         {
             Int64 meetID_ = 0;
-            string returndate = "select distinct t.meetID from qenInterviewSchedule t inner join (select qenID, max(dataIsUpdated) as MaxDate from[dbo].[qenInterviewSchedule] group by qenID) tm on t.qenID ='" + qenID + "' and t.dataIsUpdated = tm.MaxDate";
-            var meetid = db.Database.SqlQuery<Int64>(returndate).ToList();
-            meetID_ = Convert.ToInt64(meetid[0].ToString());
-            var latest = db.qenInterviewSchedules.Where(e => e.qenID == qenID && e.meetID == meetID_).FirstOrDefault();
-            if (latest != null)
+            try
             {
-                latest.JobID = jobID;
-                latest.qenID = qenID;
-                latest.slotID = slotID;
-                latest.dataIsUpdated = BaseUtil.GetCurrentDateTime();
-                latest.meetMailRepliedDateTime= BaseUtil.GetCurrentDateTime();
-                latest.meetScheduledDateTime = Convert.ToDateTime(dat);
-                latest.meetPreferredMedium = "Skyp";
-                latest.meetScheduledMailRecieved = true;
+                string returndate = "select distinct t.meetID from qenInterviewSchedule t inner join (select qenID, max(dataIsUpdated) as MaxDate from[dbo].[qenInterviewSchedule] group by qenID) tm on t.qenID ='" + qenID + "' and t.dataIsUpdated = tm.MaxDate";
+                var meetid = db.Database.SqlQuery<Int64>(returndate).ToList();
+                meetID_ = Convert.ToInt64(meetid[0].ToString());
+                var latest = db.qenInterviewSchedules.Where(e => e.qenID == qenID && e.meetID == meetID_).FirstOrDefault();
+                if (latest != null)
+                {
+                    latest.JobID = jobID;
+                    latest.qenID = qenID;
+                    latest.slotID = slotID;
+                    latest.dataIsUpdated = BaseUtil.GetCurrentDateTime();
+                    latest.meetMailRepliedDateTime = BaseUtil.GetCurrentDateTime();
+                    latest.meetScheduledDateTime = Convert.ToDateTime(dat);
+                    latest.meetPreferredMedium = "Skyp";
+                    latest.meetScheduledMailRecieved = true;
+                }
+                var qenDet = db.qendidateLists.Where(e => e.qenID == qenID).Select(x => new { x.qenName, x.qenEmail }).FirstOrDefault();
+                var jobDet = db.jobDetails.Where(j => j.jobID == jobID).Select(j => new { j.CompanyName, j.jobTitle }).FirstOrDefault();
+                var slotdet = db.slots.Where(s => s.SlotID == slotID).Select(s => s.slotTime).FirstOrDefault();
+                string qenName = qenDet.qenName;
+                StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toCandidateMeetLink.html"));
+                string HTML_Body = sr.ReadToEnd();
+                //----------------------------use below code to send emailer------------------------------------------------------------           
+                string final_Html_Body = HTML_Body.Replace("#name", qenName).Replace("#jobTitle", jobDet.jobTitle).Replace("#companyName", jobDet.CompanyName).Replace("#date", dat).Replace("#time", slotdet).Replace("#url", latest.meetURL);
+                sr.Close();
+                string To = qenDet.qenEmail;
+                string mail_Subject = "Online Meeting Schduled for your job application" + jobDet.CompanyName + jobDet.jobTitle + dat;
+
+                string resultEmailSend = BaseUtil.sendEmailer(To, mail_Subject, final_Html_Body, "");
+                db.Entry(latest).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
             }
-            var qenDet = db.qendidateLists.Where(e => e.qenID == qenID).Select(x => new { x.qenName, x.qenEmail }).FirstOrDefault();
-            var jobDet = db.jobDetails.Where(j => j.jobID == jobID).Select(j => new { j.CompanyName, j.jobTitle }).FirstOrDefault();
-            var slotdet = db.slots.Where(s => s.SlotID == slotID).Select(s => s.slotTime).FirstOrDefault();
-            string qenName = qenDet.qenName;
-            StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toCandidateMeetLink.html"));
-            string HTML_Body = sr.ReadToEnd();
-            //----------------------------use below code to send emailer------------------------------------------------------------           
-            string final_Html_Body = HTML_Body.Replace("#name", qenName).Replace("#jobTitle", jobDet.jobTitle).Replace("#companyName",jobDet.CompanyName).Replace("#date",dat).Replace("#time",slotdet).Replace("#url",latest.meetURL);
-            sr.Close();
-            string To = qenDet.qenEmail;
-            string mail_Subject = "Online Meeting Schduled for your job application" + jobDet.CompanyName + jobDet.jobTitle + dat ;
-
-            string resultEmailSend = BaseUtil.sendEmailer(To, mail_Subject, final_Html_Body, "");
-            db.Entry(latest).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
-
+            catch (Exception ex)
+            {              
+                BaseUtil.CaptureErrorValues(ex);                
+            }
             return "OK";
         }
 
@@ -1221,49 +1306,56 @@ namespace NewLetter.Controllers
         public void UpdateProfilePerformance(long qenid, int action_)
         {
             ProfilePerformance oProfilePerformance = new Models.ProfilePerformance();
-            long EMPID = Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.employerID.ToString()));
-            DateTime dt = BaseUtil.GetCurrentDateTime().Date;
-            oProfilePerformance = db.ProfilePerformances.Where(e => e.qenID == qenid && e.EmployerID == EMPID && e.dataIsCreated == dt).FirstOrDefault();
-            if (oProfilePerformance != null)
-            //eventName : 1 for view, 2 for contact, 3 for download
+            try
             {
-                if (action_ == 1)
+                long EMPID = Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.employerID.ToString()));
+                DateTime dt = BaseUtil.GetCurrentDateTime().Date;
+                oProfilePerformance = db.ProfilePerformances.Where(e => e.qenID == qenid && e.EmployerID == EMPID && e.dataIsCreated == dt).FirstOrDefault();
+                if (oProfilePerformance != null)
+                //eventName : 1 for view, 2 for contact, 3 for download
                 {
-                    oProfilePerformance.ViewedDate = BaseUtil.GetCurrentDateTime().Date;
+                    if (action_ == 1)
+                    {
+                        oProfilePerformance.ViewedDate = BaseUtil.GetCurrentDateTime().Date;
+                    }
+                    if (action_ == 2)
+                    {
+                        oProfilePerformance.Contacted = BaseUtil.GetCurrentDateTime().Date;
+                    }
+                    if (action_ == 3)
+                    {
+                        oProfilePerformance.Downloaded = BaseUtil.GetCurrentDateTime().Date;
+                    }
+                    oProfilePerformance.dataIsCreated = BaseUtil.GetCurrentDateTime().Date;
+                    db.Entry(oProfilePerformance).State = EntityState.Modified;
+                    db.SaveChanges();
                 }
-                if (action_ == 2)
+                else
                 {
-                    oProfilePerformance.Contacted = BaseUtil.GetCurrentDateTime().Date;
-                }
-                if (action_ == 3)
-                {
-                    oProfilePerformance.Downloaded = BaseUtil.GetCurrentDateTime().Date;
-                }
-                oProfilePerformance.dataIsCreated = BaseUtil.GetCurrentDateTime().Date;
-                db.Entry(oProfilePerformance).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-            else
-            {
-                oProfilePerformance = new Models.ProfilePerformance();
-                if (action_ == 1)
-                {
-                    oProfilePerformance.ViewedDate = BaseUtil.GetCurrentDateTime().Date;
-                }
-                if (action_ == 2)
-                {
-                    oProfilePerformance.Contacted = BaseUtil.GetCurrentDateTime().Date;
-                }
-                if (action_ == 3)
-                {
-                    oProfilePerformance.Downloaded = BaseUtil.GetCurrentDateTime().Date;
-                }
+                    oProfilePerformance = new Models.ProfilePerformance();
+                    if (action_ == 1)
+                    {
+                        oProfilePerformance.ViewedDate = BaseUtil.GetCurrentDateTime().Date;
+                    }
+                    if (action_ == 2)
+                    {
+                        oProfilePerformance.Contacted = BaseUtil.GetCurrentDateTime().Date;
+                    }
+                    if (action_ == 3)
+                    {
+                        oProfilePerformance.Downloaded = BaseUtil.GetCurrentDateTime().Date;
+                    }
 
-                oProfilePerformance.dataIsCreated = BaseUtil.GetCurrentDateTime().Date;
-                oProfilePerformance.EmployerID = EMPID;
-                oProfilePerformance.qenID = qenid;
-                db.ProfilePerformances.Add(oProfilePerformance);
-                db.SaveChanges();
+                    oProfilePerformance.dataIsCreated = BaseUtil.GetCurrentDateTime().Date;
+                    oProfilePerformance.EmployerID = EMPID;
+                    oProfilePerformance.qenID = qenid;
+                    db.ProfilePerformances.Add(oProfilePerformance);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {                
+                BaseUtil.CaptureErrorValues(ex);               
             }
         }
 
@@ -1289,44 +1381,53 @@ namespace NewLetter.Controllers
             long qenid = Convert.ToInt64(frm["qid"]);
             long jobId = Convert.ToInt64(frm["jid"]);
             var date = Convert.ToDateTime(frm["dt"]);
-            string returndate = "select distinct TOP 1 t.mailSendID from qendidateTestSchedule t inner join (select qenID, max(dataIsUpdated) as MaxDate from[dbo].[qendidateTestSchedule] group by qenID, jobID) tm on t.qenID = '" + qenid + "' and t.jobID = '" + jobId + "'  and t.dataIsUpdated = tm.MaxDate";
-            var mailSendID = db.Database.SqlQuery<Int64>(returndate).ToList();
-            mailSendID_ = Convert.ToInt64(mailSendID[0].ToString());
-            var latest = db.qendidateTestSchedules.Where(e => e.qenID == qenid && e.mailSendID == mailSendID_).FirstOrDefault();
-            if (latest != null)
+            try
             {
-                latest.testScheduledDateTime = date;
-                latest.mailSentTestScheduled = true;
-                latest.mailReceivedscheduled = true;
-                latest.dataIsUpdated = DateTime.Now;
-            }
-            db.Entry(latest).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
+                string returndate = "select distinct TOP 1 t.mailSendID from qendidateTestSchedule t inner join (select qenID, max(dataIsUpdated) as MaxDate from[dbo].[qendidateTestSchedule] group by qenID, jobID) tm on t.qenID = '" + qenid + "' and t.jobID = '" + jobId + "'  and t.dataIsUpdated = tm.MaxDate";
+                var mailSendID = db.Database.SqlQuery<Int64>(returndate).ToList();
+                mailSendID_ = Convert.ToInt64(mailSendID[0].ToString());
+                var latest = db.qendidateTestSchedules.Where(e => e.qenID == qenid && e.mailSendID == mailSendID_).FirstOrDefault();
+                if (latest != null)
+                {
+                    latest.testScheduledDateTime = date;
+                    latest.mailSentTestScheduled = true;
+                    latest.mailReceivedscheduled = true;
+                    latest.dataIsUpdated = DateTime.Now;
+                }
+                db.Entry(latest).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();         
+
 
             // Condition Check for assessment creation for employer
             jobDetail forassessment = new jobDetail();
-            var jDetails = db.jobDetails.Where(e => e.jobID == jobId).Include(e=>e.EmployerDetail).FirstOrDefault();
+            var jDetails = db.jobDetails.Where(e => e.jobID == jobId).Include(e => e.EmployerDetail).FirstOrDefault();
             if (jDetails.assessmentID == null)
-                {               
-                    StreamReader sremp = new StreamReader(Server.MapPath("/Emailer/toEmployerAssignTest.html"));
-                    string HTML_Body_Emp = sremp.ReadToEnd();                               
-                    string final_Html_Body_Emp = HTML_Body_Emp.Replace("#name", jDetails.jobContactPersonName).Replace("#position", jDetails.jobTitle).Replace("#date",jDetails.createdBy.ToString());
-                    sremp.Close();
-                    string ToEmp = jDetails.jobContactPersonEmail;
-                    string mail_Subject_Emp = "Create Test for for " + jDetails.jobTitle + jDetails.dataIsCreated;
-                    string resultEmailSend_Emp = BaseUtil.sendEmailer(ToEmp, mail_Subject_Emp, final_Html_Body_Emp, "");
-                }
+            {
+                StreamReader sremp = new StreamReader(Server.MapPath("/Emailer/toEmployerAssignTest.html"));
+                string HTML_Body_Emp = sremp.ReadToEnd();
+                string final_Html_Body_Emp = HTML_Body_Emp.Replace("#name", jDetails.jobContactPersonName).Replace("#position", jDetails.jobTitle).Replace("#date", jDetails.createdBy.ToString());
+                sremp.Close();
+                string ToEmp = jDetails.jobContactPersonEmail;
+                string mail_Subject_Emp = "Create Test for for " + jDetails.jobTitle + jDetails.dataIsCreated;
+                string resultEmailSend_Emp = BaseUtil.sendEmailer(ToEmp, mail_Subject_Emp, final_Html_Body_Emp, "");
+            }
 
             // Mailer sent to candidate with test link
             var qenDetails = db.qendidateLists.Where(e => e.qenID == qenid).FirstOrDefault();
             StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toCandidateWithTestLink.html"));
             string HTML_Body = sr.ReadToEnd();
-            string final_Html_Body = HTML_Body.Replace("#name", qenDetails.qenName).Replace("#post", jDetails.jobTitle).Replace("#url", "http://onlinetest.qendidate.com/OnlineAssessment.aspx?uid="+ qenid.ToString() + "&jobID=" + jobId.ToString());
+            string final_Html_Body = HTML_Body.Replace("#name", qenDetails.qenName).Replace("#post", jDetails.jobTitle).Replace("#url", "http://onlinetest.qendidate.com/OnlineAssessment.aspx?uid=" + qenid.ToString() + "&jobID=" + jobId.ToString());
             sr.Close();
             string To = qenDetails.qenEmail;
             string mail_Subject = "Test Created for you  " + jDetails.jobTitle;
             string resultEmailSend = BaseUtil.sendEmailer(To, mail_Subject, final_Html_Body, "");
             ViewBag.conversionYN = "No";
+        }
+         catch (Exception ex)
+            {
+                BaseUtil.CaptureErrorValues(ex);
+            }
+
             return View("selectTest", new { qenid, jobId });
         }
 
@@ -1369,13 +1470,22 @@ namespace NewLetter.Controllers
         [HttpPost]
         public ActionResult ReferenceCheck(referenceCheck oreferenceChec)
         {
-            var a = db.qenReferences.Where(e => e.qenRefID == oreferenceChec.qenRefID).FirstOrDefault();
-            a.isCheckComplete = oreferenceChec.isCheckComplete;
-            a.dataIsUpdated = BaseUtil.GetCurrentDateTime();
-            db.Entry(a).State = EntityState.Modified;
-            db.SaveChanges();
-            ViewBag.result = "ok";
-            return View(oreferenceChec);
+            try
+            {
+                var a = db.qenReferences.Where(e => e.qenRefID == oreferenceChec.qenRefID).FirstOrDefault();
+                a.isCheckComplete = oreferenceChec.isCheckComplete;
+                a.dataIsUpdated = BaseUtil.GetCurrentDateTime();
+                db.Entry(a).State = EntityState.Modified;
+                db.SaveChanges();
+                ViewBag.result = "ok";
+                return View(oreferenceChec);
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message.ToString();
+                BaseUtil.CaptureErrorValues(ex);
+                return RedirectToAction("Error");
+            }
         }
 
       
