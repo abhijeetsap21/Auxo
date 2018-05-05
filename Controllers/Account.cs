@@ -238,6 +238,7 @@ namespace NewLetter.Controllers
             
 =======
           
+>>>>>>> 4a112698a7db10eac44ee4dd525e191b99f8cb78
             Session.Abandon();
             return RedirectToAction("Login", "Account");
         }
