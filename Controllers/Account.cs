@@ -234,7 +234,10 @@ namespace NewLetter.Controllers
 
         public ActionResult Logout()
         {
+<<<<<<< HEAD
             
+=======
+          
             Session.Abandon();
             return RedirectToAction("Login", "Account");
         }
