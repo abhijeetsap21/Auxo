@@ -763,14 +763,15 @@ namespace NewLetter.Controllers
             }
             else
             {
-                return View();
+                TempData["Result"] = "Error";
+                return RedirectToAction("ThankYou", "Account", new { email = BaseUtil.encrypt(email), phone = BaseUtil.encrypt(result.qenPhone), qenID = BaseUtil.encrypt(result.qenID.ToString()) });
             }
                       
         }
 
         [HttpPost]
         public  ActionResult candidateReg(candidateRegistration candidateReg)
-        {
+            {
             var OTP = BaseUtil.GenerateRandomNo();
             //candidateRegistration data = new candidateRegistration();
             qendidateList qenlist = new qendidateList();

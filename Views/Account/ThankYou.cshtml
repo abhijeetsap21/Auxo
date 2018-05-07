@@ -10,6 +10,18 @@
     var qenID = BaseUtil.Decrypt(Request["qenID"].ToString());
 }
 
+<script>
+    $(function () {
+        debugger
+        if ('@TempData["Result"]' == "Error")
+
+            bootbox.alert({
+                title: "Alert !",
+                message: ' <p>Could Not Validate OTP</p>'
+            });
+    });
+</script>
+
 <h2>ThankYou</h2>
 
 <div>
