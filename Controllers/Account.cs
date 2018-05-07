@@ -189,6 +189,7 @@ namespace NewLetter.Controllers
                     //login ologin = new login();
                     var result = db.qendidateLists.Where(e => e.qenID == ID).FirstOrDefault();
                     result.isActive = true;
+                    result.isEmalVerified = true;
                     result.dataIsUpdated = BaseUtil.GetCurrentDateTime();
                     db.Entry(result).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
