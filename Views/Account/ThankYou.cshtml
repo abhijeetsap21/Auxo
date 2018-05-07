@@ -1,7 +1,7 @@
 ﻿@using NewLetter.Models;
 @{
     ViewBag.Title = "ThankYou";
-    Layout = "~/Views/Shared/_Layout_ExternalUser.cshtml";
+    Layout = "~/Views/Shared/_Layout_external_Employer.cshtml";
 }
 
 @{ 
@@ -22,22 +22,24 @@
     });
 </script>
 
-<h2>ThankYou</h2>
-
-<div>
-    We have sent Activation link on registered email id . Kindly check your email and Activate you account by clicking the Activation link
-
-    OR
-
-    We have sent one SMS  with OTP - to the registered Mobile number - Kindly enter OTP here to verify your Mobile number and there will a text box . 
-    @using (Html.BeginForm("verifyOTP", "Account", FormMethod.Post))
-    {
-    <input type="text" id="OTP" name="txt_OTP" />
-    <input type="hidden" name="email" value=@email />   
-    <input type="submit" value="Submit OTP" id="otpSubmit" name="Verify" />
-    }
-    <input type="button" value="resendOTP" id="resendOTP" name="resend" onclick="return resendOTP();" /> <br /><label id="functionresult" style="display:none"></label> <br />
-
+<div class="form-horizontal otp-thanku middle-text full-page">
+	<fieldset>
+		<h2 class="thankyou-title">ThankYou</h2>
+		<p>We have sent Activation link on registered email id . Kindly check your email and Activate you account by clicking the Activation link</p>
+		<p>OR</p>
+		<p>We have sent one SMS  with OTP - to the registered Mobile number - Kindly enter OTP here to verify your Mobile number and there will a text box .</p>
+		<div class="otp-form text-center">
+			<div class="otp-form-inner">
+				@using (Html.BeginForm("verifyOTP", "Account", FormMethod.Post))
+				{
+					<input type="text" id="OTP" class="form-control" name="txt_OTP" />
+					<input type="hidden" class="form-control" name="email" value=@email />   
+					<input type="submit" class="previous btn btn-default action-button" value="Submit OTP" id="otpSubmit" name="Verify" />
+				}
+					<input type="button" value="resend OTP" class="previous btn btn-default action-button" id="resendOTP" name="resend" onclick="return resendOTP();" /> <br /><label id="functionresult" style="display:none"></label> <br />
+			</div>
+		</div>
+	</fieldset>
 </div>
 
 <script>

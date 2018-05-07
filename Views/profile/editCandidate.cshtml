@@ -53,36 +53,36 @@
                 <div class="row">
                     <div class="container">
                         <ul class="nav nav-tabs" id="myTab">
-                            <li class="active"><a data-toggle="tab" href="#home">Personal Detials</a></li>
-                            <li><a data-toggle="tab" href="#profile">ACADEMIC Detials</a></li>
-                            <li><a data-toggle="tab" href="#messages">CERTIFICATIONS</a></li>
-                            <li><a data-toggle="tab" href="#settings">Skills</a></li>
-                            <li><a data-toggle="tab" href="#messages1">EMPLOYMENT</a></li>
-                            <li><a data-toggle="tab" href="#profile1">REFERENCES</a></li>
-                            <li><a data-toggle="tab" href="#settings1">Career High light</a></li>
+                            <li class="active"><a data-toggle="tab" href="#Profile">Personal Detials</a></li>
+                            <li><a data-toggle="tab" href="#Academic">ACADEMIC Detials</a></li>
+                            <li><a data-toggle="tab" href="#Cerifications">CERTIFICATIONS</a></li>
+                            <li><a data-toggle="tab" href="#Skills">Skills</a></li>
+                            <li><a data-toggle="tab" href="#Employment">EMPLOYMENT</a></li>
+                            <li><a data-toggle="tab" href="#References">REFERENCES</a></li>
+                            <li><a data-toggle="tab" href="#Career">Career High light</a></li>
                         </ul>
 
                         <div class="tab-content">
-                            <div class="tab-pane active  fade in" id="home">
+                            <div class="tab-pane active  fade in" id="Profile">
                                 @Html.Action("_partialPInfo", "profile", new { qenID })
                             </div>
-                            <div class="tab-pane" id="profile">
+                            <div class="tab-pane" id="Academic">
                                 @Html.Action("_partialacadInfo", "profile", new { qenID })
                             </div>
-                            <div class="tab-pane" id="messages">
+                            <div class="tab-pane" id="Cerifications">
                                 @Html.Action("_partialCertifications", "profile", new { qenID })
                             </div>
-                            <div class="tab-pane" id="settings">
+                            <div class="tab-pane" id="Skills">
                                 @Html.Action("_partialSkills", "profile", new { qenID })
                             </div>
-                            <div class="tab-pane" id="messages1">
+                            <div class="tab-pane" id="Employment">
                                 @Html.Action("_partialEmpInfo", "profile", new { qenID })
                             </div>
-                            <div class="tab-pane" id="profile1">
+                            <div class="tab-pane" id="References">
                                 @Html.Action("_partialRefInfo", "profile", new { qenID })
                             </div>
 
-                            <div class="tab-pane" id="settings1">
+                            <div class="tab-pane" id="Career">
                                 @Html.Action("_careerHighLights", "profile", new { qenID })
                             </div>
                         </div>
@@ -102,7 +102,7 @@
                 debugger
                 bootbox.alert({
                     title: 'Alert Success  !',
-                    message: @Html.Raw(Json.Encode(TempData["message"]))
+                    message: '@Html.Raw(Json.Encode(TempData["message"]))'
                 });
 
             }

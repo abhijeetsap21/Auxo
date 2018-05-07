@@ -78,8 +78,12 @@
             </div>
             <div class="col-md-6 col-sm-4 col-xs-12 common-qe-logo-block">
                 <div class="col-md-12 common-right-block">
-                    <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src="~/images/user-img.jpg" alt="img"></span><span class="common-user-loggedin-name">@fullName</span></div>
-                    <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src=@logo alt="img" style="width:35px"></span><span class="common-user-loggedin-comp">@companyname</span></div>
+                @{ if (roleID != "5")
+                    {
+                        <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src=@logo alt="img"></span><span class="common-user-loggedin-name">@companyname</span></div>
+                    }
+                }                  
+                    <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src=@logo alt="img" style="width:35px"></span><span class="common-user-loggedin-comp">@fullName </span></div>
                     <div class="dropdown common-top-dropdown">
                         <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown"><img src="~/images/profile-icon.jpg"></button>
 
@@ -432,4 +436,15 @@ var jqOld = jQuery.noConflict();
 
 
 
+<script>
 
+                       var jold = jQuery.noConflict();
+
+    debugger
+    jold(document).ready(function () {
+        debugger
+        jold('.datepicker').datepicker({
+            dateFormat: 'mm/dd/yy'  // CHANGE DATE FORMAT.
+        });
+    });
+</script>

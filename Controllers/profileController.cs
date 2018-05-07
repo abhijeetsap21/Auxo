@@ -622,12 +622,10 @@ namespace NewLetter.Controllers
 
         [HttpPost]
          [ValidateAntiForgeryToken]
-        public ActionResult SaveEmploymentDetails(qenEmpDetail model,FormCollection frm)
+        public ActionResult SaveEmploymentDetails(qenEmpDetail model)
         {
             try
-            {
-                var a = BaseUtil.convertToDate(frm["qenEmpFrom"].ToString());
-                var b = BaseUtil.convertToDate(frm["qenEmpTo"].ToString());
+            {               
                 qenEmpDetail emp = null;
                 if (model.qenEmploymentNum != 0)
                 {
@@ -636,8 +634,8 @@ namespace NewLetter.Controllers
                     {
                         
                         emp.qenPosition = model.qenPosition;
-                        emp.qenEmpFrom = a;
-                        emp.qenEmpTo = b;
+                        emp.qenEmpFrom = model.qenEmpFrom;
+                        emp.qenEmpTo = model.qenEmpTo;
                         emp.qenSalary = model.qenSalary;
                         emp.CompanyName = model.CompanyName;
                         emp.jobDescription = model.jobDescription;
@@ -648,8 +646,8 @@ namespace NewLetter.Controllers
                 }
                 else
                 {
-                    model.qenEmpFrom = a;
-                    model.qenEmpTo = b;
+                    model.qenEmpFrom = model.qenEmpFrom; 
+                    model.qenEmpTo = model.qenEmpTo;
                     model.dataIsCreated = BaseUtil.GetCurrentDateTime();
                     db.qenEmpDetails.Add(model);
                     db.SaveChanges();

@@ -35,22 +35,11 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 col-sm-12">
-            <div class="col-md-12 col-sm-12">
-                <div class="form-group">
-                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Job Description:</label>
-                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                        @Html.TextBoxFor(ex => ex.jobDescription)
-                        @Html.ValidationMessageFor(ex => ex.jobDescription, "", new { @class = "col_1 tleft text-danger" })
-                    </div>
-                </div>
-            </div>
             <div class="col-md-12 col-sm-12">
                 <div class="form-group">
                     <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Start Date:</label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                        @Html.TextBoxFor(ex => ex.qenEmpFrom, "{0:dd/MM/yyyy}", new { maxlength = "10", @class = "datepicker", onchange = "return DateCheck1();" })
+                        @Html.TextBoxFor(ex => ex.qenEmpFrom, "{0:MM/dd/yyyy}", new { maxlength = "10", @class = "datepicker", onchange = "return DateCheck1();" })
                         @Html.ValidationMessageFor(ex => ex.qenEmpFrom, "", new { @class = "col_1 tleft text-danger" })
                     </div>
                 </div>
@@ -59,52 +48,46 @@
                 <div class="form-group">
                     <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">End Date:</label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                        @Html.TextBoxFor(ex => ex.qenEmpTo, "{0:dd/MM/yyyy}", new { maxlength = "10", @class = "datepicker", onchange = "return DateCheck1();" })
+                        @Html.TextBoxFor(ex => ex.qenEmpTo, "{0:MM/dd/yyyy}", new { maxlength = "10", @class = "datepicker", onchange = "return DateCheck1();" })
                         @Html.ValidationMessageFor(ex => ex.qenEmpTo, "", new { @class = "col_1 tleft text-danger" })
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label for="concept" class="col-md-12 col-sm-12 col-xs-12 control-label">Job Description:</label>
+                    <div class="col-md-12 col-sm-12 col-xs-12 padding-none">
+                        @Html.TextAreaFor(ex => ex.jobDescription, new { maxlength = "100" })
+                        @Html.ValidationMessageFor(ex => ex.jobDescription, "", new { @class = "col_1 tleft text-danger" })
+                    </div>
+                </div>
+            </div>
+           
             <div class="col-md-12 text-right academic">
                 <input type="submit" name="save" class="plus-btn academic-create-btn btn btn-default" />
             </div>
         </div>
     </div>
-                    <br /><br />
+                  
                     }
+
+
                     <script type="text/javascript">
-                        var jold = jQuery.noConflict();
-                        jold(function () {
-                            jold.validator.addMethod('date',
-                            function (value, element) {
-                                if (this.optional(element)) {
-                                    return true;
-                                }
-                                var ok = true;
-                                try {
-                                    jold.datepicker.parseDate('dd/mm/yy', value);
-                                }
-                                catch (err) {
-                                    ok = false;
-                                }
-                                return ok;
-                            });
-                            jold(".datepicker").datepicker({ dateFormat: 'dd/mm/yy', changeYear: true });
-                        });
-
-
-
+                                                  
 
                         function DateCheck1() {
                             debugger
                             var StartDate = document.getElementById('qenEmpFrom').value;
                             var EndDate = document.getElementById('qenEmpTo').value;
-                            if (StartDate != '')
-                            { var sDate = convertToDate(StartDate); }
-                            if (StartDate != '') {
-                                var eDate = convertToDate(EndDate);
-                            }
+                            //if (StartDate != '')
+                            //{ var sDate = convertToDate(StartDate); }
+                            //if (StartDate != '') {
+                            //    var eDate = convertToDate(EndDate);
+                            //} && sDate > eDate
 
-                            if (StartDate != '' && EndDate != '' && sDate > eDate) {
+                            if (StartDate != '' && EndDate != '' && StartDate > EndDate) {
                                 debugger
                                 bootbox.alert({
                                     title: 'Alert Success  !',

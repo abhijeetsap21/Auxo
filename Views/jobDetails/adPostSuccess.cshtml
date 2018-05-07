@@ -12,14 +12,15 @@
 	<body>   
 		<div class="form-horizontal">
 			<h4>adPostSuccess</h4>
-				@{ var advID = ViewBag.refID;}
+				@{ var advID = ViewBag.refID;}				
 					<div class="col-sm-12 full-page-2">
-                        <div id=Grid>
-                            <div class="col-sm-6 text-center">
-                                <img id="adimage" src="@Model.advertisementimageURL" alt="Newspaper Ad" />
-                                <div class="col-md-12 text-center"><p id="urlclass">@Model.advertisementURL</p></div>
-                            </div>
+					<div id=Grid>
+						<div class="col-sm-6 text-center">
+							<img id="adimage" src="@Model.advertisementimageURL" alt="Newspaper Ad" />
+							<div class="col-md-12 text-center"><p id="urlclass">@Model.advertisementURL</p></div>
 						</div>
+						</div>
+						
 						<div class="col-sm-6 text-center">
 							<div class="job-status">Advt Posted successfully</div>
 							<div class="col-md-12 text-center">
@@ -47,10 +48,8 @@
 </html>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript">
-    debugger
         $(function () {
             $("#btnSubmit").click(function () {
-                debugger
                 $("input[name='GridHtml']").val($("#Grid").html());
             });
         });

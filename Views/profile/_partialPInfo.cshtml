@@ -210,6 +210,11 @@
             initAutocomplete();
             initialize();
             jqOld('[data-toggle="tooltip"]').tooltip();
+
+            //jqOld('#txtdob').datepicker({
+            //    dateFormat: 'mm/dd/yy'  // CHANGE DATE FORMAT.
+            //});
+
         });
         var placeSearch, autocomplete;
         var componentForm = {
@@ -366,12 +371,12 @@
                                 debugger
                                 var height = this.height;
                                 var width = this.width;
-                                if (height > 100 || width > 100) {
+                                if (height > 200 || width > 200) {
                                     debugger
                                    
                                     bootbox.alert({
                                         title: "Alert !",
-                                        message: 'Height and Width must not exceed 100px.'
+                                        message: 'Height and Width must not exceed 200px.'
                                     });
                                     return false;
                                 }
