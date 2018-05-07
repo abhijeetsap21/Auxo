@@ -133,7 +133,7 @@ namespace NewLetter.Models
         UserID, FullName, UserPhoto, EmailID, Mobile, role_id, LoginID, IP, Last_Login_Date, latitude, longitude, IPTrackerID,
 
         SuperAdmin, DataEntryoperator, tktcategory, RoleBit,companyID,employerID,companyname,logo, password,
-        Session_Person,socialCheck
+        Session_Person,socialCheck,emailVerified,mobileVerified
     }
 
 
@@ -449,11 +449,18 @@ namespace NewLetter.Models
                         SetSessionValue(AdminInfo.LoginID.ToString(), Convert.ToString(user.qenEmail));
                         SetSessionValue(AdminInfo.Mobile.ToString(), Convert.ToString(user.qenPhone));
                         SetSessionValue(AdminInfo.role_id.ToString(), Convert.ToString(user.roleID));
-                       // SetSessionValue(AdminInfo.socialCheck.ToString(), Convert.ToString(user.socialCheck));
+                        //SetSessionValue(AdminInfo.socialCheck.ToString(), Convert.ToString(user.socialCheck));
                         SetSessionValue(AdminInfo.FullName.ToString(), Convert.ToString(user.qenName));
                         SetSessionValue(AdminInfo.IP.ToString(), IP);
                         SetSessionValue(AdminInfo.IPTrackerID.ToString(), Convert.ToString(IPTrackerID));
-                        SetSessionValue(AdminInfo.logo.ToString(), Convert.ToString(user.qenImage));           
+                        SetSessionValue(AdminInfo.logo.ToString(), Convert.ToString(user.qenImage));                        
+                       
+                        SetSessionValue(AdminInfo.mobileVerified.ToString(), Convert.ToString(user.isMobileVerified));
+                        
+                        
+                        
+                            SetSessionValue(AdminInfo.emailVerified.ToString(), Convert.ToString(user.isEmalVerified));
+                        
                         result = "PASS";
                     }
                     else

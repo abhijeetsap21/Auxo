@@ -8,6 +8,15 @@
     var companyname = BaseUtil.GetSessionValue(AdminInfo.companyname.ToString());
     var logo = BaseUtil.GetSessionValue(AdminInfo.logo.ToString());
 }
+@{ 
+    var emailV = "";
+    var phoneV = "";
+    if (roleID == "5")
+    {
+        emailV = BaseUtil.GetSessionValue(AdminInfo.emailVerified.ToString());
+        phoneV = BaseUtil.GetSessionValue(AdminInfo.mobileVerified.ToString());
+    }
+}
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -84,6 +93,13 @@
                     }
                 }                  
                     <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src=@logo alt="img" style="width:35px"></span><span class="common-user-loggedin-comp">@fullName </span></div>
+                    
+                        @if (emailV == "False" || phoneV == "False")
+                        {                            
+                           <a href='@Url.Action("VerifyDetails", "profile")' >Your Profile Needs some action</a>                           
+
+                        }
+                    
                     <div class="dropdown common-top-dropdown">
                         <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown"><img src="~/images/profile-icon.jpg"></button>
 

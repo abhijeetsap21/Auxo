@@ -1,0 +1,115 @@
+﻿@using NewLetter.Models;
+@{
+    ViewBag.Title = "VerifyDetails";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+    var emailV = BaseUtil.GetSessionValue(AdminInfo.emailVerified.ToString());
+    var phoneV = BaseUtil.GetSessionValue(AdminInfo.mobileVerified.ToString());
+    var phone = BaseUtil.GetSessionValue(AdminInfo.Mobile.ToString());
+    var emailID = BaseUtil.GetSessionValue(AdminInfo.LoginID.ToString());
+}
+
+<h2>VerifyDetails</h2>
+
+
+@{
+    if (emailV == "False")
+    {
+        <input type="button" value="Resend Activation Email" onclick="return resendActivationEmail();" id="resendEmailer" />
+        <label style="display:none" id="emailResendResult"></label>
+    }
+}
+
+@{
+    if (phoneV == "False")
+    {
+        <input type="button" value="ResendOTP " onclick="return resendOTP();" id="resend" />
+        <label style="display:none" id="otpverificationresult"></label>
+        <input type="text" id="OTP" class="form-control" name="txt_OTP" />
+        <input type="submit" class="previous btn btn-default action-button" onclick="return verifyOTP();" value="Submit OTP" id="otpSubmit" name="Verify" />
+    }
+}
+
+@{ 
+    if(emailV == "True" && phoneV == "True")
+    {
+        <div>Congratulations , all your details are verified</div>
+    }
+}
+
+
+<script>
+    debugger
+    function resendOTP() {
+        var email = '@emailID';
+        var phone = '@phone';
+        $.ajax({
+            url: '/Account/resendOTP',
+            type: 'POST',
+            data: { 'email': email, 'phone': phone },
+            success: function (data) {
+                if (data == 'OK') {
+                    debugger
+                    var x = document.getElementById("otpverificationresult");
+                    x.style.display = "block";
+                    x.innerHTML = "OTP SENT"
+                }
+                if (data == 'notsent') {
+                    var x = document.getElementById("otpverificationresult");
+                    x.style.display = "block";
+                    x.innerHTML = "Error in sending. Please resend again"
+                }
+
+            }
+        });
+    }
+</script>
+<script>
+    debugger
+    function resendActivationEmail() {
+        debugger 
+        $.ajax({
+            url: '/profile/resendActivationEmail',
+            type: 'POST',            
+            success: function (data) {
+                if (data == 'Sent') {
+                    debugger
+                    var x = document.getElementById("emailResendResult");
+                    x.style.display = "block";
+                    x.innerHTML = "Verification Email sent. "
+                }               
+
+            }
+        });
+    }
+</script>
+<script>
+    debugger
+    function verifyOTP() {
+        var OTP = document.getElementById("OTP").value;
+        debugger
+        $.ajax({
+            url: '/profile/verifyOTP',
+            data: { 'OTP': OTP },
+            type: 'POST',
+            success: function (data) {
+                if (data == 'Verified') {
+                    debugger                  
+
+                        bootbox.alert({
+                            title: "Confirmation !",
+                            message: ' <p>Phone number successfully verified</p>'
+                        });
+                }
+                if (data == 'NotVerified') {
+                    debugger
+
+                    bootbox.alert({
+                        title: "Alert !",
+                        message: ' <p>Please try again</p>'
+                    });
+                }
+
+            }
+        });
+    }
+</script>

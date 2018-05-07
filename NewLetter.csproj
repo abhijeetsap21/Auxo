@@ -1390,6 +1390,7 @@
     <Content Include="Views\Shared\_Layout_ExternalUser.cshtml" />
     <Content Include="Views\Shared\_Layout_external_Employer.cshtml" />
     <Content Include="Views\Account\ThankYou.cshtml" />
+    <Content Include="Views\profile\VerifyDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="advertisement\" />

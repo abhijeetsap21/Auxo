@@ -54,6 +54,12 @@ namespace NewLetter.Controllers
         //    return View();
         //}
 
+        // Verify Details 
+        public ActionResult VerifyDetails()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SavePersonalInfo(qendidateList model, HttpPostedFileBase files)
@@ -1484,6 +1490,43 @@ namespace NewLetter.Controllers
                 BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
+        }
+
+        // Resend Activation Email
+        public string resendActivationEmail()
+        {
+            var result = db.qendidateLists.Where(e => e.qenEmail == AdminInfo.LoginID.ToString()).Select(e => e.password).FirstOrDefault();
+            StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toCandidateRegistrationSuccess_withActivationLink.html"));
+            string HTML_Body = sr.ReadToEnd();
+            string newString = HTML_Body.Replace("#name", AdminInfo.FullName.ToString()).Replace("#qenid", AdminInfo.UserID.ToString()).Replace("#password", result);
+            sr.Close();
+            string To = BaseUtil.GetSessionValue(AdminInfo.LoginID.ToString());
+            string mail_Subject = "Candidate Registration Confirmation ";
+            profileController objprofileController = new profileController();
+            BaseUtil.sendEmailer(To, mail_Subject, newString, "");
+            return "Sent";
+        }
+
+        // Verify OTP
+        public string verifyOTP(string OTP)
+        {
+            string email = BaseUtil.GetSessionValue(AdminInfo.LoginID.ToString());
+            var result = db.qendidateLists.Where(e => e.qenEmail == email).FirstOrDefault();
+            long otp_ = Convert.ToInt64(OTP);
+            if (result.OTP == otp_)
+            {
+                result.isActive = true;
+                result.isMobileVerified = true;
+                result.dataIsUpdated = BaseUtil.GetCurrentDateTime();
+                db.Entry(result).State = EntityState.Modified;
+                db.SaveChanges();
+                return "Verified";
+            }
+            else
+            {
+                return "NotVerified";
+            }
+                
         }
 
       

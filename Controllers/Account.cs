@@ -392,6 +392,8 @@ namespace NewLetter.Controllers
                     list.qenImage = linkedINResVM.pictureurl;
                     list.qenPhone = "+919999999999";
                     list.qenAddress = "some address";
+                    list.isMobileVerified = false;
+                    list.isEmalVerified = true;
                     list.qenAddress = null;
                     list.socialCheck = true;
                     list.registeredFrom = "LinkedIN";
@@ -425,6 +427,8 @@ namespace NewLetter.Controllers
                     user.dataIsUpdated = BaseUtil.GetCurrentDateTime();
                     user.qenName = linkedINResVM.firstName + " " + linkedINResVM.lastName;
                     user.registeredFrom = "LinkedIN";
+                    user.isMobileVerified = false;
+                    user.isEmalVerified = true;
                     db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
                     BaseUtil.SetSessionValue(AdminInfo.UserID.ToString(), Convert.ToString(user.qenID));
@@ -515,6 +519,8 @@ namespace NewLetter.Controllers
                         gmailUser.roleID = 5;
                         gmailUser.isDelete = false;
                         gmailUser.isActive = true;
+                        gmailUser.isMobileVerified = false;
+                        gmailUser.isEmalVerified = true;
                         gmailUser.password = baseClass.GetRandomPasswordString(10);
                         //gmailUser.qenImage = linkedINResVM.pictureurl;
                         gmailUser.qenPhone = "+919999999999";
@@ -655,6 +661,9 @@ namespace NewLetter.Controllers
                     list.roleID = 5;
                     list.isDelete = false;
                     list.isActive = true;
+                    list.isMobileVerified = false;
+                    list.isEmalVerified = true;
+
                     list.password = baseClass.GetRandomPasswordString(10);
                     //list.qenImage = linkedINResVM.pictureurl;
                     list.qenPhone = "+919999999999";
@@ -708,7 +717,7 @@ namespace NewLetter.Controllers
 
             return View("_partialCandidateReg", canreg);
 
-        }
+        }       
         //Method for resendOTP
 
         public string resendOTP(string email, string phone)
@@ -718,6 +727,7 @@ namespace NewLetter.Controllers
                 var result = db.qendidateLists.Where(e => e.qenEmail == email).FirstOrDefault();
                 int OTP = BaseUtil.GenerateRandomNo();
                 result.OTP = OTP;
+                result.dataIsUpdated = BaseUtil.GetCurrentDateTime();
                 db.Entry(result).State = EntityState.Modified;
                 db.SaveChanges();
                 string message = "Your voter verification code is " + OTP + "." + " Please use this number on the thank you page to verify your phone number. Thanks Team ElectoIndia";
@@ -744,6 +754,7 @@ namespace NewLetter.Controllers
             {
             result.isActive = true;
             result.isMobileVerified = true;
+            result.dataIsUpdated = BaseUtil.GetCurrentDateTime();
             try
             {
                 db.Entry(result).State = EntityState.Modified;
