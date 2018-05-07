@@ -716,6 +716,32 @@ namespace NewLetter.Models
                 return result.skillsID;
             }
         }
+        //Central Method for generating random number
+
+        public static int GenerateRandomNo()
+        {
+            int _min = 1000;
+            int _max = 9999;
+            Random _rdm = new Random();
+            return _rdm.Next(_min, _max);
+        }
+
+        // Cengtral Method for sending OTP
+        public static string sendSMS(string msg, string mobile)
+        {
+            string key = "wjm24kxfg4ntpce";
+            string sender_id = "DHVANI";            
+            WebRequest request = WebRequest.Create("http://www.smartsmsmarketing.com/sendsmsapi.php?key=" + key + "&sender_id=" + sender_id + "&sendto=" + mobile + "&message=" + msg );          
+            WebResponse response = request.GetResponse();
+            if (((HttpWebResponse)response).StatusDescription.Equals("OK"))
+            {
+                return "ok";
+            }
+            else
+            {
+                return "not sent";
+            }
+        }
 
         // Central Method for sending emails using send grid 
 

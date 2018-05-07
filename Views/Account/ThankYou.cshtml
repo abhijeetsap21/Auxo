@@ -1,0 +1,82 @@
+﻿@using NewLetter.Models;
+@{
+    ViewBag.Title = "ThankYou";
+    Layout = "~/Views/Shared/_Layout_ExternalUser.cshtml";
+}
+
+@{ 
+    var email = BaseUtil.Decrypt(Request["email"].ToString());
+    var phone = BaseUtil.Decrypt(Request["phone"].ToString());
+}
+
+<h2>ThankYou</h2>
+
+<div>
+    We have sent Activation link on registered email id . Kindly check your email and Activate you account by clicking the Activation link
+
+    OR
+
+    We have sent one SMS  with OTP - to the registered Mobile number - Kindly enter OTP here to verify your Mobile number and there will a text box . 
+
+    <input type="text" id="OTP" />
+    <input type="button" value="ResendOTP" id="resendOTP" name="resend" onclick="return resendOTP();" /> <br/><label id="functionresult" style="display:none"></label> <br />
+    <input type="button" value="Submit OTP" id="otpSubmit" name="Verify" onclick="return verifyOTP();" />
+
+</div>
+
+<script>
+    debugger
+    function resendOTP()
+    {
+        var email = '@email';
+        var phone = '@phone';
+        $.ajax({
+           url: '/Account/resendOTP',
+           type: 'POST',
+           data:{'email':email,'phone':phone},
+            success:function (data)
+            {
+                if(data=='OK')
+                {
+                    debugger
+                    var x = document.getElementById("functionresult");
+                    x.style.display = "block";
+                    x.innerHTML = "OTP SENT"
+                }
+                if(data == 'notsent')
+                {
+                    var x = document.getElementById("functionresult");
+                    x.style.display = "block";
+                    x.innerHTML = "Error in sending. Please resend again"
+                }
+
+            }
+        });
+    }
+</script>
+
+<script>
+    debugger
+    function verifyOTP()
+    {
+        var email = '@email';
+        var OTP = document.getElementById("OTP").value;
+        $.ajax({
+            url: '/Account/verifyOTP',
+           type: 'POST',
+           data: { 'email': email, 'OTP': OTP },
+            success:function (data)
+            {
+                if (TempData["Result"] = "Not Verified")
+                {
+                    debugger
+                    var x = document.getElementById("functionresult");
+                    x.style.display = "block";
+                    x.innerHTML = "Error in verifying OTP";
+                }              
+
+            }
+        });
+    }
+</script>
+

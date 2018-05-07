@@ -708,10 +708,63 @@ namespace NewLetter.Controllers
             return View("_partialCandidateReg", canreg);
 
         }
+        //Method for resendOTP
+
+        public string resendOTP(string email, string phone)
+        {
+            try
+            {
+                var result = db.qendidateLists.Where(e => e.qenEmail == email).FirstOrDefault();
+                int OTP = BaseUtil.GenerateRandomNo();
+                result.OTP = OTP;
+                db.Entry(result).State = EntityState.Modified;
+                db.SaveChanges();
+                string message = "Your voter verification code is " + OTP + "." + " Please use this number on the thank you page to verify your phone number. Thanks Team ElectoIndia";
+                string smsresult = BaseUtil.sendSMS(message, phone);
+
+                return "OK";
+            }
+            catch (Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+                return "notsent";
+            }
+        }
+
+        // Verify OTP
+        public ActionResult verifyOTP(string email , string OTP)
+        {
+            
+                var result = db.qendidateLists.Where(e => e.qenEmail == email).FirstOrDefault();               
+                long otp_ = Convert.ToInt64(OTP);
+                if(result.OTP == otp_)
+                {
+                result.isActive = true;
+                result.isMobileVerified = true;
+                try
+                {
+                    db.Entry(result).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                catch(Exception e)
+                {
+                    BaseUtil.CaptureErrorValues(e);
+                }                
+                return RedirectToAction("jobs", "jobDetails", new { ID = result.qenID });
+                
+                }
+                else
+                {
+                TempData["Result"] = "Not Verified";
+                return RedirectToAction("ThankYou", "Account", new { email = BaseUtil.encrypt(email), phone = BaseUtil.encrypt(OTP) });
+            }
+                      
+        }
 
         [HttpPost]
         public  ActionResult candidateReg(candidateRegistration candidateReg)
         {
+            var OTP = BaseUtil.GenerateRandomNo();
             //candidateRegistration data = new candidateRegistration();
             qendidateList qenlist = new qendidateList();
 
@@ -722,11 +775,16 @@ namespace NewLetter.Controllers
             qenlist.roleID = 5;
             qenlist.isActive = false;
             qenlist.isDelete = false;
+            //added on 05052018
+            qenlist.isMobileVerified = false;
+            qenlist.isEmalVerified = false;
+            //end
             qenlist.password = baseClass.GetRandomPasswordString(10);
             candidateReg.password = qenlist.password;
             qenlist.dataIsCreated = BaseUtil.GetCurrentDateTime();
             qenlist.dataIsUpdated = BaseUtil.GetCurrentDateTime();
             qenlist.registeredFrom = "SpotANeedle";
+            qenlist.OTP = OTP;
             db.qendidateLists.Add(qenlist);
             try
             {
@@ -737,7 +795,12 @@ namespace NewLetter.Controllers
             {
                 BaseUtil.CaptureErrorValues(ex);
                 TempData["result"] = "Registration failed.";
+
             }
+           
+            string message = "Your voter verification code is " + OTP + "." + " Please use this number on the thank you page to verify your phone number. Thanks Team ElectoIndia";
+            string smsresult = BaseUtil.sendSMS(message, candidateReg.candidatePhone);
+
             var emailresult = db.qendidateLists.Where(ex => ex.qenID == candidateReg.candidateID).FirstOrDefault();
             var encryptedID = BaseUtil.encrypt(emailresult.qenID.ToString());
 
@@ -752,10 +815,15 @@ namespace NewLetter.Controllers
             profileController objprofileController = new profileController();
             BaseUtil.sendEmailer(To, mail_Subject, newString, "");
             //----------------------------end to send emailer------------------------------------------------------------
-
             TempData["result"] = "Registred";
-            return RedirectToAction("login");
+            string encryptedPhone = BaseUtil.encrypt(candidateReg.candidatePhone);
+            string encryptEmail = BaseUtil.encrypt(candidateReg.Email);
+            return RedirectToAction("ThankYou","Account",new {  email =encryptEmail, phone = encryptedPhone });
+        }
 
+        public ActionResult ThankYou(string email,string phone)
+        {
+            return View();
         }
        
         

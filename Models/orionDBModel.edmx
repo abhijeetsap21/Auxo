@@ -360,6 +360,9 @@
           <Property Name="lastLoginTime" Type="datetime" />
           <Property Name="uploadFromExternalResource" Type="bit" Nullable="false" />
           <Property Name="registeredFrom" Type="nvarchar" MaxLength="100" />
+          <Property Name="isMobileVerified" Type="bit" />
+          <Property Name="isEmalVerified" Type="bit" />
+          <Property Name="OTP" Type="int" />
         </EntityType>
         <EntityType Name="qendidateListInJob">
           <Key>
@@ -456,7 +459,7 @@
           <Property Name="qenEmploymentNum" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CompanyName" Type="nvarchar" MaxLength="100" />
           <Property Name="qenEmpFrom" Type="date" />
-          <Property Name="jobDescription" Type="nvarchar" MaxLength="100" />
+          <Property Name="jobDescription" Type="nvarchar(max)" />
           <Property Name="qenEmpTo" Type="date" />
           <Property Name="qenSalary" Type="float" />
           <Property Name="qenPosition" Type="varchar" MaxLength="50" />
@@ -2757,6 +2760,36 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             <End Role="slot" EntitySet="slots" />
             <End Role="slotTempBlocked" EntitySet="slotTempBlockeds" />
           </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition1" ReturnType="Collection(oriondbModel.sp_helpdiagramdefinition1_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams1" ReturnType="Collection(oriondbModel.sp_helpdiagrams1_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams1" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -3479,6 +3512,9 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Name="lastLoginTime" Type="DateTime" Precision="3" />
           <Property Name="uploadFromExternalResource" Type="Boolean" Nullable="false" />
           <Property Name="registeredFrom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="isMobileVerified" Type="Boolean" />
+          <Property Name="isEmalVerified" Type="Boolean" />
+          <Property Name="OTP" Type="Int32" />
           <NavigationProperty Name="genderList" Relationship="oriondbModel.FK_qendidateList_genderList" FromRole="qendidateList" ToRole="genderList" />
           <NavigationProperty Name="HiredCandidates" Relationship="oriondbModel.FK_HiredCandidate_qendidateList" FromRole="qendidateList" ToRole="HiredCandidate" />
           <NavigationProperty Name="InterViewerComments" Relationship="oriondbModel.FK_InterViewerComment_qendidateList" FromRole="qendidateList" ToRole="InterViewerComment" />
@@ -3604,7 +3640,7 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Name="qenEmploymentNum" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="qenEmpFrom" Type="DateTime" Precision="0" />
-          <Property Name="jobDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="jobDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="qenEmpTo" Type="DateTime" Precision="0" />
           <Property Name="qenSalary" Type="Double" />
           <Property Name="qenPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -4855,36 +4891,23 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="sp_helpdiagramdefinition1_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams1_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="oriondbModelStoreContainer" CdmEntityContainer="oriondbEntities">
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="oriondbModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="oriondbModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="oriondbModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="oriondbModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="oriondbModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="oriondbModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="oriondbModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="oriondbModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="oriondbModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="sp_selectEducationTypeList" FunctionName="oriondbModel.Store.sp_selectEducationTypeList">
             <ResultMapping>
               <ComplexTypeMapping TypeName="oriondbModel.sp_selectEducationTypeList_Result">
@@ -5563,6 +5586,9 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <EntitySetMapping Name="qendidateLists">
             <EntityTypeMapping TypeName="oriondbModel.qendidateList">
               <MappingFragment StoreEntitySet="qendidateList">
+                <ScalarProperty Name="OTP" ColumnName="OTP" />
+                <ScalarProperty Name="isEmalVerified" ColumnName="isEmalVerified" />
+                <ScalarProperty Name="isMobileVerified" ColumnName="isMobileVerified" />
                 <ScalarProperty Name="registeredFrom" ColumnName="registeredFrom" />
                 <ScalarProperty Name="uploadFromExternalResource" ColumnName="uploadFromExternalResource" />
                 <ScalarProperty Name="lastLoginTime" ColumnName="lastLoginTime" />
@@ -5958,6 +5984,30 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram1" FunctionName="oriondbModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram1" FunctionName="oriondbModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram1" FunctionName="oriondbModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition1" FunctionName="oriondbModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="oriondbModel.sp_helpdiagramdefinition1_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams1" FunctionName="oriondbModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="oriondbModel.sp_helpdiagrams1_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram1" FunctionName="oriondbModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams1" FunctionName="oriondbModel.Store.sp_upgraddiagrams" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

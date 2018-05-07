@@ -562,7 +562,13 @@
     <Compile Include="Models\sp_getNotificationCount_Result.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition1_Result.cs">
+      <DependentUpon>orionDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>orionDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams1_Result.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
@@ -1381,6 +1387,9 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-mobile.woff" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
+    <Content Include="Views\Shared\_Layout_ExternalUser.cshtml" />
+    <Content Include="Views\Shared\_Layout_external_Employer.cshtml" />
+    <Content Include="Views\Account\ThankYou.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="advertisement\" />

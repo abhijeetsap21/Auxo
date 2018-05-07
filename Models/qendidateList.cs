@@ -71,6 +71,9 @@ namespace NewLetter.Models
         public Nullable<System.DateTime> lastLoginTime { get; set; }
         public bool uploadFromExternalResource { get; set; }
         public string registeredFrom { get; set; }
+        public Nullable<bool> isMobileVerified { get; set; }
+        public Nullable<bool> isEmalVerified { get; set; }
+        public Nullable<int> OTP { get; set; }
     
         public virtual genderList genderList { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
