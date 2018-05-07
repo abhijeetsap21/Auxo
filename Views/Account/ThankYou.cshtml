@@ -7,6 +7,7 @@
 @{ 
     var email = BaseUtil.Decrypt(Request["email"].ToString());
     var phone = BaseUtil.Decrypt(Request["phone"].ToString());
+    var qenID = BaseUtil.Decrypt(Request["qenID"].ToString());
 }
 
 <h2>ThankYou</h2>
@@ -17,10 +18,13 @@
     OR
 
     We have sent one SMS  with OTP - to the registered Mobile number - Kindly enter OTP here to verify your Mobile number and there will a text box . 
-
-    <input type="text" id="OTP" />
-    <input type="button" value="ResendOTP" id="resendOTP" name="resend" onclick="return resendOTP();" /> <br/><label id="functionresult" style="display:none"></label> <br />
-    <input type="button" value="Submit OTP" id="otpSubmit" name="Verify" onclick="return verifyOTP();" />
+    @using (Html.BeginForm("verifyOTP", "Account", FormMethod.Post))
+    {
+    <input type="text" id="OTP" name="txt_OTP" />
+    <input type="hidden" name="email" value=@email />   
+    <input type="submit" value="Submit OTP" id="otpSubmit" name="Verify" />
+    }
+    <input type="button" value="resendOTP" id="resendOTP" name="resend" onclick="return resendOTP();" /> <br /><label id="functionresult" style="display:none"></label> <br />
 
 </div>
 
@@ -55,7 +59,7 @@
     }
 </script>
 
-<script>
+@*<script>
     debugger
     function verifyOTP()
     {
@@ -67,16 +71,20 @@
            data: { 'email': email, 'OTP': OTP },
             success:function (data)
             {
-                if (TempData["Result"] = "Not Verified")
-                {
+                if (data == 'verified') {
                     debugger
+                    var url = '@Url.Action("jobs", "jobDetails")';
+                    url += "?ID=" + @qenID;
+                    window.location.href = url;
+                }
+                if (data == 'notsent') {
                     var x = document.getElementById("functionresult");
                     x.style.display = "block";
-                    x.innerHTML = "Error in verifying OTP";
-                }              
+                    x.innerHTML = "Error in sending. Please resend again"
+                }
 
             }
         });
     }
-</script>
+</script>*@
 

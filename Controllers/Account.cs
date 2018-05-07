@@ -732,31 +732,37 @@ namespace NewLetter.Controllers
         }
 
         // Verify OTP
-        public ActionResult verifyOTP(string email , string OTP)
+        public ActionResult verifyOTP(FormCollection frm)
         {
-            
-                var result = db.qendidateLists.Where(e => e.qenEmail == email).FirstOrDefault();               
-                long otp_ = Convert.ToInt64(OTP);
-                if(result.OTP == otp_)
-                {
-                result.isActive = true;
-                result.isMobileVerified = true;
-                try
-                {
-                    db.Entry(result).State = EntityState.Modified;
-                    db.SaveChanges();
-                }
-                catch(Exception e)
-                {
-                    BaseUtil.CaptureErrorValues(e);
-                }                
-                return RedirectToAction("jobs", "jobDetails", new { ID = result.qenID });
-                
-                }
-                else
-                {
-                TempData["Result"] = "Not Verified";
-                return RedirectToAction("ThankYou", "Account", new { email = BaseUtil.encrypt(email), phone = BaseUtil.encrypt(OTP) });
+            var ID = "";
+            string OTP = frm["txt_OTP"];
+            string email = frm["email"];
+            var result = db.qendidateLists.Where(e => e.qenEmail == email).FirstOrDefault();               
+            long otp_ = Convert.ToInt64(OTP);
+            if(result.OTP == otp_)
+            {
+            result.isActive = true;
+            result.isMobileVerified = true;
+            try
+            {
+                db.Entry(result).State = EntityState.Modified;
+                db.SaveChanges();
+                BaseUtil.SetSessionValue(AdminInfo.UserID.ToString(), Convert.ToString(result.qenID));
+                //BaseUtil.SetSessionValue(AdminInfo.Mobile.ToString(), Convert.ToString(user.qenPhone));
+                BaseUtil.SetSessionValue(AdminInfo.role_id.ToString(), Convert.ToString(result.roleID));
+                BaseUtil.SetSessionValue(AdminInfo.FullName.ToString(), Convert.ToString(result.qenName));
+                ID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString());              
+            }
+
+            catch(Exception e)
+            {
+                BaseUtil.CaptureErrorValues(e);
+            }
+                return RedirectToAction("jobs", "jobDetails", new { ID = ID });
+            }
+            else
+            {
+                return View();
             }
                       
         }
@@ -818,10 +824,10 @@ namespace NewLetter.Controllers
             TempData["result"] = "Registred";
             string encryptedPhone = BaseUtil.encrypt(candidateReg.candidatePhone);
             string encryptEmail = BaseUtil.encrypt(candidateReg.Email);
-            return RedirectToAction("ThankYou","Account",new {  email =encryptEmail, phone = encryptedPhone });
+            return RedirectToAction("ThankYou","Account",new {  email =encryptEmail, phone = encryptedPhone, qenID=BaseUtil.encrypt(qenlist.qenID.ToString()) });
         }
 
-        public ActionResult ThankYou(string email,string phone)
+        public ActionResult ThankYou(string email,string phone,string qenID)
         {
             return View();
         }
