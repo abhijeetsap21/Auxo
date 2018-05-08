@@ -1438,7 +1438,7 @@ namespace NewLetter.Controllers
             var qenDetails = db.qendidateLists.Where(e => e.qenID == qenid).FirstOrDefault();
             StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toCandidateWithTestLink.html"));
             string HTML_Body = sr.ReadToEnd();
-            string final_Html_Body = HTML_Body.Replace("#name", qenDetails.qenName).Replace("#post", jDetails.jobTitle).Replace("#url", "http://onlinetest.qendidate.com/OnlineAssessment.aspx?uid=" + qenid.ToString() + "&jobID=" + jobId.ToString());
+            string final_Html_Body = HTML_Body.Replace("#name", qenDetails.qenName).Replace("#post", jDetails.jobTitle).Replace("#url", "http://onlinetest.qendidate.com/OnlineAssessment.aspx?cid=" + qenid.ToString() + "&jid=" + jobId.ToString());
             sr.Close();
             string To = qenDetails.qenEmail;
             string mail_Subject = "Test Created for you  " + jDetails.jobTitle;
