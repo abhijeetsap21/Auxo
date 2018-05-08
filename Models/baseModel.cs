@@ -982,6 +982,7 @@ namespace NewLetter.Models
               try { 
                 var AppErrorLog = new app_error_log();
                 AppErrorLog.ErrorMsg = exceptionContext.Exception.Message;
+                AppErrorLog.datelog = BaseUtil.GetCurrentDateTime();
                 db.app_error_log.Add(AppErrorLog);
                 db.SaveChanges();
                 }
