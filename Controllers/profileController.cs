@@ -1427,7 +1427,7 @@ namespace NewLetter.Controllers
             {
                 StreamReader sremp = new StreamReader(Server.MapPath("/Emailer/toEmployerAssignTest.html"));
                 string HTML_Body_Emp = sremp.ReadToEnd();
-                string final_Html_Body_Emp = HTML_Body_Emp.Replace("#name", jDetails.jobContactPersonName).Replace("#position", jDetails.jobTitle).Replace("#date", jDetails.createdBy.ToString());
+                string final_Html_Body_Emp = HTML_Body_Emp.Replace("#name", jDetails.jobContactPersonName).Replace("#position", jDetails.jobTitle).Replace("#date", jDetails.dataIsCreated.ToString());
                 sremp.Close();
                 string ToEmp = jDetails.jobContactPersonEmail;
                 string mail_Subject_Emp = "Create Test for for " + jDetails.jobTitle + jDetails.dataIsCreated;
