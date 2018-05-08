@@ -1513,12 +1513,13 @@ namespace NewLetter.Controllers
         // Resend Activation Email
         public string resendActivationEmail()
         {
-            var result = db.qendidateLists.Where(e => e.qenEmail == AdminInfo.LoginID.ToString()).Select(e => e.password).FirstOrDefault();
+            var email = BaseUtil.GetSessionValue(AdminInfo.LoginID.ToString());
+            var result = db.qendidateLists.Where(e => e.qenEmail == email ).Select(e => e.password).FirstOrDefault();
             StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toCandidateRegistrationSuccess_withActivationLink.html"));
             string HTML_Body = sr.ReadToEnd();
             string newString = HTML_Body.Replace("#name", AdminInfo.FullName.ToString()).Replace("#qenid", AdminInfo.UserID.ToString()).Replace("#password", result);
             sr.Close();
-            string To = BaseUtil.GetSessionValue(AdminInfo.LoginID.ToString());
+            string To = email;
             string mail_Subject = "Candidate Registration Confirmation ";
             profileController objprofileController = new profileController();
             BaseUtil.sendEmailer(To, mail_Subject, newString, "");

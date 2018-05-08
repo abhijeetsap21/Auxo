@@ -317,7 +317,7 @@ namespace NewLetter.Controllers
                     var pass = BaseUtil.encrypt(BaseUtil.GetSessionValue(AdminInfo.password.ToString()));
                     var email = BaseUtil.encrypt(BaseUtil.GetSessionValue(AdminInfo.EmailID.ToString()));
 
-                    htmlString = htmlString + " <input type = 'button' name='Auxopass' class='previous action-button' value='Auxo Pass' onclick='location.href = 'http://localhost:49319/Login.aspx?uid='" + email + "'&key='" + pass + "/>";
+                    htmlString = htmlString + " <input type = 'button' name='Auxopass' class='previous action-button' value='Auxo Pass' onclick='location.href = 'https://spotaneedle.com/Login.aspx?uid='" + email + "'&key='" + pass + "/>";
                 }
 
                 htmlString = htmlString + "<a href='/jobDetails/JobView?jobID=" + BaseUtil.encrypt(item.jobID.ToString()) + "'>View</a>";

@@ -2,11 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="format-detection" content="telephone=no" />
-    <!-- disable auto telephone linking in iOS -->
-    <title>Qendidate Mailer System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="format-detection" content="telephone=no" /> <!-- disable auto telephone linking in iOS -->
+    <title>Respmail is a response HTML email designed to work on all major email platforms and smartphones</title>
     <style type="text/css">
         /* RESET STYLES */
         html {
@@ -281,7 +280,11 @@
                 desktop.
                 */
             /*td[class="textContent"], td[class="flexibleContainerCell"] { width: 100%; padding-left: 10px !important; padding-right: 10px !important; }*/
-            table[id="emailHeader"], table[id="emailBody"], table[id="emailFooter"], table[class="flexibleContainer"], td[class="flexibleContainerCell"] {
+            table[id="emailHeader"],
+            table[id="emailBody"],
+            table[id="emailFooter"],
+            table[class="flexibleContainer"],
+            td[class="flexibleContainerCell"] {
                 width: 100% !important;
             }
 
@@ -358,55 +361,60 @@
         @media only screen and (min-device-width : 320px) and (max-device-width:568px) {
         }
         /* end IOS targeting */
-		.btn{display: inline-block;padding: 6px 12px;font-size: 14px;line-height: 1.42857143;text-align: center;cursor: pointer;border-radius: 4px;background-color: #4a4dd0;color: #FFF;border:0px;margin:0 10px 0 0;}
     </style>
     <!--
-            Outlook Conditional CSS
-            These two style blocks target Outlook 2007 & 2010 specifically, forcing
-            columns into a single vertical stack as on mobile clients. This is
-            primarily done to avoid the 'page break bug' and is optional.
-            More information here:
-            http://templates.mailchimp.com/development/css/outlook-conditional-css
-        -->
+        Outlook Conditional CSS
+        These two style blocks target Outlook 2007 & 2010 specifically, forcing
+        columns into a single vertical stack as on mobile clients. This is
+        primarily done to avoid the 'page break bug' and is optional.
+        More information here:
+        http://templates.mailchimp.com/development/css/outlook-conditional-css
+    -->
     <!--[if mso 12]>
-            <style type="text/css">
-                .flexibleContainer{display:block !important; width:100% !important;}
-            </style>
-        <![endif]-->
+        <style type="text/css">
+            .flexibleContainer{display:block !important; width:100% !important;}
+        </style>
+    <![endif]-->
     <!--[if mso 14]>
-            <style type="text/css">
-                .flexibleContainer{display:block !important; width:100% !important;}
-            </style>
-        <![endif]-->
+        <style type="text/css">
+            .flexibleContainer{display:block !important; width:100% !important;}
+        </style>
+    <![endif]-->
 </head>
 <body bgcolor="#E1E1E1" leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+
+
     <center style="background-color:#E1E1E1;">
         <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable" style="table-layout: fixed;max-width:100% !important;width: 100% !important;min-width: 100% !important;">
             <tr>
                 <td align="center" valign="top" id="bodyCell">
+
                     <table bgcolor="#E1E1E1" border="0" cellpadding="0" cellspacing="0" width="500" id="emailHeader">
 
                         <!-- HEADER ROW // -->
                         <tr>
                             <td align="center" valign="top">
                                 <!-- CENTERING TABLE // -->
-
                                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                     <tr>
                                         <td align="center" valign="top">
                                             <!-- FLEXIBLE CONTAINER // -->
-
                                             <table border="0" cellpadding="10" cellspacing="0" width="500" class="flexibleContainer">
                                                 <tr>
                                                     <td valign="top" width="500" class="flexibleContainerCell">
-                                                        <!-- CONTENT TABLE // -->
 
+                                                        <!-- CONTENT TABLE // -->
                                                         <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
                                                             <tr>
+
                                                                 <td align="left" valign="middle" id="invisibleIntroduction" class="flexibleContainerBox" style="display:none !important; mso-hide:all;">
                                                                     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:100%;">
                                                                         <tr>
-                                                                            <td align="left" class="textContent"><div style="font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#828282;text-align:center;line-height:120%;"> The introduction of your message preview goes here. Try to make it short. </div></td>
+                                                                            <td align="left" class="textContent">
+                                                                                <div style="font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#828282;text-align:center;line-height:120%;">
+                                                                                    The introduction of your message preview goes here. Try to make it short.
+                                                                                </div>
+                                                                            </td>
                                                                         </tr>
                                                                     </table>
                                                                 </td>
@@ -415,8 +423,9 @@
                                                                         <tr>
                                                                             <td align="left" class="textContent">
                                                                                 <!-- CONTENT // -->
-
-                                                                                <div style="font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#828282;text-align:center;line-height:120%;"> If you can't see this message, <a href="#" target="_blank" style="text-decoration:none;border-bottom:1px solid #828282;color:#828282;"><span style="color:#828282;">view&nbsp;it&nbsp;in&nbsp;your&nbsp;browser</span></a>. </div>
+                                                                                <div style="font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#828282;text-align:center;line-height:120%;">
+                                                                                    If you can't see this message, <a href="#" target="_blank" style="text-decoration:none;border-bottom:1px solid #828282;color:#828282;"><span style="color:#828282;">view&nbsp;it&nbsp;in&nbsp;your&nbsp;browser</span></a>.
+                                                                                </div>
                                                                             </td>
                                                                         </tr>
                                                                     </table>
@@ -426,357 +435,82 @@
                                                     </td>
                                                 </tr>
                                             </table>
-
                                             <!-- // FLEXIBLE CONTAINER -->
                                         </td>
                                     </tr>
                                 </table>
-
                                 <!-- // CENTERING TABLE -->
                             </td>
                         </tr>
                         <!-- // END -->
 
                     </table>
-                    <table bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="0" width="600" id="emailBody">
-                        <tr>
-                            <td align="center" valign="top" bgcolor="#E1E1E1">
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                    <tr>
-                                        <td align="left" valign="middle" class="flexibleContainerBox">
-                                            <table border="0" cellpadding="0" cellspacing="0" width="210" style="max-width:100%;">
-                                                <tr>
-                                                    <td align="center" class="textContent"><img src="https://spotaneedle.com/mailerlogos/auxo-logo.png" class="flexibleImage" style="max-width:100%;" alt="Text" title="Text" /></td>
-                                                </tr>
-                                            </table>
-                                        </td>
-										<td align="center" valign="middle" class="flexibleContainerBox">
-                                            <table border="0" cellpadding="0" cellspacing="0" width="210" style="max-width:100%;">
-                                                <tr>
-													<td align="center"><img src="https://spotaneedle.com/mailerlogos/qendidate-logo.png" class="qendidate" style="max-width:100%;" alt="Text" title="Text" /></td>
-												</tr>
-                                            </table>
-                                        </td>
-                                        <td align="right" valign="middle" class="flexibleContainerBox">
-                                            <table class="flexibleContainerBoxNext" border="0" cellpadding="0" cellspacing="0" width="210" style="max-width:100%;">
-                                                <tr>
-                                                    <td align="center" class="textContent">
-                                                        <table width="100%" border="0" cellspacing="0" cellpadding="2">
-                                                            <tr>
-                                                                <td align="center" height="60"><img src="https://spotaneedle.com/mailerlogos/spot-needle-logo.png" class="qendidate" style="max-width:100%;" alt="Text" title="Text" /></td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
 
-                                <!-- // CENTERING TABLE -->
-                            </td>
-                        </tr>
-                        <tr mc:hideable=mc:hideable>
-                            <td align="center" valign="top">
-                                <!-- CENTERING TABLE // -->
+                    <table bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="0" width="500" id="emailBody">
 
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                    <tr>
-                                        <td align="center" valign="top">
-                                            <!-- FLEXIBLE CONTAINER // -->
-                                            <!-- // FLEXIBLE CONTAINER -->
-                                        </td>
-                                    </tr>
-                                </table>
 
-                                <!-- // CENTERING TABLE -->
-                            </td>
-                        </tr>
                         <tr>
                             <td align="center" valign="top">
-                                <!-- CENTERING TABLE // -->
 
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#FFF">
-                                    <tr>
-                                        <td height="7" bgcolor="#344b9f"></td>
-                                    </tr>
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="color:#FFFFFF;" bgcolor="#3498db">
                                     <tr>
                                         <td align="center" valign="top">
-                                            <!-- FLEXIBLE CONTAINER // -->
 
-                                            <table border="0" cellpadding="0" cellspacing="0" width="550" class="flexibleContainer">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="500" class="flexibleContainer">
                                                 <tr>
                                                     <td align="center" valign="top" width="500" class="flexibleContainerCell">
-                                                        <table border="0" cellpadding="10" cellspacing="0" width="100%">
+
+
+                                                        <table border="0" cellpadding="30" cellspacing="0" width="100%">
                                                             <tr>
-                                                                <td align="center" valign="top">
-                                                                    <!-- CONTENT TABLE // -->
+                                                                <td align="center" valign="top" class="textContent">
+                                                                    <h1 style="color:#FFFFFF;line-height:100%;font-family:Helvetica,Arial,sans-serif;font-size:35px;font-weight:normal;margin-bottom:5px;text-align:center;">Qendidate.Com</h1>
+                                                                    <h2 style="text-align:center;font-weight:normal;font-family:Helvetica,Arial,sans-serif;font-size:23px;margin-bottom:10px;color:#205478;line-height:135%;">Subheader introduction</h2>
+                                                                    <div style="text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#FFFFFF;line-height:135%;">.</div>
 
-                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                                                        <tr>
-																			<td valign="top" width="500" class="flexibleContainerCell">
-																				<p>HI #emailID</p>
-																				<p>You friend #name, recommended a job for you. Kindly visit below link.</p>
-																				<p><a href="#url">click here</a></p>
-																			</td>
-                                                                        </tr>
-                                                                    </table>
-
-                                                                    <!-- // CONTENT TABLE -->
+                                                                    <div style="text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#FFFFFF;line-height:135%;"></div>
                                                                 </td>
                                                             </tr>
                                                         </table>
+                                                        <!-- // CONTENT TABLE -->
+
                                                     </td>
                                                 </tr>
                                             </table>
-
                                             <!-- // FLEXIBLE CONTAINER -->
                                         </td>
                                     </tr>
                                 </table>
+                                <!-- // CENTERING TABLE -->
+                            </td>
+                        </tr>
 
+                        <tr mc:hideable>
+                            <td align="center" valign="top">
+                                <!-- CENTERING TABLE // -->
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                        <td align="center" valign="top">
+                                            <!-- FLEXIBLE CONTAINER // -->
+                                            <table border="0" cellpadding="30" cellspacing="0" width="500" class="flexibleContainer">
+                                                <tr>
+                                                    <td valign="top" width="500" class="flexibleContainerCell">
+
+                                                        <p>  HI #emailID</p>
+
+                                                        <p>  You friend #name, recommended a job for you. Kindly visit below link.</p>                                                      
+
+                                                        <p><a href='#url' target="_blank">click here</a></p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <!-- // FLEXIBLE CONTAINER -->
+                                        </td>
+                                    </tr>
+                                </table>
                                 <!-- // CENTERING TABLE -->
                             </td>
                         </tr>
                         <!-- // MODULE ROW -->
                         <!-- MODULE ROW // -->
                         
-                        <tr>
-                            <td align="center" valign="top">
-                                <!-- CENTERING TABLE // -->
-                                <!-- // CENTERING TABLE -->
-                            </td>
-                        </tr>
-                        <!-- // END -->
-                        <!-- MODULE ROW // --> <!-- // MODULE ROW -->
-                        <!-- MODULE DIVIDER // -->
-                        <tr>
-                            <td align="center" valign="top">
-                                <!-- CENTERING TABLE // -->
-
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                    <tr>
-                                        <td align="center" valign="top">
-                                            <!-- FLEXIBLE CONTAINER // -->
-                                            <!-- // FLEXIBLE CONTAINER -->
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <!-- // CENTERING TABLE -->
-                            </td>
-                        </tr>
-                        <!-- // END -->
-                        <!-- MODULE ROW // --> <!-- // MODULE ROW -->
-                        <!-- MODULE DIVIDER // -->
-                        <tr>
-                            <td align="center" valign="top">
-                                <!-- CENTERING TABLE // -->
-
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                    <tr>
-                                        <td align="center" valign="top">
-                                            <!-- FLEXIBLE CONTAINER // -->
-
-                                            <table border="0" cellpadding="0" cellspacing="0" width="500" class="flexibleContainer">
-                                                <tr>
-                                                    <td align="center" valign="top" width="500" class="flexibleContainerCell">
-                                                        <table class="flexibleContainerCellDivider" border="0" cellpadding="30" cellspacing="0" width="100%">
-                                                            <tr>
-                                                                <td align="center" valign="top" style="padding-top:0px;padding-bottom:0px;">
-                                                                    <!-- CONTENT TABLE // -->
-                                                                    <!-- // CONTENT TABLE -->
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </table>
-
-                                            <!-- // FLEXIBLE CONTAINER -->
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <!-- // CENTERING TABLE -->
-                            </td>
-                        </tr>
-                        <!-- // END -->
-                        <!-- MODULE ROW // --> <!-- // MODULE ROW -->
-                        <!-- MODULE DIVIDER // -->
-                        <tr>
-                            <td align="center" valign="top">
-                                <!-- CENTERING TABLE // -->
-
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                    <tr>
-                                        <td align="center" valign="top">
-                                            <!-- FLEXIBLE CONTAINER // -->
-
-                                            <table border="0" cellpadding="0" cellspacing="0" width="500" class="flexibleContainer">
-                                                <tr>
-                                                    <td align="center" valign="top" width="500" class="flexibleContainerCell">
-                                                        <table class="flexibleContainerCellDivider" border="0" cellpadding="30" cellspacing="0" width="100%">
-                                                            <tr>
-                                                                <td align="center" valign="top" style="padding-top:0px;padding-bottom:0px;">
-                                                                    <!-- CONTENT TABLE // -->
-                                                                    <!-- // CONTENT TABLE -->
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </table>
-
-                                            <!-- // FLEXIBLE CONTAINER -->
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <!-- // CENTERING TABLE -->
-                            </td>
-                        </tr>
-                        <!-- // END -->
-                        <!-- MODULE ROW // --> <!-- // MODULE ROW -->
-                        <!-- MODULE DIVIDER // -->
-                        <tr>
-                            <td align="center" valign="top">
-                                <!-- CENTERING TABLE // -->
-
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                    <tr>
-                                        <td align="center" valign="top">
-                                            <!-- FLEXIBLE CONTAINER // -->
-
-                                            <table border="0" cellpadding="0" cellspacing="0" width="500" class="flexibleContainer">
-                                                <tr>
-                                                    <td align="center" valign="top" width="500" class="flexibleContainerCell">
-                                                        <table class="flexibleContainerCellDivider" border="0" cellpadding="30" cellspacing="0" width="100%">
-                                                            <tr>
-                                                                <td align="center" valign="top" style="padding-top:0px;padding-bottom:0px;">
-                                                                    <!-- CONTENT TABLE // -->
-                                                                    <!-- // CONTENT TABLE -->
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </table>
-
-                                            <!-- // FLEXIBLE CONTAINER -->
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <!-- // CENTERING TABLE -->
-                            </td>
-                        </tr>
-                        <!-- // END -->
-                        <!-- MODULE ROW // --> <!-- // MODULE ROW -->
-                        <!-- MODULE DIVIDER // -->
-                        <tr>
-                            <td align="center" valign="top">
-                                <!-- CENTERING TABLE // -->
-
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                    <tr>
-                                        <td align="center" valign="top">
-                                            <!-- FLEXIBLE CONTAINER // -->
-
-                                            <table border="0" cellpadding="0" cellspacing="0" width="500" class="flexibleContainer">
-                                                <tr>
-                                                    <td align="center" valign="top" width="500" class="flexibleContainerCell">
-                                                        <table class="flexibleContainerCellDivider" border="0" cellpadding="30" cellspacing="0" width="100%">
-                                                            <tr>
-                                                                <td align="center" valign="top" style="padding-top:0px;padding-bottom:0px;">
-                                                                    <!-- CONTENT TABLE // -->
-                                                                    <!-- // CONTENT TABLE -->
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </table>
-
-                                            <!-- // FLEXIBLE CONTAINER -->
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <!-- // CENTERING TABLE -->
-                            </td>
-                        </tr>
-                        <!-- // END -->
-                        <!-- MODULE ROW // --> <!-- // MODULE ROW -->
-                        <!-- MODULE ROW // --> <!-- // MODULE ROW -->
-                        <!-- MODULE ROW // -->
-                        <tr>
-                            <td align="center" valign="top">
-                                <!-- CENTERING TABLE // -->
-
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                    <tr>
-                                        <td align="center" valign="top">
-                                            <!-- FLEXIBLE CONTAINER // -->
-
-                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="flexibleContainer">
-                                                <tr>
-                                                    <td valign="top" width="500" class="flexibleContainerCell">
-                                                        <!-- CONTENT TABLE // -->
-
-                                                        <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
-                                                            <tr>
-                                                                <td align="left" valign="top" class="flexibleContainerBox" style="background-color:#344b9f;border-right:1px solid #ccc;">
-                                                                    <table border="0" cellpadding="30" cellspacing="0" width="100%" style="max-width:100%;">
-                                                                        <tr>
-                                                                            <td align="left" class="buttonContent">
-                                                                                <div style="text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#FFFFFF;line-height:135%;"><a href="mailto:info@qendidate.com" style="font-size:20px; text-decoration:none; color:#FFF; text-decoration:none;">info@qendidate.com</a></div>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </td>
-                                                                <td align="right" valign="top" class="flexibleContainerBox" style="background-color:#344b9f;">
-                                                                    <table class="flexibleContainerBoxNext" border="0" cellpadding="30" cellspacing="0" width="100%" style="max-width:100%;">
-                                                                        <tr>
-                                                                            <td align="left" class="buttonContent">
-                                                                                <div style="text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#FFFFFF;line-height:135%;"><a href="http://www.qendidate.com/" style="font-size:20px; text-decoration:none; color:#FFF; ">www.qendidate.com</a></div>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-
-                                                        <!-- // CONTENT TABLE -->
-                                                    </td>
-                                                </tr>
-                                            </table>
-
-                                            <!-- // FLEXIBLE CONTAINER -->
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <!-- // CENTERING TABLE -->
-                            </td>
-                        </tr>
-                        <!-- // MODULE ROW -->
-                        <!-- MODULE ROW // -->
-                        <!-- // MODULE ROW -->
-
-                    </table>
-
-                    <!-- // END -->
-                    <!-- EMAIL FOOTER // -->
-                    <!--
-                                    The table "emailBody" is the email's container.
-                                    Its width can be set to 100% for a color band
-                                    that spans the width of the page.
-                                -->
-                    <!-- // END -->
-                </td>
-            </tr>
-        </table>
-    </center>
-</body>
-</html>
