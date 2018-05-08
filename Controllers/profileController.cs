@@ -57,6 +57,18 @@ namespace NewLetter.Controllers
         // Verify Details 
         public ActionResult VerifyDetails()
         {
+            if(BaseUtil.GetSessionValue(AdminInfo.mobileVerified.ToString()) == "False")
+                {
+                    int OTP = BaseUtil.GenerateRandomNo();
+                    var email = BaseUtil.GetSessionValue(AdminInfo.LoginID.ToString());
+                    var result = db.qendidateLists.Where(e => e.qenEmail == email).FirstOrDefault();
+                    result.OTP = OTP;
+                    result.dataIsUpdated = BaseUtil.GetCurrentDateTime();
+                    db.Entry(result).State = EntityState.Modified;
+                    db.SaveChanges();
+                    string message = "Your voter verification code is " + OTP + "." + " Please use this number on the thank you page to verify your phone number. Thanks Team Qendidate";
+                    string smsresult = BaseUtil.sendSMS(message, result.qenPhone);
+            }
             return View();
         }
 
@@ -84,6 +96,7 @@ namespace NewLetter.Controllers
                         if (data.qenPhone != model.qenPhone)
                         {
                             data.isMobileVerified = false;
+                            BaseUtil.SetSessionValue(AdminInfo.mobileVerified.ToString(), Convert.ToString(data.isMobileVerified));
                         }
                         data.dataIsUpdated = BaseUtil.GetCurrentDateTime();
                         data.qenEmail = model.qenEmail;
