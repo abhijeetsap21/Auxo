@@ -124,7 +124,7 @@ namespace NewLetter.Controllers
                                 db.SaveChanges();
 
                                 //----------------------------use below code to send emailer------------------------------------------------------------
-                                string jobUrl = "http://localhost:51126/Employer/submitInterest?qenid=" + BaseUtil.encrypt(arrnew1[i].ToString()) + "&jobID=" + BaseUtil.encrypt(jobID.ToString());
+                                string jobUrl = "https://spotaneedle.com/Employer/submitInterest?qenid=" + BaseUtil.encrypt(arrnew1[i].ToString()) + "&jobID=" + BaseUtil.encrypt(jobID.ToString());
                                 string final_Html_Body = HTML_Body.Replace("#name", emailresult.qenName.ToString()).Replace("#jobTitle", jobDetails.jobTitle).Replace("#companyName", companyName).Replace("#url", jobUrl).Replace("#salary", jobDetails.salary.ToString() + " Monthly").Replace("#location", jobDetails.city).Replace("#skills", BaseUtil.JOb_skillSet(jobID));
                                 sr.Close();
                                 string To = emailresult.qenEmail.ToString();
@@ -148,7 +148,7 @@ namespace NewLetter.Controllers
                                 db.SaveChanges();
 
                                 //----------------------------use below code to send emailer------------------------------------------------------------
-                                string jobUrl = "http://localhost:51126/Employer/submitInterest?qenid=" + BaseUtil.encrypt(arrnew1[i].ToString()) + "&jobID=" + BaseUtil.encrypt(jobID.ToString());
+                                string jobUrl = "https://spotaneedle.com/Employer/submitInterest?qenid=" + BaseUtil.encrypt(arrnew1[i].ToString()) + "&jobID=" + BaseUtil.encrypt(jobID.ToString());
                                 string final_Html_Body = HTML_Body.Replace("#name", emailresult.qenName.ToString()).Replace("#jobTitle", jobDetails.jobTitle).Replace("#companyName", companyName).Replace("#url", jobUrl).Replace("#salary", jobDetails.salary.ToString() + " Monthly").Replace("#location", jobDetails.city).Replace("#skills", BaseUtil.JOb_skillSet(jobID));
                                 sr.Close();
                                 string To = emailresult.qenEmail.ToString();
@@ -201,7 +201,7 @@ namespace NewLetter.Controllers
                                 db.Entry(qenInterested).State = EntityState.Modified;
                                 db.SaveChanges();
                                 //----------------------------use below code to send emailer------------------------------------------------------------
-                                string jobUrl = "http://localhost:51126/Employer/submitInterest?qenid=" + BaseUtil.encrypt(arrnew2[i].ToString()) + "&jobID=" + BaseUtil.encrypt(jobID.ToString());
+                                string jobUrl = "https://spotaneedle.com/Employer/submitInterest?qenid=" + BaseUtil.encrypt(arrnew2[i].ToString()) + "&jobID=" + BaseUtil.encrypt(jobID.ToString());
                                 string final_Html_Body = HTML_Body.Replace("#name", emailresult.qenName.ToString()).Replace("#jobTitle", jobDetails.jobTitle).Replace("#companyName", companyName).Replace("#url", jobUrl).Replace("#salary", jobDetails.salary.ToString() + " Monthly").Replace("#location", jobDetails.city).Replace("#skills", BaseUtil.JOb_skillSet(jobID));
                                 sr.Close();
                                 string To = emailresult.qenEmail.ToString();
@@ -224,7 +224,7 @@ namespace NewLetter.Controllers
                                 db.qenMialSendInteresteds.Add(qenInterested);
                                 //----------------------------use below code to sendemailer------------------------------------------------------------
                                 db.SaveChanges();
-                                string jobUrl = "http://localhost:51126/Employer/submitInterest?qenid=" + BaseUtil.encrypt(arrnew2[i].ToString()) + "&jobID=" + BaseUtil.encrypt(jobID.ToString());
+                                string jobUrl = "https://spotaneedle.com/Employer/submitInterest?qenid=" + BaseUtil.encrypt(arrnew2[i].ToString()) + "&jobID=" + BaseUtil.encrypt(jobID.ToString());
                                 string final_Html_Body = HTML_Body.Replace("#name", emailresult.qenName.ToString()).Replace("#jobTitle", jobDetails.jobTitle).Replace("#companyName", companyName).Replace("#url", jobUrl).Replace("#salary", jobDetails.salary.ToString() + " Monthly").Replace("#location", jobDetails.city).Replace("#skills", BaseUtil.JOb_skillSet(jobID));
                                 sr.Close();
                                 string To = emailresult.qenEmail.ToString();
@@ -291,7 +291,7 @@ namespace NewLetter.Controllers
                                 db.Entry(qenInterested).State = EntityState.Modified;
                                 db.SaveChanges();
                                 //----------------------------use below code to send emailer------------------------------------------------------------
-                                string jobUrl = "http://localhost:51126/Employer/submitInterest?qenid=" + BaseUtil.encrypt(arrnew3[i].ToString()) + "&jobID=" + BaseUtil.encrypt(jobID.ToString());
+                                string jobUrl = "https://spotaneedle.com/Employer/submitInterest?qenid=" + BaseUtil.encrypt(arrnew3[i].ToString()) + "&jobID=" + BaseUtil.encrypt(jobID.ToString());
                                 string final_Html_Body = HTML_Body.Replace("#name", emailresult.qenName.ToString()).Replace("#jobTitle", jobDetails.jobTitle).Replace("#companyName", companyName).Replace("#url", jobUrl).Replace("#salary", jobDetails.salary.ToString() + " Monthly").Replace("#location", jobDetails.city).Replace("#skills", BaseUtil.JOb_skillSet(jobID));
                                 sr.Close();
                                 string To = emailresult.qenEmail.ToString();
@@ -314,7 +314,7 @@ namespace NewLetter.Controllers
                                 db.qenMialSendInteresteds.Add(qenInterested);
                                 db.SaveChanges();
                                 //----------------------------use below code to send emailer------------------------------------------------------------
-                                string jobUrl = "http://localhost:51126/Employer/submitInterest?qenid=" + BaseUtil.encrypt(arrnew3[i].ToString()) + "&jobID=" + BaseUtil.encrypt(jobID.ToString());
+                                string jobUrl = "https://spotaneedle.com/Employer/submitInterest?qenid=" + BaseUtil.encrypt(arrnew3[i].ToString()) + "&jobID=" + BaseUtil.encrypt(jobID.ToString());
                                 string final_Html_Body = HTML_Body.Replace("#name", emailresult.qenName.ToString()).Replace("#jobTitle", jobDetails.jobTitle).Replace("#companyName", companyName).Replace("#url", jobUrl).Replace("#salary", jobDetails.salary.ToString() + " Monthly").Replace("#location", jobDetails.city).Replace("#skills", BaseUtil.JOb_skillSet(jobID));
                                 sr.Close();
                                 string To = emailresult.qenEmail.ToString();
@@ -385,7 +385,7 @@ namespace NewLetter.Controllers
                 {
                     //----------------------------use below code to send emailer------------------------------------------------------------
 
-                    string jobUrl = "http://localhost:51126/profile/selectTest?qenid=" + BaseUtil.encrypt(qenID.ToString()) + "&jobID=" + BaseUtil.encrypt(jobID.ToString());
+                    string jobUrl = "https://spotaneedle.com/profile/selectTest?qenid=" + BaseUtil.encrypt(qenID.ToString()) + "&jobID=" + BaseUtil.encrypt(jobID.ToString());
                     StreamReader sr = new StreamReader(Server.MapPath("/Emailer/testTimeSchedular.html"));
                     string HTML_Body = sr.ReadToEnd();
                     string final_Html_Body = HTML_Body.Replace("#name", emailresult.qenName.ToString()).Replace("#jobTitle", jobDetails.jobTitle).Replace("#companyName", jobDetails.companyDetail.companyName).Replace("#url", jobUrl).Replace("#salary", jobDetails.salary.ToString() + " Monthly").Replace("#location", jobDetails.city).Replace("#skills", BaseUtil.JOb_skillSet(jobID));
@@ -462,7 +462,7 @@ namespace NewLetter.Controllers
                     {
                         //----------------------------use below code to send emailer------------------------------------------------------------
 
-                        string jobUrl = "http://localhost:51126/profile/selectTest?qenid=" + BaseUtil.encrypt(qenID.ToString()) + "&jobID=" + BaseUtil.encrypt(jobID.ToString());
+                        string jobUrl = "https://spotaneedle.com/profile/selectTest?qenid=" + BaseUtil.encrypt(qenID.ToString()) + "&jobID=" + BaseUtil.encrypt(jobID.ToString());
                         StreamReader sr = new StreamReader(Server.MapPath("/Emailer/testTimeSchedular.html"));
                         string HTML_Body = sr.ReadToEnd();
                         string final_Html_Body = HTML_Body.Replace("#name", qenName.ToString()).Replace("#jobTitle", jobDetails.jobTitle).Replace("#companyName", jobDetails.companyDetail.companyName).Replace("#url", jobUrl).Replace("#salary", jobDetails.salary.ToString() + " Monthly").Replace("#location", jobDetails.city).Replace("#skills", BaseUtil.JOb_skillSet(jobID));

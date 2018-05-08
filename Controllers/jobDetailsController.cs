@@ -527,7 +527,7 @@ namespace NewLetter.Controllers
                         }
 
                         //----------------------------use below code to send emailer------------------------------------------------------------
-                        string jobUrl = "http://localhost:51126/jobDetails/JobView?jobID=" + BaseUtil.encrypt(jobID.ToString());
+                        string jobUrl = "https://spotaneedle.com/jobDetails/JobView?jobID=" + BaseUtil.encrypt(jobID.ToString());
                         StreamReader sr = new StreamReader(Server.MapPath("/Emailer/jobAppliedSuccessfully.html"));
                         string HTML_Body = sr.ReadToEnd();
                         string final_Html_Body = HTML_Body.Replace("#name", BaseUtil.GetSessionValue(AdminInfo.FullName.ToString())).Replace("#url", jobUrl);
