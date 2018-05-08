@@ -748,7 +748,7 @@ namespace NewLetter.Controllers
                 result.dataIsUpdated = BaseUtil.GetCurrentDateTime();
                 db.Entry(result).State = EntityState.Modified;
                 db.SaveChanges();
-                string message = "Your voter verification code is " + OTP + "." + " Please use this number on the thank you page to verify your phone number. Thanks Team ElectoIndia";
+                string message = "Your mobile verification code is " + OTP + "." + "Thanks Team Qendidate.com";
                 string smsresult = BaseUtil.sendSMS(message, phone);
 
                 return "OK";
@@ -838,7 +838,7 @@ namespace NewLetter.Controllers
 
             }
            
-            string message = "Your voter verification code is " + OTP + "." + " Please use this number on the thank you page to verify your phone number. Thanks Team ElectoIndia";
+            string message = "Your mobile verification code is " + OTP + "." + " Thanks Team Qendidate";
             string smsresult = BaseUtil.sendSMS(message, candidateReg.candidatePhone);
 
             var emailresult = db.qendidateLists.Where(ex => ex.qenID == candidateReg.candidateID).FirstOrDefault();

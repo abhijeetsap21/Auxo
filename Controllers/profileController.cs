@@ -66,7 +66,7 @@ namespace NewLetter.Controllers
                     result.dataIsUpdated = BaseUtil.GetCurrentDateTime();
                     db.Entry(result).State = EntityState.Modified;
                     db.SaveChanges();
-                    string message = "Your voter verification code is " + OTP + "." + " Please use this number on the thank you page to verify your phone number. Thanks Team Qendidate";
+                    string message = "Your mobile verification code is " + OTP + "." + "Thanks Team Qendidate";
                     string smsresult = BaseUtil.sendSMS(message, result.qenPhone);
             }
             return View();
