@@ -456,11 +456,12 @@ namespace NewLetter.Models
                         SetSessionValue(AdminInfo.logo.ToString(), Convert.ToString(user.qenImage));                        
                        
                         SetSessionValue(AdminInfo.mobileVerified.ToString(), Convert.ToString(user.isMobileVerified));
-                        
-                        
-                        
-                            SetSessionValue(AdminInfo.emailVerified.ToString(), Convert.ToString(user.isEmalVerified));
-                        
+                        SetSessionValue(AdminInfo.emailVerified.ToString(), Convert.ToString(user.isEmalVerified));
+
+
+
+
+
                         result = "PASS";
                     }
                     else

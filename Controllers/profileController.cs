@@ -81,6 +81,10 @@ namespace NewLetter.Controllers
                     data = db.qendidateLists.Where(ex => ex.qenID == model.qenID).FirstOrDefault();
                     if (data != null)
                     {
+                        if (data.qenPhone != model.qenPhone)
+                        {
+                            data.isMobileVerified = false;
+                        }
                         data.dataIsUpdated = BaseUtil.GetCurrentDateTime();
                         data.qenEmail = model.qenEmail;
                         data.City = model.City;
@@ -97,7 +101,8 @@ namespace NewLetter.Controllers
                         data.qenPassport = model.qenPassport;
                         data.qenLinkdInUrl = model.qenLinkdInUrl;
                         data.qenPhone = model.qenPhone;
-                        data.genderID = model.genderID;                       
+                        data.genderID = model.genderID;   
+                                        
 
                         if (fileName != "")
                         {
@@ -1520,6 +1525,7 @@ namespace NewLetter.Controllers
                 result.dataIsUpdated = BaseUtil.GetCurrentDateTime();
                 db.Entry(result).State = EntityState.Modified;
                 db.SaveChanges();
+                BaseUtil.SetSessionValue(AdminInfo.mobileVerified.ToString(),Convert.ToString(result.isMobileVerified));
                 return "Verified";
             }
             else
