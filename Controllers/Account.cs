@@ -417,6 +417,9 @@ namespace NewLetter.Controllers
                     BaseUtil.SetSessionValue(AdminInfo.role_id.ToString(), Convert.ToString(list.roleID));
                     BaseUtil.SetSessionValue(AdminInfo.FullName.ToString(), Convert.ToString(list.qenName));
                     ID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString());
+                    BaseUtil.SetSessionValue(AdminInfo.logo.ToString(), Convert.ToString(list.qenImage));
+                    BaseUtil.SetSessionValue(AdminInfo.mobileVerified.ToString(), Convert.ToString(list.isMobileVerified));
+                    BaseUtil.SetSessionValue(AdminInfo.emailVerified.ToString(), Convert.ToString(list.isEmalVerified));
                 }
                 else if (result == "Exists")
                 {
@@ -436,6 +439,9 @@ namespace NewLetter.Controllers
                     BaseUtil.SetSessionValue(AdminInfo.role_id.ToString(), Convert.ToString(user.roleID));
                     BaseUtil.SetSessionValue(AdminInfo.FullName.ToString(), Convert.ToString(user.qenName));                     
                     ID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString());
+                    BaseUtil.SetSessionValue(AdminInfo.logo.ToString(), Convert.ToString(user.qenImage));
+                    BaseUtil.SetSessionValue(AdminInfo.mobileVerified.ToString(), Convert.ToString(user.isMobileVerified));
+                    BaseUtil.SetSessionValue(AdminInfo.emailVerified.ToString(), Convert.ToString(user.isEmalVerified));
                     TempData["Success"] = "Linked";
                 }
 
@@ -553,6 +559,9 @@ namespace NewLetter.Controllers
                         BaseUtil.SetSessionValue(AdminInfo.role_id.ToString(), Convert.ToString(gmailUser.roleID));
                         BaseUtil.SetSessionValue(AdminInfo.FullName.ToString(), Convert.ToString(gmailUser.qenName));
                         ID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString());
+                        BaseUtil.SetSessionValue(AdminInfo.logo.ToString(), Convert.ToString(gmailUser.qenImage));
+                        BaseUtil.SetSessionValue(AdminInfo.mobileVerified.ToString(), Convert.ToString(gmailUser.isMobileVerified));
+                        BaseUtil.SetSessionValue(AdminInfo.emailVerified.ToString(), Convert.ToString(gmailUser.isEmalVerified));
                     }
                     else if (result == "Exists")
                     {
@@ -563,6 +572,9 @@ namespace NewLetter.Controllers
                         BaseUtil.SetSessionValue(AdminInfo.role_id.ToString(), Convert.ToString(user.roleID));
                         BaseUtil.SetSessionValue(AdminInfo.FullName.ToString(), Convert.ToString(user.qenName));
                         ID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString());
+                        BaseUtil.SetSessionValue(AdminInfo.logo.ToString(), Convert.ToString(user.qenImage));
+                        BaseUtil.SetSessionValue(AdminInfo.mobileVerified.ToString(), Convert.ToString(user.isMobileVerified));
+                        BaseUtil.SetSessionValue(AdminInfo.emailVerified.ToString(), Convert.ToString(user.isEmalVerified));
                     }
                 }
                 catch (Exception ex)
@@ -678,6 +690,9 @@ namespace NewLetter.Controllers
                     BaseUtil.SetSessionValue(AdminInfo.role_id.ToString(), Convert.ToString(list.roleID));
                     BaseUtil.SetSessionValue(AdminInfo.FullName.ToString(), Convert.ToString(list.qenName));
                     ID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString());
+                    BaseUtil.SetSessionValue(AdminInfo.logo.ToString(), Convert.ToString(list.qenImage));
+                    BaseUtil.SetSessionValue(AdminInfo.mobileVerified.ToString(), Convert.ToString(list.isMobileVerified));
+                    BaseUtil.SetSessionValue(AdminInfo.emailVerified.ToString(), Convert.ToString(list.isEmalVerified));
 
                     StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toCandidateRegistrationSuccess.html"));
                     string HTML_Body = sr.ReadToEnd();
@@ -696,6 +711,9 @@ namespace NewLetter.Controllers
                     //BaseUtil.SetSessionValue(AdminInfo.Mobile.ToString(), Convert.ToString(user.qenPhone));
                     BaseUtil.SetSessionValue(AdminInfo.role_id.ToString(), Convert.ToString(user.roleID));
                     BaseUtil.SetSessionValue(AdminInfo.FullName.ToString(), Convert.ToString(user.qenName));
+                    BaseUtil.SetSessionValue(AdminInfo.logo.ToString(), Convert.ToString(user.qenImage));
+                    BaseUtil.SetSessionValue(AdminInfo.mobileVerified.ToString(), Convert.ToString(user.isMobileVerified));
+                    BaseUtil.SetSessionValue(AdminInfo.emailVerified.ToString(), Convert.ToString(user.isEmalVerified));
                     ID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString());
                 }
             }
@@ -763,6 +781,9 @@ namespace NewLetter.Controllers
                 //BaseUtil.SetSessionValue(AdminInfo.Mobile.ToString(), Convert.ToString(user.qenPhone));
                 BaseUtil.SetSessionValue(AdminInfo.role_id.ToString(), Convert.ToString(result.roleID));
                 BaseUtil.SetSessionValue(AdminInfo.FullName.ToString(), Convert.ToString(result.qenName));
+                BaseUtil.SetSessionValue(AdminInfo.logo.ToString(), Convert.ToString(result.qenImage));
+                BaseUtil.SetSessionValue(AdminInfo.mobileVerified.ToString(), Convert.ToString(result.isMobileVerified));
+                BaseUtil.SetSessionValue(AdminInfo.emailVerified.ToString(), Convert.ToString(result.isEmalVerified));
                 ID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString());              
             }
 
