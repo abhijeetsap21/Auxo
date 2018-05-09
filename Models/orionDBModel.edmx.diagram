@@ -5,51 +5,51 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f81e3f2a2b7443cf908dadaf933b80e5" Name="Diagram1" ZoomLevel="62">
-        <EntityTypeShape EntityType="oriondbModel.advertisementList" Width="1.5" PointX="8.25" PointY="56.125" />
+        <EntityTypeShape EntityType="oriondbModel.advertisementList" Width="1.5" PointX="8.25" PointY="49.5" />
         <EntityTypeShape EntityType="oriondbModel.app_error_log" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="oriondbModel.App_status" Width="1.5" PointX="3" PointY="25" />
-        <EntityTypeShape EntityType="oriondbModel.Candidate_status" Width="1.5" PointX="3" PointY="36" />
-        <EntityTypeShape EntityType="oriondbModel.companyDetail" Width="1.5" PointX="8.25" PointY="47.75" />
-        <EntityTypeShape EntityType="oriondbModel.currency" Width="1.5" PointX="3" PointY="47.5" />
-        <EntityTypeShape EntityType="oriondbModel.Education" Width="1.5" PointX="3" PointY="28.875" />
-        <EntityTypeShape EntityType="oriondbModel.EmployerDetail" Width="1.5" PointX="0.75" PointY="40.625" />
-        <EntityTypeShape EntityType="oriondbModel.employerType" Width="1.5" PointX="3" PointY="59" />
-        <EntityTypeShape EntityType="oriondbModel.EmploymentType" Width="1.5" PointX="3" PointY="66.375" />
-        <EntityTypeShape EntityType="oriondbModel.genderList" Width="1.5" PointX="0.75" PointY="16.75" />
-        <EntityTypeShape EntityType="oriondbModel.HiredCandidate" Width="1.5" PointX="12.75" PointY="50.125" />
-        <EntityTypeShape EntityType="oriondbModel.industry" Width="1.5" PointX="3" PointY="40" />
-        <EntityTypeShape EntityType="oriondbModel.InterViewerComment" Width="1.5" PointX="5.25" PointY="41.375" />
-        <EntityTypeShape EntityType="oriondbModel.jobDetail" Width="1.5" PointX="10.5" PointY="50.5" />
-        <EntityTypeShape EntityType="oriondbModel.jobSavedQendidate" Width="1.5" PointX="12.75" PointY="55.375" />
-        <EntityTypeShape EntityType="oriondbModel.jobSkill" Width="1.5" PointX="12.75" PointY="58.75" />
-        <EntityTypeShape EntityType="oriondbModel.jobStatu" Width="1.5" PointX="3" PointY="55.125" />
-        <EntityTypeShape EntityType="oriondbModel.ProfilePerformance" Width="1.5" PointX="6" PointY="46.125" />
-        <EntityTypeShape EntityType="oriondbModel.qenAppliedJob" Width="1.5" PointX="5.25" PointY="24.875" />
-        <EntityTypeShape EntityType="oriondbModel.qendidateGraduation" Width="1.5" PointX="5.25" PointY="36.75" />
-        <EntityTypeShape EntityType="oriondbModel.qendidateList" Width="1.5" PointX="3" PointY="11.75" />
-        <EntityTypeShape EntityType="oriondbModel.qendidateListInJob" Width="1.5" PointX="18.75" PointY="55.5" />
-        <EntityTypeShape EntityType="oriondbModel.qendidatePGraduation" Width="1.5" PointX="5.25" PointY="20.75" />
-        <EntityTypeShape EntityType="oriondbModel.qendidatePHD" Width="1.5" PointX="5.25" PointY="5.25" />
-        <EntityTypeShape EntityType="oriondbModel.qendidateProfileSharedWith" Width="1.5" PointX="5.25" PointY="2.125" />
-        <EntityTypeShape EntityType="oriondbModel.qendidateSavedForReference" Width="1.5" PointX="12.75" PointY="61.375" />
-        <EntityTypeShape EntityType="oriondbModel.qendidateTestSchedule" Width="1.5" PointX="15.75" PointY="58.125" />
-        <EntityTypeShape EntityType="oriondbModel.qenEmpDetail" Width="1.5" PointX="5.25" PointY="54.875" />
-        <EntityTypeShape EntityType="oriondbModel.qenHigherSecondary" Width="1.5" PointX="5.25" PointY="13.375" />
-        <EntityTypeShape EntityType="oriondbModel.qenInterviewSchedule" Width="1.5" PointX="15.75" PointY="51.875" />
-        <EntityTypeShape EntityType="oriondbModel.qenMialSendInterested" Width="1.5" PointX="18.75" PointY="51.125" />
-        <EntityTypeShape EntityType="oriondbModel.qenReference" Width="1.5" PointX="5.25" PointY="9.375" />
-        <EntityTypeShape EntityType="oriondbModel.qenSecondary" Width="1.5" PointX="5.25" PointY="17.125" />
-        <EntityTypeShape EntityType="oriondbModel.qenSkill" Width="1.5" PointX="5.25" PointY="51.625" />
-        <EntityTypeShape EntityType="oriondbModel.role" Width="1.5" PointX="3" PointY="32.5" />
-        <EntityTypeShape EntityType="oriondbModel.role_action" Width="1.5" PointX="5.25" PointY="32.625" />
-        <EntityTypeShape EntityType="oriondbModel.salaryUnit" Width="1.5" PointX="3" PointY="63" />
-        <EntityTypeShape EntityType="oriondbModel.sendGridDetail" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="oriondbModel.skill" Width="1.5" PointX="3" PointY="51.25" />
-        <EntityTypeShape EntityType="oriondbModel.slot" Width="1.5" PointX="8.25" PointY="43.125" />
-        <EntityTypeShape EntityType="oriondbModel.slotsBlocked" Width="1.5" PointX="10.5" PointY="45.875" />
-        <EntityTypeShape EntityType="oriondbModel.slotTempBlocked" Width="1.5" PointX="13.5" PointY="45.875" />
-        <EntityTypeShape EntityType="oriondbModel.sysdiagram" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="oriondbModel.view_qenlist" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="oriondbModel.App_status" Width="1.5" PointX="3" PointY="56.875" />
+        <EntityTypeShape EntityType="oriondbModel.Candidate_status" Width="1.5" PointX="3" PointY="30.875" />
+        <EntityTypeShape EntityType="oriondbModel.companyDetail" Width="1.5" PointX="8.25" PointY="34.375" />
+        <EntityTypeShape EntityType="oriondbModel.currency" Width="1.5" PointX="3" PointY="60.75" />
+        <EntityTypeShape EntityType="oriondbModel.Education" Width="1.5" PointX="3" PointY="64.625" />
+        <EntityTypeShape EntityType="oriondbModel.EmployerDetail" Width="1.5" PointX="0.75" PointY="38.75" />
+        <EntityTypeShape EntityType="oriondbModel.employerType" Width="1.5" PointX="3" PointY="26.75" />
+        <EntityTypeShape EntityType="oriondbModel.EmploymentType" Width="1.5" PointX="3" PointY="38.25" />
+        <EntityTypeShape EntityType="oriondbModel.genderList" Width="1.5" PointX="0.75" PointY="14.5" />
+        <EntityTypeShape EntityType="oriondbModel.HiredCandidate" Width="1.5" PointX="15.75" PointY="46.375" />
+        <EntityTypeShape EntityType="oriondbModel.industry" Width="1.5" PointX="3" PointY="45.625" />
+        <EntityTypeShape EntityType="oriondbModel.InterViewerComment" Width="1.5" PointX="5.25" PointY="38.875" />
+        <EntityTypeShape EntityType="oriondbModel.jobDetail" Width="1.5" PointX="10.5" PointY="44.75" />
+        <EntityTypeShape EntityType="oriondbModel.jobSavedQendidate" Width="1.5" PointX="15.75" PointY="50.875" />
+        <EntityTypeShape EntityType="oriondbModel.jobSkill" Width="1.5" PointX="12.75" PointY="36.125" />
+        <EntityTypeShape EntityType="oriondbModel.jobStatu" Width="1.5" PointX="3" PointY="49.625" />
+        <EntityTypeShape EntityType="oriondbModel.ProfilePerformance" Width="1.5" PointX="6" PointY="43.125" />
+        <EntityTypeShape EntityType="oriondbModel.qenAppliedJob" Width="1.5" PointX="5.25" PointY="56.75" />
+        <EntityTypeShape EntityType="oriondbModel.qendidateGraduation" Width="1.5" PointX="5.25" PointY="26.75" />
+        <EntityTypeShape EntityType="oriondbModel.qendidateList" Width="1.5" PointX="3" PointY="9.5" />
+        <EntityTypeShape EntityType="oriondbModel.qendidateListInJob" Width="1.5" PointX="18.75" PointY="49.875" />
+        <EntityTypeShape EntityType="oriondbModel.qendidatePGraduation" Width="1.5" PointX="5.25" PointY="61.5" />
+        <EntityTypeShape EntityType="oriondbModel.qendidatePHD" Width="1.5" PointX="5.25" PointY="65.625" />
+        <EntityTypeShape EntityType="oriondbModel.qendidateProfileSharedWith" Width="1.5" PointX="5.25" PointY="31.625" />
+        <EntityTypeShape EntityType="oriondbModel.qendidateSavedForReference" Width="1.5" PointX="15.75" PointY="54.875" />
+        <EntityTypeShape EntityType="oriondbModel.qendidateTestSchedule" Width="1.5" PointX="12.75" PointY="50.625" />
+        <EntityTypeShape EntityType="oriondbModel.qenEmpDetail" Width="1.5" PointX="5.25" PointY="13.875" />
+        <EntityTypeShape EntityType="oriondbModel.qenHigherSecondary" Width="1.5" PointX="5.25" PointY="19.125" />
+        <EntityTypeShape EntityType="oriondbModel.qenInterviewSchedule" Width="1.5" PointX="12.75" PointY="44.5" />
+        <EntityTypeShape EntityType="oriondbModel.qenMialSendInterested" Width="1.5" PointX="18.75" PointY="45.5" />
+        <EntityTypeShape EntityType="oriondbModel.qenReference" Width="1.5" PointX="5.25" PointY="46.75" />
+        <EntityTypeShape EntityType="oriondbModel.qenSecondary" Width="1.5" PointX="5.25" PointY="50.75" />
+        <EntityTypeShape EntityType="oriondbModel.qenSkill" Width="1.5" PointX="5.25" PointY="23.375" />
+        <EntityTypeShape EntityType="oriondbModel.role" Width="1.5" PointX="3" PointY="34.75" />
+        <EntityTypeShape EntityType="oriondbModel.role_action" Width="1.5" PointX="5.25" PointY="34.75" />
+        <EntityTypeShape EntityType="oriondbModel.salaryUnit" Width="1.5" PointX="3" PointY="53.5" />
+        <EntityTypeShape EntityType="oriondbModel.sendGridDetail" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="oriondbModel.skill" Width="1.5" PointX="3" PointY="22.875" />
+        <EntityTypeShape EntityType="oriondbModel.slot" Width="1.5" PointX="11.25" PointY="32" />
+        <EntityTypeShape EntityType="oriondbModel.slotsBlocked" Width="1.5" PointX="13.5" PointY="39.75" />
+        <EntityTypeShape EntityType="oriondbModel.slotTempBlocked" Width="1.5" PointX="10.5" PointY="39.625" />
+        <EntityTypeShape EntityType="oriondbModel.sysdiagram" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="oriondbModel.view_qenlist" Width="1.5" PointX="4.75" PointY="0.75" />
         <AssociationConnector Association="oriondbModel.FK_jobDetails_jobDetails1" />
         <AssociationConnector Association="oriondbModel.FK_App_status_EmployerDetails" />
         <AssociationConnector Association="oriondbModel.FK_App_status_EmployerDetails1" />
@@ -66,8 +66,10 @@
         <AssociationConnector Association="oriondbModel.FK_slotTempBlocked_companyDetails" />
         <AssociationConnector Association="oriondbModel.FK_currency_EmployerDetails" />
         <AssociationConnector Association="oriondbModel.FK_currency_EmployerDetails1" />
+        <AssociationConnector Association="oriondbModel.FK_jobDetails_currency" />
         <AssociationConnector Association="oriondbModel.FK_Education_EmployerDetails" />
         <AssociationConnector Association="oriondbModel.FK_Education_EmployerDetails1" />
+        <AssociationConnector Association="oriondbModel.FK_jobDetails_Education" />
         <AssociationConnector Association="oriondbModel.FK_EmployerDetails_EmployerDetails" />
         <AssociationConnector Association="oriondbModel.FK_employerType_EmployerDetails" />
         <AssociationConnector Association="oriondbModel.FK_employerType_EmployerDetails1" />

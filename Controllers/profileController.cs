@@ -57,6 +57,12 @@ namespace NewLetter.Controllers
         // Verify Details 
         public ActionResult VerifyDetails()
         {
+            var phone = BaseUtil.GetSessionValue(AdminInfo.Mobile.ToString());
+            if(phone == "9999999999")
+            {
+                TempData["result"] = "addphone";
+                return RedirectToAction("editCandidate");
+            }
             if(BaseUtil.GetSessionValue(AdminInfo.mobileVerified.ToString()) == "False")
                 {
                     int OTP = BaseUtil.GenerateRandomNo();
@@ -96,6 +102,7 @@ namespace NewLetter.Controllers
                         if (data.qenPhone != model.qenPhone)
                         {
                             data.isMobileVerified = false;
+                            BaseUtil.SetSessionValue(AdminInfo.Mobile.ToString(), Convert.ToString(model.qenPhone));
                             BaseUtil.SetSessionValue(AdminInfo.mobileVerified.ToString(), Convert.ToString(data.isMobileVerified));
                         }
                         data.dataIsUpdated = BaseUtil.GetCurrentDateTime();

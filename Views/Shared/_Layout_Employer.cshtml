@@ -89,14 +89,14 @@
                 <div class="col-md-12 common-right-block">
                 @{ if (roleID != "5")
                     {
-                        <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src=@logo alt="img"></span><span class="common-user-loggedin-name">@companyname</span></div>
+                        <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src='@logo' alt="img"></span><span class="common-user-loggedin-name">@companyname</span></div>
                     }
                 }                  
-                    <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src=@logo alt="img" style="width:35px"></span><span class="common-user-loggedin-comp">@fullName </span></div>
+                    <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src='@logo' alt="img" style="width:35px"></span><span class="common-user-loggedin-comp">@fullName </span></div>
                     
                         @if (emailV == "False" || phoneV == "False")
                         {                            
-                           <a href='@Url.Action("VerifyDetails", "profile")' >Your Profile Needs some action</a>                           
+                           <a class="warning-verification" href='@Url.Action("VerifyDetails", "profile")'><i class="fa fa-exclamation-triangle"></i></a>                           
 
                         }
                     

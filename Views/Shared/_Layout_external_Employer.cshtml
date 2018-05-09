@@ -37,11 +37,7 @@
 
     <script src="~/Scripts/nicEdit-latest.js"></script>
 
-    <script>
-    $(function () {
-        $('#notifi[onload]').trigger('onload');
-    });
-    </script>
+  
 	<style>
 		.form-horizontal.middle-text.full-page {
 			max-width: 65%;
@@ -65,28 +61,7 @@
                 <div class="col-md-3 col-sm-4 col-xs-4 common-qe-logo-block half-width">
                     <div class="common-logo-main"><img src="~/images/qendidate-inner.png" alt="QeNdidate"></div>
                 </div>
-                @{ if (roleID == "5")
-                    {
-                        <div class="col-md-4 col-sm-4 col-xs-4 padding-left responsive-center full-width noticlass" id="notifi" onload="loadNotification();">
-
-                            <div class="common-round-shape">
-                                <img src="~/images/top-icon.png">
-                                <div class="n-green"><span class="count count_contact">&nbsp;</span></div>
-                            </div>
-                            <div class="common-round-shape">
-                                <img src="~/images/top-alert-icon.png">
-                                <div class="n-red"><span class="count count_download">&nbsp;</span></div>
-                            </div>
-                            <div class="common-round-shape">
-                                <div class="n-yellow"><span class="count count_view">&nbsp;</span></div>
-                                <img src="~/images/top-email-icon.png">
-                            </div>
-                            <div class="noti-content">
-                                <ul id="notiContent"></ul>
-                            </div>
-                        </div>
-                    }
-                }
+               
             </div>
             <div class="col-md-6 col-sm-4 col-xs-12 common-qe-logo-block">
                 <div class="col-md-12 common-right-block">
@@ -131,237 +106,22 @@ var jqOld = jQuery.noConflict();
     </script>
 </body>
 @RenderSection("head", required: false)
-
-<style type="text/css">
-    /*Added css for design notification area, you can design by your self*/
-    /* COPY css content from youtube video description*/
-    .noti-content {
-        position: fixed;
-        right: 100px;
-        background: #e5e5e5;
-        border-radius: 4px;
-        top: 47px;
-        width: 250px;
-        display: none;
-        border: 1px solid #9E988B;
-    }
-
-    ul#notiContent {
-        max-height: 200px;
-        overflow: auto;
-        padding: 0px;
-        margin: 0px;
-        padding-left: 20px;
-        z-index: 99999;
-        margin-top: 300px;
-        padding-top: 300px;
-        background: red;
-    }
-
-        ul#notiContent li {
-            margin: 3px;
-            padding: 6px;
-            background: red;
-        }
-
-
-
-    span.count {
-        position: relative;
-        top: -3px;
-    }
-</style>
-
-
 </html>
-<script>
-    function DateCheck()
-{
 
-  var StartDate= document.getElementById('txtStartDate').value;
-  var EndDate= document.getElementById('txtEndDate').value;
-  var eDate = new Date(EndDate);
-  var sDate = new Date(StartDate);
 
-  if(StartDate!= '' && StartDate!= '' && sDate> eDate)
-  {
-       debugger
-       bootbox.alert({
-        title: 'Alert Success  !',
-        message: 'Please ensure that the End Date is greater than or equal to the Start Date.'
-       });
 
-    return false;
-    }
-}
-</script>
 
 
 
 <script>
-    var jqOld = jQuery.noConflict();
-    jqOld(function () {
-        debugger
-            // Click on notification icon for show notification
-        jqOld('div.n-green').click(function (e) {
-            debugger
-                e.stopPropagation();
-                jqOld('.noti-content').show();
-                debugger
-                var count = 0;
-                count = parseInt(jqOld('span.count_contact').html()) || 0;
-                //only load notification if not already loaded
-                if (count >0) {
-                    updateNotification();
-                }
-                jqOld('span.count_contact', this).html('&nbsp;');
-            })
-            // hide notifications
-            jqOld('html').click(function () {
-                jqOld('.noti-content').hide();
-            })
-            // update notification
-            function updateNotification() {
-                debugger
-                jqOld('#notiContent').empty();
-                jqOld('#notiContent').append('<li>Loading...</li>');
 
-                var uri = '@Url.Action("GetNotificationContacts", "Account")';
+     var jold = jQuery.noConflict();
 
-                jqOld.getJSON(uri, function (data) {
-                    debugger
-                    jqOld('#notiContent').empty();
-                    if (data.length == 0) {
-                        jqOld('#notiContent').append(jqOld('<li>No data available</li>'));
-                    }
-                    jqOld.each(data, function (index, value) {
-                        jqOld('#notiContent').append(jqOld('<li>' + value.companyName + ' send you message regarding job</li>'));
-                    })
-                })
-
-            }
-            // update notification count
-
-        })
-</script>
-<script>
     debugger
-
-    //var firstVisist = localStorage.getItem("someVarName");
-    //if (firstVisist == null) {
-    //    firstVisist = 0;
-    //}
-    //if (firstVisist == 0) {
-        var jqOld = jQuery.noConflict();
-        var count = 0;
+    jold(document).ready(function () {
         debugger
-        if ('@roleID' == "5") {
-            function loadNotification() {
-                var URL = '@Url.Action("NotificationCount", "Account")';
-                jqOld.getJSON(URL, function (data) {
-                    debugger
-                    jqOld('span.count_contact').html(data[0].Column1);
-                    jqOld('span.count_download').html(data[0].Column2);
-                    jqOld('span.count_view').html(data[0].Column3);
-                });
-            }
-        }
-
+        jold('.datepicker').datepicker({
+            dateFormat: 'mm/dd/yy'  // CHANGE DATE FORMAT.
+        });
+    });
 </script>
-
-<script>
-    var jqOld = jQuery.noConflict();
-    jqOld(function () {
-        debugger
-            // Click on notification icon for show notification
-        jqOld('div.n-red').click(function (e) {
-            debugger
-                e.stopPropagation();
-                jqOld('.noti-content').show();
-                debugger
-                var count = 0;
-                count = parseInt(jqOld('span.count_download').html()) || 0;
-                //only load notification if not already loaded
-                if (count >0) {
-                    updateNotification();
-                }
-                jqOld('span.count_download', this).html('&nbsp;');
-            })
-            // hide notifications
-            jqOld('html').click(function () {
-                jqOld('.noti-content').hide();
-            })
-            // update notification
-            function updateNotification() {
-                debugger
-                jqOld('#notiContent').empty();
-                jqOld('#notiContent').append('<li>Loading...</li>');
-
-                var uri = '@Url.Action("getNotificationDownload", "Account")';
-
-                jqOld.getJSON(uri, function (data) {
-                    debugger
-                    jqOld('#notiContent').empty();
-                    if (data.length == 0) {
-                        jqOld('#notiContent').append(jqOld('<li>No data available</li>'));
-                    }
-                    jqOld.each(data, function (index, value) {
-                        jqOld('#notiContent').append(jqOld('<li>' + value+ ' send you message regarding job</li>'));
-                    })
-                })
-
-            }
-            // update notification count
-
-        })
-</script>
-<script>
-    var jqOld = jQuery.noConflict();
-    jqOld(function () {
-        debugger
-            // Click on notification icon for show notification
-        jqOld('div.n-yellow').click(function (e) {
-            debugger
-                e.stopPropagation();
-                jqOld('.noti-content').show();
-                debugger
-                var count = 0;
-                count = parseInt(jqOld('span.count_view').html()) || 0;
-                //only load notification if not already loaded
-                if (count >0) {
-                    updateNotification();
-                }
-                jqOld('span.count_view', this).html('&nbsp;');
-            })
-            // hide notifications
-            jqOld('html').click(function () {
-                jqOld('.noti-content').hide();
-            })
-            // update notification
-            function updateNotification() {
-                debugger
-                jqOld('#notiContent').empty();
-                jqOld('#notiContent').append('<li>Loading...</li>');
-
-                var uri = '@Url.Action("getNotificationView", "Account")';
-
-                jqOld.getJSON(uri, function (data) {
-                    debugger
-                    jqOld('#notiContent').empty();
-                    if (data.length == 0) {
-                        jqOld('#notiContent').append(jqOld('<li>No data available</li>'));
-                    }
-                    jqOld.each(data, function (index, value) {
-                        jqOld('#notiContent').append(jqOld('<li>' + value + ' send you message regarding job</li>'));
-                    })
-                })
-
-            }
-            // update notification count
-
-        })
-</script>
-
-
-
-

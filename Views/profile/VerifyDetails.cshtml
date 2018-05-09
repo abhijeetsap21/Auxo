@@ -7,35 +7,45 @@
     var phone = BaseUtil.GetSessionValue(AdminInfo.Mobile.ToString());
     var emailID = BaseUtil.GetSessionValue(AdminInfo.LoginID.ToString());
 }
+<div class="form-horizontal details-verification">
+<h4>VerifyDetails</h4>
 
-<h2>VerifyDetails</h2>
+	<div class="col-md-12 text-center">
+	@{
+		if (emailV == "False")
+		{
+		<div>
+		<input type="button" class="previous btn btn-default action-button" value="Resend Activation Email" onclick="return resendActivationEmail();" id="resendEmailer" />
+		</div>
+		<label style="display:none;" id="emailResendResult"></label>
+		}
+	}
 
+	@{
+		if (phoneV == "False")
+		{
+		<div>
+		<input type="button" class="previous btn btn-default action-button" value="Resend OTP" onclick="return resendOTP();" id="resend" />
+		</div>
+		<label style="display:none" id="otpverificationresult"></label>
+		<div>
+		<input type="text" id="OTP" class="form-control verify-input" name="txt_OTP" />
+		</div>
+		<div>
+		<input type="submit" class="previous btn btn-default action-button" onclick="return verifyOTP();" value="Submit OTP" id="otpSubmit" name="Verify" />
+		</div>
+		
+		}
+	}
 
-@{
-    if (emailV == "False")
-    {
-        <input type="button" value="Resend Activation Email" onclick="return resendActivationEmail();" id="resendEmailer" />
-        <label style="display:none" id="emailResendResult"></label>
-    }
-}
-
-@{
-    if (phoneV == "False")
-    {
-        <input type="button" value="ResendOTP " onclick="return resendOTP();" id="resend" />
-        <label style="display:none" id="otpverificationresult"></label>
-        <input type="text" id="OTP" class="form-control" name="txt_OTP" />
-        <input type="submit" class="previous btn btn-default action-button" onclick="return verifyOTP();" value="Submit OTP" id="otpSubmit" name="Verify" />
-    }
-}
-
-@{ 
-    if(emailV == "True" && phoneV == "True")
-    {
-        <div>Congratulations , all your details are verified</div>
-    }
-}
-
+	@{ 
+		if(emailV == "True" && phoneV == "True")
+		{
+			<div>Thank You, all details are verified</div>
+		}
+	}
+	</div>
+</div>
 
 <script>
     debugger
@@ -50,12 +60,12 @@
                 if (data == 'OK') {
                     debugger
                     var x = document.getElementById("otpverificationresult");
-                    x.style.display = "block";
+                    x.style.display = "inline-block";
                     x.innerHTML = "OTP SENT"
                 }
                 if (data == 'notsent') {
                     var x = document.getElementById("otpverificationresult");
-                    x.style.display = "block";
+                    x.style.display = "inline-block";
                     x.innerHTML = "Error in sending. Please resend again"
                 }
 
@@ -74,7 +84,7 @@
                 if (data == 'Sent') {
                     debugger
                     var x = document.getElementById("emailResendResult");
-                    x.style.display = "block";
+                    x.style.display = "inline-block";
                     x.innerHTML = "Verification Email sent. "
                 }               
 

@@ -347,9 +347,9 @@ namespace NewLetter.Controllers
             }
             if (jobid_ != 0)
             {
-                 jobDetails = db.jobDetails.Include(e => e.industry).Include(e => e.EmploymentType).Include(e => e.companyDetail).Where(e => e.jobID == jobid_).FirstOrDefault();
+                    jobDetails = db.jobDetails.Include(e => e.industry).Include(e => e.EmploymentType).Include(e => e.companyDetail).Include(e => e.Education).Include(e => e.currency).Where(e => e.jobID == jobid_).FirstOrDefault();
 
-                return View(jobDetails);
+                    return View(jobDetails);
             }
             else
             {              
@@ -423,7 +423,7 @@ namespace NewLetter.Controllers
             //Note : you can bind same list from database  
             var skillName = (dynamic)null;
             try { 
-             skillName = db.skills.Where(m => m.skillName.Contains(term)).Select(x => new { value = x.skillName, userId = x.skillsID }).Distinct().Take(10);
+             skillName = db.skills.Where(m => m.skillName.Contains(term)).Select(x => new { value = x.skillName, userId = x.skillsID }).Distinct().Take(20);
             }
             catch (Exception e)
             {

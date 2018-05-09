@@ -1,8 +1,8 @@
-﻿@model  IEnumerable<NewLetter.Models.sp_AvailableSlotsForCandidate_Result>
+﻿@model  IEnumerable<NewLetter.Models.slotsInfo>
 
 @{
     ViewBag.Title = "selectmeet";
-    Layout = "~/Views/Shared/_Layout_ExternalUser.cshtml";
+    Layout = "~/Views/Shared/_Layout_external_Employer.cshtml";
 }
 @{
     long id = 0;
@@ -137,13 +137,26 @@
                     debugger
                     if (data == "OK") {
                         debugger
-                        bootbox.alert({
+                        //location.href = 'https://spotaneedle.com/TimeSlots/SlotsInformation?dat=' + dat;
+                        bootbox.confirm({
                             title: 'Alert Success  !',
-                            message: 'Meating has been created as per your selected data time, kindly be present on time.'
-                        });
-                        location.href = 'https://spotaneedle.com/TimeSlots/SlotsInformation?dat=' + dat;
-
-                    }
+                            message: 'Meating has been created as per your selected dat time, kindly be present on time.',
+                            buttons: {
+                            confirm: {
+                                        label: 'OK',
+                                        className: 'btn-success'
+                                }
+                            },
+                        callback: function (result,URL) {
+                            if(result)
+                            {
+                                debugger
+                                var URL = '/Account/login';
+                                location.href = URL;
+                            }                               
+                        }
+                    })
+                        }
                     else {
                         bootbox.alert({
                             title: 'Alert  !',

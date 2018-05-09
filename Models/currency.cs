@@ -14,6 +14,12 @@ namespace NewLetter.Models
     
     public partial class currency
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public currency()
+        {
+            this.jobDetails = new HashSet<jobDetail>();
+        }
+    
         public int currencyID { get; set; }
         public string currency1 { get; set; }
         public System.DateTime dataIsCreated { get; set; }
@@ -25,5 +31,7 @@ namespace NewLetter.Models
     
         public virtual EmployerDetail EmployerDetail { get; set; }
         public virtual EmployerDetail EmployerDetail1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<jobDetail> jobDetails { get; set; }
     }
 }

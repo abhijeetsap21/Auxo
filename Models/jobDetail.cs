@@ -34,12 +34,12 @@ namespace NewLetter.Models
         public string jobDescription { get; set; }
         public int workExpMin { get; set; }
         public int salary { get; set; }
-        public string currency { get; set; }
+        public Nullable<int> currency { get; set; }
         public string unit { get; set; }
         public int industryID { get; set; }
         public string city { get; set; }
         public int EmploymentTypeID { get; set; }
-        public string EducationReq { get; set; }
+        public Nullable<int> EducationReq { get; set; }
         public int NoOfOpenings { get; set; }
         public long createdBy { get; set; }
         public System.DateTime dataIsCreated { get; set; }
@@ -74,6 +74,8 @@ namespace NewLetter.Models
     
         public virtual advertisementList advertisementList { get; set; }
         public virtual companyDetail companyDetail { get; set; }
+        public virtual currency currency1 { get; set; }
+        public virtual Education Education { get; set; }
         public virtual EmployerDetail EmployerDetail { get; set; }
         public virtual EmployerDetail EmployerDetail1 { get; set; }
         public virtual EmploymentType EmploymentType { get; set; }

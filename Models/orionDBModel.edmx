@@ -101,7 +101,7 @@
           <Key>
             <PropertyRef Name="EducationID" />
           </Key>
-          <Property Name="EducationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EducationID" Type="int" Nullable="false" />
           <Property Name="educationName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="dataIsCreated" Type="datetime" Nullable="false" />
           <Property Name="dataIsUpdated" Type="datetime" Nullable="false" />
@@ -211,12 +211,12 @@
           <Property Name="jobDescription" Type="nvarchar(max)" Nullable="false" />
           <Property Name="workExpMin" Type="int" Nullable="false" />
           <Property Name="salary" Type="int" Nullable="false" />
-          <Property Name="currency" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="currency" Type="int" />
           <Property Name="unit" Type="nvarchar" MaxLength="100" />
           <Property Name="industryID" Type="int" Nullable="false" />
           <Property Name="city" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="EmploymentTypeID" Type="int" Nullable="false" />
-          <Property Name="EducationReq" Type="varchar" MaxLength="500" />
+          <Property Name="EducationReq" Type="int" />
           <Property Name="NoOfOpenings" Type="int" Nullable="false" />
           <Property Name="createdBy" Type="bigint" Nullable="false" />
           <Property Name="dataIsCreated" Type="datetime" Nullable="false" />
@@ -1076,6 +1076,30 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Principal>
             <Dependent Role="InterViewerComment">
               <PropertyRef Name="qenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jobDetails_currency">
+          <End Role="currency" Type="Self.currency" Multiplicity="0..1" />
+          <End Role="jobDetails" Type="Self.jobDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="currency">
+              <PropertyRef Name="currencyID" />
+            </Principal>
+            <Dependent Role="jobDetails">
+              <PropertyRef Name="currency" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jobDetails_Education">
+          <End Role="Education" Type="Self.Education" Multiplicity="0..1" />
+          <End Role="jobDetails" Type="Self.jobDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Education">
+              <PropertyRef Name="EducationID" />
+            </Principal>
+            <Dependent Role="jobDetails">
+              <PropertyRef Name="EducationReq" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2044,6 +2068,14 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             <End Role="qendidateList" EntitySet="qendidateList" />
             <End Role="InterViewerComment" EntitySet="InterViewerComment" />
           </AssociationSet>
+          <AssociationSet Name="FK_jobDetails_currency" Association="Self.FK_jobDetails_currency">
+            <End Role="currency" EntitySet="currency" />
+            <End Role="jobDetails" EntitySet="jobDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jobDetails_Education" Association="Self.FK_jobDetails_Education">
+            <End Role="Education" EntitySet="Education" />
+            <End Role="jobDetails" EntitySet="jobDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_jobDetails_EmployeModified" Association="Self.FK_jobDetails_EmployeModified">
             <End Role="EmployerDetails" EntitySet="EmployerDetails" />
             <End Role="jobDetails" EntitySet="jobDetails" />
@@ -2391,6 +2423,36 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           </FunctionImport>
           <FunctionImport Name="sp_sendNewsletter" ReturnType="Collection(oriondbModel.sp_sendNewsletter_Result)" />
           <FunctionImport Name="sp_QendidateTestSchedule_Insert_ExamMark" />
+          <FunctionImport Name="sp_alterdiagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition1" ReturnType="Collection(oriondbModel.sp_helpdiagramdefinition1_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams1" ReturnType="Collection(oriondbModel.sp_helpdiagrams1_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram1">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams1" />
           <EntitySet Name="advertisementLists" EntityType="oriondbModel.advertisementList" />
           <EntitySet Name="app_error_log" EntityType="oriondbModel.app_error_log" />
           <EntitySet Name="App_status" EntityType="oriondbModel.App_status" />
@@ -2500,6 +2562,10 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             <End Role="EmployerDetail" EntitySet="EmployerDetails" />
             <End Role="currency" EntitySet="currencies" />
           </AssociationSet>
+          <AssociationSet Name="FK_jobDetails_currency" Association="oriondbModel.FK_jobDetails_currency">
+            <End Role="currency" EntitySet="currencies" />
+            <End Role="jobDetail" EntitySet="jobDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_Education_EmployerDetails" Association="oriondbModel.FK_Education_EmployerDetails">
             <End Role="EmployerDetail" EntitySet="EmployerDetails" />
             <End Role="Education" EntitySet="Educations" />
@@ -2507,6 +2573,10 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <AssociationSet Name="FK_Education_EmployerDetails1" Association="oriondbModel.FK_Education_EmployerDetails1">
             <End Role="EmployerDetail" EntitySet="EmployerDetails" />
             <End Role="Education" EntitySet="Educations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_jobDetails_Education" Association="oriondbModel.FK_jobDetails_Education">
+            <End Role="Education" EntitySet="Educations" />
+            <End Role="jobDetail" EntitySet="jobDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_EmployerDetails_EmployerDetails" Association="oriondbModel.FK_EmployerDetails_EmployerDetails">
             <End Role="EmployerDetail" EntitySet="EmployerDetails" />
@@ -2760,36 +2830,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             <End Role="slot" EntitySet="slots" />
             <End Role="slotTempBlocked" EntitySet="slotTempBlockeds" />
           </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram1">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram1">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram1">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition1" ReturnType="Collection(oriondbModel.sp_helpdiagramdefinition1_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams1" ReturnType="Collection(oriondbModel.sp_helpdiagrams1_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram1">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams1" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -3057,6 +3097,17 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Type="String" Name="qenEmail" Nullable="true" MaxLength="320" />
           <Property Type="Int64" Name="qenID" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition1_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams1_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
         <EntityType Name="advertisementList">
           <Key>
             <PropertyRef Name="advertisementRefID" />
@@ -3164,12 +3215,13 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Name="modifiedBy" Type="Int64" Nullable="false" />
           <NavigationProperty Name="EmployerDetail" Relationship="oriondbModel.FK_currency_EmployerDetails" FromRole="currency" ToRole="EmployerDetail" />
           <NavigationProperty Name="EmployerDetail1" Relationship="oriondbModel.FK_currency_EmployerDetails1" FromRole="currency" ToRole="EmployerDetail" />
+          <NavigationProperty Name="jobDetails" Relationship="oriondbModel.FK_jobDetails_currency" FromRole="currency" ToRole="jobDetail" />
         </EntityType>
         <EntityType Name="Education">
           <Key>
             <PropertyRef Name="EducationID" />
           </Key>
-          <Property Name="EducationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EducationID" Type="Int32" Nullable="false" />
           <Property Name="educationName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="dataIsCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="dataIsUpdated" Type="DateTime" Nullable="false" Precision="3" />
@@ -3179,6 +3231,7 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Name="modifiedBy" Type="Int64" Nullable="false" />
           <NavigationProperty Name="EmployerDetail" Relationship="oriondbModel.FK_Education_EmployerDetails" FromRole="Education" ToRole="EmployerDetail" />
           <NavigationProperty Name="EmployerDetail1" Relationship="oriondbModel.FK_Education_EmployerDetails1" FromRole="Education" ToRole="EmployerDetail" />
+          <NavigationProperty Name="jobDetails" Relationship="oriondbModel.FK_jobDetails_Education" FromRole="Education" ToRole="jobDetail" />
         </EntityType>
         <EntityType Name="EmployerDetail">
           <Key>
@@ -3333,12 +3386,12 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Name="jobDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="workExpMin" Type="Int32" Nullable="false" />
           <Property Name="salary" Type="Int32" Nullable="false" />
-          <Property Name="currency" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="currency" Type="Int32" />
           <Property Name="unit" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="industryID" Type="Int32" Nullable="false" />
           <Property Name="city" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="EmploymentTypeID" Type="Int32" Nullable="false" />
-          <Property Name="EducationReq" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="EducationReq" Type="Int32" />
           <Property Name="NoOfOpenings" Type="Int32" Nullable="false" />
           <Property Name="createdBy" Type="Int64" Nullable="false" />
           <Property Name="dataIsCreated" Type="DateTime" Nullable="false" Precision="3" />
@@ -3372,6 +3425,8 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Name="assessmentID" Type="Int64" />
           <NavigationProperty Name="advertisementList" Relationship="oriondbModel.FK_jobDetails_jobDetails1" FromRole="jobDetail" ToRole="advertisementList" />
           <NavigationProperty Name="companyDetail" Relationship="oriondbModel.FK_jobDetails_jobDetails" FromRole="jobDetail" ToRole="companyDetail" />
+          <NavigationProperty Name="currency1" Relationship="oriondbModel.FK_jobDetails_currency" FromRole="jobDetail" ToRole="currency" />
+          <NavigationProperty Name="Education" Relationship="oriondbModel.FK_jobDetails_Education" FromRole="jobDetail" ToRole="Education" />
           <NavigationProperty Name="EmployerDetail" Relationship="oriondbModel.FK_jobDetails_EmployeModified" FromRole="jobDetail" ToRole="EmployerDetail" />
           <NavigationProperty Name="EmployerDetail1" Relationship="oriondbModel.FK_jobDetails_EmployerDetails" FromRole="jobDetail" ToRole="EmployerDetail" />
           <NavigationProperty Name="EmploymentType" Relationship="oriondbModel.FK_jobDetails_EmploymentType" FromRole="jobDetail" ToRole="EmploymentType" />
@@ -4111,6 +4166,18 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_jobDetails_currency">
+          <End Type="oriondbModel.currency" Role="currency" Multiplicity="0..1" />
+          <End Type="oriondbModel.jobDetail" Role="jobDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="currency">
+              <PropertyRef Name="currencyID" />
+            </Principal>
+            <Dependent Role="jobDetail">
+              <PropertyRef Name="currency" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Education_EmployerDetails">
           <End Type="oriondbModel.EmployerDetail" Role="EmployerDetail" Multiplicity="1" />
           <End Type="oriondbModel.Education" Role="Education" Multiplicity="*" />
@@ -4132,6 +4199,18 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Principal>
             <Dependent Role="Education">
               <PropertyRef Name="modifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_jobDetails_Education">
+          <End Type="oriondbModel.Education" Role="Education" Multiplicity="0..1" />
+          <End Type="oriondbModel.jobDetail" Role="jobDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Education">
+              <PropertyRef Name="EducationID" />
+            </Principal>
+            <Dependent Role="jobDetail">
+              <PropertyRef Name="EducationReq" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4891,17 +4970,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="sp_helpdiagramdefinition1_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams1_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5244,6 +5312,30 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_QendidateTestSchedule_Insert_ExamMark" FunctionName="oriondbModel.Store.sp_QendidateTestSchedule_Insert_ExamMark" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram1" FunctionName="oriondbModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram1" FunctionName="oriondbModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram1" FunctionName="oriondbModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition1" FunctionName="oriondbModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="oriondbModel.sp_helpdiagramdefinition1_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams1" FunctionName="oriondbModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="oriondbModel.sp_helpdiagrams1_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram1" FunctionName="oriondbModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams1" FunctionName="oriondbModel.Store.sp_upgraddiagrams" />
           <EntitySetMapping Name="advertisementLists">
             <EntityTypeMapping TypeName="oriondbModel.advertisementList">
               <MappingFragment StoreEntitySet="advertisementList">
@@ -5984,30 +6076,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram1" FunctionName="oriondbModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram1" FunctionName="oriondbModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram1" FunctionName="oriondbModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition1" FunctionName="oriondbModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="oriondbModel.sp_helpdiagramdefinition1_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams1" FunctionName="oriondbModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="oriondbModel.sp_helpdiagrams1_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram1" FunctionName="oriondbModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams1" FunctionName="oriondbModel.Store.sp_upgraddiagrams" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

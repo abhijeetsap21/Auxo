@@ -127,3 +127,28 @@
 
 
 
+@{
+    if (TempData["result"] != null)
+    {
+
+        if (TempData["result"].ToString() == "addphone")
+        {
+            <script type="text/javascript">
+            {
+            debugger
+                bootbox.alert({
+                title: 'Alert',
+                    message: 'Please update your mobile number first'
+                });
+            }               
+
+            </script>
+            }
+        }
+    }
+
+
+
+
+
+

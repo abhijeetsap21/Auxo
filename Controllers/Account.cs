@@ -235,7 +235,24 @@ namespace NewLetter.Controllers
 
         public ActionResult Logout()
         {
-            Session.Abandon();
+            try
+            {
+
+                var ID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.UserID.ToString()));
+                var role_id = BaseUtil.GetSessionValue(AdminInfo.role_id.ToString());
+                if (role_id == "5")
+                {
+                    var result = db.qendidateLists.Where(e => e.qenID == ID).FirstOrDefault();
+                    result.lastLoginTime = BaseUtil.GetCurrentDateTime();
+                    db.Entry(result).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                Session.Abandon();
+            }
+            catch (Exception ex)
+            {
+                BaseUtil.CaptureErrorValues(ex);
+            }
             return RedirectToAction("Login", "Account");
         }
 
@@ -390,7 +407,7 @@ namespace NewLetter.Controllers
                     list.isActive = true;
                     list.password = baseClass.GetRandomPasswordString(10);
                     list.qenImage = linkedINResVM.pictureurl;
-                    list.qenPhone = "+919999999999";
+                    list.qenPhone = "9999999999";
                     list.qenAddress = "some address";
                     list.isMobileVerified = false;
                     list.isEmalVerified = true;
@@ -529,7 +546,7 @@ namespace NewLetter.Controllers
                         gmailUser.isEmalVerified = true;
                         gmailUser.password = baseClass.GetRandomPasswordString(10);
                         //gmailUser.qenImage = linkedINResVM.pictureurl;
-                        gmailUser.qenPhone = "+919999999999";
+                        gmailUser.qenPhone = "9999999999";
                         gmailUser.qenAddress = "some address";
                         gmailUser.qenAddress = null;
                         gmailUser.registeredFrom = "Google";
@@ -678,7 +695,7 @@ namespace NewLetter.Controllers
 
                     list.password = baseClass.GetRandomPasswordString(10);
                     //list.qenImage = linkedINResVM.pictureurl;
-                    list.qenPhone = "+919999999999";
+                    list.qenPhone = "9999999999";
                     list.qenAddress = "some address";
                     list.qenAddress = null;
                     list.registeredFrom = "FaceBook";
