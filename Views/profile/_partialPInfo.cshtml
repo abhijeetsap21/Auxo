@@ -116,7 +116,14 @@
                                     <div class="form-group">
                                         <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Mobile Number:</label>
                                         <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                                            @Html.TextBoxFor(m => m.qenPhone, new { id = "phone", maxlength = "10" })
+                                            @if (Model.qenPhone == "9999999999")
+                                            {
+                                            @Html.TextBoxFor(m => m.qenPhone,"", new { id = "phone", maxlength = "10",Value = "" })
+                                            }
+                                            else
+                                            {
+                                               @Html.TextBoxFor(m => m.qenPhone, "", new { id = "phone", maxlength = "10" })
+                                            }
                                             @Html.ValidationMessageFor(model => model.qenPhone, "", new { @class = "col_1 tleft text-danger" })
                                         </div>
                                     </div>

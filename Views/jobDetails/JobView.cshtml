@@ -225,7 +225,7 @@
 			<label class="cutom-label">
 				@{if (Model.salaryVisibleToEmployee)
 					{
-						<span> @Model.salary </span><span>@Model.currency </span><span>@Model.unit</span>
+						<span> @Model.salary </span><span>@Model.currency1.currency1 </span><span>@Model.unit</span>
 					}
 					else
 					{
@@ -247,7 +247,7 @@
 		</div>
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<label class="cutom-label" for="NoOfOpenings"><b>Education</b></label>
-			<label class="cutom-label">@Model.EducationReq</label>
+			<label class="cutom-label">@Model.Education.educationName</label>
 		</div>
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<label class="cutom-label" for="NoOfOpenings"><b>Industry</b></label>

@@ -212,7 +212,7 @@
 
     <script type="text/javascript">
         debugger
-var jqOld = jQuery.noConflict();
+        var jqOld = jQuery.noConflict();
         jqOld(document).ready(function() {
             jqOld('#myDataTable').DataTable();
         } );
@@ -291,23 +291,22 @@ var jqOld = jQuery.noConflict();
     jqOld(function () {
         debugger
             // Click on notification icon for show notification
-        jqOld('div.n-green').click(function (e) {
+        jqOld('div.n-yellow').click(function (e) {
             debugger
                 e.stopPropagation();
                 jqOld('.noti-content').show();
                 debugger
                 var count = 0;
                 count = parseInt(jqOld('span.count_contact').html()) || 0;
-                //only load notification if not already loaded
+            //only load notification if not already loaded  count_contact
                 if (count >0) {
                     updateNotification();
                 }
                 jqOld('span.count_contact', this).html('&nbsp;');
+                jqOld('div.n-yellow').css('display', 'none');
             })
             // hide notifications
-            jqOld('html').click(function () {
-                jqOld('.noti-content').hide();
-            })
+           
             // update notification
             function updateNotification() {
                 debugger
@@ -330,27 +329,46 @@ var jqOld = jQuery.noConflict();
             }
             // update notification count
 
-        })
+    })
+
+    jqOld('html').click(function () {
+        jqOld('.noti-content').hide();
+        jqOld('#notiContent').empty();
+    })
 </script>
 <script>
     debugger
 
-    //var firstVisist = localStorage.getItem("someVarName");
-    //if (firstVisist == null) {
-    //    firstVisist = 0;
-    //}
-    //if (firstVisist == 0) {
         var jqOld = jQuery.noConflict();
         var count = 0;
         debugger
-        if ('@roleID' == "5") {
+        if ('@roleID' == '5') {
             function loadNotification() {
+                debugger
                 var URL = '@Url.Action("NotificationCount", "Account")';
                 jqOld.getJSON(URL, function (data) {
                     debugger
-                    jqOld('span.count_contact').html(data[0].Column1);
+                    jqOld('span.count_contact').html(data[0].Column3);
                     jqOld('span.count_download').html(data[0].Column2);
-                    jqOld('span.count_view').html(data[0].Column3);
+                    jqOld('span.count_view').html(data[0].Column1);
+
+                    var count1 = 0;
+                    count1 = parseInt(jqOld('span.count_contact').html()) || 0;
+                    if (count1 == 0) {
+                        jqOld('div.n-yellow').css('display', 'none');
+                    }
+
+                    var count2 = 0;
+                    count2 = parseInt(jqOld('span.count_download').html()) || 0;
+                    if (count2 == 0) {
+                        jqOld('div.n-red').css('display', 'none');
+                    }
+
+                    var count3 = 0;
+                    count3 = parseInt(jqOld('span.count_view').html()) || 0;
+                    if (count3 == 0) {
+                        jqOld('div.n-green').css('display', 'none');
+                    }
                 });
             }
         }
@@ -369,18 +387,16 @@ var jqOld = jQuery.noConflict();
                 debugger
                 var count = 0;
                 count = parseInt(jqOld('span.count_download').html()) || 0;
-                //only load notification if not already loaded
+            //only load notification if not already loaded  count_download
                 if (count >0) {
-                    updateNotification();
+                    updateNotification1();
                 }
                 jqOld('span.count_download', this).html('&nbsp;');
+                jqOld('div.n-red').css('display', 'none');
             })
-            // hide notifications
-            jqOld('html').click(function () {
-                jqOld('.noti-content').hide();
-            })
+          
             // update notification
-            function updateNotification() {
+            function updateNotification1() {
                 debugger
                 jqOld('#notiContent').empty();
                 jqOld('#notiContent').append('<li>Loading...</li>');
@@ -394,7 +410,7 @@ var jqOld = jQuery.noConflict();
                         jqOld('#notiContent').append(jqOld('<li>No data available</li>'));
                     }
                     jqOld.each(data, function (index, value) {
-                        jqOld('#notiContent').append(jqOld('<li>' + value+ ' send you message regarding job</li>'));
+                        jqOld('#notiContent').append(jqOld('<li>' + value+ ' downloaded your profile. </li>'));
                     })
                 })
 
@@ -408,25 +424,23 @@ var jqOld = jQuery.noConflict();
     jqOld(function () {
         debugger
             // Click on notification icon for show notification
-        jqOld('div.n-yellow').click(function (e) {
+        jqOld('div.n-green').click(function (e) {
             debugger
                 e.stopPropagation();
                 jqOld('.noti-content').show();
                 debugger
                 var count = 0;
                 count = parseInt(jqOld('span.count_view').html()) || 0;
-                //only load notification if not already loaded
+            //only load notification if not already loaded count_view
                 if (count >0) {
-                    updateNotification();
+                    updateNotification2();
                 }
                 jqOld('span.count_view', this).html('&nbsp;');
+                jqOld('div.n-green').css('display', 'none');
             })
-            // hide notifications
-            jqOld('html').click(function () {
-                jqOld('.noti-content').hide();
-            })
+            
             // update notification
-            function updateNotification() {
+            function updateNotification2() {
                 debugger
                 jqOld('#notiContent').empty();
                 jqOld('#notiContent').append('<li>Loading...</li>');
@@ -440,7 +454,7 @@ var jqOld = jQuery.noConflict();
                         jqOld('#notiContent').append(jqOld('<li>No data available</li>'));
                     }
                     jqOld.each(data, function (index, value) {
-                        jqOld('#notiContent').append(jqOld('<li>' + value + ' send you message regarding job</li>'));
+                        jqOld('#notiContent').append(jqOld('<li>' + value + ' viewed your profile.</li>'));
                     })
                 })
 
