@@ -45,7 +45,7 @@
                 <div class="form-group">
                     <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Start Date:</label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                        @Html.TextBoxFor(m => m.phdStart, "{0:mm/dd/yyyy}", new { @class = "datepicker", onchange = "return DateCheck1();" })
+                        @Html.TextBoxFor(m => m.phdStart, "{0:MM/dd/yyyy}", new { @class = "datepicker", onchange = "return DateCheck1();" })
                         @Html.ValidationMessageFor(model => model.phdStart, "", new { @class = "col_1 tleft text-danger" })
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                 <div class="form-group">
                     <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">End Date:</label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                        @Html.TextBoxFor(m => m.phdEnd, "{0:mm/dd/yyyy}", new { @class = "datepicker", onchange = "return DateCheck1();" })
+                        @Html.TextBoxFor(m => m.phdEnd, "{0:MM/dd/yyyy}", new { @class = "datepicker", onchange = "return DateCheck1();" })
                         @Html.ValidationMessageFor(model => model.phdEnd, "", new { @class = "col_1 tleft text-danger" })
                     </div>
                 </div>
@@ -85,6 +85,15 @@
 
         <br /><br /><br />
         }
+<script>
+    var jold = jQuery.noConflict();
+    jold(document).ready(function () {
+
+        jold('.datepicker').datepicker({
+            dateFormat: 'mm/dd/yy'  // CHANGE DATE FORMAT.
+        });
+    });
+</script>
 
         <script type="text/javascript">
 
