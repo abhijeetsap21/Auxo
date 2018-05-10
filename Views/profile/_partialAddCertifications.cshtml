@@ -69,7 +69,16 @@
                 </div>
             </div>
             <div class="col-md-12 text-right academic">
+                @{ 
+                    if (Model.phdid == 0)
+                    {
                 <input type="submit" name="save" class="plus-btn academic-create-btn btn btn-default" value="Save" />
+                    }
+                    else
+                    {
+                        <input type="submit" name="save" class="plus-btn academic-create-btn btn btn-default" value="Update" />
+                    }
+                }
             </div>
         </div>
     </div>
