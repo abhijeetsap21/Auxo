@@ -197,6 +197,10 @@
       <HintPath>packages\Sendgrid.9.9.0\lib\net452\SendGrid.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sparkle.LinkedInNET, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ce73a39745302302, processorArchitecture=MSIL">
+      <HintPath>packages\Sparkle.LinkedInNET.1.0.15\lib\net45\Sparkle.LinkedInNET.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Supremes, Version=1.0.0.6474, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\dcsoup.1.0.0\lib\net45\Supremes.dll</HintPath>
       <Private>True</Private>

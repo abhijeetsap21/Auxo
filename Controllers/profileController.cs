@@ -864,26 +864,35 @@ namespace NewLetter.Controllers
                 int skill_id = checkValuExist(model.skillName.ToString());
                 qenSkill oqenSkill = null;
 
-                oqenSkill = db.qenSkills.Where(ex => ex.skillsID == skill_id && ex.qenID== model.qenID).FirstOrDefault();
-                if (oqenSkill != null)
-                {                   
-                    oqenSkill.skillsID = skill_id;
-                    oqenSkill.yearOfExp = model.yearOfExp;
-                    oqenSkill.qenID = model.qenID;
-                  
-                    db.Entry(oqenSkill).State = EntityState.Modified;
-                    db.SaveChanges();
-                    TempData["message"] = "Skills Information Updated Successfully";
+                if (skill_id == 0)
+                {
+                    TempData["message"] = "Please Select Skill from the list";
                 }
+
                 else
                 {
-                    oqenSkill = new qenSkill();                  
-                    oqenSkill.skillsID = skill_id;
-                    oqenSkill.yearOfExp = model.yearOfExp;
-                    oqenSkill.qenID = model.qenID;
-                    db.qenSkills.Add(oqenSkill);
-                    db.SaveChanges();
-                    TempData["message"] = "Skill Information Added Successfully";
+
+                    oqenSkill = db.qenSkills.Where(ex => ex.skillsID == skill_id && ex.qenID == model.qenID).FirstOrDefault();
+                    if (oqenSkill != null)
+                    {
+                        oqenSkill.skillsID = skill_id;
+                        oqenSkill.yearOfExp = model.yearOfExp;
+                        oqenSkill.qenID = model.qenID;
+
+                        db.Entry(oqenSkill).State = EntityState.Modified;
+                        db.SaveChanges();
+                        TempData["message"] = "Skills Information Updated Successfully";
+                    }
+                    else
+                    {
+                        oqenSkill = new qenSkill();
+                        oqenSkill.skillsID = skill_id;
+                        oqenSkill.yearOfExp = model.yearOfExp;
+                        oqenSkill.qenID = model.qenID;
+                        db.qenSkills.Add(oqenSkill);
+                        db.SaveChanges();
+                        TempData["message"] = "Skill Information Added Successfully";
+                    }
                 }
 
                 return RedirectToAction("editCandidate");
@@ -938,11 +947,8 @@ namespace NewLetter.Controllers
                 var result = db.skills.Where(e => e.skillName == skill_).Select(x => new { x.skillsID }).SingleOrDefault();
                 if (result == null)
                 {
-                    skill oskill = new skill();
-                    oskill.skillName = skill_;
-                    db.skills.Add(oskill);
-                    db.SaveChanges();
-                    return oskill.skillsID;
+                    
+                    return 0;
                 }
                 else
                 {
