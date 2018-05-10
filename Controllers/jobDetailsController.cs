@@ -338,6 +338,7 @@ namespace NewLetter.Controllers
             return htmlString;
         }
         public ActionResult JobView(string jobID)
+
         {
             long jobid_ = 0; var jobDetails = (dynamic)null;
             try { 
@@ -347,7 +348,7 @@ namespace NewLetter.Controllers
             }
             if (jobid_ != 0)
             {
-                    jobDetails = db.jobDetails.Include(e => e.industry).Include(e => e.EmploymentType).Include(e => e.companyDetail).Include(e => e.Education).Include(e => e.currency).Where(e => e.jobID == jobid_).FirstOrDefault();
+                    jobDetails = db.jobDetails.Include(e => e.industry).Include(e => e.EmploymentType).Include(e => e.companyDetail).Include(e => e.Education).Include(e => e.currency1).Where(e => e.jobID == jobid_).FirstOrDefault();
 
                     return View(jobDetails);
             }
