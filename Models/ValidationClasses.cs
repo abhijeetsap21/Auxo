@@ -61,7 +61,7 @@ namespace NewLetter.Models
         [Display(Name = "Job Title")]
         public string jobTitle { get; set; }
 
-        [AllowHtml]
+        //[AllowHtml]
         [Display(Name = "Job Description")]       
         [Required(ErrorMessage = "job description required")]
         public string jobDescription { get; set; }
@@ -755,9 +755,9 @@ namespace NewLetter.Models
     public class careerObjective
     {
         public long qenID { get; set; }
-        [AllowHtml]
+        //[AllowHtml]
         public string careerObj { get; set; }
-        [AllowHtml]
+        //[AllowHtml]
         public string careerHighLights { get; set; }
     }
 
