@@ -609,6 +609,7 @@
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Startup.cs" />
+    <Compile Include="Models\storedProcedureModels.cs" />
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>

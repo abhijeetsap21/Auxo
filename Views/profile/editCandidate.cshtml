@@ -45,6 +45,15 @@
     });
 </script>
 <div class="form-horizontal edit-candidate-cv">
+    <div class="container">
+        <h2>Basic Progress Bar</h2>
+        <div class="progress">
+            <div id="progress" class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                <p id="progresstext" class="sr-only">70% Complete</p>
+                </div>
+            
+        </div>
+    </div>
     <h4>Profile</h4>
     <input type="button" class="btn btn-info btn-lg edit-candidate-cv-btn" data-toggle="modal" data-target="#myModal" value="View" onclick="return dispalyResume(@qenID);" />
     <div class="col-lg-12 col-md-12 col-xs-12 table-das">
@@ -147,6 +156,30 @@
         }
     }
 
+
+<script>
+    debugger
+    var jqOld = jQuery.noConflict();
+    jqOld(document).ready(function () {
+        debugger        
+            debugger
+            var qenID = '@qenID';
+        debugger
+            jqOld.ajax({
+                url: '/profile/getProfileCompletePercentage',
+                data: { 'qenID': qenID },
+                success: function (data) {                    
+                        debugger
+                        var x = document.getElementById('progress');
+                        x.style.width = data + '%';
+                        x.innerHTML = "Your profile is" + data + "% complete";
+                       
+                    
+                }
+            });
+        
+    });
+</script>
 
 
 

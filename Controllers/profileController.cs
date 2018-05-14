@@ -12,6 +12,8 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using SelectPdf;
 using System.Globalization;
+using System.Data.SqlClient;
+using static NewLetter.Models.storedProcedureModels;
 
 namespace NewLetter.Controllers
 {
@@ -1560,6 +1562,13 @@ namespace NewLetter.Controllers
                 return "NotVerified";
             }
                 
+        }
+
+        public int getProfileCompletePercentage(string qenID)
+        {
+            var qenID_ = new SqlParameter("@qenID", qenID);
+            var result = db.Database.SqlQuery<usp_GetProfileCompletenessPerc_Result>("usp_GetProfileCompletenessPerc @qenID", qenID_).FirstOrDefault();
+            return result.perc;
         }
 
       

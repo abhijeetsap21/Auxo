@@ -665,5 +665,95 @@ namespace NewLetter.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams1");
         }
+    
+        public virtual int usp_GetNullFieldFromCertifications(Nullable<long> qenID)
+        {
+            var qenIDParameter = qenID.HasValue ?
+                new ObjectParameter("qenID", qenID) :
+                new ObjectParameter("qenID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_GetNullFieldFromCertifications", qenIDParameter);
+        }
+    
+        public virtual int usp_GetNullFieldFromEmployment(Nullable<long> qenID)
+        {
+            var qenIDParameter = qenID.HasValue ?
+                new ObjectParameter("qenID", qenID) :
+                new ObjectParameter("qenID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_GetNullFieldFromEmployment", qenIDParameter);
+        }
+    
+        public virtual int usp_GetNullFieldFromPGrad(Nullable<long> qenID)
+        {
+            var qenIDParameter = qenID.HasValue ?
+                new ObjectParameter("qenID", qenID) :
+                new ObjectParameter("qenID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_GetNullFieldFromPGrad", qenIDParameter);
+        }
+    
+        public virtual int usp_GetNullFieldFromReferences(Nullable<long> qenID)
+        {
+            var qenIDParameter = qenID.HasValue ?
+                new ObjectParameter("qenID", qenID) :
+                new ObjectParameter("qenID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_GetNullFieldFromReferences", qenIDParameter);
+        }
+    
+        public virtual int usp_GetNullFieldFromSkills(Nullable<long> qenID)
+        {
+            var qenIDParameter = qenID.HasValue ?
+                new ObjectParameter("qenID", qenID) :
+                new ObjectParameter("qenID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_GetNullFieldFromSkills", qenIDParameter);
+        }
+    
+        public virtual int usp_GetNullFieldsFromHigherSecondary(Nullable<long> qenid)
+        {
+            var qenidParameter = qenid.HasValue ?
+                new ObjectParameter("qenid", qenid) :
+                new ObjectParameter("qenid", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_GetNullFieldsFromHigherSecondary", qenidParameter);
+        }
+    
+        public virtual int usp_GetNullFieldsFromQendidateList(Nullable<long> qenID)
+        {
+            var qenIDParameter = qenID.HasValue ?
+                new ObjectParameter("qenID", qenID) :
+                new ObjectParameter("qenID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_GetNullFieldsFromQendidateList", qenIDParameter);
+        }
+    
+        public virtual int usp_GetNullFieldsFromSecondary(Nullable<long> qenID)
+        {
+            var qenIDParameter = qenID.HasValue ?
+                new ObjectParameter("qenID", qenID) :
+                new ObjectParameter("qenID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_GetNullFieldsFromSecondary", qenIDParameter);
+        }
+    
+        public virtual int usp_GetNullFieldsGraduation(Nullable<long> qenID)
+        {
+            var qenIDParameter = qenID.HasValue ?
+                new ObjectParameter("qenID", qenID) :
+                new ObjectParameter("qenID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_GetNullFieldsGraduation", qenIDParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> usp_GetProfileCompletenessPerc(Nullable<long> qenID)
+        {
+            var qenIDParameter = qenID.HasValue ?
+                new ObjectParameter("qenID", qenID) :
+                new ObjectParameter("qenID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("usp_GetProfileCompletenessPerc", qenIDParameter);
+        }
     }
 }
