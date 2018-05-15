@@ -89,10 +89,10 @@
                 <div class="col-md-12 common-right-block">
                 @{ if (roleID != "5")
                     {
-                        <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src='@logo' alt="img"></span><span class="common-user-loggedin-name">@companyname</span></div>
+                        <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src='@logo'></span><span class="common-user-loggedin-name">@companyname</span></div>
                     }
                 }                  
-                    <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src='@logo' alt="img" style="width:35px"></span><span class="common-user-loggedin-comp">@fullName </span></div>
+                    <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src='@logo' style="width:35px"></span><span class="common-user-loggedin-comp">@fullName </span></div>
                     
                         @if (emailV == "False" || phoneV == "False")
                         {                            
@@ -105,10 +105,10 @@
 
                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                             <li role="presentation"><a role="menuitem" tabindex="-1" onclick="location.href='@Url.Action("Logout", "Account", new { Area = "" })'">Sign Out</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
+                            @*<li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
                             <li role="presentation" class="divider"></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>*@
                         </ul>
 
                     </div>
@@ -468,13 +468,15 @@
 
 <script>
 
-                       var jold = jQuery.noConflict();
+   var jold = jQuery.noConflict();
 
     debugger
     jold(document).ready(function () {
         debugger
         jold('.datepicker').datepicker({
-            dateFormat: 'mm/dd/yy'  // CHANGE DATE FORMAT.
+            dateFormat: 'mm/dd/yy',   // CHANGE DATE FORMAT.
+            changeMonth: true,
+        changeYear: true
         });
     });
 </script>

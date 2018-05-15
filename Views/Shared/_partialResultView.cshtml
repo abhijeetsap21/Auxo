@@ -71,7 +71,7 @@
                                             }
                                         }
                                         @Html.ActionLink("View", "JobView", "jobDetails", new { jobID = BaseUtil.encrypt(@item.jobID.ToString()) }, null)
-                                        <a href="#"onclick="return callApply(@item.jobID);">Apply Now</a>
+                                        <a href="#">Apply Now</a>
                                     </div>
                                 </div>
 
@@ -124,84 +124,4 @@
             }
         });
     });
-</script>
-
-<script>
-    function callApply(jobID)
-    {
-        debugger      
-    
-    
-        {
-            var URL = '@Url.Action("Apply", "jobDetails")?jobID=' + jobID;
-        $.get(URL, function (data) {
-
-
-             debugger
-             if (data == "login") {
-                bootbox.confirm({
-                     title: "Alert Warning  !",
-                     message: '<p>Please login to apply this job.</p>',
-                     buttons: {
-                            confirm: {
-                                label: 'Yes',
-                                className: 'btn-success'
-
-                            },
-                            cancel: {
-                                label: 'No',
-                                className: 'btn-danger'
-                            }
-                        },
-                        callback: function (result,URL) {
-                              if(result)
-                              {
-                                  debugger
-                                 var URL = '/Account/login';
-                                  location.href = URL;
-
-                              }
-                           else
-                            {
-                            @*debugger
-                            var URL = window.location.href;
-                            location.href = URL;*@
-                         }
-                        }
-
-                 })
-
-             }
-             if (data == "alreadyApplied") {
-
-                 bootbox.alert({
-                  title: "Alert Warning  !",
-                  message: '<p>You have already applied at this job.</p>'
-              });
-             }
-             if (data == "access") {
-
-                 bootbox.alert({
-                     title: "Alert Warning  !",
-                     message: '<p>You are not authorised to apply this job.</p>'
-                 });
-             }
-             if (data == "mail sent and applied") {
-                 $('div.alert').addClass("alert-success"); $("#divmsg").css("display", "block");
-                 $("#divmsg").html("You have applied successfuly to this job.");
-                 bootbox.alert({
-                  title: "Alert Success  !",
-                  message: '<p>You have applied successfuly to this job.</p>'
-              });
-
-             }
-
-         }
-     );
-    }
-    }
-
-
-
-
 </script>

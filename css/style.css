@@ -40,11 +40,11 @@ input:focus{outline:0px;}
 }
 .form-horizontal .nav > li > a:hover {
     text-decoration: none;
-    background-color: #333366;
+    background-color: #e97b27;
     color: #fff;
     border-bottom: 0;
 }
-.form-horizontal .nav > li.active a{color:#333366;}
+.form-horizontal .nav > li.active a{color:#e97b27;}
 .form-horizontal .nav > li.active a:hover{color:#fff;}
 .table.dataTable{padding:0px;border:0px;}
 .btn.btn-default{
@@ -71,7 +71,7 @@ input:focus{outline:0px;}
     padding: 15px 25.68px;
 }
 .form-horizontal .nav > li {margin-bottom: 0;}
-.form-horizontal .nav > li.active a {color: #fff;background: #333366;border-bottom: 1px solid transparent;}
+.form-horizontal .nav > li.active a {color: #fff;background: #e97b27;border-bottom: 1px solid transparent;}
 .form-horizontal .nav > li.active a:hover, .form-horizontal .nav > li.active a:focus {color: #fff;border: 1px solid transparent;}
 .form-horizontal h4.title{ background:none; color:#333366; font-size:16px; font-weight:bold; }
 .rightside.rightside1{background:none;}
@@ -222,8 +222,9 @@ tr.odd td.sorting_1 {
 .navbar-default{background-color:#4a4dd0;  border-color:transparent; border:0px; border-radius:0px;}
 .left-nav{background-color:#4a4dd0;}
 .common-user-loggedin { background:#f6f6f6; border:none; -webkit-border-radius: 20px 20px 20px 20px; border-radius: 20px 20px 20px 20px; margin:0px 4px;  display:inline-block; }
-.common-user-loggedin-pic { border-radius: 50%; width:34px; height:34px; }
-.common-user-loggedin-name { padding-left:10px; font-size:13px; width:130px; display:inline-block;text-align: left;}
+.common-user-loggedin-pic { width:34px; height:34px;float:left; }
+.common-user-loggedin-pic img{border-radius: 50%;}
+.common-user-loggedin-name {font-size: 13px;width: 155px;display: inline-block;text-align: left;padding: 7px 10px;}
 .rightside {
     background: #ebebeb;
     box-shadow: inset 0px 11px 8px -10px #CCC;
@@ -331,12 +332,12 @@ by the way it is so weird when you look at your code a couple of years after you
 
 
 
-.common-user-loggedin-comp { padding-left:10px; font-size:13px; width:130px; display:inline-block;text-align: left;}
-.common-right-block {margin:38px 0px 0; text-align:right;}
+.common-user-loggedin-comp {font-size: 13px;width: 155px;display: inline-block;text-align: left;padding: 7px 10px;}
+.common-right-block {margin:38px 0px 0; text-align:right;position:relative;}
 .common-top-dropdown {display:inline-block; background-color:none;    border-color: #f6f6f6;  }
 .common-top-dropdown .btn { padding:0px; border:0;width:34px; height:34px;  border-radius:50%;  }
 .common-top-dropdown .dropdown-menu {left: -125px; margin: 5px 0 0;}
-.navbar-default .navbar-nav > li > a:hover{background:#e97a25 url(../images/left-nav-arrow.png) right center no-repeat; color:#fff;}
+.navbar-default .navbar-nav > li > a:hover{background:#e97a25;color:#fff;}
 .navbar-default .navbar-nav > li > a {
     border-bottom: 1px solid #6e71d9;
     color: #fff;
@@ -344,21 +345,20 @@ by the way it is so weird when you look at your code a couple of years after you
     font-size: 14px;
 	line-height:55px;
 	padding:0px 20px;
-	background:url(../images/left-nav-arrow.png) right center no-repeat;
 }
 .navbar-left {
     float: left;
     width: 100%;
 }
-
-
+li.dropdown.custom-menu:after {content: '\f105';position: absolute;right: 15px;color: #fff;display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing:grayscale;top: 50%;transform: translateY(-50%);font-size: 18px;}
+li.dropdown.custom-menu.open:after{content:'';}
 
 
 /*Register Page*/
 .register-page{background:url(../images/registration-bg.jpg) left top no-repeat; background-size:cover;}
 .register-page .container{max-width:774px; width:100%; padding-top:30px;}
 .register-main{background:#fff; width:100%; border-radius: 3px; display:inline-block; float:left;
- margin:35px 0 0; padding:54px 40px;}
+ margin:35px 0 0; padding:40px 40px;}
 .register-main p{font-size:12.9px; font-family:"Segoe UI", "Segoe UI Light", "Segoe UI Symbol"; color:#666;  margin:0 0 0 0;}
 .register-main h3{display:block; margin:0px; padding:0px 0 24px 0; font-size:26.12px; color:#4a4dd0;}
 .input-group{margin:0px 0 10px 0;}
@@ -513,7 +513,7 @@ input#btn_:hover{background:#282c75;}
 .tab-content table.table {border: 1px solid #ccc;max-width: 90%;margin: 20px auto;}
 .margin-bot-20-30 {margin: 0 30px 20px 0;}
 .edit_candidate.dashboard label.left-label {text-align: left;margin: 0 0 10px;}
-.form-horizontal .nav-tabs > li > a:focus {text-decoration: none;background-color: #333366;outline: none;}  
+.form-horizontal .nav-tabs > li > a:focus {text-decoration: none;background-color: #e97b27;outline: none;}  
 .modal-dialog.cv-profile {width: 65%;margin: 30px auto;height:65vh;}
 h4.modal-title {margin: 0;line-height: normal;padding: 0;font-size: 20px;}
 .dataTables_info {float: left;width: 50%;margin: 0 0 10px;font-size: 14px;}
@@ -545,12 +545,15 @@ div#chartContainer {width: 100%;height: 375px;}
 .chat-ratio {float: left;width: 100%;border-top: 1px solid #ccc;padding: 20px 0 0;}
 .chat-ratio .dl-horizontal dd {float: left;width: auto;margin-left: 10px;}
 .chat-ratio .dl-horizontal dt {float: left;width: auto;overflow: hidden;text-align: right;text-overflow: ellipsis;white-space: nowrap;clear: none;margin: 0 0 0 30px;}
-.job-view-padd form#msform {float: left;width: 100%;padding: 25px;}
+.job-view-padd form#msform {float: left;width: 100%;padding: 0;}
 .job-view-padd .dropdown-menu{right:0;left:auto;}
 span.job-view-title {font-size: 20px;color: #282c75;margin-left: 10px;}
 h5.job-title {float: left;width: 100%;font-size: 18px;}
-.job-view-padd table tr td {float: left;line-height: 28px;padding: 5px 5px;font-size: 16px !important;border: 1px solid #ccc;width: 50% !important;height: 40px;border-bottom: 0;border-right: 0;}
-.job-view-padd table {width: 60%;}
+.job-view-padd table tr td {float: left;line-height: 28px;padding: 5px 5px;font-size: 16px !important;border: 1px solid #ccc;height: 40px;border-bottom: 0;border-right: 0;}
+.job-view-padd table tr td:first-child {width: 25% !important;}
+.job-view-padd table tr td:last-child {width: 75% !important;}
+.job-view-padd table {width: 100%;}
+.job-view-padd table tr td.cmpny p{float:left;width:100%;}
 .job-view-padd table tr td.job-title {width: 100% !important;line-height: normal;border:0px;}
 .job-view-padd table tr td.job-title h5 {margin: 0;font-size: 18px;line-height: normal;padding: 3px 0;}
 .job-view-padd table tr td:last-child {border-right: 1px solid #ccc;}
@@ -580,13 +583,105 @@ dl.dl-horizontal.emp-details dd {float: left;width: auto;margin: 0;line-height: 
 dl.dl-horizontal.emp-details dd:before {content: ':';float: left;width: auto;position: absolute;left: -15px;}
 dl.dl-horizontal.emp-details dd input {margin-top: 8px;}
 dl.dl-horizontal.emp-details {float: left;width: 100%;padding: 0 15px;margin:0px;}
+label.cutom-label {float: left;width: 40%;font-weight: normal;margin: 0 20px 15px 0;}
+label.cutom-label-2 {float: left;width: 100%;margin: 0 0 10px;font-size: 18px;font-weight:400;}
+.custom-margin{margin:0 0 20px;}
+hr.job-view {margin-top: 0;margin-bottom: 20px;float: left;width: 100%;}
+.custom-menu ul.dropdown-menu.forAnimate {position: relative;float: left;width: 100%;background: #4a4dd0;box-shadow: 0 0 0;border: 0;padding:0 0 0 0;}
+.custom-menu ul.dropdown-menu.forAnimate a {border-bottom: 0;color: #fff;display: block;font-size: 14px;line-height: 45px;padding: 0px 0 0 40px;}
+li.dropdown.custom-menu.open a.dropdown-toggle {background: #e97b27;color: #fff;}
+li.dropdown.custom-menu.open a.dropdown-toggle:after {content: '\f107';position: absolute;right: 15px;color: #fff;display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;top: 50%;transform: translateY(-50%);font-size: 18px;}
+.custom-menu ul.dropdown-menu.forAnimate a:hover {background: #292c75;}
+.navbar-default .navbar-nav > li > a:focus{color:#fff;}
+h2.thankyou-title {float: left;width: 100%;text-align: center;color:#e97b27;}
+h2.thankyou-title-2 {float: left;width: 100%;text-align: center;color:#4a4dd0;}
+.thankyou-btns {float: left;width: 100%;text-align: center;}
+.thankyou-btns input {font-size: 14px;color: #fff;font-weight: 400;text-transform: uppercase;background: #e97b26;padding: 10px 15px;border-radius: 3px;margin: 20px 0 0px 0;display: inline-block;border: 0;}
+.form-horizontal.full-page {height: 80vh;display: flex;vertical-align: middle;align-items: center;width: 100%;}
+.form-horizontal.full-page fieldset {float: left;width: 100%;}
+.thankyou-btns input:hover {background: #292c75;}
+p#urlclass {float: left;width: 100%;margin: 25px 0 0;font-size: 18px;}
+.job-status {float: left;width: 100%;font-size: 28px;color: #e97b26;margin:0 0 5px;}
+.job-link-1 a {float: left;width: 100%;margin: 15px 0 0;font-size: 20px;color: #4a4dd0;}
+.full-page-2 {width: 100%;float: left;display: flex;vertical-align: middle;align-items: center;}
+.job-link-1 a {float: none;width: auto;margin: 10px 0;font-size: 20px;color: #4a4dd0;display: inline-block;line-height: normal;}
+.edit-employee input {margin: 4px !important;}
+.right-panel-btns {float: right;width: 100%;text-align: right;margin: 20px 0;display: flex;vertical-align: middle;align-items: center;}
+.right-panel-btns input.previous.btn.btn-default.action-button {margin: 0;}
+.cutom-wid label {margin: 0;}
+.cutom-wid input {position: relative;top: 3px;}
+.cutom-wid {float: right;margin: 0 0 0 31px;}
+.pagination-section {float: right;width: 100%;text-align: right;}
+.pagination-numbers {float: none;width: auto;display: inline-block;}
+.pagination-numbers span, .pagination-numbers a {background: #292c75;padding: 8px 14px;line-height: normal;border-radius: 3px;color: #fff;}
+.pagination-numbers span {background: #e97b27;}
+.pagination-numbers a:hover {background: #e97b27;text-decoration: none;}
+.academic {margin: 0 0 15px;}
+.otp-thanku p {float: left;width: 100%;text-align: center;font-size: 16px;padding: 0 50px;color: #333;margin: 0 0 5px;line-height: 26px;}
+.otp-form input.form-control {float: none;display: inline-block;width: 20%;line-height: normal;height: 38px;}
+.otp-form input.btn {margin: -3px 0 0;line-height:normal;}
+.otp-form .otp-form-inner {float: left;width: 100%;}
+.otp-form .otp-form-inner label#functionresult {float: left;width: 100%;font-size: 14px;color: green;margin: 10px 0 0;}
+.otp-form {float: left;width: 100%;vertical-align: middle;display: flex;align-items: center;margin: 10px 0 0;}
+.custom-margin-CandidateMaster{margin-top:7px;}
+.common-right-block a.warning-verification i {color: #fff;font-size: 12px;background: #fcb323;border-radius: 50% 50%;padding:6px;}
+.common-right-block a.warning-verification {position: absolute;right: 6.1%;top: -1px;float: left;width: 21%;padding: 6px 0;}
+input.form-control.verify-input {float: none;display: inline-block;width: 20%;}
+.details-verification input.btn.btn-default {margin: 0;line-height: normal;}
+.details-verification input.form-control{height:38px;}
+.details-verification label {float: left;width: 100%;margin: 20px 0 0;color: green;}
 
 input[type="checkbox"], input[type="radio"]{line-height: normal; margin: 0;}
+
+/*Add CSS 14-05-2018*/
+
+.login_ragister_btn{background: #e97b26 !important; color: #fff;}
+.login_ragister_btn:hover{background: #cc6616 !important; color: #fff !important;}
+.login_ragister_btn:focus{background: #cc6616 !important; color: #fff !important; outline: none !important;}
+input:focus{outline: none !important;}
+.padding-none_login{padding: 0px !important;}
+.add_border_line{border: solid 1px #ccc !important;}
+.add_border_line:focus{outline: none; box-shadow: inherit !important;}
+
+.text-danger {font-size: 12px;}
+.employe_zone_text_login{text-align: center;}
+.employe_zone_text_login a{text-decoration: none; background: #4a4dd0 !important; padding: 6px 12px; display: inline-block; color: #fff; border-radius: 4px; margin: 0 0 20px 0px;}
+.employe_zone_text_login a:hover{background: #3c3fc3 !important; color: #fff;}
+
+.text_center_powered{text-align: center;}
+
+.thankyou_main_bg{background: #fff; margin: 0 auto; width: 60%; margin-top: 50px; text-align: center;}
+
+.thankyou_main_bg .top_section_thankyou{background: #e97b26; display:inline-block; width: 100%; padding: 50px 0 50px 0px;}
+
+
+.thankyou_main_bg .thankyou_logo{margin-bottom:20px; max-width: 100%; margin-top: 20px;}
+
+.thankyou_main_bg .inner_tnakyou{padding:30px 15px 50px 15px; display: inline-block; width: 100%;}
+
+/*Add CSS 14-05-2018*/
+
+
+
+
+
+
+
+
+
+
+/*sfsfdsfdfdfdff*/
+
+
 @media only screen and (max-width: 1600px) {
 	body {font-size: 13px;}
 	.company-logo-img input#photoA {width: 100%;}
 	.company-logo-img input#photoA:after{padding:10.5px;}
 	.company-logo-img input#photoA[type="file"]::-webkit-file-upload-button {padding: 6px 10px;font-size: 14px;}
+}
+@media only screen and (max-width:1440px){
+	h2.thankyou-title{font-size:22px;}
+	h2.thankyou-title-2{font-size:22px;}
 }
 @media only screen and (max-width: 1366px) {
 	.form-horizontal .logo-company-cj {padding: 0;}
@@ -646,6 +741,7 @@ input[type="checkbox"], input[type="radio"]{line-height: normal; margin: 0;}
    .form-horizontal .form-group{margin:0px 0px 15px;min-height:auto;}
    .form-horizontal h4{margin:0 0 15px;}
    .form-group-1 {float: right;}
+	label.cutom-label a{word-wrap: break-word;}
    
 }
 @media only screen and (max-width:480px){
@@ -660,8 +756,80 @@ input[type="checkbox"], input[type="radio"]{line-height: normal; margin: 0;}
 	.common-right-block {margin: 20px 0 10px;}
 }
 @media only screen and (max-width: 320px) {
-   .register-main{ padding: 54px 0px;}
-   .social-login-buttons {    margin-bottom: 20px;    margin-top: 0;}
+   .register-main{ padding:21px 0px;}
+   .social-login-buttons {margin-bottom:10px; margin-top: 0;}
 }
 
-#loading {display: none;position: fixed;left: 0px;top: 0px;width: 100%;height: 100%;z-index: 9999;background: url('/Images/processing.gif') 50% 50% no-repeat;}
+
+/*Add media 14-05-2018*/
+ @media only screen and (min-width:1920px) {
+
+}
+
+ @media only screen and (min-width:1600px) {
+.table-responsive {min-height: .01%; overflow-x: auto !important;}
+	 .common-right-block a.warning-verification{right:52px;}
+}
+@media only screen and (min-width:992px) and (max-width:1199px) {
+.common-right-block a.warning-verification{right:11%;}
+.table-responsive {min-height: .01%; overflow-x: auto;}
+
+}
+ @media only screen and (min-width:768px) and (max-width:991px) {
+.register-page{display: table-footer-group;}
+ .gry .auxo-cv{display: inline-block; width: 100%;}
+	 .gry .dashboard label{width:100%;}
+	 .gry .dashboard input{width: 100%;}
+	 .gry .dashboard input#locality[type="text"]{width:100%;}
+	 .gry .dashboard input[type="text"], .dashboard select{width:100%;}
+	 .form-horizontal .media-body h4{padding: 15px;}
+	 .form-horizontal.edit-candidate-cv{margin:0px;}
+	 .gry .dashboard .flex{display: inline-block; width: 100%; margin: 0px 0 11px 0px;}
+	 .gry .table-responsive {overflow-x: scroll;}
+	 .common-round-shape{margin: 36px 2px 0 0px;}
+	 .gry .form-horizontal{max-width:96%; margin-top: 13px;}
+	 .add_ipad_heder{width:50%; padding-top:30px;}
+
+	 .thankyou-btns.login-btn input{margin: 20px 0 0 0px !important;}
+	 .thankyou_main_bg{width:80%;}
+	 .common-right-block a.warning-verification{right:11%;}
+	 
+}
+ @media only screen and (max-width:767px) {
+	 .text_center_powered{text-align: center !important;}
+	 
+	 .register-page{display: table-footer-group;}
+	 .register-main h3{padding: 7px 0 7px 0px; font-size: 20px;}
+	 .form-top-left{margin: 10px 0 0 0px;}
+	 .register-page .container {padding-top: 5px;}
+	 .form-horizontal.middle-text.full-page{height: auto !important; max-width: 100% !important;}
+	 .otp-thanku p{padding:25px 15px 0 15px;}
+	 .register-main{padding: 20px 0px;}
+	 
+	 .left-nav {min-height: 20px; height: auto; position: absolute; z-index: 9;}
+	 .form-horizontal {margin: 50px 0 0 0; width: 100% !important; max-width: 100%;}
+	 .dashboard .flex{padding: 10px; display: inline-block; width: 100%;}
+	 .gry .auxo-cv{display: inline-block; width: 100%;}
+	 .gry .dashboard label{width:100%;}
+	 .gry .dashboard input{width: 100%;}
+	 .gry .dashboard input#locality[type="text"]{width:100%;}
+	 .gry .dashboard input[type="text"], .dashboard select{width:100%;}
+	 .form-horizontal .media-body h4{padding: 15px;}
+	 .form-horizontal.edit-candidate-cv{margin:0px;}
+	 .edit-candidate-cv .table-das{padding: 0px;}
+	 .edit-candidate-cv{margin: 50px 0 0 0px !important;}
+	 .common-right-block{margin:0px;}
+	 .thankyou_main_bg .otp-form input.form-control{margin-bottom: 20px; width: 100%;}
+	 .thankyou_main_bg{width:100%;}
+	 span.job-view-title{display: inline-block; width: 100%; margin:20px 0 0 0;}
+	 .form-horizontal h4 i{display: inline-block; width: 100%; margin:13px 0 0px 0;}
+	 .form-horizontal h4{display: inline-block; width: 100%;}
+	 .common-right-block a.warning-verification{right:32px;}
+
+}
+ @media only screen and (max-width:480px) {
+	 .common-round-shape{margin:34px 7px 0 0px;}
+}
+ @media only screen and (max-width: 320px) {
+
+}

@@ -1048,6 +1048,7 @@ namespace NewLetter.Controllers
         [HttpGet]
         public ActionResult editCandidate()
         {
+            TempData["message"] = TempData["message"];
             return View();
         }
 
@@ -1569,8 +1570,6 @@ namespace NewLetter.Controllers
             var qenID_ = new SqlParameter("@qenID", qenID);
             var result = db.Database.SqlQuery<usp_GetProfileCompletenessPerc_Result>("usp_GetProfileCompletenessPerc @qenID", qenID_).FirstOrDefault();
             return result.perc;
-        }
-
-      
+        }      
     }
 }		  

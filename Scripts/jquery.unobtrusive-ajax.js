@@ -1,17 +1,21 @@
-// Unobtrusive Ajax support library for jQuery
-// Copyright (C) Microsoft Corporation. All rights reserved.
-// @version v3.2.5
-// 
-// Microsoft grants you the right to use these script files for the sole
-// purpose of either: (i) interacting through your browser with the Microsoft
-// website or online service, subject to the applicable licensing or use
-// terms; or (ii) using the files as included with a Microsoft product subject
-// to that product's license terms. Microsoft reserves all other rights to the
-// files not expressly granted by Microsoft, whether by implication, estoppel
-// or otherwise. Insofar as a script file is dual licensed under GPL,
-// Microsoft neither took the code under GPL nor distributes it thereunder but
-// under the terms set out in this paragraph. All notices and licenses
-// below are for informational purposes only.
+/* NUGET: BEGIN LICENSE TEXT
+ *
+ * Microsoft grants you the right to use these script files for the sole
+ * purpose of either: (i) interacting through your browser with the Microsoft
+ * website or online service, subject to the applicable licensing or use
+ * terms; or (ii) using the files as included with a Microsoft product subject
+ * to that product's license terms. Microsoft reserves all other rights to the
+ * files not expressly granted by Microsoft, whether by implication, estoppel
+ * or otherwise. Insofar as a script file is dual licensed under GPL,
+ * Microsoft neither took the code under GPL nor distributes it thereunder but
+ * under the terms set out in this paragraph. All notices and licenses
+ * below are for informational purposes only.
+ *
+ * NUGET: END LICENSE TEXT */
+/*!
+** Unobtrusive Ajax support library for jQuery
+** Copyright (C) Microsoft Corporation. All rights reserved.
+*/
 
 /*jslint white: true, browser: true, onevar: true, undef: true, nomen: true, eqeqeq: true, plusplus: true, bitwise: true, regexp: true, newcap: true, immed: true, strict: false */
 /*global window: false, jQuery: false */
@@ -55,18 +59,23 @@
             var top;
 
             switch (mode) {
-                case "BEFORE":
-                    $(update).prepend(data);
-                    break;
-                case "AFTER":
-                    $(update).append(data);
-                    break;
-                case "REPLACE-WITH":
-                    $(update).replaceWith(data);
-                    break;
-                default:
-                    $(update).html(data);
-                    break;
+            case "BEFORE":
+                top = update.firstChild;
+                $("<div />").html(data).contents().each(function () {
+                    update.insertBefore(this, top);
+                });
+                break;
+            case "AFTER":
+                $("<div />").html(data).contents().each(function () {
+                    update.appendChild(this);
+                });
+                break;
+            case "REPLACE-WITH":
+                $(update).replaceWith(data);
+                break;
+            default:
+                $(update).html(data);
+                break;
             }
         });
     }
@@ -85,7 +94,7 @@
         $.extend(options, {
             type: element.getAttribute("data-ajax-method") || undefined,
             url: element.getAttribute("data-ajax-url") || undefined,
-            cache: (element.getAttribute("data-ajax-cache") || "").toLowerCase() === "true",
+            cache: !!element.getAttribute("data-ajax-cache"),
             beforeSend: function (xhr) {
                 var result;
                 asyncOnBeforeSend(xhr, method);
@@ -166,7 +175,7 @@
     $(document).on("submit", "form[data-ajax=true]", function (evt) {
         var clickInfo = $(this).data(data_click) || [],
             clickTarget = $(this).data(data_target),
-            isCancel = clickTarget && (clickTarget.hasClass("cancel") || clickTarget.attr('formnovalidate') !== undefined);
+            isCancel = clickTarget && clickTarget.hasClass("cancel");
         evt.preventDefault();
         if (!isCancel && !validate(this)) {
             return;

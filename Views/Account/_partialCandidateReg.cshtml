@@ -6,21 +6,21 @@
     @Html.ValidationMessageFor(model => model.candidateName, "", new { @class = "text-danger" })
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-        @Html.TextBoxFor(model => model.candidateName, new { @class = "form-control", placeholder = "Full Name" })
+        @Html.TextBoxFor(model => model.candidateName, new { @class = "form-control add_border_line", placeholder = "Full Name" })
        
     </div>
     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email ID" })
+        @Html.TextBoxFor(model => model.Email, new { @class = "form-control add_border_line", placeholder = "Email ID" })
        
     </div>
     @Html.ValidationMessageFor(model => model.candidatePhone, "", new { @class = "text-danger" })
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-phone-alt"></i></span>
-        @Html.TextBoxFor(model => model.candidatePhone, new { @class = "form-control", placeholder = "Mobile No" })
+        @Html.TextBoxFor(model => model.candidatePhone, new { @class = "form-control add_border_line", placeholder = "Mobile No" })
         
     </div>
-    <input type="submit" class="btn" value="Register" />
+    <input type="submit" class="btn login_ragister_btn" value="Register" />
 
 }

@@ -272,7 +272,7 @@ namespace NewLetter.Models
         public string qenEmail { get; set; }
         public string qenLinkdInUrl { get; set; }
         [Required(ErrorMessage = "please enter your phone number")]
-        [RegularExpression(@"^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$", ErrorMessage = "Invalid phone number")]
+        [RegularExpression(@"^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$", ErrorMessage = "Invalid phone number")]        
         public System.Nullable<long> qenPhone { get; set; }
         public string qenNationality { get; set; }
         public string qenPassport { get; set; }
@@ -483,7 +483,7 @@ namespace NewLetter.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "please enter mobile number")]
-        [RegularExpression(@"^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$", ErrorMessage = "Invalid phone number")]
+        [RegularExpression(@"^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$", ErrorMessage = "Invalid phone number")]       
         [Display(Name = "Contact Number")]
         public string candidatePhone { get; set; }
 
