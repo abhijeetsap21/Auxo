@@ -34,6 +34,13 @@ namespace NewLetter.Models
 
     }
 
+    [MetadataType(typeof(qenpgradutionvalidtion))]
+    public partial class qendidatePGraduation
+    {
+
+
+    }
+
     [MetadataType(typeof(EmpDetails))]
     public partial class qenEmpDetail
     {
@@ -51,7 +58,8 @@ namespace NewLetter.Models
     public partial class qenHigherSecondary
     {
 
-    }
+    }    
+
     public class jobDetailsvalidation
     {
         public long jobID { get; set; }
@@ -167,7 +175,7 @@ namespace NewLetter.Models
         [RegularExpression("^[0-9]*$", ErrorMessage = "invalid number")]
         [Required(ErrorMessage = "please enter pass year")]
         public int? secondaryPassYear { get; set; }
-        [RegularExpression("^[0-9]*$", ErrorMessage = "invalid number")]
+        [RegularExpression("^(100([.][0]{1,})?$|[0-9]{1,2}([.][0-9]{1,})?)$", ErrorMessage = "invalid number")]
         [Required(ErrorMessage = "please enter percentage")]
         public int? secondaryPercentage { get; set; }
         [Required(ErrorMessage = "please enter school name")]
@@ -183,7 +191,7 @@ namespace NewLetter.Models
         [Required(ErrorMessage = "please enter pass year")]
         public int? hSecondaryPassYear { get; set; }
         [Required(ErrorMessage = "please enter percentage")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "invalid number")]
+        [RegularExpression("^(100([.][0]{1,})?$|[0-9]{1,2}([.][0-9]{1,})?)$", ErrorMessage = "invalid number")]
         public int? hSecondaryPercentage { get; set; }
         [Required(ErrorMessage = "please enter school name")]
         public string schoolName { get; set; }
@@ -223,7 +231,57 @@ namespace NewLetter.Models
     public class qengradutionvalidtion
     {
         [RegularExpression("^[0-9]*$", ErrorMessage = "invalid number")]
-        public long gradPercentage { get; set; }
+        [Required(ErrorMessage = "please enter pass year")]
+        public int? YearPassing { get; set; }
+
+        [Required(ErrorMessage = "please enter percentage")]
+        [RegularExpression("^(100([.][0]{1,})?$|[0-9]{1,2}([.][0-9]{1,})?)$", ErrorMessage = "invalid number")]
+        public long? gradPercentage { get; set; }
+
+        [Required(ErrorMessage ="Course field is required")]
+        public string courseField { get; set; }
+
+        [Required(ErrorMessage = "Course name is required")]
+        public string courseName { get; set; }
+
+        [Required(ErrorMessage = "University name is required")]
+        public string collegeUniversity { get; set; }
+
+        [Required(ErrorMessage = "College name is required")]
+        public string collegeName { get; set; }
+
+       
+        [Required(ErrorMessage = "Subjects are required")]
+        public string subjects { get; set; }
+
+        
+    }
+
+    public class qenpgradutionvalidtion
+    {
+        [RegularExpression("^[0-9]*$", ErrorMessage = "invalid number")]
+        [Required(ErrorMessage = "please enter pass year")]
+        public int? YearPassing { get; set; }
+
+        [Required(ErrorMessage = "please enter percentage")]
+        [RegularExpression("^(100([.][0]{1,})?$|[0-9]{1,2}([.][0-9]{1,})?)$", ErrorMessage = "invalid number")]
+        public long? pGradPercentage { get; set; }
+
+        [Required(ErrorMessage = "Course field is required")]
+        public string courseField { get; set; }
+
+        [Required(ErrorMessage = "Course name is required")]
+        public string courseName { get; set; }
+
+        [Required(ErrorMessage = "University name is required")]
+        public string collegeUniversity { get; set; }
+
+        [Required(ErrorMessage = "College name is required")]
+        public string collegeName { get; set; }
+
+
+        [Required(ErrorMessage = "Subjects are required")]
+        public string subjects { get; set; }
     }
     public class qenrefvalidation
     {
@@ -313,6 +371,7 @@ namespace NewLetter.Models
         }
     }
 
+   
 
     public class qenSkillName
     {

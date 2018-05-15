@@ -69,8 +69,8 @@
                     <div class="form-group">
                         <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Percentage:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                            @Html.TextBoxFor(m => m.gradPercentage, new { id = "gradpercentage" })
-                            @Html.ValidationMessageFor(m => m.gradPercentage, "", new { @class = "col_1 tleft text-danger", maxlength = "3" })
+                            @Html.TextBoxFor(m => m.gradPercentage, new { maxlength = "5", id = "gradpercentage" })
+                            @Html.ValidationMessageFor(m => m.gradPercentage, "", new { @class = "col_1 tleft text-danger" })
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                     <div class="form-group">
                         <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Passing Year:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                            @Html.TextBoxFor(m => m.YearPassing, new { id = "gradpassyear" })
+                            @Html.TextBoxFor(m => m.YearPassing, new { maxlength = "4", id = "gradpassyear" })
                             @Html.ValidationMessageFor(m => m.YearPassing, "", new { @class = "col_1 tleft text-danger", maxlength = "4" })
                         </div>
                     </div>
