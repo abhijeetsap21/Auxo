@@ -17,7 +17,7 @@ namespace NewLetter.Models
         public long qenSkillsID { get; set; }
         public long qenID { get; set; }
         public int skillsID { get; set; }
-        public int yearOfExp { get; set; }
+        public double yearOfExp { get; set; }
     
         public virtual qendidateList qendidateList { get; set; }
         public virtual skill skill { get; set; }

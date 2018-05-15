@@ -25,24 +25,39 @@
             @Html.DisplayNameFor(model => model.App_status.status)
         </th>
     </tr>
-    @{int rowNo = 0;}
-    @foreach (var item in Model) {
-    <tr>
-        <td>@(rowNo += 1) </td>
-        <td>
-            @item.appliedDate.ToString("dd/MM/yyyy")
-        </td>
-        <td>
-          @Html.DisplayFor(modelItem => item.jobDetail.jobTitle)
-        </td>       
-        <td>
-            @Html.DisplayFor(modelItem => item.jobDetail.CompanyName)
-        </td>      
-        <td>
-            @Html.DisplayFor(modelItem => item.App_status.status)
-        </td>
-    </tr>
-}
+    @{
+        var a = Model.Count();
+
+    }
+    <tbody>
+        @if (a == 0)
+        {
+            <tr>
+                <td colspan="7">
+                    No Result Found
+                </td>
+            </tr>
+        }
+        @{int rowNo = 0;}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@(rowNo += 1) </td>
+                <td>
+                    @item.appliedDate.ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.jobDetail.jobTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.jobDetail.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.App_status.status)
+                </td>
+            </tr>
+        }
+        </tbody>
 
 </table>
 </div>

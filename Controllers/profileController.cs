@@ -922,7 +922,7 @@ namespace NewLetter.Controllers
                     oqenSkillName.qenID = Convert.ToInt32(emp.qenID);
                     oqenSkillName.qenSkillsID = Convert.ToInt32(emp.skillsID);
                     oqenSkillName.skillName = emp.skill.skillName;
-                    oqenSkillName.yearOfExp = emp.yearOfExp;
+                    oqenSkillName.yearOfExp = Convert.ToInt32(emp.yearOfExp);
                     return PartialView("_partialAddSkills", oqenSkillName);
                 }
                 catch (Exception ex)

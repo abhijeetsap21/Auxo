@@ -45,7 +45,7 @@
                 <div class="form-group">
                     <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Start Date:</label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                        @Html.TextBoxFor(m => m.phdStart, "{0:MM/dd/yyyy}", new { @class = "datepicker", onchange = "return DateCheck1();", @readonly = "readonly" })
+                        @Html.TextBoxFor(m => m.phdStart, "{0:MM/dd/yyyy}", new { @class = "datepicker", onchange = "return DateCheck2();", @readonly = "readonly" })
                         @Html.ValidationMessageFor(model => model.phdStart, "", new { @class = "col_1 tleft text-danger" })
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                 <div class="form-group">
                     <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">End Date:</label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                        @Html.TextBoxFor(m => m.phdEnd, "{0:MM/dd/yyyy}", new { @class = "datepicker", onchange = "return DateCheck1();", @readonly = "readonly" })
+                        @Html.TextBoxFor(m => m.phdEnd, "{0:MM/dd/yyyy}", new { @class = "datepicker", onchange = "return DateCheck2();", @readonly = "readonly" })
                         @Html.ValidationMessageFor(model => model.phdEnd, "", new { @class = "col_1 tleft text-danger" })
                     </div>
                 </div>
@@ -97,7 +97,7 @@
 
         <script type="text/javascript">
 
-            function DateCheck1() {
+            function DateCheck2() {
                 debugger
                 var StartDate = document.getElementById('phdStart').value;
                 var EndDate = document.getElementById('phdEnd').value;

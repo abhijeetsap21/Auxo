@@ -379,8 +379,8 @@ namespace NewLetter.Models
         public string skillName { get; set; }
         public int skillID { get; set; }
         [Required(ErrorMessage = "please enter year of exp")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "invalid number")]
-        public int yearOfExp { get; set; }
+        [RegularExpression("^(100([.][0]{1,})?$|[0-9]{1,2}([.][0-9]{1,})?)$", ErrorMessage = "invalid number")]
+        public float yearOfExp { get; set; }
         public int qenID { get; set; }
         public int qenSkillsID { get; set; }
     }

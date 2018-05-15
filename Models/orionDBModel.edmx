@@ -559,7 +559,7 @@
           <Property Name="qenSkillsID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="qenID" Type="bigint" Nullable="false" />
           <Property Name="skillsID" Type="int" Nullable="false" />
-          <Property Name="yearOfExp" Type="int" Nullable="false" />
+          <Property Name="yearOfExp" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="role">
           <Key>
@@ -2483,6 +2483,36 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams1" />
+          <FunctionImport Name="usp_GetNullFieldFromCertifications">
+          <Parameter Name="qenID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetNullFieldFromEmployment">
+          <Parameter Name="qenID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetNullFieldFromPGrad">
+          <Parameter Name="qenID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetNullFieldFromReferences">
+          <Parameter Name="qenID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetNullFieldFromSkills">
+          <Parameter Name="qenID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetNullFieldsFromHigherSecondary">
+          <Parameter Name="qenid" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetNullFieldsFromQendidateList">
+          <Parameter Name="qenID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetNullFieldsFromSecondary">
+          <Parameter Name="qenID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetNullFieldsGraduation">
+          <Parameter Name="qenID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetProfileCompletenessPerc" ReturnType="Collection(Int32)">
+          <Parameter Name="qenID" Mode="In" Type="Int64" />
+          </FunctionImport>
           <EntitySet Name="advertisementLists" EntityType="oriondbModel.advertisementList" />
           <EntitySet Name="app_error_log" EntityType="oriondbModel.app_error_log" />
           <EntitySet Name="App_status" EntityType="oriondbModel.App_status" />
@@ -2860,36 +2890,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             <End Role="slot" EntitySet="slots" />
             <End Role="slotTempBlocked" EntitySet="slotTempBlockeds" />
           </AssociationSet>
-          <FunctionImport Name="usp_GetNullFieldFromCertifications">
-            <Parameter Name="qenID" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="usp_GetNullFieldFromEmployment">
-            <Parameter Name="qenID" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="usp_GetNullFieldFromPGrad">
-            <Parameter Name="qenID" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="usp_GetNullFieldFromReferences">
-            <Parameter Name="qenID" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="usp_GetNullFieldFromSkills">
-            <Parameter Name="qenID" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="usp_GetNullFieldsFromHigherSecondary">
-            <Parameter Name="qenid" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="usp_GetNullFieldsFromQendidateList">
-            <Parameter Name="qenID" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="usp_GetNullFieldsFromSecondary">
-            <Parameter Name="qenID" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="usp_GetNullFieldsGraduation">
-            <Parameter Name="qenID" Mode="In" Type="Int64" />
-          </FunctionImport>
-          <FunctionImport Name="usp_GetProfileCompletenessPerc" ReturnType="Collection(Int32)">
-            <Parameter Name="qenID" Mode="In" Type="Int64" />
-          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -3865,7 +3865,7 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Name="qenSkillsID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="qenID" Type="Int64" Nullable="false" />
           <Property Name="skillsID" Type="Int32" Nullable="false" />
-          <Property Name="yearOfExp" Type="Int32" Nullable="false" />
+          <Property Name="yearOfExp" Type="Double" Nullable="false" />
           <NavigationProperty Name="qendidateList" Relationship="oriondbModel.FK_qenSkills_qendidateList" FromRole="qenSkill" ToRole="qendidateList" />
           <NavigationProperty Name="skill" Relationship="oriondbModel.FK_qenSkills_skills" FromRole="qenSkill" ToRole="skill" />
         </EntityType>
@@ -5396,6 +5396,16 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram1" FunctionName="oriondbModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams1" FunctionName="oriondbModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="usp_GetNullFieldFromCertifications" FunctionName="oriondbModel.Store.usp_GetNullFieldFromCertifications" />
+          <FunctionImportMapping FunctionImportName="usp_GetNullFieldFromEmployment" FunctionName="oriondbModel.Store.usp_GetNullFieldFromEmployment" />
+          <FunctionImportMapping FunctionImportName="usp_GetNullFieldFromPGrad" FunctionName="oriondbModel.Store.usp_GetNullFieldFromPGrad" />
+          <FunctionImportMapping FunctionImportName="usp_GetNullFieldFromReferences" FunctionName="oriondbModel.Store.usp_GetNullFieldFromReferences" />
+          <FunctionImportMapping FunctionImportName="usp_GetNullFieldFromSkills" FunctionName="oriondbModel.Store.usp_GetNullFieldFromSkills" />
+          <FunctionImportMapping FunctionImportName="usp_GetNullFieldsFromHigherSecondary" FunctionName="oriondbModel.Store.usp_GetNullFieldsFromHigherSecondary" />
+          <FunctionImportMapping FunctionImportName="usp_GetNullFieldsFromQendidateList" FunctionName="oriondbModel.Store.usp_GetNullFieldsFromQendidateList" />
+          <FunctionImportMapping FunctionImportName="usp_GetNullFieldsFromSecondary" FunctionName="oriondbModel.Store.usp_GetNullFieldsFromSecondary" />
+          <FunctionImportMapping FunctionImportName="usp_GetNullFieldsGraduation" FunctionName="oriondbModel.Store.usp_GetNullFieldsGraduation" />
+          <FunctionImportMapping FunctionImportName="usp_GetProfileCompletenessPerc" FunctionName="oriondbModel.Store.usp_GetProfileCompletenessPerc" />
           <EntitySetMapping Name="advertisementLists">
             <EntityTypeMapping TypeName="oriondbModel.advertisementList">
               <MappingFragment StoreEntitySet="advertisementList">
@@ -6136,16 +6146,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="usp_GetNullFieldFromCertifications" FunctionName="oriondbModel.Store.usp_GetNullFieldFromCertifications" />
-          <FunctionImportMapping FunctionImportName="usp_GetNullFieldFromEmployment" FunctionName="oriondbModel.Store.usp_GetNullFieldFromEmployment" />
-          <FunctionImportMapping FunctionImportName="usp_GetNullFieldFromPGrad" FunctionName="oriondbModel.Store.usp_GetNullFieldFromPGrad" />
-          <FunctionImportMapping FunctionImportName="usp_GetNullFieldFromReferences" FunctionName="oriondbModel.Store.usp_GetNullFieldFromReferences" />
-          <FunctionImportMapping FunctionImportName="usp_GetNullFieldFromSkills" FunctionName="oriondbModel.Store.usp_GetNullFieldFromSkills" />
-          <FunctionImportMapping FunctionImportName="usp_GetNullFieldsFromHigherSecondary" FunctionName="oriondbModel.Store.usp_GetNullFieldsFromHigherSecondary" />
-          <FunctionImportMapping FunctionImportName="usp_GetNullFieldsFromQendidateList" FunctionName="oriondbModel.Store.usp_GetNullFieldsFromQendidateList" />
-          <FunctionImportMapping FunctionImportName="usp_GetNullFieldsFromSecondary" FunctionName="oriondbModel.Store.usp_GetNullFieldsFromSecondary" />
-          <FunctionImportMapping FunctionImportName="usp_GetNullFieldsGraduation" FunctionName="oriondbModel.Store.usp_GetNullFieldsGraduation" />
-          <FunctionImportMapping FunctionImportName="usp_GetProfileCompletenessPerc" FunctionName="oriondbModel.Store.usp_GetProfileCompletenessPerc" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
