@@ -1108,7 +1108,7 @@ namespace NewLetter.Controllers
             using (MemoryStream stream = new System.IO.MemoryStream())
             {
                 HtmlToPdf converter = new HtmlToPdf();
-                PdfDocument doc = converter.ConvertHtmlString(GridHtml);
+                SelectPdf.PdfDocument doc = converter.ConvertHtmlString(GridHtml);
                 converter.Options.WebPageHeight = 842;
                 converter.Options.WebPageWidth = 595;
                 byte[] pdf = doc.Save();
@@ -1116,6 +1116,13 @@ namespace NewLetter.Controllers
                 FileResult fileResult = new FileContentResult(pdf, "application/pdf");
                 fileResult.FileDownloadName = "Document.pdf";
                 return fileResult;
+                //StringReader sr = new StringReader(GridHtml);
+                //Document pdfDoc = new Document(PageSize.A4, 0f, 0f, 0f, 0f);
+                //PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                //pdfDoc.Open();
+                //XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                //pdfDoc.Close();
+                //return File(stream.ToArray(), "application/pdf", "Grid.pdf");
             }
         }
 

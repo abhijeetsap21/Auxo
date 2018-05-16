@@ -117,10 +117,6 @@
       <HintPath>packages\HtmlRenderer.PdfSharp.1.5.0.6\lib\net45\HtmlRenderer.PdfSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Membership.OpenAuth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.Membership.OpenAuth.2.0.1\lib\net45\Microsoft.AspNet.Membership.OpenAuth.dll</HintPath>
       <Private>True</Private>
@@ -1212,7 +1208,7 @@
     <Content Include="Views\profile\_partialHighSchool.cshtml" />
     <Content Include="Views\profile\_partialPInfo.cshtml" />
     <Content Include="Views\profile\_partialPostGraduation.cshtml" />
-    <Content Include="Views\profile\_partialPreviewCV.cshtml" />
+    <Content Include="Views\profile\_partialPreviewCV_copy.cshtml" />
     <Content Include="Views\profile\_partialRefInfo.cshtml" />
     <Content Include="Views\profile\_partialSkills.cshtml" />
     <Content Include="Views\companyDetails\empedit.cshtml" />
@@ -1250,6 +1246,7 @@
     <Content Include="Views\Shared\_Layout_external_Employer.cshtml" />
     <Content Include="Views\Account\ThankYou.cshtml" />
     <Content Include="Views\profile\VerifyDetails.cshtml" />
+    <Content Include="Views\profile\_partialPreviewCV.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="advertisement\" />
