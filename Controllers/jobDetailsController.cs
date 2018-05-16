@@ -576,7 +576,7 @@ namespace NewLetter.Controllers
 
                 string result = BaseUtil.sendEmailer(To, mail_Subject, final_Html_Body, "");
                 //----------------------------end to send emailer------------------------------------------------------------
-                return "sent";
+                return "Mail Sent";
             }
             catch (Exception e)
             {

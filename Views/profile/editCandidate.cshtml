@@ -10,7 +10,6 @@
 
 
 <script>
-
     var jqOld = jQuery.noConflict(); var $ = jqOld.noConflict();
     $(window).on('load', function () {
         debugger
@@ -46,7 +45,7 @@
 </script>
 <div class="form-horizontal edit-candidate-cv">
     <div class="container">
-        <h2>Basic Progress Bar</h2>
+        <h4>Profile progress bar</h2>
         <div class="progress">
             <div id="progress" class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
                 <p id="progresstext" class="sr-only">70% Complete</p>
@@ -171,7 +170,7 @@
                         debugger
                         var x = document.getElementById('progress');
                         x.style.width = data + '%';
-                        x.innerHTML = "Your profile is" + data + "% complete";
+                        x.innerHTML = "Your profile is " + data + "% complete";
                        
                     
                 }

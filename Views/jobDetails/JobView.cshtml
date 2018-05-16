@@ -341,7 +341,13 @@
                         data: { 'jobUrl': url, 'email': email },
                         success: function (data) {
                             debugger
-                            alert(data);
+                            bootbox.dialog({
+                                message  : data                              
+                               
+                            });
+                            window.setTimeout(function(){ 
+                                bootbox.hideAll();
+                            }, 1000);
                         }
                     });
                 }

@@ -617,15 +617,15 @@ p#urlclass {float: left;width: 100%;margin: 25px 0 0;font-size: 18px;}
 .pagination-numbers span {background: #e97b27;}
 .pagination-numbers a:hover {background: #e97b27;text-decoration: none;}
 .academic {margin: 0 0 15px;}
-.otp-thanku p {float: left;width: 100%;text-align: center;font-size: 16px;padding: 0 50px;color: #333;margin: 0 0 5px;line-height: 26px;}
+.otp-thanku p {float: left;width: 100%;text-align: center;font-size: 16px;padding: 0 50px;color: #4a4dd0;margin: 0 0 5px;line-height: 26px;}
 .otp-form input.form-control {float: none;display: inline-block;width: 20%;line-height: normal;height: 38px;}
 .otp-form input.btn {margin: -3px 0 0;line-height:normal;}
 .otp-form .otp-form-inner {float: left;width: 100%;}
 .otp-form .otp-form-inner label#functionresult {float: left;width: 100%;font-size: 14px;color: green;margin: 10px 0 0;}
 .otp-form {float: left;width: 100%;vertical-align: middle;display: flex;align-items: center;margin: 10px 0 0;}
 .custom-margin-CandidateMaster{margin-top:7px;}
-.common-right-block a.warning-verification i {color: #fff;font-size: 12px;background: #fcb323;border-radius: 50% 50%;padding:6px;}
-.common-right-block a.warning-verification {position: absolute;right: 6.1%;top: -1px;float: left;width: 21%;padding: 6px 0;}
+.common-right-block a.warning-verification i {color: #fff;font-size: 14px;background: #fcb323;border-radius: 50% 50%;padding: 10px;}
+.common-right-block a.warning-verification {position: absolute;right: 6.1%;top: -6px;float: left;width: 21%;padding: 6px 0;}
 input.form-control.verify-input {float: none;display: inline-block;width: 20%;}
 .details-verification input.btn.btn-default {margin: 0;line-height: normal;}
 .details-verification input.form-control{height:38px;}
@@ -650,14 +650,6 @@ input:focus{outline: none !important;}
 
 .text_center_powered{text-align: center;}
 
-.thankyou_main_bg{background: #fff; margin: 0 auto; width: 60%; margin-top: 50px; text-align: center;}
-
-.thankyou_main_bg .top_section_thankyou{background: #e97b26; display:inline-block; width: 100%; padding: 50px 0 50px 0px;}
-
-
-.thankyou_main_bg .thankyou_logo{margin-bottom:20px; max-width: 100%; margin-top: 20px;}
-
-.thankyou_main_bg .inner_tnakyou{padding:30px 15px 50px 15px; display: inline-block; width: 100%;}
 
 /*Add CSS 14-05-2018*/
 
@@ -741,7 +733,6 @@ input:focus{outline: none !important;}
    .form-horizontal .form-group{margin:0px 0px 15px;min-height:auto;}
    .form-horizontal h4{margin:0 0 15px;}
    .form-group-1 {float: right;}
-	label.cutom-label a{word-wrap: break-word;}
    
 }
 @media only screen and (max-width:480px){
@@ -766,13 +757,11 @@ input:focus{outline: none !important;}
 
 }
 
- @media only screen and (min-width:1600px) {
-.table-responsive {min-height: .01%; overflow-x: auto !important;}
-	 .common-right-block a.warning-verification{right:52px;}
+ @media only screen and (max-width:1600px) {
+
 }
 @media only screen and (min-width:992px) and (max-width:1199px) {
-.common-right-block a.warning-verification{right:11%;}
-.table-responsive {min-height: .01%; overflow-x: auto;}
+
 
 }
  @media only screen and (min-width:768px) and (max-width:991px) {
@@ -789,10 +778,7 @@ input:focus{outline: none !important;}
 	 .common-round-shape{margin: 36px 2px 0 0px;}
 	 .gry .form-horizontal{max-width:96%; margin-top: 13px;}
 	 .add_ipad_heder{width:50%; padding-top:30px;}
-
-	 .thankyou-btns.login-btn input{margin: 20px 0 0 0px !important;}
-	 .thankyou_main_bg{width:80%;}
-	 .common-right-block a.warning-verification{right:11%;}
+	 .common-right-block{}
 	 
 }
  @media only screen and (max-width:767px) {
@@ -803,7 +789,7 @@ input:focus{outline: none !important;}
 	 .form-top-left{margin: 10px 0 0 0px;}
 	 .register-page .container {padding-top: 5px;}
 	 .form-horizontal.middle-text.full-page{height: auto !important; max-width: 100% !important;}
-	 .otp-thanku p{padding:25px 15px 0 15px;}
+	 .otp-thanku p{padding: 0 15px 0 15px;}
 	 .register-main{padding: 20px 0px;}
 	 
 	 .left-nav {min-height: 20px; height: auto; position: absolute; z-index: 9;}
@@ -818,17 +804,10 @@ input:focus{outline: none !important;}
 	 .form-horizontal.edit-candidate-cv{margin:0px;}
 	 .edit-candidate-cv .table-das{padding: 0px;}
 	 .edit-candidate-cv{margin: 50px 0 0 0px !important;}
-	 .common-right-block{margin:0px;}
-	 .thankyou_main_bg .otp-form input.form-control{margin-bottom: 20px; width: 100%;}
-	 .thankyou_main_bg{width:100%;}
-	 span.job-view-title{display: inline-block; width: 100%; margin:20px 0 0 0;}
-	 .form-horizontal h4 i{display: inline-block; width: 100%; margin:13px 0 0px 0;}
-	 .form-horizontal h4{display: inline-block; width: 100%;}
-	 .common-right-block a.warning-verification{right:32px;}
 
 }
  @media only screen and (max-width:480px) {
-	 .common-round-shape{margin:34px 7px 0 0px;}
+
 }
  @media only screen and (max-width: 320px) {
 

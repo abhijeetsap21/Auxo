@@ -132,7 +132,7 @@
                                     <div class="form-group">
                                         <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">date of birth:</label>
                                         <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                                            @Html.TextBoxFor(m => m.dob, "{0:d/MM/yyyy}", new { id = "txtdob", maxlength = "50", @class = "datepicker", @readonly = "readonly"  })
+                                            @Html.TextBoxFor(m => m.dob, "{0:d/MM/yyyy}", new { id = "txtdob", maxlength = "50", @class = "datepicker",@readonly = "readonly" })
                                             @Html.ValidationMessageFor(model => model.dob, "", new { @class = "col_1 tleft text-danger" })
                                         </div>
                                     </div>

@@ -21,19 +21,15 @@
             });
     });
 </script>
-<div class="clearfix"></div>
-<div class="thankyou_main_bg">
-<div class="top_section_thankyou">
-<img class="like_logo" src="/stagingauxo/images/like_img.png" alt="">
-</div>
+
+<div class="form-horizontal otp-thanku middle-text full-page">
 	<fieldset>
 	
-		<div class="inner_tnakyou">
+		
 		<p>
-		<img class="like_logo" src="/stagingauxo/images/star_img.png" alt=""><br />
-		<img class="thankyou_logo" src="/stagingauxo/images/thankyou.png" alt=""><br />
-		We have sent Activation link on registered email id . Kindly check your email and Activate you account by clicking the Activation link
-		OR
+		<img style="margin-bottom:20px; max-width:100%;" src="/images/thankyou.png" alt=""><br />
+		We have sent Activation link on registered email id . Kindly check your email and Activate you account by clicking the Activation link<br />
+		OR<br />
 		We have sent one SMS  with OTP - to the registered Mobile number - Kindly enter OTP here to verify your Mobile number and there will a text box .
 		</p>
 		<div class="otp-form text-center">
@@ -43,11 +39,9 @@
 					<input type="text" id="OTP" class="form-control" name="txt_OTP" />
 					<input type="hidden" class="form-control" name="email" value=@email />   
 					<input type="submit" class="previous btn btn-default action-button" value="Submit OTP" id="otpSubmit" name="Verify" />
-					<input type="button" value="resend OTP" class="previous btn btn-default action-button" id="resendOTP" name="resend" onclick="return resendOTP();" />
 				}
-					<label id="functionresult" style="display:none"></label> 
+					<input type="button" value="resend OTP" class="previous btn btn-default action-button" id="resendOTP" name="resend" onclick="return resendOTP();" /> <br /><label id="functionresult" style="display:none"></label> <br />
 			</div>
-		</div>
 		</div>
 	</fieldset>
 </div>
