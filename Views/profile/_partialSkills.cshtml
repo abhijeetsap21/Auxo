@@ -17,7 +17,7 @@
     @{ var id = ViewBag.qenID;}
 
     <div class="container">
-	<p style="text-align:right">Suggested Search will generate more relevant options based on accurate input </p>
+	<p class="account_input_text_center">Suggested Search will generate more relevant options based on accurate input </p>
         <div class="row sub-container">            
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="right-box">
@@ -28,7 +28,8 @@
                     @*<div class="form" id="content-1">*@
                         @if (Model.Count() > 0)
                         {
-                            <br /><br />
+                            <br />
+							<div class="certificate_tab_main">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -54,6 +55,7 @@
                                     </tr>
                                 }
                             </table>
+							</div>
                         }   
 
                     </div>                    

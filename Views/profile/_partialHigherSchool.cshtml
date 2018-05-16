@@ -13,11 +13,11 @@
 
         @Html.HiddenFor(model => model.qenID)
 
-        <div class="col-md-12 col-sm-12 margin-20">
-            <div class="col-md-6 col-sm-12">
-                <div class="col-md-12 col-sm-12">
+        <div class="col-md-12 col-sm-12 margin-20 padding_lbl_threee">
+            <div class="col-md-6 col-sm-12 padding_lbl_threee">
+                <div class="col-md-12 col-sm-12 padding_lbl_threee">
                     <div class="form-group">
-                        <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">School Name:</label>
+                        <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label top_margin_schkoolname">School Name:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
                             @Html.TextBoxFor(model => model.schoolName, new { maxlength = "100" })
                             @Html.ValidationMessageFor(model => model.schoolName, "", new { @class = "col_1 tleft text-danger" })
@@ -25,7 +25,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-12 col-sm-12">
+                <div class="col-md-12 col-sm-12 padding_lbl_threee">
                     <div class="form-group">
                         <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Board Name:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
@@ -36,7 +36,7 @@
                 </div>
 
 
-                <div class="col-md-12 col-sm-12">
+                <div class="col-md-12 col-sm-12 padding_lbl_threee">
                     <div class="form-group">
                         <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Subjects:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
@@ -47,8 +47,8 @@
                 </div>
             </div>
 
-            <div class="col-md-6 col-sm-12">
-                <div class="col-md-12 col-sm-12">
+            <div class="col-md-6 col-sm-12 padding_lbl_threee">
+                <div class="col-md-12 col-sm-12 padding_lbl_threee">
                     <div class="form-group">
                         <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Percentage:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 col-sm-12">
+                <div class="col-md-12 col-sm-12 padding_lbl_threee">
                     <div class="form-group">
                         <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Passing Year:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
@@ -74,7 +74,7 @@
         </div>
     </div>
 }
-<hr />
+<hr class="none_hr_tag">
 
 <script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>

@@ -14,6 +14,10 @@ using SelectPdf;
 using System.Globalization;
 using System.Data.SqlClient;
 using static NewLetter.Models.storedProcedureModels;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.html.simpleparser;
+using iTextSharp.tool.xml;
 
 namespace NewLetter.Controllers
 {
@@ -1097,7 +1101,7 @@ namespace NewLetter.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public FileResult Export(string GridHtml, string qenID_)
+        public ActionResult Export(string GridHtml, string qenID_)
         {
             long qenID = Convert.ToInt64(qenID_);
             //eventName : 1 for view, 2 for contact, 3 for download
@@ -1105,24 +1109,28 @@ namespace NewLetter.Controllers
             {
                 UpdateProfilePerformance(qenID, 3);
             }
+            //using (MemoryStream stream = new System.IO.MemoryStream())
+            //{
+            //    HtmlToPdf converter = new HtmlToPdf();
+            //    SelectPdf.PdfDocument doc = converter.ConvertHtmlString(GridHtml);
+            //    converter.Options.WebPageHeight = 842;
+            //    converter.Options.WebPageWidth = 595;
+            //    byte[] pdf = doc.Save();
+            //    doc.Close();
+            //    FileResult fileResult = new FileContentResult(pdf, "application/pdf");
+            //    fileResult.FileDownloadName = "Document.pdf";
+            //    return fileResult;
+
+            //}
             using (MemoryStream stream = new System.IO.MemoryStream())
             {
-                HtmlToPdf converter = new HtmlToPdf();
-                SelectPdf.PdfDocument doc = converter.ConvertHtmlString(GridHtml);
-                converter.Options.WebPageHeight = 842;
-                converter.Options.WebPageWidth = 595;
-                byte[] pdf = doc.Save();
-                doc.Close();
-                FileResult fileResult = new FileContentResult(pdf, "application/pdf");
-                fileResult.FileDownloadName = "Document.pdf";
-                return fileResult;
-                //StringReader sr = new StringReader(GridHtml);
-                //Document pdfDoc = new Document(PageSize.A4, 0f, 0f, 0f, 0f);
-                //PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
-                //pdfDoc.Open();
-                //XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
-                //pdfDoc.Close();
-                //return File(stream.ToArray(), "application/pdf", "Grid.pdf");
+                StringReader sr = new StringReader(GridHtml);
+                Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 100f, 0f);
+                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                pdfDoc.Open();
+                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                pdfDoc.Close();
+                return File(stream.ToArray(), "application/pdf", "PDFUsingiTextSharp.pdf");
             }
         }
 

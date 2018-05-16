@@ -1,317 +1,340 @@
-﻿@model NewLetter.Models.ResumeModel
+﻿            @model NewLetter.Models.ResumeModel
 
-<div class="modal-content">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Resume</h4>
-    </div>
-    <div class="modal-body" style="overflow:auto">
-        <div id="Grid" style="width:100%;height:100%;">
-            <div style="margin: 0px; padding: 0px; background: #bfbfbf;">
-                <table style="margin: 0 auto; width: 990px; background: #fff; font-family: arial; font-size:15px;"
-                       border="0" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <td style="width: 297px; margin: 0px; padding: 0px 0 50px 0; background: #003d74; color: #fff;
+            <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jquery.min.js"></script> // dependency for Kendo UI API
+            <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jszip.min.js"></script>
+            <script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
 
-vertical-align:top;">
-                            <h5 style="margin:18px 20px 5px 20px; padding:0px; font-size: 38px; font-weight:
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Resume</h4>
+                </div>
+                <div class="modal-body" style="overflow:auto">
+                    <div id="Grid" style="width:100%;height:100%;">
+                        <div style="margin: 0px; padding: 0px; background: #bfbfbf;">
+                            <table style="margin: 0 auto; width: 990px; background: #fff; font-family: arial; font-size:15px;"
+                                   border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td style="width: 297px; margin: 0px; padding: 0px 0 50px 0; background: #003d74; color: #fff;
 
-bold;">
-                                @Model.personainfo.qenName
-</h5>
-@*<p style="margin:0 20px 10px 20px; font-size:21px;">IT Project Manager</p>*@
-<h3 style="margin:24px 0 0px 0; padding:9px 20px 9px 20px; background: #002e58; font-
+            vertical-align:top;">
+                                        <h5 style="margin:18px 20px 5px 20px; padding:0px; font-size: 38px; font-weight:
 
-size:20px;">
-    Personal Info
-</h3>
-<span style="font-size:15px; font-weight: bold; margin:14px 0 0 0px; padding: 0 20px 0 20px;
+            bold;">
+                                            @Model.personainfo.qenName
+            </h5>
+            @*<p style="margin:0 20px 10px 20px; font-size:21px;">IT Project Manager</p>*@
+            <h3 style="margin:24px 0 0px 0; padding:9px 20px 9px 20px; background: #002e58; font-
 
-display: inline-block; color: #fff;">Adress</span>
-<p style="font-size: 14px; margin: 0px; padding: 1px 20px 0 20px; line-height: 24px; color:
+            size:20px;">
+                Personal Info
+            </h3>
+            <span style="font-size:15px; font-weight: bold; margin:14px 0 0 0px; padding: 0 20px 0 20px;
 
-#f5f5f5;">
-    @Model.personainfo.streetNo &nbsp; @Model.personainfo.qenAddress<br />
-    @Model.personainfo.City, @Model.personainfo.state, @Model.personainfo.zipCode
-</p>
-<span style="font-size:15px; font-weight: bold; margin:14px 0 0 0px; padding: 0 20px 0 20px;
+            display: inline-block; color: #fff;">Adress</span>
+            <p style="font-size: 14px; margin: 0px; padding: 1px 20px 0 20px; line-height: 24px; color:
 
-display: inline-block; color: #fff;">Phone</span>
-<p style="font-size: 14px; margin: 0px; padding: 6px 20px 0 20px; color:
+            #f5f5f5;">
+                @Model.personainfo.streetNo &nbsp; @Model.personainfo.qenAddress
+                @Model.personainfo.City, @Model.personainfo.state, @Model.personainfo.zipCode
+            </p>
+            <span style="font-size:15px; font-weight: bold; margin:14px 0 0 0px; padding: 0 20px 0 20px;
 
-#f5f5f5;">@Model.personainfo.qenPhone</p>
-<span style="font-size:15px; font-weight: bold; margin:14px 0 0 0px; padding: 0 20px 0 20px;
+            display: inline-block; color: #fff;">Phone</span>
+            <p style="font-size: 14px; margin: 0px; padding: 6px 20px 0 20px; color:
 
-display: inline-block; color: #fff;">E-mail</span>
-<p style="font-size: 14px; margin: 0px; padding: 6px 20px 0 20px;  color:
+            #f5f5f5;">@Model.personainfo.qenPhone</p>
+            <span style="font-size:15px; font-weight: bold; margin:14px 0 0 0px; padding: 0 20px 0 20px;
 
-#f5f5f5;">@Model.personainfo.qenEmail</p>
-@{
-    if (Model.personainfo.qenLinkdInUrl != null)
-    {
-        <span style="font-size:15px; font-weight: bold; margin:14px 0 0 0px; padding: 0 20px 0 20px;
+            display: inline-block; color: #fff;">E-mail</span>
+            <p style="font-size: 14px; margin: 0px; padding: 6px 20px 0 20px;  color:
 
-display: inline-block; color: #fff;">Linkedin</span>
-                            <p style="font-size: 14px; margin: 0px; padding: 6px 20px 0 20px;  color:
+            #f5f5f5;">@Model.personainfo.qenEmail</p>
+            @{
+                if (Model.personainfo.qenLinkdInUrl != null)
+                {
+                    <span style="font-size:15px; font-weight: bold; margin:14px 0 0 0px; padding: 0 20px 0 20px;
 
-#f5f5f5;">@Model.personainfo.qenLinkdInUrl</p>
-    }
-}
-<h3 style="margin:15px 0 0px 0; padding:9px 20px 9px 20px; background: #002e58; font-size:20px;
+            display: inline-block; color: #fff;">Linkedin</span>
+                                        <p style="font-size: 14px; margin: 0px; padding: 6px 20px 0 20px;  color:
 
-color: #fff;">
-    Skills
-</h3>
-@if (Model.skills != null && Model.skills.Count > 0)
-{
-    foreach (var item in Model.skills)
-    {
-        <p style="font-size: 14px; margin: 0px; padding: 15px 20px 0 20px; color:
-
-#f5f5f5;">@item.skill.skillName</p>
-    }
-}
-
-
-<h3 style="margin:15px 0 0px 0; padding:9px 20px 9px 20px; background: #002e58; font-size:20px;
-
-color: #fff;">
-    References
-</h3>
-@if (Model.refrences != null && Model.refrences.Count > 0)
-{
-    foreach (var item in Model.refrences)
-    {
-        <p style="font-size: 14px; margin: 0px; padding:13px 20px 1px 20px; color:
-
-#f5f5f5;">@item.qenRefName</p>
-                            <p style="font-size: 14px; margin: 0px; padding:5px 20px 0 20px; color: #f5f5f5; text-align:
-
-right;">@item.qenRefPhone</p>
-                            <p style="font-size: 14px; margin: 0px; padding:5px 20px 0 20px; color: #f5f5f5; text-align:
-
-right;">@item.qenRefEmail</p>
-    }
-}
-</td>
-<td style="width:687px; margin: 0px; padding:20px 20px 0px 20px; color: #3b3b3b; vertical-
-
-align:top;">
-    <p style="margin: 0px; padding: 0px; font-size:14px; line-height:24px;">
-        @Model.personainfo.CareerHighlight
-    </p>
-    <h2 style="margin: 15px 0 15px 0px; padding: 7px 0 7px 0px; border-bottom: solid 1px #d5d6d6;
-
-border-top: solid 1px #d5d6d6; color: #003d74;">
-        Experience
-    </h2>
-    <table style="width: 100%; border-spacing: 0px; margin: 0px 0 30px 0px; padding: 0px;">
-        @if (Model.employmentinfo != null && Model.employmentinfo.Count > 0)
-        {
-            foreach (var item in Model.employmentinfo)
-            {
-                <tr>
-                    <td style="width: 123px; margin: 0px; padding: 0px; border: none; vertical-align:
-
-top;">
-                        <p style="font-size: 14px; margin: 0px; padding: 0px; line-height:
-
-24px;">@item.qenEmpFrom.Value.ToShortDateString()<br />@item.qenEmpTo.Value.ToShortDateString()</p>
-</td>
-<td style="margin: 0px; padding: 0px; border: none; vertical-align: top;">
-    <h3 style="margin: 0px 0 8px 0px; padding: 0px; font-size: 18px; font-weight: bold;
-
-color: #323232;">
-        @item.qenPosition
-</h3>
-<i style="font-size: 14px;">@item.CompanyName</i>
-<ul style="margin: 0px; padding: 6px 0 0 16px;">
-    <li style="font-size: 15px; line-height: 27px; color:
-
-#373636;">@item.jobDescription</li>
-</ul>
-</td>
-</tr>
+            #f5f5f5;">@Model.personainfo.qenLinkdInUrl</p>
+                }
             }
-        }
-    </table>
+            <h3 style="margin:15px 0 0px 0; padding:9px 20px 9px 20px; background: #002e58; font-size:20px;
+
+            color: #fff;">
+                Skills
+            </h3>
+            @if (Model.skills != null && Model.skills.Count > 0)
+            {
+                foreach (var item in Model.skills)
+                {
+                    <p style="font-size: 14px; margin: 0px; padding: 15px 20px 0 20px; color:
+
+            #f5f5f5;">@item.skill.skillName</p>
+                }
+            }
 
 
-    <h2 style="margin: 15px 0 15px 0px; padding: 7px 0 7px 0px; border-bottom: solid 1px #d5d6d6;
+            <h3 style="margin:15px 0 0px 0; padding:9px 20px 9px 20px; background: #002e58; font-size:20px;
 
-border-top: solid 1px #d5d6d6; color: #003d74;">
-        Education
-    </h2>
-    @{
-        if (Model.educationinfo.pgraduation.collegeName != null)
-        {
-            <table style="width: 100%; border-spacing: 0px; margin: 0px 0 18px 0px; padding: 0px;">
+            color: #fff;">
+                References
+            </h3>
+            @if (Model.refrences != null && Model.refrences.Count > 0)
+            {
+                foreach (var item in Model.refrences)
+                {
+                    <p style="font-size: 14px; margin: 0px; padding:13px 20px 1px 20px; color:
+
+            #f5f5f5;">@item.qenRefName</p>
+                                        <p style="font-size: 14px; margin: 0px; padding:5px 20px 0 20px; color: #f5f5f5; text-align:
+
+            right;">@item.qenRefPhone</p>
+                                        <p style="font-size: 14px; margin: 0px; padding:5px 20px 0 20px; color: #f5f5f5; text-align:
+
+            right;">@item.qenRefEmail</p>
+                }
+            }
+            </td>
+            <td style="width:687px; margin: 0px; padding:20px 20px 0px 20px; color: #3b3b3b; vertical-
+
+            align:top;">
+                <p style="margin: 0px; padding: 0px; font-size:14px; line-height:24px;">
+                    @Model.personainfo.CareerHighlight
+                </p>
+                <h2 style="margin: 15px 0 15px 0px; padding: 7px 0 7px 0px; border-bottom: solid 1px #d5d6d6;
+
+            border-top: solid 1px #d5d6d6; color: #003d74;">
+                    Experience
+                </h2>
+                <table style="width: 100%; border-spacing: 0px; margin: 0px 0 30px 0px; padding: 0px;">
+                    @if (Model.employmentinfo != null && Model.employmentinfo.Count > 0)
+                    {
+                        foreach (var item in Model.employmentinfo)
+                        {
+                            <tr>
+                                <td style="width: 123px; margin: 0px; padding: 0px; border: none; vertical-align:
+
+            top;">
+                                    <p style="font-size: 14px; margin: 0px; padding: 0px; line-height:
+
+            24px;">@item.qenEmpFrom.Value.ToShortDateString()@item.qenEmpTo.Value.ToShortDateString()</p>
+            </td>
+            <td style="margin: 0px; padding: 0px; border: none; vertical-align: top;">
+                <h3 style="margin: 0px 0 8px 0px; padding: 0px; font-size: 18px; font-weight: bold;
+
+            color: #323232;">
+                    @item.qenPosition
+            </h3>
+            <i style="font-size: 14px;">@item.CompanyName</i>
+            <ul style="margin: 0px; padding: 6px 0 0 16px;">
+                <li style="font-size: 15px; line-height: 27px; color:
+
+            #373636;">@item.jobDescription</li>
+            </ul>
+            </td>
+            </tr>
+                        }
+                    }
+                </table>
+
+
+                <h2 style="margin: 15px 0 15px 0px; padding: 7px 0 7px 0px; border-bottom: solid 1px #d5d6d6;
+
+            border-top: solid 1px #d5d6d6; color: #003d74;">
+                    Education
+                </h2>
+                @{
+                    if (Model.educationinfo.pgraduation.collegeName != null)
+                    {
+                        <table style="width: 100%; border-spacing: 0px; margin: 0px 0 18px 0px; padding: 0px;">
+                            <tr>
+                                <td style="width: 123px; margin: 0px; padding: 0px; border: none; vertical-align:
+
+            top;">
+                                    <p style="font-size: 14px; margin: 0px; padding: 0px; line-height:
+
+            24px;">@Model.educationinfo.pgraduation.YearPassing</p>
+            </td>
+            <td style="margin: 0px; padding: 0px; border: none; vertical-align: top;">
+                <h3 style="margin: 0px 0 8px 0px; padding: 0px; font-size: 18px; font-weight: bold;
+
+            color: #323232;">
+                    @Model.educationinfo.pgraduation.courseName,@Model.educationinfo.pgraduation.collegeName
+                </h3>
+                <ul style="margin: 0px; padding: 0px 0 0 16px;">
+                    <li style="font-size: 15px; line-height: 27px; color:
+
+            #373636;">@Model.educationinfo.pgraduation.courseField.</li>
+            <li style="font-size: 15px; line-height: 27px; color:
+
+            #373636;">@Model.educationinfo.pgraduation.pGradPercentage.</li>
+            </ul>
+            </td>
+            </tr>
+            </table>
+                    }
+                }
+                <table style="width: 100%; border-spacing: 0px; margin: 0px 0 19px 0px; padding: 0px;">
+                    <tr>
+                        <td style="width: 123px; margin: 0px; padding: 0px; border: none; vertical-align:
+
+            top;">
+                            <p style="font-size: 14px; margin: 0px; padding: 0px; line-height:
+
+            24px;">@Model.educationinfo.graduation.YearPassing</p>
+            </td>
+            <td style="margin: 0px; padding: 0px; border: none; vertical-align: top;">
+                <h3 style="margin: 0px 0 8px 0px; padding: 0px; font-size: 18px; font-weight: bold;
+
+            color: #323232;">
+                    @Model.educationinfo.graduation.courseName, @Model.educationinfo.graduation.collegeUniversity
+                </h3>
+                <ul style="margin: 0px; padding: 0px 0 0 16px;">
+                    <li style="font-size: 15px; line-height: 27px; color:
+
+            #373636;">@Model.educationinfo.graduation.courseField.</li>
+            <li style="font-size: 15px; line-height: 27px; color:
+
+            #373636;">@Model.educationinfo.graduation.gradPercentage.</li>
+            </ul>
+            </td>
+            </tr>
+            </table>
+
+            <table style="width: 100%; border-spacing: 0px; margin: 0px 0 19px 0px; padding: 0px;">
                 <tr>
                     <td style="width: 123px; margin: 0px; padding: 0px; border: none; vertical-align:
 
-top;">
+            top;">
                         <p style="font-size: 14px; margin: 0px; padding: 0px; line-height:
 
-24px;">@Model.educationinfo.pgraduation.YearPassing<br /></p>
-</td>
-<td style="margin: 0px; padding: 0px; border: none; vertical-align: top;">
-    <h3 style="margin: 0px 0 8px 0px; padding: 0px; font-size: 18px; font-weight: bold;
+            24px;">@Model.educationinfo.hsecondary.hSecondaryPassYear</p>
+            </td>
+            <td style="margin: 0px; padding: 0px; border: none; vertical-align: top;">
+                <h3 style="margin: 0px 0 8px 0px; padding: 0px; font-size: 18px; font-weight: bold;
 
-color: #323232;">
-        @Model.educationinfo.pgraduation.courseName,@Model.educationinfo.pgraduation.collegeName
-    </h3>
-    <ul style="margin: 0px; padding: 0px 0 0 16px;">
-        <li style="font-size: 15px; line-height: 27px; color:
+            color: #323232;">
+                    @Model.educationinfo.hsecondary.schoolName, @Model.educationinfo.hsecondary.hSecondaryBoard
+                </h3>
+                <ul style="margin: 0px; padding: 0px 0 0 16px;">
+                    <li style="font-size: 15px; line-height: 27px; color:
 
-#373636;">@Model.educationinfo.pgraduation.courseField.</li>
-<li style="font-size: 15px; line-height: 27px; color:
+            #373636;">@Model.educationinfo.hsecondary.hSecondaryPercentage.</li>
+            </ul>
+            </td>
+            </tr>
+            </table>
+            <table style="width: 100%; border-spacing: 0px; margin: 0px 0 19px 0px; padding: 0px;">
+                <tr>
+                    <td style="width: 123px; margin: 0px; padding: 0px; border: none; vertical-align:
 
-#373636;">@Model.educationinfo.pgraduation.pGradPercentage.</li>
-</ul>
-</td>
-</tr>
-</table>
-        }
-    }
-    <table style="width: 100%; border-spacing: 0px; margin: 0px 0 19px 0px; padding: 0px;">
-        <tr>
-            <td style="width: 123px; margin: 0px; padding: 0px; border: none; vertical-align:
+            top;">
+                        <p style="font-size: 14px; margin: 0px; padding: 0px; line-height:
 
-top;">
-                <p style="font-size: 14px; margin: 0px; padding: 0px; line-height:
+            24px;">@Model.educationinfo.secondary.secondaryPassYear</p>
+            </td>
+            <td style="margin: 0px; padding: 0px; border: none; vertical-align: top;">
+                <h3 style="margin: 0px 0 8px 0px; padding: 0px; font-size: 18px; font-weight: bold;
 
-24px;">@Model.educationinfo.graduation.YearPassing<br /></p>
-</td>
-<td style="margin: 0px; padding: 0px; border: none; vertical-align: top;">
-    <h3 style="margin: 0px 0 8px 0px; padding: 0px; font-size: 18px; font-weight: bold;
+            color: #323232;">
+                    @Model.educationinfo.secondary.schoolName, @Model.educationinfo.secondary.secondaryBoard
+                </h3>
+                <ul style="margin: 0px; padding: 0px 0 0 16px;">
+                    <li style="font-size: 15px; line-height: 27px; color:
 
-color: #323232;">
-        @Model.educationinfo.graduation.courseName, @Model.educationinfo.graduation.collegeUniversity
-    </h3>
-    <ul style="margin: 0px; padding: 0px 0 0 16px;">
-        <li style="font-size: 15px; line-height: 27px; color:
-
-#373636;">@Model.educationinfo.graduation.courseField.</li>
-<li style="font-size: 15px; line-height: 27px; color:
-
-#373636;">@Model.educationinfo.graduation.gradPercentage.</li>
-</ul>
-</td>
-</tr>
-</table>
-
-<table style="width: 100%; border-spacing: 0px; margin: 0px 0 19px 0px; padding: 0px;">
-    <tr>
-        <td style="width: 123px; margin: 0px; padding: 0px; border: none; vertical-align:
-
-top;">
-            <p style="font-size: 14px; margin: 0px; padding: 0px; line-height:
-
-24px;">@Model.educationinfo.hsecondary.hSecondaryPassYear<br /></p>
-</td>
-<td style="margin: 0px; padding: 0px; border: none; vertical-align: top;">
-    <h3 style="margin: 0px 0 8px 0px; padding: 0px; font-size: 18px; font-weight: bold;
-
-color: #323232;">
-        @Model.educationinfo.hsecondary.schoolName, @Model.educationinfo.hsecondary.hSecondaryBoard
-    </h3>
-    <ul style="margin: 0px; padding: 0px 0 0 16px;">
-        <li style="font-size: 15px; line-height: 27px; color:
-
-#373636;">@Model.educationinfo.hsecondary.hSecondaryPercentage.</li>
-</ul>
-</td>
-</tr>
-</table>
-<table style="width: 100%; border-spacing: 0px; margin: 0px 0 19px 0px; padding: 0px;">
-    <tr>
-        <td style="width: 123px; margin: 0px; padding: 0px; border: none; vertical-align:
-
-top;">
-            <p style="font-size: 14px; margin: 0px; padding: 0px; line-height:
-
-24px;">@Model.educationinfo.secondary.secondaryPassYear<br /></p>
-</td>
-<td style="margin: 0px; padding: 0px; border: none; vertical-align: top;">
-    <h3 style="margin: 0px 0 8px 0px; padding: 0px; font-size: 18px; font-weight: bold;
-
-color: #323232;">
-        @Model.educationinfo.secondary.schoolName, @Model.educationinfo.secondary.secondaryBoard
-    </h3>
-    <ul style="margin: 0px; padding: 0px 0 0 16px;">
-        <li style="font-size: 15px; line-height: 27px; color:
-
-#373636;">@Model.educationinfo.secondary.secondaryPercentage.</li>
-</ul>
-</td>
-</tr>
-</table>
+            #373636;">@Model.educationinfo.secondary.secondaryPercentage.</li>
+            </ul>
+            </td>
+            </tr>
+            </table>
 
 
-<h2 style="margin: 15px 0 15px 0px; padding: 7px 0 7px 0px; border-bottom: solid 1px #d5d6d6;
+            <h2 style="margin: 15px 0 15px 0px; padding: 7px 0 7px 0px; border-bottom: solid 1px #d5d6d6;
 
-border-top: solid 1px #d5d6d6; color: #003d74;">
-    Certifications
-</h2>
-@if (Model.phdinfo != null && Model.phdinfo.Count > 0)
-{
-    foreach (var item in Model.phdinfo)
-    {
-        <table style="width: 100%; border-spacing: 0px; margin: 0px 0 30px 0px; padding: 0px;">
-            <tr>
-                <td style="width: 123px; margin: 0px; padding: 0px; border: none; vertical-align:
-
-top;">
-                    <p style="font-size: 14px; margin: 0px; padding: 0px; line-height:
-
-28px;">@item.phdStart.Value.ToShortDateString()<br />@item.phdEnd.Value.ToShortDateString()</p>
-</td>
-<td style="margin: 0px; padding: 0px; border: none; vertical-align: top;">
-    <ul style="margin: 0px; padding: 0px 0 0 0px; list-style: none;">
-        <li style="font-size: 15px; line-height: 27px; color:
-
-#373636;">@item.courseField</li>
-</ul>
-</td>
-</tr>
-</table>
-    }
-}
-
-
-
-
-<h2 style="margin: 15px 0 15px 0px; padding: 7px 0 7px 0px; border-bottom: solid 1px #d5d6d6;
-
-border-top: solid 1px #d5d6d6; color: #003d74;">
-    Objective
-</h2>
-<p style="margin: 0px; padding: 0px; font-size:14px; line-height:24px;">
-    @Model.personainfo.CareerObjective
-</p>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<script type="text/javascript">
-                $(function () {
-                    $("#btnSubmit").click(function () {
-                        $("input[name='GridHtml']").val($("#Grid").html());
-                    });
-                });
-</script>
-</div>
-<div class="modal-footer">
-    @using (Html.BeginForm("Export", "profile", FormMethod.Post))
+            border-top: solid 1px #d5d6d6; color: #003d74;">
+                Certifications
+            </h2>
+            @if (Model.phdinfo != null && Model.phdinfo.Count > 0)
             {
-        <input type="hidden" name="GridHtml" /><input type="hidden" name="qenID_" value='@Model.personainfo.qenID' />
-            <input type="submit" id="btnSubmit" value="Export" class="btn btn-default" /><button type="button"
-                                                                                                 class="btn btn-default" data-dismiss="modal">
-                Close
-            </button>
-    }
-</div>
+                foreach (var item in Model.phdinfo)
+                {
+                    <table style="width: 100%; border-spacing: 0px; margin: 0px 0 30px 0px; padding: 0px;">
+                        <tr>
+                            <td style="width: 123px; margin: 0px; padding: 0px; border: none; vertical-align:
 
-</div>
+            top;">
+                                <p style="font-size: 14px; margin: 0px; padding: 0px; line-height:
+
+            28px;">@item.phdStart.Value.ToShortDateString()@item.phdEnd.Value.ToShortDateString()</p>
+            </td>
+            <td style="margin: 0px; padding: 0px; border: none; vertical-align: top;">
+                <ul style="margin: 0px; padding: 0px 0 0 0px; list-style: none;">
+                    <li style="font-size: 15px; line-height: 27px; color:
+
+            #373636;">@item.courseField</li>
+            </ul>
+            </td>
+            </tr>
+            </table>
+                }
+            }
+
+
+
+
+            <h2 style="margin: 15px 0 15px 0px; padding: 7px 0 7px 0px; border-bottom: solid 1px #d5d6d6;
+
+            border-top: solid 1px #d5d6d6; color: #003d74;">
+                Objective
+            </h2>
+            <p style="margin: 0px; padding: 0px; font-size:14px; line-height:24px;">
+                @Model.personainfo.CareerObjective
+            </p>
+            </td>
+            </tr>
+            </table>
+            </div>
+            </div>
+            <script type="text/javascript">
+                            $(function () {
+                                $("#btnSubmit").click(function () {
+                                    $("input[name='GridHtml']").val($("#Grid").html());
+                                });
+                            });
+            </script>
+            </div>
+            <div class="modal-footer">
+                @*@using (Html.BeginForm("Export", "profile", FormMethod.Post))
+                        {
+                    <input type="hidden" name="GridHtml" /><input type="hidden" name="qenID_" value='@Model.personainfo.qenID' />
+                        <input type="submit" id="btnSubmit" value="Export" class="btn btn-default" /><button type="button"
+                                                                                                             class="btn btn-default" data-dismiss="modal">
+                            Close
+                        </button>*@
+                <input type="button" onclick="return ExportPdf();" class="btn btn-default" /><button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                }
+                
+            </div>
+
+            </div>
+
+<script>
+    function ExportPdf() {
+        debugger 
+kendo.drawing
+    .drawDOM("#Grid",
+    {
+        //paperSize: "A4",
+        margin: { top: "0cm", bottom: "0cm" },
+        scale: 0.8,
+        //height: 500
+    })
+        .then(function(group){
+        kendo.drawing.pdf.saveAs(group, "Exported.pdf")
+    });
+}
+</script>
 
