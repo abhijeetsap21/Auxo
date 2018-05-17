@@ -11,12 +11,12 @@
 @{ 
     var emailV = "";
     var phoneV = "";
-    var perc = "";
+	var perc = "";
     if (roleID == "5")
     {
         emailV = BaseUtil.GetSessionValue(AdminInfo.emailVerified.ToString());
         phoneV = BaseUtil.GetSessionValue(AdminInfo.mobileVerified.ToString());
-        perc = BaseUtil.getProfileCompletePercentage(userID).ToString();
+		perc = BaseUtil.getProfileCompletePercentage(userID).ToString();
     }
 }
 <head>
@@ -98,7 +98,7 @@
                     
                         @if (emailV == "False" || phoneV == "False")
                         {                            
-                           <a class="warning-verification" href='@Url.Action("VerifyDetails", "profile")'><i class="fa fa-exclamation-triangle"></i></a>                           
+                           <a class="warning-verification" href='@Url.Action("VerifyDetails", "profile")'></a>                           
 
                         }
                     
@@ -151,7 +151,7 @@
                                 }
                                 if (roleID == "5")
                                 {
-                                    <li>@Html.ActionLink("Profile", "editCandidate", "profile")</li>@perc
+                                    <li>@Html.ActionLink("Profile", "editCandidate", "profile") <p class="left-vvbbvv">@perc%</p> <p class="completed_text_profile">Completed</p></li>
                                     <li>@Html.ActionLink("Find Jobs ", "jobs", "jobDetails")</li>
                                     <li>@Html.ActionLink("Profile Summary", "ProfilePerformance", "profile")</li>
                                     <li>@Html.ActionLink("Applied Job", "AppliedJobs", "profile")</li>

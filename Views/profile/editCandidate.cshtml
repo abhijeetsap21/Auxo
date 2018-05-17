@@ -6,10 +6,9 @@
 }
 
 @{
-    var qenID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.UserID.ToString()));
-    var perc = BaseUtil.getProfileCompletePercentage(qenID.ToString());
-
-    }
+		var qenID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.UserID.ToString()));
+		var perc = BaseUtil.getProfileCompletePercentage(qenID.ToString()); 
+		}
 
 
 
@@ -48,17 +47,22 @@
     });
 </script>
 <div class="form-horizontal edit-candidate-cv modal_resume_bg">
-    <div class="container">       
-
-            <div class="progressbarto">
+ <h4><span class="profile_text">Profile</span>
+			
+			<input type="button" class="btn btn-info btn-lg edit-candidate-cv-btn" data-toggle="modal" data-target="#myModal" value="View" onclick="return dispalyResume(@qenID);" />
+<div class="progressbarto">
                 <div class="progrssfld">
                     <div class="line"></div>
                     <div id="progress" class="fill-color" style="width:10%"><span></span><div id="perc"class="percantage">10%</div></div>
                 </div>
                 <strong>Resume Completion</strong>
             </div> 
+			</h4>
+    <div class="container">       
+
+            
 <div class="clearfix"></div>			
-            <h4>Profile <input type="button" class="btn btn-info btn-lg edit-candidate-cv-btn" data-toggle="modal" data-target="#myModal" value="View" onclick="return dispalyResume(@qenID);" /></h4>
+           
 			
             <div class="col-lg-12 col-md-12 col-xs-12 table-das">
                 <div class="">
@@ -161,7 +165,7 @@
     }
 
 
-    <script>
+<script>
     debugger
     var jqOld = jQuery.noConflict();
     jqOld(document).ready(function () {

@@ -20,7 +20,7 @@
     <div class="container">
         <div class="row sub-container">
 
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12 padding_lbl_threee">
                 <div class="right-box">
                     @using (Html.BeginForm("SaveRefrenceInfo", "profile", FormMethod.Post, new { id = "msform" }))
                     {
@@ -28,9 +28,9 @@
                         @Html.AntiForgeryToken()
                         @Html.HiddenFor(m => m.qenid)          @Html.HiddenFor(m => m.qenRefID1)
                         var qenid = Model.qenid;
-                        <div class="col-md-12 col-sm-12 margin-20">
-                            <div class="col-md-6 col-sm-12">
-                                <label>reference  1</label>
+                        <div class="col-md-12 col-sm-12 margin-20 padding_lbl_threee margin-top_ipad__m">
+                            <div class="col-md-6 col-sm-12 padding_lbl_threee">
+                                <label class="refrence_one_text">Reference  1</label>
                                 <div class="col-md-12 col-sm-12">
                                     <div class="form-group">
                                         <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Full Name:</label>
@@ -76,7 +76,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="group text-right margin-bot-20-30">
+                                <div class="group text-right margin-bot-20-30 margin_resetmail_mobile">
 
                                     @{ if (Model.qenRefID1 != 0)
                                         {
@@ -84,7 +84,7 @@
                                             {<span id="ref1">Verified</span> }
                                             else
                                             {
-                                                <input type="button" id="ref2" onclick="return resendRefMail1();" value="Resend mail" />
+                                                <input class="resent_main_blue_color" type="button" id="ref2" onclick="return resendRefMail1();" value="Resend mail" />
 
                                             }
 
@@ -92,8 +92,8 @@
                                     }
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-12">
-                                <label>reference  2</label>
+                            <div class="col-md-6 col-sm-12 padding_lbl_threee">
+                                <label class="refrence_one_text">Reference  2</label>
                                 <div class="col-md-12 col-sm-12">
                                     <div class="form-group">
                                         <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Full Name:</label>
@@ -140,7 +140,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="group text-right margin-bot-20-30">
+                                <div class="group text-right margin-bot-20-30 margin_resetmail_mobile">
 
                                     @{ if (Model.qenRefID2 != 0)
                                         {
@@ -148,13 +148,13 @@
                                             {<span id="ref2">Verified</span> }
                                             else
                                             {
-                                                <input type="button" id="ref2" onclick="return resendRefMail2();" value="Resend mail" />
+                                                <input class="resent_main_blue_color" type="button" id="ref2" onclick="return resendRefMail2();" value="Resend mail" />
                                             }
 
                                         }
                                     }
                                 </div>
-                                <div class="col-md-12 text-right academic">
+                                <div class="col-md-12 text-right academic save_btn_refrence_tabs_style">
                                     <input type="submit" name="Submit" id="btnnext" class="Submit action-button academic-create-btn btn btn-default" value="Save" />
                                 </div>
                             </div>

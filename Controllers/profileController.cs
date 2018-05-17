@@ -684,7 +684,7 @@ namespace NewLetter.Controllers
                 else
                 {
                     model.qenEmpFrom = model.qenEmpFrom; 
-                    model.qenEmpTo = model.qenEmpTo;
+                    model.qenEmpTo = model.qenEmpTo;                   
                     model.dataIsCreated = BaseUtil.GetCurrentDateTime();
                     db.qenEmpDetails.Add(model);
                     db.SaveChanges();

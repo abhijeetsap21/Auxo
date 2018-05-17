@@ -27,7 +27,7 @@
         <div class="row sub-container">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="row">
-                    <div class="right-box form-horizontal">
+                    <div class="right-box form-horizontal form_bg_color_main_sections">
                         @using (Html.BeginForm("SavePersonalInfo", "profile", FormMethod.Post, new { id = "msform", enctype = "multipart/form-data" }))
                         {
                             @Html.AntiForgeryToken()
@@ -35,7 +35,7 @@
                             @*<div class="form" id="content-1">*@
 
                             @Html.HiddenFor(m => m.qenID)
-                            <div class="col-md-6 col-sm-12">
+                            <div class="col-md-6 col-sm-12 bg_color_main_forms">
                                 <div class="col-md-12 col-sm-12 padding_none_responsive_may_profile">
                                     <div class="form-group">
                                         <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Full Name:</label>
@@ -111,7 +111,7 @@
                                 </div>
                             </div>
                             @Html.HiddenFor(m => m.latitude)  @Html.HiddenFor(m => m.longitude)
-                            <div class="col-md-6 col-sm12">
+                            <div class="col-md-6 col-sm12 bg_color_main_forms_to">
                                 <div class="col-md-12 col-sm-12 padding_none_responsive_may_profile">
                                     <div class="form-group">
                                         <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Mobile Number:</label>
@@ -165,7 +165,7 @@
                                 </div>
 
 
-                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-12 col-sm-12 col-xs-12 ipad_choce_file_class">
                                     <div class="form-group">
                                         <div class="col-md-12 col-sm-12 col-xs-12 padding-none">
                                             <div class="col-md-6 col-sm-6 col-xs-12 company-logo-img edit-p-info padding-none">
@@ -185,17 +185,19 @@
                                                     }
                                                 }
                                             </div>
+											<div class="row">
+											<div class="save_ipades_btn_removesss" class="col-md-12 group remove_padding_ipades text-right">
+                                                            <input  type="submit"  class="nxt-btn btn btn-default save_btn_ipad_design" name="Save" value="Save" />
+                                                        </div>
+														</div>
+											
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             @*</div>*@
-                                                    <div class="col-md-12 col-sm-12 text-right">
-                                                        <div class="col-md-12 group next-btn-wrap">
-                                                            <input  type="submit"  class="nxt-btn btn btn-default" name="Save" value="Save" />
-                                                        </div>
-                                                    </div>
+                                                   
                                                     }
                     </div>
                 </div>

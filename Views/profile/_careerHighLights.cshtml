@@ -9,7 +9,7 @@
     @Html.AntiForgeryToken()
 
     @Html.HiddenFor(e=>e.qenID)
-    <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="col-md-12 col-sm-12 col-xs-12 padding_lbl_threee">
         <div class="form-group">
             <label class="control-label col-md-12 col-sm-12 col-xs-12 left-label">Career Objective:</label>
             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="col-md-12 col-sm-12 col-xs-12 padding_lbl_threee">
         <div class="form-group">
             <label class="control-label col-md-12 col-sm-12 col-xs-12 left-label">Career Highlights:</label>
             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -27,7 +27,7 @@
                 @Html.ValidationMessageFor(m => m.careerHighLights, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-md-12 text-right academic">
+        <div class="col-md-12 text-right academic careet_tab_save_btn_padding">
             <input type="submit" value="Save" class="academic-create-btn btn btn-default" />
         </div>
     </div>
