@@ -5,7 +5,11 @@
     Layout = "~/Views/Shared/_Layout_Employer.cshtml";
 }
 
-@{var qenID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.UserID.ToString())); }
+@{
+    var qenID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.UserID.ToString()));
+    var perc = BaseUtil.getProfileCompletePercentage(qenID.ToString());
+
+    }
 
 
 
@@ -161,25 +165,16 @@
     debugger
     var jqOld = jQuery.noConflict();
     jqOld(document).ready(function () {
-        debugger
-            debugger
-            var qenID = '@qenID';
-        debugger
-            jqOld.ajax({
-                url: '/profile/getProfileCompletePercentage',
-                data: { 'qenID': qenID },
-                success: function (data) {
-                        debugger
+        var perc_ = '@perc';       
                         var x = document.getElementById('progress');
-                        x.style.width = data + '%';
+                        x.style.width = perc_ + '%';
                         var y = document.getElementById('perc');
-                        y.innerHTML = data + "%";
+                        y.innerHTML = perc_ + "%";
 
 
-                }
-            });
+                }         
 
-    });
+    );
     </script>
 
 

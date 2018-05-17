@@ -16,6 +16,8 @@ using System.Security.Cryptography;
 using System.IO;
 using System.Diagnostics;
 using System.Web.Configuration;
+using static NewLetter.Models.storedProcedureModels;
+using System.Data.SqlClient;
 
 namespace NewLetter.Models
 {
@@ -823,6 +825,13 @@ namespace NewLetter.Models
                 }
             }
             return encryptString;
+        }
+
+        public static int getProfileCompletePercentage(string qenID)
+        {
+            var qenID_ = new SqlParameter("@qenID", qenID);
+            var result = db.Database.SqlQuery<usp_GetProfileCompletenessPerc_Result>("usp_GetProfileCompletenessPerc @qenID", qenID_).FirstOrDefault();
+            return result.perc;
         }
 
         // Central Method for string decryption

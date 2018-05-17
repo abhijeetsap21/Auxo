@@ -1580,11 +1580,11 @@ namespace NewLetter.Controllers
                 
         }
 
-        public int getProfileCompletePercentage(string qenID)
-        {
-            var qenID_ = new SqlParameter("@qenID", qenID);
-            var result = db.Database.SqlQuery<usp_GetProfileCompletenessPerc_Result>("usp_GetProfileCompletenessPerc @qenID", qenID_).FirstOrDefault();
-            return result.perc;
-        }      
+        //public int getProfileCompletePercentage(string qenID)
+        //{
+        //    var qenID_ = new SqlParameter("@qenID", qenID);
+        //    var result = db.Database.SqlQuery<usp_GetProfileCompletenessPerc_Result>("usp_GetProfileCompletenessPerc @qenID", qenID_).FirstOrDefault();
+        //    return result.perc;
+        //}      
     }
 }		  

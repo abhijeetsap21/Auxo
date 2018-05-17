@@ -211,7 +211,7 @@ tr.odd td.sorting_1 {
     display: none;
 }
 .form-horizontal{ background:#fff; border-radius:5px; overflow:hidden; max-width: 94%; margin:0 auto; margin-top:50px; padding:0 0 22px 0;}
-.form-horizontal h4{background: #fafafa none repeat scroll 0 0; border-bottom: 1px solid #eee; color: #000000; font-size: 16px; margin: 0; padding: 17px 22px 18px; text-transform: capitalize;  margin: 0 0 24px 0; position: relative;}
+.form-horizontal h4{background:#4c46461a none repeat scroll 0 0; border-bottom: 1px solid #eee; color: #000000; font-size: 16px; margin: 0; padding: 17px 22px 18px; text-transform: capitalize;  margin: 0 0 24px 0; position: relative; font-weight: bold;}
 .n-green{background: #a9d86e none repeat scroll 0 0;   border-radius: 50%;  color: #fff;  font-size: 13px;  height: 20px;  position: absolute;  right: -14px;
     text-align: center; top: -8px;  width: 20px;}
 .n-red{background: #ff6c60 none repeat scroll 0 0;   border-radius: 50%;  color: #fff;  font-size: 13px;  height: 20px;  position: absolute;  right: -14px;
@@ -633,7 +633,7 @@ input.form-control.verify-input {float: none;display: inline-block;width: 20%;}
 
 input[type="checkbox"], input[type="radio"]{line-height: normal; margin: 0;}
 
-/*Add CSS 14-05-2018*/
+/*Add Custom CSS Start*/
 
 .login_ragister_btn{background: #e97b26 !important; color: #fff;}
 .login_ragister_btn:hover{background: #cc6616 !important; color: #fff !important;}
@@ -673,7 +673,7 @@ input:focus{outline: none !important;}
 
 .modal_resume_bg .modal{width:70%; margin: 0px; margin:20px auto;}
 
-.modal-open .modal {overflow-x: inherit; overflow-y: inherit;}
+/*.modal_resume_bg .modal-body{overflow: inherit !important;}*/
 
 .modal_resume_bg .modal .modal-body{padding:0px;}
 
@@ -685,8 +685,12 @@ input:focus{outline: none !important;}
 .common-top-dropdown img:focus{outline: none;}
 
 .account_input_text_center{text-align: center; margin: 20px 0 0 0px;}
+.personal_detail_main_bg_responsive .nav-tabs > li > a{margin: 0px;}
 
-/*sfsfdsfdfdfdff*/
+.text-area_hieght_employer textarea{height: 150px;}
+.job_title_job_discription_text{text-align: left !important; padding: 0 0 8px 0;}
+
+/*Custome CSS Done*/
 
 
 @media only screen and (max-width: 1600px) {
@@ -782,12 +786,28 @@ input:focus{outline: none !important;}
 }
 
  @media only screen and (max-width:1600px) {
-
+	 .form-horizontal .nav-tabs > li > a{padding: 15px 18.68px;}
 }
 @media only screen and (min-width:992px) and (max-width:1199px) {
 	.common-right-block a.warning-verification{right:50px;}
 	.table-responsive {overflow-x: auto;}
 	label.cutom-label a{word-wrap: break-word;}
+	.form-horizontal .nav > li.active a{margin: 0px;}
+	.padding_lbl_threee{padding: 0px;}
+	.edit_candidate .right-box.form-horizontal{margin: 0px auto 0;}
+	 .form-horizontal .form-group{margin: 0; margin-bottom: 15px;}
+	.academic{padding: 0px;}
+	.academic input.academic-create-btn.btn.btn-default{margin: 0px;}
+	.remove_padding_ipades{padding: 0px;}
+	.tab-content table.table{max-width:100%;}
+	.careet_tab_save_btn_padding{padding: 0 15px 0 15px;}
+	.apply_job_tbl_responsive{min-height: .01%; overflow-x: auto;}
+	
+	.margin_resetmail_mobile{padding: 0 15px 0 15px; margin: 0 0 15px 0px;}
+	 .refrence_one_text{padding: 0 15px 0 15px !important; font-weight: bold; font-size: 15px !important;}
+	 .save_btn_refrence_tabs_style{margin:0 0px 0 -15px;}
+	 .resent_main_blue_color{width: auto !important;}
+	.margin-top_ipad__m{margin: 0px;}
 
 }
  @media only screen and (min-width:768px) and (max-width:991px) {
@@ -816,6 +836,30 @@ input:focus{outline: none !important;}
 	 .personal_detail_main_bg_responsive .nav-tabs > li{margin: 0 0 1px; width: auto;}
 	 
 	 .edit_candidate .right-box.form-horizontal{max-width:100%;}
+	 .personal_detail_main_bg_responsive .padding_none_responsive_may_profile{padding:0px;}
+	 .ipad_choce_file_class{padding:0px;}
+	 .gry .dashboard .save_btn_ipad_design{width:auto; margin: 0px !important;}
+	 
+	 .padding_lbl_threee{padding: 0px;}
+	.edit_candidate .right-box.form-horizontal{margin: 0px auto 0;}
+	 .form-horizontal .form-group{margin: 0; margin-bottom: 15px;}
+	.academic{padding: 0px;}
+	.academic input.academic-create-btn.btn.btn-default{margin: 0px; width: auto;}
+	 .personal_detail_main_bg_responsive .nav-tabs{margin-bottom: 10px;}
+	 .remove_padding_ipades{padding: 0px;}
+	 .tab-content table.table{max-width:100%;}
+	 .certificate_tab_main .table td {white-space: nowrap;}
+	 .personal_detail_main_bg_responsive .nav-tabs > li > a{margin: 0px;}
+	 
+	 .careet_tab_save_btn_padding{padding: 0 15px 0 15px;}
+	 .apply_job_tbl_responsive{min-height: .01%; overflow-x: auto;}
+	 .certificate_tab_main{min-height: .01%; overflow-x: auto; width: 100%;}
+	 
+	 .margin_resetmail_mobile{padding: 0 15px 0 15px; margin: 0 0 15px 0px;}
+	 .refrence_one_text{padding: 0 15px 0 15px !important; font-weight: bold; font-size: 15px !important;}
+	 .save_btn_refrence_tabs_style{margin:0 15px 0 0px;}
+	 .resent_main_blue_color{width: auto !important;}
+	 .margin-top_ipad__m{margin: 0px;}
 	 
 }
  @media only screen and (max-width:767px) {
@@ -853,7 +897,7 @@ input:focus{outline: none !important;}
 	 .form-horizontal.edit-candidate-cv .edit-candidate-cv-btn{position: relative; right: 0px; top:0px;}
 	 
 	 .personal_detail_main_bg_responsive .nav-tabs{width:95%; margin: 0 auto; float: none;}
-	 .personal_detail_main_bg_responsive .nav-tabs > li > a{padding: 15px 25.68px;}
+	 .personal_detail_main_bg_responsive .nav-tabs > li > a{padding: 15px 25.68px; margin: 0px;}
 	 .personal_detail_main_bg_responsive .tab-content{width:100%;}
 	 .personal_detail_main_bg_responsive .padding_none_responsive_may_profile{padding: 0px;}
 	 .panel-group .panel.panel-default .panel-heading h4.panel-title a.accordion-toggle.collapsed{padding: 10px 20px 10px 20px;}
@@ -864,10 +908,14 @@ input:focus{outline: none !important;}
 	 .top_margin_schkoolname{margin-top: 13px !important;}
 	 .none_hr_tag{display: none;}
 	 .progressbarto{max-width: 100%; min-width: 100%;}
-	 .certificate_tab_main{overflow-x: scroll; overflow-y: hidden;}
+	 .certificate_tab_main{overflow-x: auto;}
 	 .certificate_tab_main .table th{white-space: nowrap;}
 	 .certificate_tab_main .table td{white-space: nowrap;}
 	 .candidate-apply .apply_job_ttle_add_hdng{padding: 17px 15px 18px 16px;}
+	 .form-horizontal.edit-candidate-cv.candidate-apply table.table{font-size:15px;}
+	 
+	 .margin_resetmail_mobile{padding: 0 15px 0 15px; margin: 0 0 15px 0px;}
+	 .refrence_one_text{padding: 0 15px 0 15px !important; font-weight: bold; font-size: 15px !important;}
 	 
 
 }

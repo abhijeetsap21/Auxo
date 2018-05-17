@@ -11,10 +11,12 @@
 @{ 
     var emailV = "";
     var phoneV = "";
+    var perc = "";
     if (roleID == "5")
     {
         emailV = BaseUtil.GetSessionValue(AdminInfo.emailVerified.ToString());
         phoneV = BaseUtil.GetSessionValue(AdminInfo.mobileVerified.ToString());
+        perc = BaseUtil.getProfileCompletePercentage(userID).ToString();
     }
 }
 <head>
@@ -149,7 +151,7 @@
                                 }
                                 if (roleID == "5")
                                 {
-                                    <li>@Html.ActionLink("Profile", "editCandidate", "profile")</li>
+                                    <li>@Html.ActionLink("Profile", "editCandidate", "profile")</li>@perc
                                     <li>@Html.ActionLink("Find Jobs ", "jobs", "jobDetails")</li>
                                     <li>@Html.ActionLink("Profile Summary", "ProfilePerformance", "profile")</li>
                                     <li>@Html.ActionLink("Applied Job", "AppliedJobs", "profile")</li>
