@@ -66,10 +66,19 @@
                         </div>
                     </div>
                 </div>
-
+                @if(Model.schoolName != null)
+                { 
                 <div class="col-md-12 text-right academic">
                     <input type="submit" value="Update" class="academic-create-btn btn btn-default" />
                 </div>
+                }
+                else
+                {
+                    <div class="col-md-12 text-right academic">
+                        <input type="submit" value="Save" class="academic-create-btn btn btn-default" />
+                    </div>
+                }
+
             </div>
         </div>
     </div>

@@ -188,7 +188,7 @@ namespace NewLetter.Controllers
                 {
                     oqenSecondary = new qenSecondary();
                     oqenSecondary.qenID = qenid;
-                    return PartialView("_partialHighSchool");
+                    return PartialView("_partialHighSchool", oqenSecondary);
                 }
             }
             catch (Exception ex)
@@ -258,7 +258,7 @@ namespace NewLetter.Controllers
                 {
                     oqenSecondary = new qenHigherSecondary();
                     oqenSecondary.qenID = qenid;
-                    return PartialView("_partialHigherSchool");
+                    return PartialView("_partialHigherSchool", oqenSecondary);
                 }
             }
             catch (Exception ex)
@@ -328,7 +328,7 @@ namespace NewLetter.Controllers
                 {
                     oqenSecondary = new qendidateGraduation();
                     oqenSecondary.qenID = qenid;
-                    return PartialView("_partialGraduation");
+                    return PartialView("_partialGraduation", oqenSecondary);
                 }
             }
             catch (Exception ex)
@@ -401,7 +401,7 @@ namespace NewLetter.Controllers
                 {
                     oqenSecondary = new qendidatePGraduation();
                     oqenSecondary.qenID = qenid;
-                    return PartialView("_partialPostGraduation");
+                    return PartialView("_partialPostGraduation", oqenSecondary);
                 }
             }
             catch (Exception ex)
