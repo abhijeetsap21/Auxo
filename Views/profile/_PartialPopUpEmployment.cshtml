@@ -60,7 +60,7 @@
         <div class="col-md-6 col-sm-12 padding_lbl_threee bg_color_employment_left_bg">
             <div class="col-md-12 col-sm-12 padding_lbl_threee">
                 <div class="form-group">
-                    <label for="concept" class="col-md-12 col-sm-12 col-xs-12 control-label left-title job_title_job_discription_text">Job Description:</label>
+                    <label style="padding-top:0px;" for="concept" class="col-md-12 col-sm-12 col-xs-12 control-label left-title job_title_job_discription_text">Job Description:</label>
                     <div class="col-md-12 col-sm-12 col-xs-12 padding-none text-area_hieght_employer">
                         @Html.TextAreaFor(ex => ex.jobDescription, new { maxlength = "100", @class = "form-control" })
                         @Html.ValidationMessageFor(ex => ex.jobDescription, "", new { @class = "col_1 tleft text-danger" })						 
@@ -73,13 +73,13 @@
                 if (Model.qenEmploymentNum == 0)
                 {
             <div class="col-md-12 text-right academic padding_lbl_threee">
-                <input type="submit" name="save" value="SAVE" class="plus-btn academic-create-btn btn btn-default" />
+                <input type="submit" name="save" value="SAVE" class="plus-btn academic-create-btn btn btn-default distip_btn_seves" />
             </div>
                 }
                 else
                 {
                     <div class="col-md-12 text-right academic padding_lbl_threee">
-                        <input type="submit" name="save" value="Update" class="plus-btn academic-create-btn btn btn-default" />
+                        <input type="submit" name="save" value="Update" class="plus-btn academic-create-btn btn btn-default distip_btn_seves" />
                     </div>
                 }
             }

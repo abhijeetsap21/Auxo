@@ -91,14 +91,32 @@
                 <div class="col-md-12 common-right-block">
                 @{ if (roleID != "5")
                     {
+                         if (logo != "")
+                        {
                         <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src='@logo'></span><span class="common-user-loggedin-name">@companyname</span></div>
+                        }
+                        else
+                        {
+                        <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src="~/images/user_icon_pic.png"></span><span class="common-user-loggedin-name">@companyname</span></div>
+                        }
                     }
-                }                  
+                }  
+					@if (logo != "")
+                    {
                     <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src='@logo' style="width:35px"></span><span class="common-user-loggedin-comp">@fullName </span></div>
+                    }
+                    else
+                    {
+                        <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src="~/images/user_icon_pic.png" style="width:35px"></span><span class="common-user-loggedin-comp">@fullName </span></div>
+                    }                
+                    
                     
                         @if (emailV == "False" || phoneV == "False")
                         {                            
-                           <a class="warning-verification" href='@Url.Action("VerifyDetails", "profile")'></a>                           
+                           <a class="warning-verification atd_bg_color_wrning" href='@Url.Action("VerifyDetails", "profile")'>
+						   <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+
+						   </a>                           
 
                         }
                     

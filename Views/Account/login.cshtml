@@ -72,22 +72,8 @@
                                 @Html.Action("logincandidate")
                             </div>
                         </div>
-                        <div class="">
-                            <div class="col-md-12 col-sm-12 col-xs-12 text-center or"><img src="~/images/orimg.jpg" alt="img"></div>
-                            <div class="col-md-12 col-sm-12 col-xs-12 text-center alternate">Alternate Way to Login </div>
-                        </div>
-                        <div class="social-login col-md-12 col-sm-12 col-xs-12 login_sosial_btns_main_padding">
-                            <div class="social-login-buttons">
-                           
-							<a href="@Url.Action("Facebook","Account")" class="facebook_icon_login_page">
-							<i class="fa fa-facebook" aria-hidden="true"></i> Facebook
-							</a> 
-							<a href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=772sds0w0tvipg&redirect_uri=https%3A%2F%2Fspotaneedle.com%2FAccount%2FlinkdInReg&state=987654321" class="linkdin_icon_login_page">
-							<i class="fa fa-linkedin" aria-hidden="true"></i> Linkedin
-							</a> 
-							
-							<a href="@Url.Action("googleReg","Account")" class="google_plus_icon_login_page"><i class="fa fa-google-plus" aria-hidden="true"></i> Google Plus</a> </div>
-                        </div>
+                      
+                        
                     </div>
                     <div class="col-sm-2"></div>
                     <div class="col-sm-5 col-md-5 col-xs-12">
@@ -104,12 +90,24 @@
 
                                 @Html.Action("candidateReg")
                             </div>
-                            <div class="social-login">
-                                <h6>...or login with:</h6>
-                                <div class="social-login-buttons"> <a href="@Url.Action("Facebook","Account")" class="btn btn-link-1"> <img src="~/images/facebook-btn.jpg" alt="Facebook"> </a> <a href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=772sds0w0tvipg&redirect_uri=https%3A%2F%2Fspotaneedle.com%2FAccount%2FlinkdInReg&state=987654321" class="btn btn-link-1"> <img src="~/images/linkedin-btn.jpg" alt="Linkedin"> </a> <a href="@Url.Action("googleReg","Account")" class="btn btn-link-1"> <img src="~/images/googlebtn.jpg" alt="Google+"> </a> </div>
-                            </div>
+                          
                         </div>
                     </div>
+					<div class="login_ragister_btns_sosial_btn_text_center">
+					<img class="or_img_login_page" src="/stagingauxo/images/orimg.jpg" alt="img">
+					<div class="alternate">Alternate Way to Login </div>
+					
+					<div class="social-login-buttons">
+                           
+							<a href="/stagingauxo/Account/Facebook" class="facebook_icon_login_page">
+							<i class="fa fa-facebook" aria-hidden="true"></i> Facebook
+							</a> 
+							<a href="https://www.linkedin.com/oauth/v2/authorization?response_type=code&amp;client_id=772sds0w0tvipg&amp;redirect_uri=https%3A%2F%2Fspotaneedle.com%2FAccount%2FlinkdInReg&amp;state=987654321" class="linkdin_icon_login_page">
+							<i class="fa fa-linkedin" aria-hidden="true"></i> Linkedin
+							</a> 
+							
+							<a href="/stagingauxo/Account/googleReg" class="google_plus_icon_login_page"><i class="fa fa-google-plus" aria-hidden="true"></i> Google Plus</a> </div>
+					</div>
                 </div>
 
             <div class="login-bottom col-md-12 col-sm-12 col-xs-12"><img src="~/images/login-shadow.png" width="713" height="38"></div>

@@ -8,7 +8,7 @@
     @Html.HiddenFor(m => m.qenID)
 
     <div class="col-md-12 col-sm-12 margin-20 padding_lbl_threee add_slill_bg_border_style">
-        <div class="col-md-6 col-sm-12 padding_lbl_threee">
+        <div class="col-md-5 col-sm-12 padding_lbl_threee width_ipade_year_exp">
             <div class="col-md-12 col-sm-12 padding_lbl_threee">
                 <div class="form-group">
                     <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Skill: </label>
@@ -19,11 +19,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-sm-12 padding_lbl_threee">
+        <div class="col-md-5 col-sm-12 padding_lbl_threee width_ipade_year_exp">
             <div class="col-md-12 col-sm-12 padding_lbl_threee">
                 <div class="form-group">
                     <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Year of Exp:</label>
-                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none year_text_box_width">
                         @Html.TextBoxFor(model => model.yearOfExp, new { maxlength = "100" })
                         @Html.ValidationMessageFor(model => model.yearOfExp, "", new { @class = "text-danger" })
                     </div>
@@ -31,19 +31,20 @@
             </div>
 
 
-             @{if (Model.qenSkillsID == 0)
+            
+        </div>
+		 @{if (Model.qenSkillsID == 0)
                 {
-                    <div class="col-md-12 text-right academic">
+                    <div class="col-sm-2 text-right academic btn_reset_cod">
                         <input type="submit" name="save" class="previous action-button academic-create-btn btn btn-default" value="Save" id="btnsaveempinfo" />
                     </div>
                 }
                 else
                 {
-                    <div class="col-md-12 text-right academic">
+                    <div class="col-sm-2 text-right academic btn_reset_cod">
                         <input type="submit" name="save" class="previous action-button academic-create-btn btn btn-default" value="Update" id="btnsaveempinfo" />
                     </div>
                 }
             }
-        </div>
     </div>
                 }

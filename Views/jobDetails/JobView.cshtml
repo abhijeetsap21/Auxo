@@ -177,7 +177,7 @@
                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                             <li role="presentation"><a role="menuitem" tabindex="-1" onclick="return callApply(@Model.jobID);">Apply here</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-1" data-toggle="modal" data-target="#dialog-sendmail">Share with friend</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Add to favorite</a></li>
+                            
                         </ul>
                     }
 
@@ -267,7 +267,7 @@
 		</div>
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<label class="cutom-label" for="NoOfOpenings"><b>Website</b></label>
-			<label class="cutom-label"><a href='http://@Model.CompanyWebsite'>@Model.CompanyWebsite</a></label>
+			<label class="cutom-label"><a target="_blank" href='http://@Model.CompanyWebsite'>@Model.CompanyWebsite</a></label>
 		</div>
 		<div class="col-md-12 col-sm-12 col-xs-12">
 			<label class="cutom-label-2" for="NoOfOpenings">Contact Information</label>

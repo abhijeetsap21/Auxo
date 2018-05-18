@@ -20,7 +20,7 @@
     <div class="container">
         <div class="row sub-container">
 
-            <div class="col-md-12 col-sm-12 col-xs-12 padding_lbl_threee">
+            <div class="col-md-12 col-sm-12 col-xs-12 padding_lbl_threee refrences_bg_border_tabs">
                 <div class="right-box">
                     @using (Html.BeginForm("SaveRefrenceInfo", "profile", FormMethod.Post, new { id = "msform" }))
                     {
@@ -28,8 +28,8 @@
                         @Html.AntiForgeryToken()
                         @Html.HiddenFor(m => m.qenid)          @Html.HiddenFor(m => m.qenRefID1)
                         var qenid = Model.qenid;
-                        <div class="col-md-12 col-sm-12 margin-20 padding_lbl_threee margin-top_ipad__m">
-                            <div class="col-md-6 col-sm-12 padding_lbl_threee">
+                        <div class="col-md-12 col-sm-12 margin-20 padding_lbl_threee margin-top_ipad__m margin_nones_abs">
+                            <div class="col-md-6 col-sm-12 padding_lbl_threee bg_color_cmn_refrence_tab">
                                 <label class="refrence_one_text">Reference  1</label>
                                 <div class="col-md-12 col-sm-12">
                                     <div class="form-group">
@@ -92,7 +92,7 @@
                                     }
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-12 padding_lbl_threee">
+                            <div class="col-md-6 col-sm-12 padding_lbl_threee bg_color_cmn_refrence_tab_to">
                                 <label class="refrence_one_text">Reference  2</label>
                                 <div class="col-md-12 col-sm-12">
                                     <div class="form-group">

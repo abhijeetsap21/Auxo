@@ -668,7 +668,7 @@ input:focus{outline: none !important;}
 .progressbarto .progrssfld .line { background-color: #e3e3e3; clear: both; float: left; height: 7px; width: 100%;}
 .progressbarto .progrssfld .fill-color {background-color: #fc8c2a; height: 7px; position: absolute; top: 43px; width: 43%;}
 .progressbarto .progrssfld .fill-color span {background-color: #fff; border-radius: 50%; box-shadow: 0 1px 3px 1px rgba(0,0,0,0.2); height: 11px; position: absolute; right: -6px; top: -2px; width: 11px;}
-.progressbarto .progrssfld .fill-color .percantage { background-color: #fc8c2a; bottom: 23px; color: #fff; font-size: 15px; line-height: 28px; position: absolute; right: -25px; text-align: center; width: 50px;}
+.progressbarto .progrssfld .fill-color .percantage { background-color: #fc8c2a; bottom: 23px; color: #fff; font-size: 12px; line-height: 22px; position: absolute; right: -25px; text-align: center; width:44px;}
 .progressbarto .progrssfld .fill-color .percantage:after { border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid #fc8c2a; content: ""; left: 50%; margin-left: -8px; position: absolute; top: 100%;}
 .progressbarto strong {font-size: 13px; width: 100%; text-align: center; display: inline-block; margin: 9px 0 6px 0px;}
 
@@ -743,7 +743,7 @@ input:focus{outline: none !important;}
 
 .edit_candidate #accordion{margin-top:15px;}
 
-.rgv_color_bg_main{background: #eeecec; padding: 20px 0 10px 0; border: solid 1px #ccc; width: 48%; margin-right: 1.90%;}
+.rgv_color_bg_main{background: #eeecec; padding: 20px 0 10px 0; border: solid 1px #ccc; width: 48%; margin-right: 1.60%;}
 #AddSkills form{margin: 0px;}
 
 .border_certificate_main_bg .margin-20{margin: 0px;}
@@ -775,8 +775,41 @@ input:focus{outline: none !important;}
 .checkmark:after {content: ""; position: absolute; display: none;}
 .container_check input:checked ~ .checkmark:after {display: block;}
 .container_check .checkmark:after {left: 2px; top:1px; font-family: 'FontAwesome'; content: "\f00c"; font-size: 11px; color: #1b1d1d;}
+.distip_btn_seves{margin: 15px 0px 0 0px !important;}
+.refrences_bg_border_tabs{padding: 15px; border: solid 1px #ccc; padding-top: 0px;}
+.margin_nones_abs{margin: 0px !important;}
+.bg_color_cmn_refrence_tab{background: #eeecec; padding:15px; border: solid 1px #ccc; width: 48%; margin-right: 1.60%;}
+.bg_color_cmn_refrence_tab_to{background: #eeecec; padding:15px; border: solid 1px #ccc;}
+.employment_bg_formemployment_bg_form .table{margin-top: 0px !important;}
 
+.year_text_box_width{width:80px;}
+.career_tab_border_form{border: solid 1px #ccc; display: inline-block; width: 100%;}
+.career_tab_border_form .form-group{margin:2px 0 10px 0px;}
+.careet_tab_save_btn_padding .btn-default{margin: 0px !important;}
 
+.bg_left_acadmic_detail_bordersf{border: solid 1px #ccc; background: #eeecec; padding-top: 15px; margin-right: 1.60%; width: 48%; margin-bottom:5px;}
+.bg_left_acadmic_detail_bordersf .form-group{margin: 0px; margin-bottom: 15px;}
+
+.bg_left_acadmic_detail_bordersf_to{border: solid 1px #ccc; background: #eeecec; padding-top: 15px; margin-bottom:5px;}
+.bg_left_acadmic_detail_bordersf_to .form-group{margin: 0px; margin-bottom: 15px;}
+
+.btn_careere_save_rtv{margin: 0 0px 0 0px !important;}
+
+.forgat_pass_wor_text{margin: 0px; padding: 0px;}
+
+.forgot_pass_word_body{display: inline-block; width: 100%; padding: 0 0 20px 0;}
+.add_claa_sbmt{width: 137px;}
+
+.login_ragister_btns_sosial_btn_text_center{display: inline-block; width: 100%; text-align: center;}
+
+.login_ragister_btns_sosial_btn_text_center .alternate{padding:4px 0 13px 0px;}
+.login_ragister_btns_sosial_btn_text_center .or_img_login_page{margin: 12px 0 0 0px;}
+
+.atd_bg_color_wrning .fa-exclamation-triangle{background: #fcb323; border-radius: 100%; padding: 6px; font-size: 10px; color: #fff;}
+.canvasjs-chart-credit{display: none;}
+
+.edit_candidate .bg_color_main_forms_to .save_btn_ipad_design{margin-right: 15px;}
+.main_ttl_text_jobs{text-transform: capitalize;}
 
 @media only screen and (max-width: 1600px) {
 	body {font-size: 13px;}
@@ -872,6 +905,7 @@ input:focus{outline: none !important;}
 
  @media only screen and (max-width:1600px) {
 	 .form-horizontal .nav-tabs > li > a{padding: 15px 18.68px;}
+	 .common-right-block a.warning-verification{right: 8.1%;}
 }
 @media only screen and (min-width:992px) and (max-width:1199px) {
 	.common-right-block a.warning-verification{right:50px;}
@@ -898,6 +932,14 @@ input:focus{outline: none !important;}
 	.rgv_color_bg_main{padding:15px !important; margin-bottom: 15px;}
 	.rgv_color_bg_main_to{padding:15px !important;}
 	.add_slill_bg_border_style{padding:15px !important;}
+	.refrences_bg_border_tabs{padding: 15px !important; padding-top: 0px !important;}
+	.bg_color_cmn_refrence_tab{margin: 0px 0 20px 0px;}
+	.bg_color_cmn_refrence_tab{padding-top: 10px !important;}
+	.bg_color_cmn_refrence_tab_to{padding:15px 0px 15px 0px !important;}
+	.btn_reset_cod{width:100%;}
+	.width_ipade_year_exp{width:100%;}
+	.career_tab_border_form{padding: 12px 0 0 0px;}
+	.edit_candidate .bg_color_main_forms_to .save_btn_ipad_design{margin-right:0px !important;}
 
 }
  @media only screen and (min-width:768px) and (max-width:991px) {
@@ -947,7 +989,7 @@ input:focus{outline: none !important;}
 	 
 	 .margin_resetmail_mobile{padding: 0 15px 0 15px; margin: 0 0 15px 0px;}
 	 .refrence_one_text{padding: 0 15px 0 15px !important; font-weight: bold; font-size: 15px !important;}
-	 .save_btn_refrence_tabs_style{margin:0 15px 0 0px;}
+	 .save_btn_refrence_tabs_style{margin:0 15px 15px 0px;}
 	 .resent_main_blue_color{width: auto !important;}
 	 .margin-top_ipad__m{margin: 0px;}
 	 .edit_candidate .bg_color_main_forms{padding: 0px; background: none; border: none; width: 100%;}
@@ -957,6 +999,13 @@ input:focus{outline: none !important;}
 	  .rgv_color_bg_main_to{background: none; border: none;}
 	 .rgv_color_bg_main{background: none; border: none; margin: 0px;}
 	 .add_slill_bg_border_style{background:none; border:none; margin-bottom:0px; padding: 0px !important;}
+	  .bg_color_cmn_refrence_tab{border:none; background: none; margin: 0px;}
+	 .bg_color_cmn_refrence_tab_to{border:none; background: none;}
+	 .width_ipade_year_exp input{width:100%;}
+	 .btn_reset_cod{width:100%;}
+	 .career_tab_border_form{padding: 12px 0 0 0px;}
+	 
+	 .edit_candidate .bg_color_main_forms_to .save_btn_ipad_design{margin-top:10px !important;}
 	 
 }
  @media only screen and (max-width:767px) {
@@ -1019,6 +1068,11 @@ input:focus{outline: none !important;}
 	 .rgv_color_bg_main_to{background: none; border: none;}
 	 .rgv_color_bg_main{background: none; border: none; margin: 0px;}
 	 .add_slill_bg_border_style{background:none; border:none; margin-bottom:0px;}
+	 
+	 .bg_color_cmn_refrence_tab{border:none; background: none; margin: 0px;}
+	 .bg_color_cmn_refrence_tab_to{border:none; background: none;}
+	 .career_tab_border_form{padding: 12px 0 0 0px;}
+	 
 	 
 
 }

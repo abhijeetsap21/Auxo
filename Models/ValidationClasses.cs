@@ -60,6 +60,8 @@ namespace NewLetter.Models
 
     }    
 
+   
+
     public class jobDetailsvalidation
     {
         public long jobID { get; set; }
@@ -560,6 +562,14 @@ namespace NewLetter.Models
         public string Email { get; set; }
 
         public string password { get; set; }
+    }
+
+    public class linkedInShare
+    {
+        [StringLength(700, MinimumLength = 20 , ErrorMessage = "700 charectar max")]
+        [Required(ErrorMessage = "You must specify your share text")]
+        [Display(Name = "Share Text")]
+        public string caption { get; set; }
     }
     public class qenforgotPassword
     {

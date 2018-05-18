@@ -1255,6 +1255,7 @@
     <Content Include="Views\Account\ThankYou.cshtml" />
     <Content Include="Views\profile\VerifyDetails.cshtml" />
     <Content Include="Views\profile\_partialPreviewCV.cshtml" />
+    <Content Include="Views\profile\_partialShareLinkedIN.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="advertisement\" />

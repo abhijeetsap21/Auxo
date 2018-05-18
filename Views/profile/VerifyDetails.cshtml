@@ -8,15 +8,14 @@
     var emailID = BaseUtil.GetSessionValue(AdminInfo.LoginID.ToString());
 }
 <div class="form-horizontal details-verification">
-<h4>VerifyDetails</h4>
+<h4>Verify Details</h4>
 
 	<div class="col-md-12 text-center">
 	@{
 		if (emailV == "False")
 		{
-		<div>
 		<input type="button" class="previous btn btn-default action-button" value="Resend Activation Email" onclick="return resendActivationEmail();" id="resendEmailer" />
-		</div>
+		
 		<label style="display:none;" id="emailResendResult"></label>
 		}
 	}
@@ -24,12 +23,12 @@
 	@{
 		if (phoneV == "False")
 		{
-		<div>
+		
 		<input type="button" class="previous btn btn-default action-button" value="Resend OTP" onclick="return resendOTP();" id="resend" />
-		</div>
+		
 		<label style="display:none" id="otpverificationresult"></label>
 		<div>
-		<input type="text" id="OTP" class="form-control verify-input" name="txt_OTP" />
+		<input style="margin:12px 0 12px 0px;" type="text" id="OTP" class="form-control verify-input" name="txt_OTP" />
 		</div>
 		<div>
 		<input type="submit" class="previous btn btn-default action-button" onclick="return verifyOTP();" value="Submit OTP" id="otpSubmit" name="Verify" />
