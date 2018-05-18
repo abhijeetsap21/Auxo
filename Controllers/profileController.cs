@@ -642,7 +642,7 @@ namespace NewLetter.Controllers
             {
                 if (empno != null && empno > 0)
                 {
-                    emp = db.qenEmpDetails.Where(ex => ex.qenEmploymentNum == empno).FirstOrDefault();
+                    emp = db.qenEmpDetails.Where(ex => ex.qenEmploymentNum == empno).FirstOrDefault();                    
                 }
                 else
                 {
@@ -672,7 +672,15 @@ namespace NewLetter.Controllers
                         
                         emp.qenPosition = model.qenPosition;
                         emp.qenEmpFrom = model.qenEmpFrom;
-                        emp.qenEmpTo = model.qenEmpTo;
+                        
+                        if (model.qenEmpTo == null)
+                        {
+                            model.qenEmpTo = Convert.ToDateTime("1900-01-01");
+                        }
+                        else
+                        {
+                            emp.qenEmpTo = model.qenEmpTo;
+                        }
                         emp.qenSalary = model.qenSalary;
                         emp.CompanyName = model.CompanyName;
                         emp.jobDescription = model.jobDescription;
@@ -682,9 +690,15 @@ namespace NewLetter.Controllers
                     }
                 }
                 else
+                    //ModelState["qenEmpTo"].Errors.Clear();
                 {
                     model.qenEmpFrom = model.qenEmpFrom; 
-                    model.qenEmpTo = model.qenEmpTo;                   
+                    if(model.qenEmpTo == null)
+                    {
+                        model.qenEmpTo = Convert.ToDateTime("1900-01-01");
+                    }
+                    //model.qenEmpTo = model.qenEmpTo;
+                    
                     model.dataIsCreated = BaseUtil.GetCurrentDateTime();
                     db.qenEmpDetails.Add(model);
                     db.SaveChanges();

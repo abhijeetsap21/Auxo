@@ -42,7 +42,7 @@ input:focus{outline:0px;}
     text-decoration: none;
     background-color: #e97b27;
     color: #fff;
-border-radius: 0px;
+    border-bottom: 0;
 }
 .form-horizontal .nav > li.active a{color:#e97b27;}
 .form-horizontal .nav > li.active a:hover{color:#fff;}
@@ -71,7 +71,7 @@ border-radius: 0px;
     padding: 15px 25.68px;
 }
 .form-horizontal .nav > li {margin-bottom: 0;}
-.form-horizontal .nav > li.active a {color: #fff;background: #e97b27;border-bottom: 1px solid transparent; border-radius: 0px;}
+.form-horizontal .nav > li.active a {color: #fff;background: #e97b27;border-bottom: 1px solid transparent;}
 .form-horizontal .nav > li.active a:hover, .form-horizontal .nav > li.active a:focus {color: #fff;border: 1px solid transparent;}
 .form-horizontal h4.title{ background:none; color:#333366; font-size:16px; font-weight:bold; }
 .rightside.rightside1{background:none;}
@@ -211,7 +211,7 @@ tr.odd td.sorting_1 {
     display: none;
 }
 .form-horizontal{ background:#fff; border-radius:5px; overflow:hidden; max-width: 94%; margin:0 auto; margin-top:50px; padding:0 0 22px 0;}
-.form-horizontal h4{background:#4c46461a none repeat scroll 0 0; border-bottom: 1px solid #eee; color: #000000; font-size: 16px; margin: 0; padding: 17px 22px 18px; text-transform: capitalize;  margin: 0 0 24px 0; position: relative; font-weight: bold; display: inline-block; width: 100%;}
+.form-horizontal h4{background: #fafafa none repeat scroll 0 0; border-bottom: 1px solid #eee; color: #000000; font-size: 16px; margin: 0; padding: 17px 22px 18px; text-transform: capitalize;  margin: 0 0 24px 0;}
 .n-green{background: #a9d86e none repeat scroll 0 0;   border-radius: 50%;  color: #fff;  font-size: 13px;  height: 20px;  position: absolute;  right: -14px;
     text-align: center; top: -8px;  width: 20px;}
 .n-red{background: #ff6c60 none repeat scroll 0 0;   border-radius: 50%;  color: #fff;  font-size: 13px;  height: 20px;  position: absolute;  right: -14px;
@@ -343,8 +343,8 @@ by the way it is so weird when you look at your code a couple of years after you
     color: #fff;
     display: block;
     font-size: 14px;
-	line-height:normal;
-	padding:20px 20px;
+	line-height:55px;
+	padding:0px 20px;
 }
 .navbar-left {
     float: left;
@@ -487,7 +487,7 @@ input#btn_:hover{background:#282c75;}
 .dashboard.edit_candidate i.glyphicon.glyphicon-map-marker {right: 10px;top: 0px;}
 .next-btn-wrap input.nxt-btn.btn.btn-default {transition: all 0.25s linear 0s;margin: 0 15px 0 0;}
 .next-btn-wrap input.nxt-btn.btn.btn-default:hover {background: #282c75;color: #fff;}
-.form-horizontal.edit-candidate-cv .edit-candidate-cv-btn {transition: all 0.25s linear 0s;background:#282c75;border: 0;font-size: 14px;border-radius: 3px;padding: 8px 18px; float: right;}
+.form-horizontal.edit-candidate-cv .edit-candidate-cv-btn {transition: all 0.25s linear 0s;position: absolute;top: 9px;right: 29px;background:#282c75;border: 0;font-size: 14px;border-radius: 3px;padding: 8px 18px;}
 .form-horizontal.edit-candidate-cv {position: relative;margin-bottom:50px;}
 .form-horizontal.edit-candidate-cv .edit-candidate-cv-btn:hover {background:#e97b26;}
 .edit_candidate.dashboard label {width: 50%;margin: 0;}
@@ -504,13 +504,13 @@ input#btn_:hover{background:#282c75;}
 .academic input.academic-create-btn.btn.btn-default {margin: 0 15px 0 0;transition: all 0.25s linear 0s;}
 .academic input.academic-create-btn.btn.btn-default:hover {background: #282c75;}
 .margin-20{margin:20px 0 0;}
-.edit_candidate .right-box.form-horizontal {margin: 0px auto 0;max-width:100%;}
+.edit_candidate .right-box.form-horizontal {margin: 20px auto 0;max-width: 94%;}
 .tab-content th {color: #fff;font-size: 14px;font-weight: 400;border: 1px solid #ccc;}
 .tab-content table.table {border: 1px solid #ccc;}
 .tab-content table.table tr td {border: 1px solid #ccc;}
 .tab-content table.table tr td a {cursor: pointer;margin: 0 5px;position:relative;}
 .tab-content table.table tr td a:first-child::before {content: '|';position: absolute;right: -11px;top: -2px;}
-.tab-content table.table {border: 1px solid #ccc;max-width: 100%;margin: 20px auto;}
+.tab-content table.table {border: 1px solid #ccc;max-width: 90%;margin: 20px auto;}
 .margin-bot-20-30 {margin: 0 30px 20px 0;}
 .edit_candidate.dashboard label.left-label {text-align: left;margin: 0 0 10px;}
 .form-horizontal .nav-tabs > li > a:focus {text-decoration: none;background-color: #e97b27;outline: none;}  
@@ -564,9 +564,8 @@ tr.brdr-btm {border-bottom: 1px solid #ccc;}
 .form-horizontal.job-view-padd {margin-bottom: 50px;}
 .popup-error span {float: left;width: auto;margin: 0 0 0 15px;}
 .common-round-shape span.count {position: relative;top: 0;}
-.form-horizontal.edit-candidate-cv.candidate-apply table.table {padding: 0 40px;width: 100%;max-width: 95%;margin: 0 auto;border-right: 1px solid #ccc;border-left: 1px solid #ccc;border-bottom: 1px solid #ccc; font-size: 14px;}
+.form-horizontal.edit-candidate-cv.candidate-apply table.table {padding: 0 40px;width: 100%;max-width: 95%;margin: 0 auto;border-right: 1px solid #ccc;border-left: 1px solid #ccc;border-bottom: 1px solid #ccc;}
 .form-horizontal.edit-candidate-cv.candidate-apply table.table tr th, .form-horizontal.edit-candidate-cv.candidate-apply table.table tr td {border:1px solid #ccc;}
-.form-horizontal.edit-candidate-cv.candidate-apply table.table tr th{text-transform: capitalize;}
 .form-horizontal.edit-candidate-cv.candidate-apply table.table tr th {background: #282c75;color: #fff;}
 .form-horizontal.edit-candidate-cv.profile-performance {width: 50%;}
 .job-view-padd table tr td.cmpny {overflow-y: scroll;height: 65px;vertical-align: middle;display: flex;align-items: center;}
@@ -625,8 +624,8 @@ p#urlclass {float: left;width: 100%;margin: 25px 0 0;font-size: 18px;}
 .otp-form .otp-form-inner label#functionresult {float: left;width: 100%;font-size: 14px;color: green;margin: 10px 0 0;}
 .otp-form {float: left;width: 100%;vertical-align: middle;display: flex;align-items: center;margin: 10px 0 0;}
 .custom-margin-CandidateMaster{margin-top:7px;}
-.common-right-block a.warning-verification i {color: #fff;font-size: 9px;background: #fcb323;border-radius: 50% 50%;padding: 6px;}
-.common-right-block a.warning-verification {position: absolute;right: 6.1%;top:0px;float: left;width: 21%;padding: 6px 0;}
+.common-right-block a.warning-verification i {color: #fff;font-size: 14px;background: #fcb323;border-radius: 50% 50%;padding: 10px;}
+.common-right-block a.warning-verification {position: absolute;right: 6.1%;top: -6px;float: left;width: 21%;padding: 6px 0;}
 input.form-control.verify-input {float: none;display: inline-block;width: 20%;}
 .details-verification input.btn.btn-default {margin: 0;line-height: normal;}
 .details-verification input.form-control{height:38px;}
@@ -634,7 +633,7 @@ input.form-control.verify-input {float: none;display: inline-block;width: 20%;}
 
 input[type="checkbox"], input[type="radio"]{line-height: normal; margin: 0;}
 
-/*Add Custom CSS Start*/
+/*Add CSS 14-05-2018*/
 
 .login_ragister_btn{background: #e97b26 !important; color: #fff;}
 .login_ragister_btn:hover{background: #cc6616 !important; color: #fff !important;}
@@ -643,139 +642,27 @@ input:focus{outline: none !important;}
 .padding-none_login{padding: 0px !important;}
 .add_border_line{border: solid 1px #ccc !important;}
 .add_border_line:focus{outline: none; box-shadow: inherit !important;}
+
 .text-danger {font-size: 12px;}
 .employe_zone_text_login{text-align: center;}
 .employe_zone_text_login a{text-decoration: none; background: #4a4dd0 !important; padding: 6px 12px; display: inline-block; color: #fff; border-radius: 4px; margin: 0 0 20px 0px;}
 .employe_zone_text_login a:hover{background: #3c3fc3 !important; color: #fff;}
+
 .text_center_powered{text-align: center;}
 
 
-
-
-.thankyou_page_main_bg{background: #fff; text-align: center; margin: 0 auto; margin-top: 50px; width: 64%; padding:0px 0px 40px 0px;} 
-.thankyou_page_main_bg .top_thankyou{background: #e97b26; margin: 0 0 20px 0px; padding: 40px 0 40px 0px;}
-.thankyou_page_main_bg .top_thankyou .linke_img{max-width: 100%;}
-.thankyou_page_main_bg .img_stars{margin-bottom: 20px;}
-
-.thankyou_page_main_bg p{padding: 0 15px 0 15px;}
-.thankyou_page_main_bg form{padding: 0 15px 0 15px; margin: 30px 0 30px 0;}
-
-.personal_detail_main_bg_responsive{max-width: 100%;}
-
-
-.progressbarto {max-width:270px; min-width:270px; position: relative;margin-top:0px; padding-bottom:0px; float: right; margin-right: 40px;}
-.progressbarto .progrssfld { padding-top: 44px; clear: both; float: left; width: 100%; position: relative;}
-.progressbarto .progrssfld .line { background-color: #e3e3e3; clear: both; float: left; height: 7px; width: 100%;}
-.progressbarto .progrssfld .fill-color {background-color: #fc8c2a; height: 7px; position: absolute; top: 43px; width: 43%;}
-.progressbarto .progrssfld .fill-color span {background-color: #fff; border-radius: 50%; box-shadow: 0 1px 3px 1px rgba(0,0,0,0.2); height: 11px; position: absolute; right: -6px; top: -2px; width: 11px;}
-.progressbarto .progrssfld .fill-color .percantage { background-color: #fc8c2a; bottom: 23px; color: #fff; font-size: 15px; line-height: 28px; position: absolute; right: -25px; text-align: center; width: 50px;}
-.progressbarto .progrssfld .fill-color .percantage:after { border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid #fc8c2a; content: ""; left: 50%; margin-left: -8px; position: absolute; top: 100%;}
-.progressbarto strong {font-size: 13px; width: 100%; text-align: center; display: inline-block; margin: 9px 0 6px 0px;}
-
-.modal_resume_bg .modal{width:70%; margin: 0px; margin:20px auto;}
+/*Add CSS 14-05-2018*/
 
 
 
 
 
-/*.modal_resume_bg .modal-body{overflow: inherit !important;}*/
-
-.modal_resume_bg .modal .modal-body{padding:0px;}
-
-.modal_resume_bg .close{position: absolute; right:20px; z-index: 9;}
-
-.add_hight_text_area{height:130px !important; resize: none;}
-.common-top-dropdown:focus{outline: none;}
-.common-top-dropdown:hover{outline: none;}
-.common-top-dropdown img:focus{outline: none;}
-
-.account_input_text_center{text-align: center; margin:0px 0 0 0px;}
-.personal_detail_main_bg_responsive .nav-tabs > li > a{margin: 0px;}
-
-.text-area_hieght_employer textarea{height: 150px;}
-.job_title_job_discription_text{text-align: left !important; padding: 0 0 8px 0;}
-
-.des-job{max-height: 150px; overflow: hidden;}
-
-.facebook_icon_login_page{background: #4a63a6; border-radius: 4px; text-decoration: none; color: #fff; font-size: 10px; padding:3px 6px 3px 6px; display: inline-block; border: solid 1px #384d86;}
-.facebook_icon_login_page:hover{background: #384d86; color: #fff; text-decoration: none;}
-.facebook_icon_login_page:focus{color: #fff; text-decoration: none;}
-
-.linkdin_icon_login_page{background: #0281c4; border-radius: 4px; text-decoration: none; color: #fff; font-size: 10px; padding:3px 6px 3px 6px; display: inline-block; border: solid 1px #0770a8;}
-.linkdin_icon_login_page:hover{background: #0770a8; color: #fff; text-decoration: none;}
-.linkdin_icon_login_page:focus{color: #fff; text-decoration: none;}
 
 
-.google_plus_icon_login_page{background: #de4c35; border-radius: 4px; text-decoration: none; color: #fff; font-size: 10px; padding:3px 6px 3px 6px; display: inline-block; border: solid 1px #ba3b27;}
-.google_plus_icon_login_page:hover{background: #ba3b27; color: #fff; text-decoration: none;}
-.google_plus_icon_login_page:focus{color: #fff; text-decoration: none;}
-
-.login_sosial_btns_main_padding{padding: 0px;}
-
-.navbar-default .navbar-nav > li{display: inline-block; width: 100%;}
 
 
-.left-vvbbvv{margin: 0px; position: absolute; right:21px; top:3px; background: #fc8c2a; color: #fff; padding:2px 6px 2px 5px; font-size: 12px;}
 
-.completed_text_profile{float: right; color: #fff; width: auto; margin: -26px 12px 0 0; font-size: 13px; position: absolute; right: 0px;}
-
-.left-vvbbvv:after {border-left: 8px solid transparent; border-right: 8px solid transparent;
-    border-top: 8px solid #fc8c2a; content: ""; left: 50%; margin-left: -8px; position: absolute; top: 100%;}
-
-
-.navbar-default .navbar-nav > li:hover .left-vvbbvv{background: #fff; color: #000;}
-.navbar-default .navbar-nav > li:hover .left-vvbbvv:after{border-top: 8px solid #fff;}
-
-.edit_candidate .form_bg_color_main_sections{border: solid 1px #ccc; padding: 15px; max-width: 100% !important; border-radius: 0px;}
-.edit_candidate .bg_color_main_forms{background: #eeecec; padding: 20px 0 10px 0; border: solid 1px #ccc; width: 48%; margin-right: 1.60%;}
-
-.edit_candidate .bg_color_main_forms_to{background: #eeecec; padding: 20px 0 10px 0; border: solid 1px #ccc;}
-
-.save_ipades_btn_removesss{margin: 0px; display: inline-block; width: 100%; text-align: right;}
-
-.bg_color_main_forms_three{background: #eeecec; padding: 20px 0 10px 0; border: solid 1px #ccc;}
-
-.form-horizontal h4 .profile_text{display: inline-block; margin:31px 0 0 0px;}
-
-.border_certificate_main_bg{border: solid 1px #ccc; padding: 15px; max-width: 100% !important; border-radius: 0px;}
-
-.col-md-12.col-sm-12.margin-20.padding_lbl_threee {padding: 0px;}
-
-.edit_candidate #accordion{margin-top:15px;}
-
-.rgv_color_bg_main{background: #eeecec; padding: 20px 0 10px 0; border: solid 1px #ccc; width: 48%; margin-right: 1.90%;}
-#AddSkills form{margin: 0px;}
-
-.border_certificate_main_bg .margin-20{margin: 0px;}
-
-.rgv_color_bg_main_to{background: #eeecec; padding: 20px 0 10px 0; border: solid 1px #ccc; margin-bottom: 20px;}
-
-.add_slill_bg_border_style{background: #eeecec; padding: 20px 0 0px 0 !important; border: solid 1px #ccc; margin-bottom: 20px;}
-
-.border_slill_info_cantener{border: solid 1px #ccc; padding: 15px;}
-
-.employment_bg_form{padding: 15px; border: solid 1px #ccc;}
-.employment_bg_form .tab-content table.table{margin: 0 auto;}
-
-.employment_bg_formemployment_bg_form{padding: 15px; border: solid 1px #ccc;}
-
-.bg_color_employment_left_bg{background: #eeecec; padding:15px; border: solid 1px #ccc;}
-.bg_color_employment_left_bg_one{background: #eeecec; padding:15px; border: solid 1px #ccc; width:48%; margin-right: 1.60%;}
-
-.bg_color_employment_left_bg .form-group{margin: 0px;}
-.bg_color_employment_left_bg_one .form-group{ margin: 0px; margin-bottom: 14px;}
-
-.media-body .des-job p{font-size: 15px !important;}
-
-.container_check{margin: 13px 0 0 0px !important; width:100% !important;}
-.container_check{display: block; position: relative; padding-left:27px; margin-bottom: 24px; margin-top: 5px; cursor: pointer; font-size: 16px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; text-align: left !important; padding-top: 0px !important; color: #8f9295; font-family: 'Montserrat regular'; font-weight: normal;}
-.container_check input {position: absolute; opacity: 0;}
-.checkmark {position: absolute; top: 0; left: 0; height:19px; width:19px; background-color: #fff; border: 2px solid #bdbdbd; border-radius: 4px;}
-.container_check input:checked ~ .checkmark {background-color: #fff; border-color: #1b1d1d;}
-.checkmark:after {content: ""; position: absolute; display: none;}
-.container_check input:checked ~ .checkmark:after {display: block;}
-.container_check .checkmark:after {left: 2px; top:1px; font-family: 'FontAwesome'; content: "\f00c"; font-size: 11px; color: #1b1d1d;}
-
+/*sfsfdsfdfdfdff*/
 
 
 @media only screen and (max-width: 1600px) {
@@ -871,33 +758,10 @@ input:focus{outline: none !important;}
 }
 
  @media only screen and (max-width:1600px) {
-	 .form-horizontal .nav-tabs > li > a{padding: 15px 18.68px;}
+
 }
 @media only screen and (min-width:992px) and (max-width:1199px) {
-	.common-right-block a.warning-verification{right:50px;}
-	.table-responsive {overflow-x: auto;}
-	label.cutom-label a{word-wrap: break-word;}
-	.form-horizontal .nav > li.active a{margin: 0px;}
-	.padding_lbl_threee{padding: 0px;}
-	.edit_candidate .right-box.form-horizontal{margin: 0px auto 0;}
-	 .form-horizontal .form-group{margin: 0; margin-bottom: 15px;}
-	.academic{padding: 0px;}
-	.academic input.academic-create-btn.btn.btn-default{margin: 0px;}
-	.remove_padding_ipades{padding: 0px;}
-	.tab-content table.table{max-width:100%;}
-	.careet_tab_save_btn_padding{padding: 0 15px 0 15px;}
-	.apply_job_tbl_responsive{min-height: .01%; overflow-x: auto;}
-	
-	.margin_resetmail_mobile{padding: 0 15px 0 15px; margin: 0 0 15px 0px;}
-	 .refrence_one_text{padding: 0 15px 0 15px !important; font-weight: bold; font-size: 15px !important;}
-	 .save_btn_refrence_tabs_style{margin:0 0px 0 -15px;}
-	 .resent_main_blue_color{width: auto !important;}
-	.margin-top_ipad__m{margin: 0px;}
-	.save_ipades_btn_removesss{margin: 0px 0 0 -15px;}
-	.edit_candidate .bg_color_main_forms_to{margin: 20px 0 0 0px;}
-	.rgv_color_bg_main{padding:15px !important; margin-bottom: 15px;}
-	.rgv_color_bg_main_to{padding:15px !important;}
-	.add_slill_bg_border_style{padding:15px !important;}
+
 
 }
  @media only screen and (min-width:768px) and (max-width:991px) {
@@ -908,55 +772,13 @@ input:focus{outline: none !important;}
 	 .gry .dashboard input#locality[type="text"]{width:100%;}
 	 .gry .dashboard input[type="text"], .dashboard select{width:100%;}
 	 .form-horizontal .media-body h4{padding: 15px;}
-	 .form-horizontal.edit-candidate-cv{margin:0 auto;}
+	 .form-horizontal.edit-candidate-cv{margin:0px;}
 	 .gry .dashboard .flex{display: inline-block; width: 100%; margin: 0px 0 11px 0px;}
 	 .gry .table-responsive {overflow-x: scroll;}
 	 .common-round-shape{margin: 36px 2px 0 0px;}
 	 .gry .form-horizontal{max-width:96%; margin-top: 13px;}
 	 .add_ipad_heder{width:50%; padding-top:30px;}
-	 .thankyou_page_main_bg{width:90%;}
-	 .common-right-block a.warning-verification{right:38px;}
-	 .common-right-block{margin: 28px 0 0px; width: 340px;}
-	 label.cutom-label a{word-wrap: break-word;}
-	 
-	 .personal_detail_main_bg_responsive .nav-tabs{width: auto;}
-	 .personal_detail_main_bg_responsive .nav-tabs > li > a{padding: 15px 25.68px;}
-	 .personal_detail_main_bg_responsive .tab-content{width:100%;}
-	
-	 .personal_detail_main_bg_responsive .nav-tabs > li{margin: 0 0 1px; width: auto;}
-	 
-	 .edit_candidate .right-box.form-horizontal{max-width:100%;}
-	 .personal_detail_main_bg_responsive .padding_none_responsive_may_profile{padding:0px;}
-	 .ipad_choce_file_class{padding:0px;}
-	 .gry .dashboard .save_btn_ipad_design{width:auto; margin: 0px !important;}
-	 
-	 .padding_lbl_threee{padding: 0px;}
-	.edit_candidate .right-box.form-horizontal{margin: 0px auto 0;}
-	 .form-horizontal .form-group{margin: 0; margin-bottom: 15px;}
-	.academic{padding: 0px;}
-	.academic input.academic-create-btn.btn.btn-default{margin: 0px; width: auto;}
-	 .personal_detail_main_bg_responsive .nav-tabs{margin-bottom: 10px;}
-	 .remove_padding_ipades{padding: 0px;}
-	 .tab-content table.table{max-width:100%;}
-	 .certificate_tab_main .table td {white-space: nowrap;}
-	 .personal_detail_main_bg_responsive .nav-tabs > li > a{margin: 0px;}
-	 
-	 .careet_tab_save_btn_padding{padding: 0 15px 0 15px;}
-	 .apply_job_tbl_responsive{min-height: .01%; overflow-x: auto;}
-	 .certificate_tab_main{min-height: .01%; overflow-x: auto; width: 100%;}
-	 
-	 .margin_resetmail_mobile{padding: 0 15px 0 15px; margin: 0 0 15px 0px;}
-	 .refrence_one_text{padding: 0 15px 0 15px !important; font-weight: bold; font-size: 15px !important;}
-	 .save_btn_refrence_tabs_style{margin:0 15px 0 0px;}
-	 .resent_main_blue_color{width: auto !important;}
-	 .margin-top_ipad__m{margin: 0px;}
-	 .edit_candidate .bg_color_main_forms{padding: 0px; background: none; border: none; width: 100%;}
-	 .edit_candidate .bg_color_main_forms_to{padding: 0px; border: none; background: none;}
-	 .save_ipades_btn_removesss{margin: 0px 0 0 -15px;}
-	 
-	  .rgv_color_bg_main_to{background: none; border: none;}
-	 .rgv_color_bg_main{background: none; border: none; margin: 0px;}
-	 .add_slill_bg_border_style{background:none; border:none; margin-bottom:0px; padding: 0px !important;}
+	 .common-right-block{}
 	 
 }
  @media only screen and (max-width:767px) {
@@ -982,49 +804,11 @@ input:focus{outline: none !important;}
 	 .form-horizontal.edit-candidate-cv{margin:0px;}
 	 .edit-candidate-cv .table-das{padding: 0px;}
 	 .edit-candidate-cv{margin: 50px 0 0 0px !important;}
-	 
-	 .thankyou_page_main_bg{width:100%;}
-	 .thankyou_page_main_bg form{margin: 10px 0 0px 0px;}
-	 .thankyou_page_main_bg .otp-form input.form-control{width:100%; margin-bottom: 20px;}
-	 
-	 span.job-view-title{margin: 15px 0 0 0px; display: inline-block; width: 100%; font-size: 19px;}
-	 .form-horizontal h4{display: inline-block; margin: 0 0 15px; width: 100%; padding: 17px 15px 18px;}
-	 .form-horizontal h4 i{float: left; margin: 19px 0 0 0px; width:100%;}
-	 label.cutom-label a{word-wrap: break-word;}
-	 .form-horizontal.edit-candidate-cv .edit-candidate-cv-btn{position: relative; right: 0px; top:0px;}
-	 
-	 .personal_detail_main_bg_responsive .nav-tabs{width:95%; margin: 0 auto; float: none;}
-	 .personal_detail_main_bg_responsive .nav-tabs > li > a{padding: 15px 25.68px; margin: 0px;}
-	 .personal_detail_main_bg_responsive .tab-content{width:100%;}
-	 .personal_detail_main_bg_responsive .padding_none_responsive_may_profile{padding: 0px;}
-	 .panel-group .panel.panel-default .panel-heading h4.panel-title a.accordion-toggle.collapsed{padding: 10px 20px 10px 20px;}
-	 
-	 .padding_lbl_threee{padding: 0px;}
-	 .padding_lbl_to{padding: 0px;}
-	 .padding_lbl_one{padding: 0px;}
-	 .top_margin_schkoolname{margin-top: 13px !important;}
-	 .none_hr_tag{display: none;}
-	 .progressbarto{max-width:93%; min-width:93%; margin-right: 21px;}
-	 .certificate_tab_main{overflow-x: auto;}
-	 .certificate_tab_main .table th{white-space: nowrap;}
-	 .certificate_tab_main .table td{white-space: nowrap;}
-	 .candidate-apply .apply_job_ttle_add_hdng{padding: 17px 15px 18px 16px;}
-	 .form-horizontal.edit-candidate-cv.candidate-apply table.table{font-size:15px;}
-	 
-	 .margin_resetmail_mobile{padding: 0 15px 0 15px; margin: 0 0 15px 0px;}
-	 .refrence_one_text{padding: 0 15px 0 15px !important; font-weight: bold; font-size: 15px !important;}
-	 .edit_candidate .bg_color_main_forms{padding: 0px; background: none; border: none; width: 100%;}
-	 .edit_candidate .bg_color_main_forms_to{padding: 0px; border: none; background: none;}
-	 
-	 .rgv_color_bg_main_to{background: none; border: none;}
-	 .rgv_color_bg_main{background: none; border: none; margin: 0px;}
-	 .add_slill_bg_border_style{background:none; border:none; margin-bottom:0px;}
-	 
 
 }
  @media only screen and (max-width:480px) {
-.common-right-block a.warning-verification{right:-20px;}
+
 }
  @media only screen and (max-width: 320px) {
-	 .common-right-block a.warning-verification{right:30px;}
+
 }

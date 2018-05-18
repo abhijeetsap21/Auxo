@@ -20,7 +20,7 @@
     <div class="container">
         <div class="row sub-container">
             
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12 employment_bg_formemployment_bg_form">
 
                 <div class="right-box">
 
@@ -38,7 +38,7 @@
                                             <th>Company Name</th>
                                             <th>Designation</th>
                                             <th>Date</th>
-                                            <th>Edit</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody id="certificatelistbody">
@@ -50,7 +50,14 @@
 
                                                 <td>@data.CompanyName</td>
                                                 <td>@data.qenPosition</td>
-                                                <td>@data.qenEmpFrom.Value.ToString("dd/MM/yyyy") <b>To</b> @data.qenEmpTo.Value.ToString("dd/MM/yyyy")</td>
+                                                @if (data.qenEmpTo.Value.ToString("dd/MM/yyyy") == "01/01/1900")
+                                                {
+                                                <td>@data.qenEmpFrom.Value.ToString("dd/MM/yyyy") <b>To</b> Present</td>
+                                                }
+                                                else
+                                                {
+                                                <td>@data.qenEmpFrom.Value.ToString("dd/MM/yyyy") <b>To</b> @data.qenEmpTo.Value.ToString("dd/MM/yyyy")</td> 
+                                                }
 
                                                 <td>
                                                     <a onclick="return editemployment(@data.qenEmploymentNum);"><i class="glyphicon glyphicon-edit"></i></a>

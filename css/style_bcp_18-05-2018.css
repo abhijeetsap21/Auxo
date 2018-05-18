@@ -564,9 +564,8 @@ tr.brdr-btm {border-bottom: 1px solid #ccc;}
 .form-horizontal.job-view-padd {margin-bottom: 50px;}
 .popup-error span {float: left;width: auto;margin: 0 0 0 15px;}
 .common-round-shape span.count {position: relative;top: 0;}
-.form-horizontal.edit-candidate-cv.candidate-apply table.table {padding: 0 40px;width: 100%;max-width: 95%;margin: 0 auto;border-right: 1px solid #ccc;border-left: 1px solid #ccc;border-bottom: 1px solid #ccc; font-size: 14px;}
+.form-horizontal.edit-candidate-cv.candidate-apply table.table {padding: 0 40px;width: 100%;max-width: 95%;margin: 0 auto;border-right: 1px solid #ccc;border-left: 1px solid #ccc;border-bottom: 1px solid #ccc;}
 .form-horizontal.edit-candidate-cv.candidate-apply table.table tr th, .form-horizontal.edit-candidate-cv.candidate-apply table.table tr td {border:1px solid #ccc;}
-.form-horizontal.edit-candidate-cv.candidate-apply table.table tr th{text-transform: capitalize;}
 .form-horizontal.edit-candidate-cv.candidate-apply table.table tr th {background: #282c75;color: #fff;}
 .form-horizontal.edit-candidate-cv.profile-performance {width: 50%;}
 .job-view-padd table tr td.cmpny {overflow-y: scroll;height: 65px;vertical-align: middle;display: flex;align-items: center;}
@@ -689,7 +688,7 @@ input:focus{outline: none !important;}
 .common-top-dropdown:hover{outline: none;}
 .common-top-dropdown img:focus{outline: none;}
 
-.account_input_text_center{text-align: center; margin:0px 0 0 0px;}
+.account_input_text_center{text-align: center; margin: 20px 0 0 0px;}
 .personal_detail_main_bg_responsive .nav-tabs > li > a{margin: 0px;}
 
 .text-area_hieght_employer textarea{height: 150px;}
@@ -743,40 +742,10 @@ input:focus{outline: none !important;}
 
 .edit_candidate #accordion{margin-top:15px;}
 
-.rgv_color_bg_main{background: #eeecec; padding: 20px 0 10px 0; border: solid 1px #ccc; width: 48%; margin-right: 1.90%;}
+.rgv_color_bg_main{background: #eeecec; padding: 20px 0 10px 0; border: solid 1px #ccc;}
 #AddSkills form{margin: 0px;}
 
 .border_certificate_main_bg .margin-20{margin: 0px;}
-
-.rgv_color_bg_main_to{background: #eeecec; padding: 20px 0 10px 0; border: solid 1px #ccc; margin-bottom: 20px;}
-
-.add_slill_bg_border_style{background: #eeecec; padding: 20px 0 0px 0 !important; border: solid 1px #ccc; margin-bottom: 20px;}
-
-.border_slill_info_cantener{border: solid 1px #ccc; padding: 15px;}
-
-.employment_bg_form{padding: 15px; border: solid 1px #ccc;}
-.employment_bg_form .tab-content table.table{margin: 0 auto;}
-
-.employment_bg_formemployment_bg_form{padding: 15px; border: solid 1px #ccc;}
-
-.bg_color_employment_left_bg{background: #eeecec; padding:15px; border: solid 1px #ccc;}
-.bg_color_employment_left_bg_one{background: #eeecec; padding:15px; border: solid 1px #ccc; width:48%; margin-right: 1.60%;}
-
-.bg_color_employment_left_bg .form-group{margin: 0px;}
-.bg_color_employment_left_bg_one .form-group{ margin: 0px; margin-bottom: 14px;}
-
-.media-body .des-job p{font-size: 15px !important;}
-
-.container_check{margin: 13px 0 0 0px !important; width:100% !important;}
-.container_check{display: block; position: relative; padding-left:27px; margin-bottom: 24px; margin-top: 5px; cursor: pointer; font-size: 16px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; text-align: left !important; padding-top: 0px !important; color: #8f9295; font-family: 'Montserrat regular'; font-weight: normal;}
-.container_check input {position: absolute; opacity: 0;}
-.checkmark {position: absolute; top: 0; left: 0; height:19px; width:19px; background-color: #fff; border: 2px solid #bdbdbd; border-radius: 4px;}
-.container_check input:checked ~ .checkmark {background-color: #fff; border-color: #1b1d1d;}
-.checkmark:after {content: ""; position: absolute; display: none;}
-.container_check input:checked ~ .checkmark:after {display: block;}
-.container_check .checkmark:after {left: 2px; top:1px; font-family: 'FontAwesome'; content: "\f00c"; font-size: 11px; color: #1b1d1d;}
-
-
 
 @media only screen and (max-width: 1600px) {
 	body {font-size: 13px;}
@@ -895,9 +864,6 @@ input:focus{outline: none !important;}
 	.margin-top_ipad__m{margin: 0px;}
 	.save_ipades_btn_removesss{margin: 0px 0 0 -15px;}
 	.edit_candidate .bg_color_main_forms_to{margin: 20px 0 0 0px;}
-	.rgv_color_bg_main{padding:15px !important; margin-bottom: 15px;}
-	.rgv_color_bg_main_to{padding:15px !important;}
-	.add_slill_bg_border_style{padding:15px !important;}
 
 }
  @media only screen and (min-width:768px) and (max-width:991px) {
@@ -954,10 +920,6 @@ input:focus{outline: none !important;}
 	 .edit_candidate .bg_color_main_forms_to{padding: 0px; border: none; background: none;}
 	 .save_ipades_btn_removesss{margin: 0px 0 0 -15px;}
 	 
-	  .rgv_color_bg_main_to{background: none; border: none;}
-	 .rgv_color_bg_main{background: none; border: none; margin: 0px;}
-	 .add_slill_bg_border_style{background:none; border:none; margin-bottom:0px; padding: 0px !important;}
-	 
 }
  @media only screen and (max-width:767px) {
 	 .text_center_powered{text-align: center !important;}
@@ -1004,7 +966,7 @@ input:focus{outline: none !important;}
 	 .padding_lbl_one{padding: 0px;}
 	 .top_margin_schkoolname{margin-top: 13px !important;}
 	 .none_hr_tag{display: none;}
-	 .progressbarto{max-width:93%; min-width:93%; margin-right: 21px;}
+	 .progressbarto{max-width: 100%; min-width: 100%;}
 	 .certificate_tab_main{overflow-x: auto;}
 	 .certificate_tab_main .table th{white-space: nowrap;}
 	 .certificate_tab_main .table td{white-space: nowrap;}
@@ -1015,10 +977,6 @@ input:focus{outline: none !important;}
 	 .refrence_one_text{padding: 0 15px 0 15px !important; font-weight: bold; font-size: 15px !important;}
 	 .edit_candidate .bg_color_main_forms{padding: 0px; background: none; border: none; width: 100%;}
 	 .edit_candidate .bg_color_main_forms_to{padding: 0px; border: none; background: none;}
-	 
-	 .rgv_color_bg_main_to{background: none; border: none;}
-	 .rgv_color_bg_main{background: none; border: none; margin: 0px;}
-	 .add_slill_bg_border_style{background:none; border:none; margin-bottom:0px;}
 	 
 
 }

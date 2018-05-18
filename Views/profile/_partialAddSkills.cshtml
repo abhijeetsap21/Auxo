@@ -7,11 +7,11 @@
     @Html.HiddenFor(m => m.qenSkillsID)
     @Html.HiddenFor(m => m.qenID)
 
-    <div class="col-md-12 col-sm-12 margin-20 padding_lbl_threee">
+    <div class="col-md-12 col-sm-12 margin-20 padding_lbl_threee add_slill_bg_border_style">
         <div class="col-md-6 col-sm-12 padding_lbl_threee">
             <div class="col-md-12 col-sm-12 padding_lbl_threee">
                 <div class="form-group">
-                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">skill:</label>
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Skill: </label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
                         @Html.TextBoxFor(model => model.skillName, new { maxlength = "100" })
                         @Html.ValidationMessageFor(model => model.skillName, "", new { @class = "text-danger" })
@@ -22,7 +22,7 @@
         <div class="col-md-6 col-sm-12 padding_lbl_threee">
             <div class="col-md-12 col-sm-12 padding_lbl_threee">
                 <div class="form-group">
-                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">year of Exp:</label>
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Year of Exp:</label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
                         @Html.TextBoxFor(model => model.yearOfExp, new { maxlength = "100" })
                         @Html.ValidationMessageFor(model => model.yearOfExp, "", new { @class = "text-danger" })
