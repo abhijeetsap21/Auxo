@@ -475,6 +475,22 @@ namespace NewLetter.Models
 
             return result;
         }
+        
+
+
+        //for month wise count 
+        public static Tuple <int,int,int> ok()
+        {
+            int viewCount, DownloadCount, contactCount;
+            long userID = Convert.ToInt64(BaseUtil.GetSessionValue(AdminInfo.UserID.ToString()));
+            var AppliedJob = db.ProfilePerformances.Where(e => e.dataIsCreated.Month == DateTime.Now.Month && e.qenID == userID).OrderByDescending(e => e.dataIsCreated);          
+            
+            viewCount = AppliedJob.Where(e => e.ViewedDate != null).Count();
+            DownloadCount = AppliedJob.Where(e => e.Downloaded != null).Count();
+            contactCount = AppliedJob.Where(e => e.Contacted != null).Count();
+            return new Tuple<int, int, int> (viewCount, DownloadCount, contactCount);
+
+        }
 
         // Check matching variables 
 
@@ -826,6 +842,8 @@ namespace NewLetter.Models
             }
             return encryptString;
         }
+
+       
 
         public static int getProfileCompletePercentage(string qenID)
         {

@@ -48,6 +48,7 @@
 </script>
 <div class="form-horizontal edit-candidate-cv modal_resume_bg">
  <h4><span class="profile_text">Profile</span>
+  <a class="share_linkdin_btn" onclick="return share();">Post on Linkedin</a>
 			
 			<input type="button" class="btn btn-info btn-lg edit-candidate-cv-btn" data-toggle="modal" data-target="#myModal" value="View" onclick="return dispalyResume(@qenID);" />
 <div class="progressbarto">
@@ -179,6 +180,16 @@
                 }         
 
     );
+    </script>
+	
+	 <script>
+        function share() {
+            // Opens a pop-up with a Linkedin share dialog
+
+            var url = "https://spotaneedle.com";          
+            
+            window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(url), '', 'left=0,top=0,width=650,height=420,personalbar=0,toolbar=0,scrollbars=0,resizable=0');
+        }
     </script>
 
 

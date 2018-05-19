@@ -114,6 +114,8 @@
         //} && sDate > eDate
 
         if (StartDate != '' && EndDate != '' && StartDate > EndDate) {
+            document.getElementById('qenEmpFrom').value = null
+            document.getElementById('qenEmpTo').value = null
             debugger
             bootbox.alert({
                 title: 'Alert Success  !',

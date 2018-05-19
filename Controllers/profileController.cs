@@ -1204,6 +1204,8 @@ namespace NewLetter.Controllers
             return View(AppliedJob.ToList());
         }
 
+        
+
         [HttpGet]
         public ActionResult ProfilePerformance()
         {

@@ -8,15 +8,24 @@
     var companyname = BaseUtil.GetSessionValue(AdminInfo.companyname.ToString());
     var logo = BaseUtil.GetSessionValue(AdminInfo.logo.ToString());
 }
-@{ 
+@{
     var emailV = "";
     var phoneV = "";
-	var perc = "";
+    var perc = "";
+    var viewCount = "";
+    var downloadCount = "";
+    var contactCount = "";
     if (roleID == "5")
     {
         emailV = BaseUtil.GetSessionValue(AdminInfo.emailVerified.ToString());
         phoneV = BaseUtil.GetSessionValue(AdminInfo.mobileVerified.ToString());
-		perc = BaseUtil.getProfileCompletePercentage(userID).ToString();
+        perc = BaseUtil.getProfileCompletePercentage(userID).ToString();
+        Tuple <int,int,int> tuples = BaseUtil.ok();
+        viewCount = tuples.Item1.ToString();
+        downloadCount = tuples.Item2.ToString();
+        contactCount = tuples.Item3.ToString();
+
+
     }
 }
 <head>
@@ -26,7 +35,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Auxo - Employer</title>
     <!-- Bootstrap -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="~/css/bootstrap.css" rel="stylesheet">
     <link href="~/css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
@@ -89,46 +98,46 @@
             </div>
             <div class="col-md-6 col-sm-4 col-xs-12 common-qe-logo-block">
                 <div class="col-md-12 common-right-block">
-                @{ if (roleID != "5")
-                    {
-                         if (logo != "")
+                    @{ if (roleID != "5")
                         {
-                        <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src='@logo'></span><span class="common-user-loggedin-name">@companyname</span></div>
-                        }
-                        else
-                        {
-                        <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src="~/images/user_icon_pic.png"></span><span class="common-user-loggedin-name">@companyname</span></div>
+                            if (logo != "")
+                            {
+                                <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src='@logo'></span><span class="common-user-loggedin-name">@companyname</span></div>
+                            }
+                            else
+                            {
+                                <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src="~/images/user_icon_pic.png"></span><span class="common-user-loggedin-name">@companyname</span></div>
+                            }
                         }
                     }
-                }  
-					@if (logo != "")
+                    @if (logo != "")
                     {
-                    <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src='@logo' style="width:35px"></span><span class="common-user-loggedin-comp">@fullName </span></div>
+                        <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src='@logo' style="width:35px"></span><span class="common-user-loggedin-comp">@fullName </span></div>
                     }
                     else
                     {
                         <div class="common-user-loggedin common-logo-main"><span class="common-user-loggedin-pic"><img src="~/images/user_icon_pic.png" style="width:35px"></span><span class="common-user-loggedin-comp">@fullName </span></div>
-                    }                
-                    
-                    
-                        @if (emailV == "False" || phoneV == "False")
-                        {                            
-                           <a class="warning-verification atd_bg_color_wrning" href='@Url.Action("VerifyDetails", "profile")'>
-						   <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    }
 
-						   </a>                           
 
-                        }
-                    
+                    @if (emailV == "False" || phoneV == "False")
+                    {
+                        <a class="warning-verification atd_bg_color_wrning" href='@Url.Action("VerifyDetails", "profile")'>
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true" title="Your Mobile/Email needs verification"></i>
+
+                        </a>
+
+                    }
+
                     <div class="dropdown common-top-dropdown">
                         <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown"><img src="~/images/profile-icon.jpg"></button>
 
                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                             <li role="presentation"><a role="menuitem" tabindex="-1" onclick="location.href='@Url.Action("Logout", "Account", new { Area = "" })'">Sign Out</a></li>
                             @*<li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
-                            <li role="presentation" class="divider"></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>*@
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
+                                <li role="presentation" class="divider"></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>*@
                         </ul>
 
                     </div>
@@ -150,62 +159,88 @@
                                 {
                                     <li>@Html.ActionLink(" Dashboard", "Dashbord", "Employer")</li>
 
-                                    <li class="dropdown custom-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Jobs</a>
-										<ul class="dropdown-menu forAnimate" role="menu">
-											<li>@Html.ActionLink(" New Job", "jobDashboard", "jobDetails")</li>
-											<li>@Html.ActionLink(" Posted Jobs", "Myjobs", "jobDetails")</li>
-											<li>@Html.ActionLink(" Pending Jobs", "pendingJobs", "jobDetails")</li>
-											<li>@Html.ActionLink(" Advertisements", "jobPluginList", "jobDetails")</li>
-										</ul>
-									</li>
+                                    <li class="dropdown custom-menu">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jobs</a>
+                                        <ul class="dropdown-menu forAnimate" role="menu">
+                                            <li>@Html.ActionLink(" New Job", "jobDashboard", "jobDetails")</li>
+                                            <li>@Html.ActionLink(" Posted Jobs", "Myjobs", "jobDetails")</li>
+                                            <li>@Html.ActionLink(" Pending Jobs", "pendingJobs", "jobDetails")</li>
+                                            <li>@Html.ActionLink(" Advertisements", "jobPluginList", "jobDetails")</li>
+                                        </ul>
+                                    </li>
                                     <li>@Html.ActionLink(" Profile", "empedit", "companyDetails")</li>
-                                   
-                                    <li class="dropdown custom-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Add Colleague</a>
-										<ul class="dropdown-menu forAnimate" role="menu">
-											<li>@Html.ActionLink(" Colleague List", "Index", "NewEmployee")</li>
-											<li>@Html.ActionLink(" Add Colleague", "create", "NewEmployee")</li>
-										<ul>
-									</li>
+
+                                    <li class="dropdown custom-menu">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add Colleague</a>
+                                        <ul class="dropdown-menu forAnimate" role="menu">
+                                            <li>@Html.ActionLink(" Colleague List", "Index", "NewEmployee")</li>
+                                            <li>@Html.ActionLink(" Add Colleague", "create", "NewEmployee")</li>
+                                            <ul>
+                                    </li>
                                 }
                                 if (roleID == "5")
                                 {
-                                    <li>@Html.ActionLink("Profile", "editCandidate", "profile") <p class="left-vvbbvv">@perc%</p> <p class="completed_text_profile">Completed</p></li>
-                                    <li>@Html.ActionLink("Find Jobs ", "jobs", "jobDetails")</li>
-                                    <li>@Html.ActionLink("Profile Summary", "ProfilePerformance", "profile")</li>
-                                    <li>@Html.ActionLink("Applied Job", "AppliedJobs", "profile")</li>
+                                    <li><a href="~/profile/editcandidate"><i class="fa fa-user" aria-hidden="true"></i> Profile</a><p class="left-vvbbvv">@perc%</p> <p class="completed_text_profile">Completed</p></li>
+                                    <li><a href="~/jobDetails/jobs"><i class="fa fa-briefcase" aria-hidden="true"></i> Find Jobs</a></li>
+                                    <li><a href="~/profile/ProfilePerformance"><i class="fa fa-address-book-o" aria-hidden="true"></i> Profile Summary</a></li>
+                                    <li><a href="~/profile/AppliedJobs"><i class="fa fa-check" aria-hidden="true"></i> Applied Job</a></li>
 
                                 }
                                 if (roleID == "1" || roleID == "4")
                                 {
                                     <li>@Html.ActionLink("Education", "Index", "Education", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Candidate Status", "Index", "CandidateStatus", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Interview Slots", "Index", "Slots", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Slots Information  ", "SlotsInformation", "TimeSlots", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("BlockSlots  ", "BlockSlots", "TimeSlots", new { area = "Admin" }, null)</li>                                  
-									<li>@Html.ActionLink("tempBlockSlots  ", "tempBlockSlots", "TimeSlots", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Edit Your Details", "empedit", "companyDetails",new { area = "" }, null)</li>
-									<li>@Html.ActionLink(" View Posted Jobs ", "Myjobs", "jobDetails",new { area = "" }, null)</li>
-									if (roleID == "1")
+                                    <li>@Html.ActionLink("Candidate Status", "Index", "CandidateStatus", new { area = "Admin" }, null)</li>
+                                    <li>@Html.ActionLink("Interview Slots", "Index", "Slots", new { area = "Admin" }, null)</li>
+                                    <li>@Html.ActionLink("Slots Information  ", "SlotsInformation", "TimeSlots", new { area = "Admin" }, null)</li>
+                                    <li>@Html.ActionLink("BlockSlots  ", "BlockSlots", "TimeSlots", new { area = "Admin" }, null)</li>
+                                    <li>@Html.ActionLink("tempBlockSlots  ", "tempBlockSlots", "TimeSlots", new { area = "Admin" }, null)</li>
+                                    <li>@Html.ActionLink("Edit Your Details", "empedit", "companyDetails", new { area = "" }, null)</li>
+                                    <li>@Html.ActionLink(" View Posted Jobs ", "Myjobs", "jobDetails", new { area = "" }, null)</li>
+                                    if (roleID == "1")
                                     {
-										<li>@Html.ActionLink(" Add Colleague ", "#", "#")</li>
-										<li>@Html.ActionLink(" Colleague List ", "Index", "NewEmployee",new { area = "" }, null)</li>
-										<li>@Html.ActionLink(" Add Colleague ", "create", "NewEmployee",new { area = "" }, null)</li>
-										<li>@Html.ActionLink(" Pending Jobs ", "pendingJobs", "jobDetails",new { area = "" }, null)</li>
-										<li>@Html.ActionLink(" Created Advertisements ", "jobPluginList", "jobDetails",new { area = "" }, null)</li>
+                                        <li>@Html.ActionLink(" Add Colleague ", "#", "#")</li>
+                                        <li>@Html.ActionLink(" Colleague List ", "Index", "NewEmployee", new { area = "" }, null)</li>
+                                        <li>@Html.ActionLink(" Add Colleague ", "create", "NewEmployee", new { area = "" }, null)</li>
+                                        <li>@Html.ActionLink(" Pending Jobs ", "pendingJobs", "jobDetails", new { area = "" }, null)</li>
+                                        <li>@Html.ActionLink(" Created Advertisements ", "jobPluginList", "jobDetails", new { area = "" }, null)</li>
                                     }
-									<li>@Html.ActionLink("Skills", "Index", "Skills", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Roles", "Index", "Roles", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Job Status", "Index", "JobStatus", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Industry", "Index", "Industry", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Employer Master", "Index", "EmployerMaster", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Candidate Master", "Index", "CandidateMaster", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Company Master", "Index", "CompanyMaster", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Employment Type", "Index", "EmploymentTypes", new { area = "Admin" }, null)</li>
-									<li>@Html.ActionLink("Advertisements", "Index", "AdvertisementList", new { area = "Admin" }, null)</li>
+                                    <li>@Html.ActionLink("Skills", "Index", "Skills", new { area = "Admin" }, null)</li>
+                                    <li>@Html.ActionLink("Roles", "Index", "Roles", new { area = "Admin" }, null)</li>
+                                    <li>@Html.ActionLink("Job Status", "Index", "JobStatus", new { area = "Admin" }, null)</li>
+                                    <li>@Html.ActionLink("Industry", "Index", "Industry", new { area = "Admin" }, null)</li>
+                                    <li>@Html.ActionLink("Employer Master", "Index", "EmployerMaster", new { area = "Admin" }, null)</li>
+                                    <li>@Html.ActionLink("Candidate Master", "Index", "CandidateMaster", new { area = "Admin" }, null)</li>
+                                    <li>@Html.ActionLink("Company Master", "Index", "CompanyMaster", new { area = "Admin" }, null)</li>
+                                    <li>@Html.ActionLink("Employment Type", "Index", "EmploymentTypes", new { area = "Admin" }, null)</li>
+                                    <li>@Html.ActionLink("Advertisements", "Index", "AdvertisementList", new { area = "Admin" }, null)</li>
 
                                 }
                             }
                         </ul>
+                        @if (roleID == "5")
+                        {
+                            <div class="col_sm_left_boxis">
+                                <h4>This month</h4>
+                                <ul>
+                                    <li>
+                                        <b>@viewCount</b>
+                                        <span>Viewed</span>
+                                    </li>
+
+                                    <li>
+                                        <b>@downloadCount</b>
+                                        <span>Downloaded</span>
+                                    </li>
+
+                                    <li>
+                                        <b>@contactCount</b>
+                                        <span>Contacted</span>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        }
+
                     </div>
                 </nav>
             </div>
@@ -326,7 +361,7 @@
                 jqOld('div.n-yellow').css('display', 'none');
             })
             // hide notifications
-           
+
             // update notification
             function updateNotification() {
                 debugger
@@ -414,7 +449,7 @@
                 jqOld('span.count_download', this).html('&nbsp;');
                 jqOld('div.n-red').css('display', 'none');
             })
-          
+
             // update notification
             function updateNotification1() {
                 debugger
@@ -458,7 +493,7 @@
                 jqOld('span.count_view', this).html('&nbsp;');
                 jqOld('div.n-green').css('display', 'none');
             })
-            
+
             // update notification
             function updateNotification2() {
                 debugger

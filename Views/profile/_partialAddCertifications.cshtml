@@ -93,7 +93,7 @@
     });
 </script>
 
-        <script type="text/javascript">
+         <script type="text/javascript">
 
             function DateCheck2() {
                 debugger
@@ -106,10 +106,13 @@
                 //}
 
                 if (StartDate != '' && EndDate != '' && StartDate > EndDate) {
+                    document.getElementById('phdStart').value = null
+                    document.getElementById('phdEnd').value = null
                     debugger
                     bootbox.alert({
                         title: 'Alert Success  !',
                         message: 'Please ensure that the End Date is greater than or equal to the Start Date.'
+                        
                     });
 
                     return false;

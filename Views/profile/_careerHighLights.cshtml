@@ -13,7 +13,7 @@
         <div class="form-group">
             <label class="control-label col-md-12 col-sm-12 col-xs-12 left-label">Career Objective:</label>
             <div class="col-md-12 col-sm-12 col-xs-12">
-                @Html.TextAreaFor(m => m.careerObj, new { @class = "form-control add_hight_text_area", placeholder = "" })
+                @Html.TextAreaFor(m => m.careerObj, new { @class = "form-control add_hight_text_area", placeholder = "",maxlength=400 })
               @Html.ValidationMessageFor(m => m.careerObj, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -23,7 +23,7 @@
         <div class="form-group">
             <label class="control-label col-md-12 col-sm-12 col-xs-12 left-label">Career Highlights:</label>
             <div class="col-md-12 col-sm-12 col-xs-12">
-                @Html.TextAreaFor(m => m.careerHighLights, new { @class = "form-control add_hight_text_area", placeholder = "" })
+                @Html.TextAreaFor(m => m.careerHighLights, new { @class = "form-control add_hight_text_area", placeholder = "" ,maxlength=400})
                 @Html.ValidationMessageFor(m => m.careerHighLights, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -58,9 +58,36 @@ namespace NewLetter.Models
     public partial class qenHigherSecondary
     {
 
-    }    
+    }
 
-   
+    [MetadataType(typeof(HCValidateCertificate))]
+    public partial class qendidatePHD
+    {
+
+    }
+
+    public class HCValidateCertificate
+        {
+        [Required(ErrorMessage = "Certificate name is required")]
+        public string courseField { get; set; }
+
+        [Required(ErrorMessage = "Authority name is required")]
+        public string collegeUniversity { get; set; }
+
+        [Required(ErrorMessage = "Licence Number: is required")]
+        public string phdTitle { get; set; }
+
+        [Required(ErrorMessage = "Start date is required")]
+        public DateTime phdStart { get; set; }
+
+        [Required(ErrorMessage = "End date is required")]
+        public DateTime phdEnd { get; set; }
+
+        
+
+    }
+
+
 
     public class jobDetailsvalidation
     {
