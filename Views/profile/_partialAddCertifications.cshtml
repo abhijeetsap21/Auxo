@@ -88,7 +88,9 @@
     jold(document).ready(function () {
 
         jold('.datepicker').datepicker({
-            dateFormat: 'mm/dd/yy'  // CHANGE DATE FORMAT.
+            dateFormat: 'mm/dd/yy' , // CHANGE DATE FORMAT.
+			changeMonth: true,
+        changeYear: true
         });
     });
 </script>
@@ -114,13 +116,13 @@
                     bootbox.alert({
                         title: 'Alert Success  !',
                         message: 'Please ensure that the End Date is greater than or equal to the Start Date.'
-
+                        
                     });
 
                     return false;
                 }
             }
-</script>
+        </script>
         <script>
             function convertToDate(str) {
                 debugger

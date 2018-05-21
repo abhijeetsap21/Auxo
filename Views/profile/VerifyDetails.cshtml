@@ -14,15 +14,23 @@
 	@{
 		if (emailV == "False")
 		{
-		<input type="button" class="previous btn btn-default action-button" value="Resend Activation Email" onclick="return resendActivationEmail();" id="resendEmailer" />
-		
+		<p class="emailnotverified">
+			Dear Candidate, verified profiles are first to be picked up by employers. Verified Profiles are marked separately while your details are being displayed.
+			Please click on resend button and activate your profile by clicking on the link in the email.
+		</p>
+		<input type="button" class="previous btn btn-default action-button" value="Resend Activation Email" onclick="return resendActivationEmail();" id="resendEmailer" />		
 		<label style="display:none;" id="emailResendResult"></label>
+		
 		}
 	}
 
 	@{
 		if (phoneV == "False")
 		{
+		<p class="emailnotverified">
+			Dear Candidate, verified profiles are first to be picked up by employers. Verified Profiles are marked separately while your details are being displayed.
+			Please enter the OTP received on your phone to verify your phone number. In case you have not received , please click on the resend OTP button.
+		</p>
 		
 		<input type="button" class="previous btn btn-default action-button" value="Resend OTP" onclick="return resendOTP();" id="resend" />
 		

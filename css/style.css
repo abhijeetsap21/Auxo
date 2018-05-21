@@ -668,9 +668,9 @@ input:focus{outline: none !important;}
 .progressbarto .progrssfld .line { background-color: #e3e3e3; clear: both; float: left; height: 7px; width: 100%;}
 .progressbarto .progrssfld .fill-color {background-color: #fc8c2a; height: 7px; position: absolute; top: 43px; width: 43%;}
 .progressbarto .progrssfld .fill-color span {background-color: #fff; border-radius: 50%; box-shadow: 0 1px 3px 1px rgba(0,0,0,0.2); height: 11px; position: absolute; right: -6px; top: -2px; width: 11px;}
-.progressbarto .progrssfld .fill-color .percantage { background-color: #fc8c2a; bottom: 23px; color: #fff; font-size: 12px; line-height: 22px; position: absolute; right: -25px; text-align: center; width:44px;}
+.progressbarto .progrssfld .fill-color .percantage { background-color: #fc8c2a; bottom: 23px; color: #fff; font-size: 11px; line-height: 20px; position: absolute; right: -25px; text-align: center; width:42px;}
 .progressbarto .progrssfld .fill-color .percantage:after { border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid #fc8c2a; content: ""; left: 50%; margin-left: -8px; position: absolute; top: 100%;}
-.progressbarto strong {font-size: 13px; width: 100%; text-align: center; display: inline-block; margin: 9px 0 6px 0px;}
+.progressbarto strong {font-size: 12px; width: 100%; text-align: center; display: inline-block; margin:4px 0 0px 0px;}
 
 .modal_resume_bg .modal{width:70%; margin: 0px; margin:20px auto;}
 
@@ -735,7 +735,7 @@ input:focus{outline: none !important;}
 
 .bg_color_main_forms_three{background: #eeecec; padding: 20px 0 10px 0; border: solid 1px #ccc;}
 
-.form-horizontal h4 .profile_text{display: inline-block; margin:31px 0 0 0px;}
+.form-horizontal h4 .profile_text{display: inline-block; margin:26px 0 0 0px;}
 
 .border_certificate_main_bg{border: solid 1px #ccc; padding: 15px; max-width: 100% !important; border-radius: 0px;}
 
@@ -787,7 +787,8 @@ input:focus{outline: none !important;}
 .career_tab_border_form .form-group{margin:2px 0 10px 0px;}
 .careet_tab_save_btn_padding .btn-default{margin: 0px !important;}
 
-.bg_left_acadmic_detail_bordersf{border: solid 1px #ccc; background: #eeecec; padding-top: 15px; margin-right: 1.60%; width: 48%; margin-bottom:5px; min-height: 168px;}
+.bg_left_acadmic_detail_bordersf{border: solid 1px #ccc; background: #eeecec; padding-top: 15px; margin-right: 1.60%; width: 48%; margin-bottom:5px; min-height: 217px;}
+.bg_left_acadmic_detail_bordersf_to{min-height: 217px;}
 .bg_left_acadmic_detail_bordersf .form-group{margin: 0px; margin-bottom: 15px;}
 
 .bg_left_acadmic_detail_bordersf_to{border: solid 1px #ccc; background: #eeecec; padding-top: 15px; margin-bottom:5px;}
@@ -832,9 +833,19 @@ input:focus{outline: none !important;}
 .navbar-default .navbar-nav > li > a:hover i{background: #fff; color: #e97b27;}
 
 .share_linkdin_btn{text-decoration: none; cursor: pointer; background: #007bb5; color: #fff; margin: 0 0 0 20px; padding: 8px 15px 8px 15px; border-radius: 4px; font-size: 13px; }
-.share_linkdin_btn:hover{background: #006a9c; color: #fff;}
+.share_linkdin_btn:hover{background: #006a9c; color: #fff; text-decoration: none;}
+
+.user_large_profile_pic{width:205px; height:205px; float:right;}
+
+.form-group i.glyphicon:hover span.location-tooltip{left: -116px;}
 
 
+
+
+.forgot_password_bg_page_url{margin: 0 auto; width:40%; float: none; background: #fff; padding: 10px 30px 18px 30px; margin-top: 50px; border-radius: 5px; text-align: center;}
+
+.forgot_password_bg_page_url h2{margin: 0px; padding:10px 0 10px 0; font-size: 26.12px; color: #4a4dd0;}
+.forgot_password_bg_page_url h4{padding: 0px 0 0 0px;}
 
 
 @media only screen and (max-width: 1600px) {
@@ -844,6 +855,7 @@ input:focus{outline: none !important;}
 	.company-logo-img input#photoA[type="file"]::-webkit-file-upload-button {padding: 6px 10px;font-size: 14px;}
 	.col_sm_left_boxis ul li{width:71px;}
 	.col_sm_left_boxis ul li span{font-size:11px;}
+	.user_large_profile_pic{margin: 10px 0 0 0px;}
 }
 @media only screen and (max-width:1440px){
 	h2.thankyou-title{font-size:22px;}
@@ -970,10 +982,16 @@ input:focus{outline: none !important;}
 	.width_ipade_year_exp{width:100%;}
 	.career_tab_border_form{padding: 12px 0 0 0px;}
 	.edit_candidate .bg_color_main_forms_to .save_btn_ipad_design{margin-right:0px !important;}
+	.col_sm_left_boxis ul li b{width: 30px; height: 30px; line-height: 27px; font-size: 9px;}
 	
 	.col_sm_left_boxis ul li b:after{width:15px;}
 	.col_sm_left_boxis ul li{width:51px;}
-	.col_sm_left_boxis ul li b:after{width:17px; margin:17px 0 0 10px;}
+	.col_sm_left_boxis ul li b:after{width:27px; margin:14px 0 0 10px;}
+	.col_sm_left_boxis ul li span{font-size:9px;}
+	.bg_left_acadmic_detail_bordersf{padding: 15px !important; margin-bottom: 15px;}
+	.bg_left_acadmic_detail_bordersf_to{padding: 15px !important;}
+	.edit_candidate #accordion{margin: 0 0 0 10px;}
+	.forgot_password_bg_page_url{width:60%;}
 
 }
  @media only screen and (min-width:768px) and (max-width:991px) {
@@ -1045,6 +1063,16 @@ input:focus{outline: none !important;}
 	 
 	 .col_sm_left_boxis h4{color: #fff; margin: 0 0 22px 0; padding: 0 10px 0 10px; font-weight: bold; font-size: 12px;}
 	 
+	 .form-horizontal h4 .profile_text{margin:29px 0 0 0px; display: inline-block;}
+	 .progressbarto{margin-right: 20px; max-width: 240px; min-width: 220px;}
+	 .bg_left_acadmic_detail_bordersf{background: none; border:none;}
+	 .bg_left_acadmic_detail_bordersf_to{background: none; border:none;}
+	 
+	 .navbar-default .navbar-nav > li > a{padding: 20px 4px; margin: -3px 5px 0 0px; font-size: 12px;}
+	 .navbar-default .navbar-nav > li > a i{height: 22px; width: 22px; margin:-4px 7px 0 0px; font-size: 10px; line-height: 23px;}
+	 .completed_text_profile{font-size:11px;}
+	 .forgot_password_bg_page_url{width:70%;}
+	 
 	 
 }
  @media only screen and (max-width:767px) {
@@ -1111,13 +1139,19 @@ input:focus{outline: none !important;}
 	 .bg_color_cmn_refrence_tab{border:none; background: none; margin: 0px;}
 	 .bg_color_cmn_refrence_tab_to{border:none; background: none;}
 	 .career_tab_border_form{padding: 12px 0 0 0px;}
+	 .bg_left_acadmic_detail_bordersf{background: none; border:none;}
+	 .bg_left_acadmic_detail_bordersf_to{background: none; border:none;}
+	 .form-horizontal.edit-candidate-cv .edit-candidate-cv-btn{float: left; margin: 22px 0 0 0px;}
+	 .forgot_password_bg_page_url{width:100%;}
 	 
 	 
 
 }
  @media only screen and (max-width:480px) {
 .common-right-block a.warning-verification{right:0px;}
+.form-horizontal.edit-candidate-cv .edit-candidate-cv-btn{float: right; margin: 22px 0 0 0px;}
 }
  @media only screen and (max-width: 320px) {
 	 .common-right-block a.warning-verification{right:47px;}
+	 	 .form-horizontal.edit-candidate-cv .edit-candidate-cv-btn{float: left; margin: 22px 0 0 0px;}
 }

@@ -1084,7 +1084,7 @@ namespace NewLetter.Controllers
                 qendidatePGraduation pg = db.qendidatePGraduations.Where(ex => ex.qenID == qenID).FirstOrDefault();
                 List<qenEmpDetail> emp = db.qenEmpDetails.Where(ex => ex.qenID == qenID).ToList();
                 List<qendidatePHD> phd = db.qendidatePHDs.Where(ex => ex.qenID == qenID).ToList();
-                List<qenReference> refrences = db.qenReferences.Where(ex => ex.qenID == qenID).ToList();
+                List<qenReference> refrences = db.qenReferences.Where(ex => ex.qenID == qenID && ex.isDelete == false).ToList();
                 List<qenSkill> skills = db.qenSkills.Include(ex => ex.skill).Where(ex => ex.qenID == qenID).ToList();
                 model.personainfo = personal;
                 AcademicModel academic = new AcademicModel();
