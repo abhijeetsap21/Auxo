@@ -107,13 +107,15 @@
         debugger
         var StartDate = document.getElementById('qenEmpFrom').value;
         var EndDate = document.getElementById('qenEmpTo').value;
+		var StartDate_ = new Date(StartDate);
+		var EndDate_ = new Date(EndDate);
         //if (StartDate != '')
         //{ var sDate = convertToDate(StartDate); }
         //if (StartDate != '') {
         //    var eDate = convertToDate(EndDate);
         //} && sDate > eDate
 
-        if (StartDate != '' && EndDate != '' && StartDate > EndDate) {
+        if (StartDate_ != '' && EndDate_ != '' && StartDate_ > EndDate_) {
             document.getElementById('qenEmpFrom').value = null
             document.getElementById('qenEmpTo').value = null
             debugger

@@ -99,26 +99,28 @@
                 debugger
                 var StartDate = document.getElementById('phdStart').value;
                 var EndDate = document.getElementById('phdEnd').value;
+				var StartDate_ = new Date(StartDate);
+				var EndDate_ = new Date(EndDate);
                 //if (StartDate != '')
                 //{ var sDate = convertToDate(StartDate); }
                 //if (StartDate != '') {
                 //    var eDate = convertToDate(EndDate);&& sDate > eDate
                 //}
 
-                if (StartDate != '' && EndDate != '' && StartDate > EndDate) {
+                if (StartDate_ != '' && EndDate_ != '' && StartDate_ > EndDate_) {
                     document.getElementById('phdStart').value = null
                     document.getElementById('phdEnd').value = null
                     debugger
                     bootbox.alert({
                         title: 'Alert Success  !',
                         message: 'Please ensure that the End Date is greater than or equal to the Start Date.'
-                        
+
                     });
 
                     return false;
                 }
             }
-        </script>
+</script>
         <script>
             function convertToDate(str) {
                 debugger
