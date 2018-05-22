@@ -50,7 +50,7 @@
  <h4><span class="profile_text">Profile</span>
   <a class="share_linkdin_btn" onclick="return share();">Post on Linkedin</a>
 			
-			<input type="button" class="btn btn-info btn-lg edit-candidate-cv-btn" data-toggle="modal" data-target="#myModal" value="View" onclick="return dispalyResume(@qenID);" />
+			<input type="button" class="btn btn-info btn-lg edit-candidate-cv-btn" value="View" onclick="return dispalyResume(@qenID);" />
 <div class="progressbarto">
                 <div class="progrssfld">
                     <div class="line"></div>
@@ -129,16 +129,15 @@
         }
     }
 
-    <div class="modal fade" id="myModal" role="dialog">   </div>
+    
 
 
     <script>
     function dispalyResume(qenID) {
         debugger
-        var URL = '@Url.Action("_partialPreviewCV", "profile")?qenID=' + qenID;
-        jqOld.get(URL, function (data) {
-            jqOld("#myModal").html(data);
-        });
+        var URL = '@Url.Action("PreviewCV", "profile")?qenID=' + qenID;       
+        window.location.href = URL;
+        
     }
 
     </script>
@@ -186,8 +185,9 @@
         function share() {
             // Opens a pop-up with a Linkedin share dialog
 
-            var url = "https://spotaneedle.com";          
-            
+            var url = "https://www.spotaneedle.com";          
+            var title = "Replace this with a title.";
+            var text = "Replace this with your share copy.";            
             window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(url), '', 'left=0,top=0,width=650,height=420,personalbar=0,toolbar=0,scrollbars=0,resizable=0');
         }
     </script>

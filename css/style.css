@@ -847,6 +847,11 @@ input:focus{outline: none !important;}
 .forgot_password_bg_page_url h2{margin: 0px; padding:10px 0 10px 0; font-size: 26.12px; color: #4a4dd0;}
 .forgot_password_bg_page_url h4{padding: 0px 0 0 0px;}
 
+.thankyou-btns.login-btn input{margin: 28px 0 0 0px !important;}
+
+.verifed_text_bg_white_main_bg{min-height: 350px; margin: 40px 15px 60px 15px;}
+.verifed_text_bg_white_main_bg p{margin: 40px 15px 40px 15px;}
+
 
 @media only screen and (max-width: 1600px) {
 	body {font-size: 13px;}
@@ -1072,7 +1077,7 @@ input:focus{outline: none !important;}
 	 .navbar-default .navbar-nav > li > a i{height: 22px; width: 22px; margin:-4px 7px 0 0px; font-size: 10px; line-height: 23px;}
 	 .completed_text_profile{font-size:11px;}
 	 .forgot_password_bg_page_url{width:70%;}
-	 
+
 	 
 }
  @media only screen and (max-width:767px) {
@@ -1143,6 +1148,7 @@ input:focus{outline: none !important;}
 	 .bg_left_acadmic_detail_bordersf_to{background: none; border:none;}
 	 .form-horizontal.edit-candidate-cv .edit-candidate-cv-btn{float: left; margin: 22px 0 0 0px;}
 	 .forgot_password_bg_page_url{width:100%;}
+	 .thankyou-btns.login-btn input{margin:0px 0 0 0px !important;}
 	 
 	 
 

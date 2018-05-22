@@ -133,6 +133,7 @@ namespace NewLetter.Controllers
                         if (fileName != "")
                         {
                             data.qenImage = fileName;
+                            BaseUtil.SetSessionValue(AdminInfo.logo.ToString(), Convert.ToString(data.qenImage));
                         }
                         db.SaveChanges();
                         TempData["message"] = "Personal Information Updated Successfully";
@@ -1072,7 +1073,7 @@ namespace NewLetter.Controllers
 
         // preview CV
 
-        public ActionResult _partialPreviewCV(Int64 qenID)
+        public ActionResult PreviewCV(Int64 qenID)
         {
             ResumeModel model = new ResumeModel();
             try

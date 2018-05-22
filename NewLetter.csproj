@@ -1216,7 +1216,6 @@
     <Content Include="Views\profile\_partialHighSchool.cshtml" />
     <Content Include="Views\profile\_partialPInfo.cshtml" />
     <Content Include="Views\profile\_partialPostGraduation.cshtml" />
-    <Content Include="Views\profile\_partialPreviewCV_copy.cshtml" />
     <Content Include="Views\profile\_partialRefInfo.cshtml" />
     <Content Include="Views\profile\_partialSkills.cshtml" />
     <Content Include="Views\companyDetails\empedit.cshtml" />
@@ -1256,6 +1255,7 @@
     <Content Include="Views\profile\VerifyDetails.cshtml" />
     <Content Include="Views\profile\_partialPreviewCV.cshtml" />
     <Content Include="Views\profile\_partialShareLinkedIN.cshtml" />
+    <Content Include="Views\profile\PreviewCV.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="advertisement\" />
