@@ -19,7 +19,7 @@
             @Html.HiddenFor(ex => ex.qenID) @Html.HiddenFor(ex => ex.qenEmploymentNum)
             <div class="col-md-12 col-sm-12 padding_lbl_threee">
                 <div class="form-group">
-                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">salary:</label>
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Annual (CTC):</label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
                         @Html.TextBoxFor(ex => ex.qenSalary, new { maxlength = "100" })
                         @Html.ValidationMessageFor(ex => ex.qenSalary, "", new { @class = "col_1 tleft text-danger" })
@@ -73,7 +73,7 @@
                 if (Model.qenEmploymentNum == 0)
                 {
             <div class="col-md-12 text-right academic padding_lbl_threee">
-                <input type="submit" name="save" value="SAVE" class="plus-btn academic-create-btn btn btn-default distip_btn_seves" />
+                <input type="submit" name="save" value="ADD" class="plus-btn academic-create-btn btn btn-default distip_btn_seves" />
             </div>
                 }
                 else

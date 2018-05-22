@@ -43,7 +43,7 @@
         <div class="col-md-6 col-sm-12 padding_lbl_threee rgv_color_bg_main_to">
             <div class="col-md-12 col-sm-12 padding_lbl_threee">
                 <div class="form-group">
-                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Start Date:</label>
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Issue Date:</label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
                         @Html.TextBoxFor(m => m.phdStart, "{0:MM/dd/yyyy}", new { @class = "datepicker", onchange = "return DateCheck2();", @readonly = "readonly" })
                         @Html.ValidationMessageFor(model => model.phdStart, "", new { @class = "col_1 tleft text-danger" })
@@ -52,7 +52,7 @@
             </div>
             <div class="col-md-12 col-sm-12 padding_lbl_threee">
                 <div class="form-group">
-                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">End Date:</label>
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Valid Thru:</label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
                         @Html.TextBoxFor(m => m.phdEnd, "{0:MM/dd/yyyy}", new { @class = "datepicker", onchange = "return DateCheck2();", @readonly = "readonly" })
                         @Html.ValidationMessageFor(model => model.phdEnd, "", new { @class = "col_1 tleft text-danger" })
@@ -72,7 +72,7 @@
                 @{ 
                     if (Model.phdid == 0)
                     {
-                <input type="submit" name="save" class="plus-btn academic-create-btn btn btn-default" value="Save" />
+                <input type="submit" name="save" class="plus-btn academic-create-btn btn btn-default" value="Add" />
                     }
                     else
                     {

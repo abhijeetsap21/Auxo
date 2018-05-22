@@ -34,7 +34,7 @@
 								<table class="table">
                                     <thead>
                                         <tr>
-
+                                            <th>Sr.No.</th>
                                             <th>Company Name</th>
                                             <th>Designation</th>
                                             <th>Duration</th>
@@ -45,9 +45,10 @@
                                         @{int row = 0;  }
                                         @foreach (var data in Model.employers)
                                         {
+                                            row++;
 
                                             <tr>
-
+                                                <td>@row</td>
                                                 <td>@data.CompanyName</td>
                                                 <td>@data.qenPosition</td>
                                                 @if (data.qenEmpTo.Value.ToString("dd/MM/yyyy") == "01/01/1900")

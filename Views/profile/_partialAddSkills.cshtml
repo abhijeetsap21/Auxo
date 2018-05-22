@@ -13,7 +13,7 @@
                 <div class="form-group">
                     <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Skill: </label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                        @Html.TextBoxFor(model => model.skillName, new { maxlength = "100" })
+                        @Html.TextBoxFor(model => model.skillName, new { maxlength = "100", placeholder = "Enter Characters of your skill" })
                         @Html.ValidationMessageFor(model => model.skillName, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -22,7 +22,7 @@
         <div class="col-md-5 col-sm-12 padding_lbl_threee width_ipade_year_exp">
             <div class="col-md-12 col-sm-12 padding_lbl_threee">
                 <div class="form-group">
-                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Year of Exp:</label>
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Years of Experience:</label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none year_text_box_width">
                         @Html.TextBoxFor(model => model.yearOfExp, new { maxlength = "100" })
                         @Html.ValidationMessageFor(model => model.yearOfExp, "", new { @class = "text-danger" })
@@ -36,7 +36,7 @@
 		 @{if (Model.qenSkillsID == 0)
                 {
                     <div class="col-sm-2 text-right academic btn_reset_cod">
-                        <input type="submit" name="save" class="previous action-button academic-create-btn btn btn-default" value="Save" id="btnsaveempinfo" />
+                        <input type="submit" name="save" class="previous action-button academic-create-btn btn btn-default" value="Add" id="btnsaveempinfo" />
                     </div>
                 }
                 else

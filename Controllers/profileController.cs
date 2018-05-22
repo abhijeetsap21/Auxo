@@ -487,7 +487,7 @@ namespace NewLetter.Controllers
                 List<qenEmpDetail> emp = null;
                 if (qenid != 0)
                 {
-                    emp = db.qenEmpDetails.Where(ex => ex.qenID == qenid).ToList();
+                    emp = db.qenEmpDetails.Where(ex => ex.qenID == qenid).OrderByDescending(ex => ex.qenEmpFrom).ToList();
                     if (emp.Count > 0 && emp != null)
                     {
                         model = new EmployerModel();
