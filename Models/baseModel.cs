@@ -475,6 +475,228 @@ namespace NewLetter.Models
 
             return result;
         }
+
+        public static List<SelectListItem> getYears()
+        {
+            List<SelectListItem> years = new List<SelectListItem>();
+            int startYear = Convert.ToInt16(WebConfigurationManager.AppSettings["qenStartYear"]);
+            int endYear = Convert.ToInt16(WebConfigurationManager.AppSettings["qenEndYear"]);
+            
+            for(int i = startYear; i<= endYear; i++)
+                {
+               
+                years.Add(new SelectListItem
+                {
+                    Text = i.ToString(),
+                    Value = i.ToString(),
+                });
+                }
+            return years;
+
+        }
+
+        public static List<SelectListItem> getMonths()
+        {
+            List<SelectListItem> months = new List<SelectListItem>();
+            months.Add(new SelectListItem
+            {
+                Text = "January",
+                Value = "1"
+            });
+            months.Add(new SelectListItem
+            {
+                Text = "February",
+                Value = "2"
+            });
+            months.Add(new SelectListItem
+            {
+                Text = "March",
+                Value = "3"
+            });
+            months.Add(new SelectListItem
+            {
+                Text = "April",
+                Value = "4"
+            });
+            months.Add(new SelectListItem
+            {
+                Text = "May",
+                Value = "5"
+
+            });
+            months.Add(new SelectListItem
+            {
+                Text = "June",
+                Value = "6"
+            });
+            months.Add(new SelectListItem
+            {
+                Text = "July",
+                Value = "7"
+            });
+            months.Add(new SelectListItem
+            {
+                Text = "August",
+                Value = "8"
+            });
+            months.Add(new SelectListItem
+            {
+                Text = "September",
+                Value = "9"
+            });
+            months.Add(new SelectListItem
+            {
+                Text = "October",
+                Value = "10"
+            });
+            months.Add(new SelectListItem
+            {
+                Text = "November",
+                Value = "11"
+            });
+            months.Add(new SelectListItem
+            {
+                Text = "December",
+                Value = "12"
+            });
+            return months;
+        }
+
+
+        public static List<SelectListItem> getdates()
+        {
+            List<SelectListItem> dates = new List<SelectListItem>();
+            dates.Add(new SelectListItem
+            {
+                Text = "1",
+                Value = "1"        
+            });
+            dates.Add(new SelectListItem
+            {
+                Text = "2",
+                Value = "2"
+            });
+            dates.Add(new SelectListItem
+            {
+                Text = "3",
+                Value = "3"
+            });
+            dates.Add(new SelectListItem
+            {
+                Text = "4",
+                Value = "4"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "5",
+                Value = "5"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "6",
+                Value = "6"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "7",
+                Value = "7"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "8",
+                Value = "8"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "9",
+                Value = "9"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "10",
+                Value = "10"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "11",
+                Value = "11"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "12",
+                Value = "12"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "13",
+                Value = "13"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "14",
+                Value = "14"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "15",
+                Value = "15"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "16",
+                Value = "16"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "17",
+                Value = "17"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "18",
+                Value = "18"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "19",
+                Value = "19"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "20",
+                Value = "20"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "21",
+                Value = "21"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "22",
+                Value = "22"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "23",
+                Value = "23"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "24",
+                Value = "24"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "25",
+                Value = "25"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "26",
+                Value = "26"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "27",
+                Value = "27"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "28",
+                Value = "28"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "29",
+                Value = "29"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "30",
+                Value = "30"
+            }); dates.Add(new SelectListItem
+            {
+                Text = "31",
+                Value = "31"
+            }); 
+
+            return dates;
+        }
         
 
 
@@ -687,6 +909,103 @@ namespace NewLetter.Models
             return skillsReq;
         }
 
+        public struct DateTimeSpan
+        {
+            private readonly int years;
+            private readonly int months;
+            private readonly int days;
+            private readonly int hours;
+            private readonly int minutes;
+            private readonly int seconds;
+            private readonly int milliseconds;
+
+            public DateTimeSpan(int years, int months, int days, int hours, int minutes, int seconds, int milliseconds)
+            {
+                this.years = years;
+                this.months = months;
+                this.days = days;
+                this.hours = hours;
+                this.minutes = minutes;
+                this.seconds = seconds;
+                this.milliseconds = milliseconds;
+            }
+
+            public int Years { get { return years; } }
+            public int Months { get { return months; } }
+            public int Days { get { return days; } }
+            public int Hours { get { return hours; } }
+            public int Minutes { get { return minutes; } }
+            public int Seconds { get { return seconds; } }
+            public int Milliseconds { get { return milliseconds; } }
+
+            enum Phase { Years, Months, Days, Done }
+
+            public static DateTimeSpan CompareDates(DateTime date1, DateTime date2)
+            {
+                if (date2 < date1)
+                {
+                    var sub = date1;
+                    date1 = date2;
+                    date2 = sub;
+                }
+
+                DateTime current = date1;
+                int years = 0;
+                int months = 0;
+                int days = 0;
+
+                Phase phase = Phase.Years;
+                DateTimeSpan span = new DateTimeSpan();
+                int officialDay = current.Day;
+
+                while (phase != Phase.Done)
+                {
+                    switch (phase)
+                    {
+                        case Phase.Years:
+                            if (current.AddYears(years + 1) > date2)
+                            {
+                                phase = Phase.Months;
+                                current = current.AddYears(years);
+                            }
+                            else
+                            {
+                                years++;
+                            }
+                            break;
+                        case Phase.Months:
+                            if (current.AddMonths(months + 1) > date2)
+                            {
+                                phase = Phase.Days;
+                                current = current.AddMonths(months);
+                                if (current.Day < officialDay && officialDay <= DateTime.DaysInMonth(current.Year, current.Month))
+                                    current = current.AddDays(officialDay - current.Day);
+                            }
+                            else
+                            {
+                                months++;
+                            }
+                            break;
+                        case Phase.Days:
+                            if (current.AddDays(days + 1) > date2)
+                            {
+                                current = current.AddDays(days);
+                                var timespan = date2 - current;
+                                span = new DateTimeSpan(years, months, days, timespan.Hours, timespan.Minutes, timespan.Seconds, timespan.Milliseconds);
+                                phase = Phase.Done;
+                            }
+                            else
+                            {
+                                days++;
+                            }
+                            break;
+                    }
+                }
+
+                return span;
+            }
+        }
+
         public static string checkSocialProfile(string email)
         {
             var result = "Profile Exists / Not Exists";
@@ -851,6 +1170,7 @@ namespace NewLetter.Models
             var result = db.Database.SqlQuery<usp_GetProfileCompletenessPerc_Result>("usp_GetProfileCompletenessPerc @qenID", qenID_).FirstOrDefault();
             return result.perc;
         }
+        
 
         // Central Method for string decryption
         public static string Decrypt(string cipherText)

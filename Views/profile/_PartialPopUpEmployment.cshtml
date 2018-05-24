@@ -1,7 +1,7 @@
 ﻿@model NewLetter.Models.qenEmpDetail
 
 
-@using (Html.BeginForm("SaveEmploymentDetails", "profile", FormMethod.Post))
+@using (Html.BeginForm("SaveEmploymentDetails", "profile", FormMethod.Post, new { id = "msform" }))
 {
     @Html.AntiForgeryToken()
 
@@ -9,39 +9,52 @@
         <div class="col-md-6 col-sm-12 padding_lbl_threee bg_color_employment_left_bg_one">
             <div class="col-md-12 col-sm-12 padding_lbl_threee">
                 <div class="form-group">
-                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Employer:</label>
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Organization:</label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
                         @Html.TextBoxFor(ex => ex.CompanyName, new { maxlength = "100" })
                         @Html.ValidationMessageFor(ex => ex.CompanyName, "", new { @class = "col_1 tleft text-danger" })
                     </div>
                 </div>
             </div>
-            @Html.HiddenFor(ex => ex.qenID) @Html.HiddenFor(ex => ex.qenEmploymentNum)
             <div class="col-md-12 col-sm-12 padding_lbl_threee">
                 <div class="form-group">
-                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Annual (CTC):</label>
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">City:</label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                        @Html.TextBoxFor(ex => ex.qenSalary, new { maxlength = "100" })
-                        @Html.ValidationMessageFor(ex => ex.qenSalary, "", new { @class = "col_1 tleft text-danger" })
+                        @Html.TextBoxFor(ex => ex.jobLocation, new { id = "locality" })<i class="glyphicon glyphicon-map-marker loc-icon" onclick="return codeLatLng();"><span class="location-tooltip">find current location</span></i>
+                        @Html.ValidationMessageFor(ex => ex.CompanyName, "", new { @class = "col_1 tleft text-danger" })
                     </div>
                 </div>
             </div>
             <div class="col-md-12 col-sm-12 padding_lbl_threee">
                 <div class="form-group">
-                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Position:</label>
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Position#:</label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
                         @Html.TextBoxFor(ex => ex.qenPosition, new { maxlength = "100" })
                         @Html.ValidationMessageFor(ex => ex.qenPosition, "", new { @class = "col_1 tleft text-danger" })
                     </div>
                 </div>
             </div>
+            @Html.HiddenFor(ex => ex.qenID) @Html.HiddenFor(ex => ex.qenEmploymentNum)
+            <div class="col-md-12 col-sm-12 padding_lbl_threee">
+                <div class="form-group">
+                    <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Annual (CTC)#:</label>
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.TextBoxFor(ex => ex.qenSalary, new { maxlength = "100" })
+                        @Html.ValidationMessageFor(ex => ex.qenSalary, "", new { @class = "col_1 tleft text-danger" })
+                    </div>
+                </div>
+            </div>            
             <div class="col-md-12 col-sm-12 padding_lbl_threee">
                 <div class="form-group">
                     <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Start Date:</label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                        @Html.TextBoxFor(ex => ex.qenEmpFrom, "{0:MM/dd/yyyy}", new { maxlength = "10", @class = "datepicker", onchange = "return DateCheck1();" , @readonly = "readonly"})
-                        @Html.ValidationMessageFor(ex => ex.qenEmpFrom, "", new { @class = "col_1 tleft text-danger" })
-						<label class="container_check"><input type="checkbox" onclick="return disable(this)" id="presentemp_check" />
+                        @Html.DropDownListFor(model => model.empStartDate, new SelectList(ViewBag.dates, "Value", "Text" ), "Date", new { @id = "empStartDate" , onchange = " return DateCheck1(); " })                                              
+                        @Html.DropDownListFor(model => model.empStartMonth, new SelectList(ViewBag.months, "monthID", "monthName"), " Month ",new { @id = "empStartMonth" })
+                        @Html.DropDownListFor(ex => ex.empStartYear, new SelectList(ViewBag.years, "Value", "Text"), "Year", new { @id = "yearselect", onchange = " return DateCheck1(); " })
+                        @Html.ValidationMessageFor(ex => ex.empStartMonth, "", new { @class = "col_1 tleft text-danger" })
+                        @Html.ValidationMessageFor(ex => ex.empStartYear, "", new { @class = "col_1 tleft text-danger" })
+						<label class="container_check"><input type="checkbox" name="present" onclick="return disable(this)" id="presentemp_check" />                            
+                          <input type="hidden" value="false" name="ispresentval" id="ispresent"/> 
 						<span class="checkmark"></span>
 						Is Present Employment?</label>
                     </div>
@@ -51,8 +64,11 @@
                 <div class="form-group">
                     <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label" id="endDateLabel">End Date:</label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                        @Html.TextBoxFor(ex => ex.qenEmpTo, "{0:MM/dd/yyyy}", new { maxlength = "10", @class = "datepicker", onchange = "return DateCheck1();", @readonly = "readonly" })
-                        @Html.ValidationMessageFor(ex => ex.qenEmpTo, "", new { @class = "col_1 tleft text-danger" })
+                        @Html.DropDownListFor(model => model.empEndDate, new SelectList(ViewBag.dates, "Value", "Text"), "Date",new { @id = "empEndDate", onchange = " return DateCheck1(); " })
+                        @Html.DropDownListFor(model => model.empEndMonth, new SelectList(ViewBag.months, "monthID", "monthName"), " Month ", new { @id = "empEndMonth" })
+                        @Html.DropDownListFor(ex => ex.empEndYear, new SelectList(ViewBag.years, "Value", "Text"), "Year", new { @id = "yearselect_1",onchange = " return DateCheck1(); " })
+                        @Html.ValidationMessageFor(ex => ex.empEndMonth, "", new { @class = "col_1 tleft text-danger" })
+                        @Html.ValidationMessageFor(ex => ex.empEndYear, "", new { @class = "col_1 tleft text-danger" })
                     </div>
                 </div>
             </div>
@@ -60,7 +76,7 @@
         <div class="col-md-6 col-sm-12 padding_lbl_threee bg_color_employment_left_bg">
             <div class="col-md-12 col-sm-12 padding_lbl_threee">
                 <div class="form-group">
-                    <label style="padding-top:0px;" for="concept" class="col-md-12 col-sm-12 col-xs-12 control-label left-title job_title_job_discription_text">Job Description:</label>
+                    <label style="padding-top:0px;" for="concept" class="col-md-12 col-sm-12 col-xs-12 control-label left-title job_title_job_discription_text">Job Description#:</label>
                     <div class="col-md-12 col-sm-12 col-xs-12 padding-none text-area_hieght_employer">
                         @Html.TextAreaFor(ex => ex.jobDescription, new { maxlength = "100", @class = "form-control" })
                         @Html.ValidationMessageFor(ex => ex.jobDescription, "", new { @class = "col_1 tleft text-danger" })						 
@@ -84,29 +100,25 @@
                 }
             }
         </div>
+        <p># - At the time of leaving the organization</p>
     </div>
 
 }
-
-<script>
-    var jold = jQuery.noConflict();
-    jold(document).ready(function () {
-
-        jold('.datepicker').datepicker({
-
-            dateFormat: 'mm/dd/yy' , // CHANGE DATE FORMAT.
-            changeMonth: true,
-        changeYear: true
-        });
-    });
-</script>
 <script type="text/javascript">
-
 
     function DateCheck1() {
         debugger
-        var StartDate = document.getElementById('qenEmpFrom').value;
-        var EndDate = document.getElementById('qenEmpTo').value;
+        var EDate = document.getElementById('empEndDate').value;
+        var EMonth = document.getElementById('empEndMonth').value;        
+        var EYear = $("#yearselect_1 option:selected").text();
+
+        var SDate = document.getElementById('empStartDate').value;
+        var SMonth = document.getElementById('empStartMonth').value;        
+        var SYear = $("#yearselect option:selected").text();
+        
+        var EndDate = EYear + '/' + EMonth + '/' + EDate;
+        var StartDate = SYear + '/' + SMonth + '/' + SDate;
+
 		var StartDate_ = new Date(StartDate);
 		var EndDate_ = new Date(EndDate);
         //if (StartDate != '')
@@ -115,9 +127,18 @@
         //    var eDate = convertToDate(EndDate);
         //} && sDate > eDate
 
-        if (StartDate_ != '' && EndDate_ != '' && StartDate_ > EndDate_) {
-            document.getElementById('qenEmpFrom').value = null
-            document.getElementById('qenEmpTo').value = null
+		if (StartDate_ != '' && EndDate_ != '' && StartDate_ > EndDate_) {
+            debugger            
+            document.getElementById('empEndDate').value = ""
+            document.getElementById('empEndMonth').value = ""
+            document.getElementById('yearselect_1').value = ""
+            document.getElementById('empStartDate').value = ""
+            document.getElementById('empStartMonth').value = ""
+            document.getElementById('yearselect').value = ""
+
+
+           
+
             debugger
             bootbox.alert({
                 title: 'Alert Success  !',
@@ -128,7 +149,8 @@
         }
     }
 </script>
-<script>
+
+@*<script>
     function convertToDate(str) {
         debugger
         var dd = str.substring(0, 2);
@@ -138,7 +160,7 @@
         var dt = new Date(dat);
         return dt;
     }
-</script>
+</script>*@
 
 <script>
     debugger
@@ -146,20 +168,23 @@
     {
         if(val.checked)
         {
-            document.getElementById("qenEmpTo").style.display = "none";
-			document.getElementById("endDateLabel").style.display = "none";
+            document.getElementById("empEndDate").style.display = "none";
+            document.getElementById("empEndMonth").style.display = "none";
+            document.getElementById("yearselect_1").style.display = "none";
+            document.getElementById('ispresent').value = true;
            
         }
         else
         {
-            document.getElementById("qenEmpTo").style.display = "block";
-			document.getElementById("endDateLabel").style.display = "block";
-			document.getElementById('qenEmpTo').disabled = false;
+            document.getElementById("empEndDate").style.display = "block";
+            document.getElementById("empEndMonth").style.display = "block";
+            document.getElementById('yearselect_1').style.display = "block";
+            document.getElementById('ispresent').value = false;
         }
     }
 </script>
 
-<script>
+@*<script>
     debugger
     var jqOld = jQuery.noConflict();
     jqOld(document).ready(function () {
@@ -173,4 +198,157 @@
     }   
 
     );
+</script>*@
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDGhqKFgJrrhrXFGFHRzuPJ84hK7GbtAno"></script>
+
+<script>
+        // This example displays an address form, using the autocomplete feature
+        // of the Google Places API to help users fill in the information.
+
+        // This example requires the Places library. Include the libraries=places
+        // parameter when you first load the API. For example:
+        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+        var jqOld = jQuery.noConflict();
+        jqOld(document).ready(function () {
+            initAutocomplete();
+            initialize();
+            jqOld('[data-toggle="tooltip"]').tooltip();
+
+            //jqOld('#txtdob').datepicker({
+            //    dateFormat: 'mm/dd/yy'  // CHANGE DATE FORMAT.
+            //});
+
+        });
+        var placeSearch, autocomplete;
+        var componentForm = {
+            street_number: 'long_name',
+            route: 'long_name',
+            locality: 'long_name',
+            administrative_area_level_1: 'long_name',
+            country: 'long_name',
+            postal_code: 'short_name'
+        };
+
+        function initAutocomplete() {
+            debugger
+            // Create the autocomplete object, restricting the search to geographical
+            // location types.
+            autocomplete = new google.maps.places.Autocomplete((document.getElementById('locality')), { autocomplete: ['geocode'] });
+
+            // When the user selects an address from the dropdown, populate the address
+            // fields in the form.
+            autocomplete.addListener('place_changed', fillInAddress);
+        }
+
+        function fillInAddress() {
+            debugger
+            // Get the place details from the autocomplete object.
+            var place = autocomplete.getPlace();
+
+            for (var component in componentForm) {
+                document.getElementById(component).value = '';
+            }
+
+            // Get each component of the address from the place details
+            // and fill the corresponding field on the form.
+            for (var i = 0; i < place.address_components.length; i++) {
+                debugger
+                var addressType = place.address_components[i].types[0];
+
+                if (componentForm[addressType]) {
+                    debugger
+                    var val = place.address_components[i][componentForm[addressType]];
+                    document.getElementById(addressType).value = val;
+                    document.getElementById('latitude').value = place.geometry.viewport.b.b;
+                    document.getElementById('longitude').value = place.geometry.viewport.f.f;
+
+                }
+            }
+
+        }
+
+        // Bias the autocomplete object to the user's geographical location,
+        // as supplied by the browser's 'navigator.geolocation' object.
+        function geolocate() {
+            debugger
+            if (navigator.geolocation) {
+
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var geolocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    var circle = new google.maps.Circle({
+                        center: geolocation,
+                        radius: position.coords.accuracy
+                    });
+                    debugger
+
+                    autocomplete.setBounds(circle.getBounds());
+                });
+            }
+        }
+</script>
+<script type="text/javascript">
+
+        var geocoder;
+        var lat, lng;
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+        }
+        //Get the latitude and the longitude;
+        function successFunction(position) {
+            lat = position.coords.latitude;
+            lng = position.coords.longitude;
+
+        }
+
+        function errorFunction() {
+            alert("Geocoder failed");
+        }
+
+        function initialize() {
+            geocoder = new google.maps.Geocoder();
+
+        }
+
+
+        function codeLatLng() {
+
+            var latlng = new google.maps.LatLng(lat, lng);
+            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        //formatted address
+
+                        //====================================================
+                        for (var component in componentForm) {
+                            document.getElementById(component).value = '';
+                        }
+
+                        // Get each component of the address from the place details
+                        // and fill the corresponding field on the form.
+                        for (var i = 0; i < results[0].address_components.length; i++) {
+                            debugger
+                            var addressType = results[0].address_components[i].types[0];
+
+                            if (componentForm[addressType]) {
+                                debugger
+                                var val = results[0].address_components[i][componentForm[addressType]];
+                                document.getElementById(addressType).value = val;
+                            }
+                        }
+                        document.getElementById('latitude').value = results[0].geometry.viewport.b.b;
+                        document.getElementById('longitude').value = results[0].geometry.viewport.f.f;
+                        //====================================================
+
+                    }
+                    else {
+                        alert("No results found");
+                    }
+                } else {
+                    alert("Geocoder failed due to: " + status);
+                }
+            });
+        }
 </script>

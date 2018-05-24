@@ -113,18 +113,6 @@
       <HintPath>packages\HtmlRenderer.Core.1.5.0.6\lib\net45\HtmlRenderer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="HtmlRenderer.PdfSharp, Version=1.5.0.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\HtmlRenderer.PdfSharp.1.5.0.6\lib\net45\HtmlRenderer.PdfSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="itextsharp.xmlworker, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>packages\itextsharp.xmlworker.5.5.13\lib\itextsharp.xmlworker.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Membership.OpenAuth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.Membership.OpenAuth.2.0.1\lib\net45\Microsoft.AspNet.Membership.OpenAuth.dll</HintPath>
       <Private>True</Private>
@@ -174,14 +162,6 @@
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="PdfSharp.Charting, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Quartz, Version=2.4.1.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
@@ -447,6 +427,9 @@
     <Compile Include="Models\jobStatu.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\month.cs">
+      <DependentUpon>orionDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\NotificationComponenet.cs" />
     <Compile Include="Models\NotificationHub.cs" />
     <Compile Include="Models\orionDBModel.Context.cs">
@@ -573,10 +556,16 @@
     <Compile Include="Models\sp_helpdiagramdefinition1_Result.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition2_Result.cs">
+      <DependentUpon>orionDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams1_Result.cs">
+      <DependentUpon>orionDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams2_Result.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
@@ -1116,6 +1105,7 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\validate.js" />
+    <Content Include="Scripts\year-select.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Shared\_Layout_Employer.cshtml" />
     <Content Include="Web.config">

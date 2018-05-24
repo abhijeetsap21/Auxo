@@ -75,14 +75,10 @@ border-radius: 0px;
 .form-horizontal .nav > li.active a:hover, .form-horizontal .nav > li.active a:focus {color: #fff;border: 1px solid transparent;}
 .form-horizontal h4.title{ background:none; color:#333366; font-size:16px; font-weight:bold; }
 .rightside.rightside1{background:none;}
-.common-logo-block { height:100px; background:#eaebf7; text-align:center; display: table; } 
+.common-logo-block { height:65px; background:#eaebf7; text-align:center; display: table; } 
 .common-logo-main { display:table-cell; vertical-align:middle;}
-.common-qe-logo-block { height:100px; text-align:center; display: table; } 
-.common-round-shape {
-    display: inline-block;
-    margin: 36px 20px 0 0;
-    position: relative;
-}
+.common-qe-logo-block { height:65px; text-align:center; display: table; } 
+.common-round-shape {display: inline-block; margin:16px 20px 0 0; position: relative;}
 .dataTables_length {
     padding: 7px;
     border: 0px solid #666 !important;
@@ -210,8 +206,8 @@ tr.odd td.sorting_1 {
     color: #333;
     display: none;
 }
-.form-horizontal{ background:#fff; border-radius:5px; overflow:hidden; max-width: 94%; margin:0 auto; margin-top:50px; padding:0 0 22px 0;}
-.form-horizontal h4{background:#4c46461a none repeat scroll 0 0; border-bottom: 1px solid #eee; color: #000000; font-size: 16px; margin: 0; padding: 17px 22px 18px; text-transform: capitalize;  margin: 0 0 24px 0; position: relative; font-weight: bold; display: inline-block; width: 100%;}
+.form-horizontal{ background:#fff; border-radius:5px; overflow:hidden; max-width: 97%; margin:0 auto; margin-top:20px; padding:0 0 22px 0;}
+.form-horizontal h4{background:#4c46461a none repeat scroll 0 0; border-bottom: 1px solid #eee; color: #000000; font-size: 16px; margin: 0; padding:9px 22px 9px; text-transform: capitalize;  margin: 0 0 24px 0; position: relative; font-weight: bold; display: inline-block; width: 100%;}
 .n-green{background: #a9d86e none repeat scroll 0 0;   border-radius: 50%;  color: #fff;  font-size: 13px;  height: 20px;  position: absolute;  right: -14px;
     text-align: center; top: -8px;  width: 20px;}
 .n-red{background: #ff6c60 none repeat scroll 0 0;   border-radius: 50%;  color: #fff;  font-size: 13px;  height: 20px;  position: absolute;  right: -14px;
@@ -333,7 +329,7 @@ by the way it is so weird when you look at your code a couple of years after you
 
 
 .common-user-loggedin-comp {font-size: 13px;width: 155px;display: inline-block;text-align: left;padding: 7px 10px;}
-.common-right-block {margin:38px 0px 0; text-align:right;position:relative;}
+.common-right-block {margin:16px 0px 0; text-align:right;position:relative;}
 .common-top-dropdown {display:inline-block; background-color:none;    border-color: #f6f6f6;  }
 .common-top-dropdown .btn { padding:0px; border:0;width:34px; height:34px;  border-radius:50%;  }
 .common-top-dropdown .dropdown-menu {left: -125px; margin: 5px 0 0;}
@@ -487,7 +483,7 @@ input#btn_:hover{background:#282c75;}
 .dashboard.edit_candidate i.glyphicon.glyphicon-map-marker {right: 10px;top: 0px;}
 .next-btn-wrap input.nxt-btn.btn.btn-default {transition: all 0.25s linear 0s;margin: 0 15px 0 0;}
 .next-btn-wrap input.nxt-btn.btn.btn-default:hover {background: #282c75;color: #fff;}
-.form-horizontal.edit-candidate-cv .edit-candidate-cv-btn {transition: all 0.25s linear 0s;background:#282c75;border: 0;font-size: 14px;border-radius: 3px;padding: 8px 18px; float: right;}
+.form-horizontal.edit-candidate-cv .edit-candidate-cv-btn {transition: all 0.25s linear 0s;background:#282c75;border: 0;font-size: 14px;border-radius: 3px;padding: 8px 18px; float: right; margin: 21px 0 0 0px;}
 .form-horizontal.edit-candidate-cv {position: relative;margin-bottom:50px;}
 .form-horizontal.edit-candidate-cv .edit-candidate-cv-btn:hover {background:#e97b26;}
 .edit_candidate.dashboard label {width: 50%;margin: 0;}
@@ -832,7 +828,7 @@ input:focus{outline: none !important;}
 
 .navbar-default .navbar-nav > li > a:hover i{background: #fff; color: #e97b27;}
 
-.share_linkdin_btn{text-decoration: none; cursor: pointer; background: #007bb5; color: #fff; margin: 0 0 0 20px; padding: 8px 15px 8px 15px; border-radius: 4px; font-size: 13px; }
+.share_linkdin_btn{text-decoration: none; cursor: pointer; background: #007bb5; color: #fff; margin: 0 0 0 20px; padding:8px 15px 10px 15px; border-radius: 4px; font-size: 13px; }
 .share_linkdin_btn:hover{background: #006a9c; color: #fff; text-decoration: none;}
 
 .user_large_profile_pic{width:205px; height:205px; float:right;}
@@ -851,6 +847,8 @@ input:focus{outline: none !important;}
 
 .verifed_text_bg_white_main_bg{min-height: 350px; margin: 40px 15px 60px 15px;}
 .verifed_text_bg_white_main_bg p{margin: 40px 15px 40px 15px;}
+
+.candidate_cv_pages_btn_export .btn-default{margin: 10px 0 10px 0px;}
 
 
 @media only screen and (max-width: 1600px) {

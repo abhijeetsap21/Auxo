@@ -233,20 +233,34 @@ namespace NewLetter.Models
     {
         [Required(ErrorMessage = "please enter company name")]
         public string CompanyName { get; set; }
-        [Required(ErrorMessage = "please enter employment start date")]
-        public System.Nullable<System.DateTime> qenEmpFrom { get; set; }
+
+        [Required(ErrorMessage = "please enter job location")]
+        public string jobLocation { get; set; }
+
+        [Required(ErrorMessage = "please enter your postition")]
+        public string qenPosition { get; set; }
+
+        [Required(ErrorMessage = "please enter salary")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "invalid salary detail")]
+        public System.Nullable<double> qenSalary { get; set; }
 
         [AllowHtml]
         [Display(Name = "Responsibilities")]
         public string jobDescription { get; set; }
+        
+        [Required(ErrorMessage ="please select month")]
+        public int empStartMonth { get; set; }
 
-        [Required(ErrorMessage = "please enter employment end date")]
-        public System.Nullable<System.DateTime> qenEmpTo { get; set; }
-        [Required(ErrorMessage = "please enter salary")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "invalid salary detail")]
-        public System.Nullable<double> qenSalary { get; set; }
-        [Required(ErrorMessage = "please enter your postition")]
-        public string qenPosition { get; set; }
+        [Required(ErrorMessage = "please select year")]
+        public int empStartYear { get; set; }
+
+        [Required(ErrorMessage = "please select month")]
+        public int empEndMonth { get; set; }
+
+        [Required(ErrorMessage = "please select year")]
+        public int empEndYear { get; set; }
+
+
     }
     public class EmployerModel
     {
@@ -255,6 +269,7 @@ namespace NewLetter.Models
             employers = new List<qenEmpDetail>();
         }
         public long qenid { get; set; }
+        
         public List<qenEmpDetail> employers { get; set; }
     }
     public class qengradutionvalidtion

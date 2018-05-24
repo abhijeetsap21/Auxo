@@ -281,6 +281,13 @@
           <Property Name="createdBy" Type="bigint" Nullable="false" />
           <Property Name="modifiedBy" Type="bigint" Nullable="false" />
         </EntityType>
+        <EntityType Name="months">
+          <Key>
+            <PropertyRef Name="monthID" />
+          </Key>
+          <Property Name="monthID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="monthName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="ProfilePerformance">
           <Key>
             <PropertyRef Name="performanceID" />
@@ -458,19 +465,21 @@
           </Key>
           <Property Name="qenEmploymentNum" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CompanyName" Type="nvarchar" MaxLength="100" />
-          <Property Name="qenEmpFrom" Type="date" />
           <Property Name="jobDescription" Type="nvarchar(max)" />
-          <Property Name="qenEmpTo" Type="date" />
           <Property Name="qenSalary" Type="float" />
           <Property Name="qenPosition" Type="varchar" MaxLength="50" />
           <Property Name="dataIsCreated" Type="datetime" />
           <Property Name="dataIsUpdated" Type="datetime" />
           <Property Name="qenID" Type="bigint" Nullable="false" />
-          <Property Name="qenRoleInProject" Type="varchar" MaxLength="500" />
-          <Property Name="teamSize" Type="int" />
           <Property Name="jobLocation" Type="varchar" MaxLength="100" />
           <Property Name="isPresent" Type="bit" />
-          <Property Name="projectDescription" Type="nvarchar" MaxLength="300" />
+          <Property Name="empStartDate" Type="int" />
+          <Property Name="empStartMonth" Type="int" />
+          <Property Name="empStartYear" Type="int" />
+          <Property Name="empEndDate" Type="int" />
+          <Property Name="empEndMonth" Type="int" />
+          <Property Name="empEndYear" Type="int" />
+          <Property Name="totalExperience" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="qenHigherSecondary">
           <Key>
@@ -1415,6 +1424,30 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_qenEmpDetails_months">
+          <End Role="months" Type="Self.months" Multiplicity="0..1" />
+          <End Role="qenEmpDetails" Type="Self.qenEmpDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="months">
+              <PropertyRef Name="monthID" />
+            </Principal>
+            <Dependent Role="qenEmpDetails">
+              <PropertyRef Name="empStartMonth" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_qenEmpDetails_months1">
+          <End Role="months" Type="Self.months" Multiplicity="0..1" />
+          <End Role="qenEmpDetails" Type="Self.qenEmpDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="months">
+              <PropertyRef Name="monthID" />
+            </Principal>
+            <Dependent Role="qenEmpDetails">
+              <PropertyRef Name="empEndMonth" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_qenEmpDetails_qendidateList">
           <End Role="qendidateList" Type="Self.qendidateList" Multiplicity="1" />
           <End Role="qenEmpDetails" Type="Self.qenEmpDetails" Multiplicity="*" />
@@ -1912,6 +1945,7 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <EntitySet Name="jobSavedQendidate" EntityType="Self.jobSavedQendidate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="jobSkills" EntityType="Self.jobSkills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="jobStatus" EntityType="Self.jobStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="months" EntityType="Self.months" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProfilePerformance" EntityType="Self.ProfilePerformance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="qenAppliedJob" EntityType="Self.qenAppliedJob" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="qendidateGraduation" EntityType="Self.qendidateGraduation" Schema="dbo" store:Type="Tables" />
@@ -2209,6 +2243,14 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <AssociationSet Name="FK_qendidateTestSchedule_qendidateList" Association="Self.FK_qendidateTestSchedule_qendidateList">
             <End Role="qendidateList" EntitySet="qendidateList" />
             <End Role="qendidateTestSchedule" EntitySet="qendidateTestSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_qenEmpDetails_months" Association="Self.FK_qenEmpDetails_months">
+            <End Role="months" EntitySet="months" />
+            <End Role="qenEmpDetails" EntitySet="qenEmpDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_qenEmpDetails_months1" Association="Self.FK_qenEmpDetails_months1">
+            <End Role="months" EntitySet="months" />
+            <End Role="qenEmpDetails" EntitySet="qenEmpDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_qenEmpDetails_qendidateList" Association="Self.FK_qenEmpDetails_qendidateList">
             <End Role="qendidateList" EntitySet="qendidateList" />
@@ -2513,6 +2555,36 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <FunctionImport Name="usp_GetProfileCompletenessPerc" ReturnType="Collection(Int32)">
           <Parameter Name="qenID" Mode="In" Type="Int64" />
           </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram2">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram2">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram2">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition2" ReturnType="Collection(oriondbModel.sp_helpdiagramdefinition2_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams2" ReturnType="Collection(oriondbModel.sp_helpdiagrams2_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram2">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams2" />
           <EntitySet Name="advertisementLists" EntityType="oriondbModel.advertisementList" />
           <EntitySet Name="app_error_log" EntityType="oriondbModel.app_error_log" />
           <EntitySet Name="App_status" EntityType="oriondbModel.App_status" />
@@ -2531,6 +2603,7 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <EntitySet Name="jobSavedQendidates" EntityType="oriondbModel.jobSavedQendidate" />
           <EntitySet Name="jobSkills" EntityType="oriondbModel.jobSkill" />
           <EntitySet Name="jobStatus" EntityType="oriondbModel.jobStatu" />
+          <EntitySet Name="months" EntityType="oriondbModel.month" />
           <EntitySet Name="ProfilePerformances" EntityType="oriondbModel.ProfilePerformance" />
           <EntitySet Name="qenAppliedJobs" EntityType="oriondbModel.qenAppliedJob" />
           <EntitySet Name="qendidateGraduations" EntityType="oriondbModel.qendidateGraduation" />
@@ -2805,6 +2878,14 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <AssociationSet Name="FK_jobSkills_skills" Association="oriondbModel.FK_jobSkills_skills">
             <End Role="skill" EntitySet="skills" />
             <End Role="jobSkill" EntitySet="jobSkills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_qenEmpDetails_months" Association="oriondbModel.FK_qenEmpDetails_months">
+            <End Role="month" EntitySet="months" />
+            <End Role="qenEmpDetail" EntitySet="qenEmpDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_qenEmpDetails_months1" Association="oriondbModel.FK_qenEmpDetails_months1">
+            <End Role="month" EntitySet="months" />
+            <End Role="qenEmpDetail" EntitySet="qenEmpDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_ProfilePerformance_qendidateList" Association="oriondbModel.FK_ProfilePerformance_qendidateList">
             <End Role="qendidateList" EntitySet="qendidateLists" />
@@ -3162,6 +3243,17 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Type="Binary" Name="definition" Nullable="true" />
         </ComplexType>
         <ComplexType Name="sp_helpdiagrams1_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition2_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams2_Result">
           <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -3542,6 +3634,15 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <NavigationProperty Name="EmployerDetail1" Relationship="oriondbModel.FK_jobStatus_EmployerDetails1" FromRole="jobStatu" ToRole="EmployerDetail" />
           <NavigationProperty Name="jobDetails" Relationship="oriondbModel.FK_jobDetails_jobStatus" FromRole="jobStatu" ToRole="jobDetail" />
         </EntityType>
+        <EntityType Name="month">
+          <Key>
+            <PropertyRef Name="monthID" />
+          </Key>
+          <Property Name="monthID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="monthName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="qenEmpDetails" Relationship="oriondbModel.FK_qenEmpDetails_months" FromRole="month" ToRole="qenEmpDetail" />
+          <NavigationProperty Name="qenEmpDetails1" Relationship="oriondbModel.FK_qenEmpDetails_months1" FromRole="month" ToRole="qenEmpDetail" />
+        </EntityType>
         <EntityType Name="ProfilePerformance">
           <Key>
             <PropertyRef Name="performanceID" />
@@ -3754,19 +3855,23 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           </Key>
           <Property Name="qenEmploymentNum" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="qenEmpFrom" Type="DateTime" Precision="0" />
           <Property Name="jobDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="qenEmpTo" Type="DateTime" Precision="0" />
           <Property Name="qenSalary" Type="Double" />
           <Property Name="qenPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="dataIsCreated" Type="DateTime" Precision="3" />
           <Property Name="dataIsUpdated" Type="DateTime" Precision="3" />
           <Property Name="qenID" Type="Int64" Nullable="false" />
-          <Property Name="qenRoleInProject" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="teamSize" Type="Int32" />
           <Property Name="jobLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="isPresent" Type="Boolean" />
-          <Property Name="projectDescription" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="empStartDate" Type="Int32" />
+          <Property Name="empStartMonth" Type="Int32" />
+          <Property Name="empStartYear" Type="Int32" />
+          <Property Name="empEndDate" Type="Int32" />
+          <Property Name="empEndMonth" Type="Int32" />
+          <Property Name="empEndYear" Type="Int32" />
+          <Property Name="totalExperience" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="month" Relationship="oriondbModel.FK_qenEmpDetails_months" FromRole="qenEmpDetail" ToRole="month" />
+          <NavigationProperty Name="month1" Relationship="oriondbModel.FK_qenEmpDetails_months1" FromRole="qenEmpDetail" ToRole="month" />
           <NavigationProperty Name="qendidateList" Relationship="oriondbModel.FK_qenEmpDetails_qendidateList" FromRole="qenEmpDetail" ToRole="qendidateList" />
         </EntityType>
         <EntityType Name="qenHigherSecondary">
@@ -4778,6 +4883,30 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_qenEmpDetails_months">
+          <End Type="oriondbModel.month" Role="month" Multiplicity="0..1" />
+          <End Type="oriondbModel.qenEmpDetail" Role="qenEmpDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="month">
+              <PropertyRef Name="monthID" />
+            </Principal>
+            <Dependent Role="qenEmpDetail">
+              <PropertyRef Name="empStartMonth" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_qenEmpDetails_months1">
+          <End Type="oriondbModel.month" Role="month" Multiplicity="0..1" />
+          <End Type="oriondbModel.qenEmpDetail" Role="qenEmpDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="month">
+              <PropertyRef Name="monthID" />
+            </Principal>
+            <Dependent Role="qenEmpDetail">
+              <PropertyRef Name="empEndMonth" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProfilePerformance_qendidateList">
           <End Type="oriondbModel.qendidateList" Role="qendidateList" Multiplicity="1" />
           <End Type="oriondbModel.ProfilePerformance" Role="ProfilePerformance" Multiplicity="*" />
@@ -5372,30 +5501,6 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_QendidateTestSchedule_Insert_ExamMark" FunctionName="oriondbModel.Store.sp_QendidateTestSchedule_Insert_ExamMark" />
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram1" FunctionName="oriondbModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram1" FunctionName="oriondbModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram1" FunctionName="oriondbModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition1" FunctionName="oriondbModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="oriondbModel.sp_helpdiagramdefinition1_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams1" FunctionName="oriondbModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="oriondbModel.sp_helpdiagrams1_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram1" FunctionName="oriondbModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams1" FunctionName="oriondbModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="usp_GetNullFieldFromCertifications" FunctionName="oriondbModel.Store.usp_GetNullFieldFromCertifications" />
           <FunctionImportMapping FunctionImportName="usp_GetNullFieldFromEmployment" FunctionName="oriondbModel.Store.usp_GetNullFieldFromEmployment" />
           <FunctionImportMapping FunctionImportName="usp_GetNullFieldFromPGrad" FunctionName="oriondbModel.Store.usp_GetNullFieldFromPGrad" />
@@ -5406,6 +5511,30 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <FunctionImportMapping FunctionImportName="usp_GetNullFieldsFromSecondary" FunctionName="oriondbModel.Store.usp_GetNullFieldsFromSecondary" />
           <FunctionImportMapping FunctionImportName="usp_GetNullFieldsGraduation" FunctionName="oriondbModel.Store.usp_GetNullFieldsGraduation" />
           <FunctionImportMapping FunctionImportName="usp_GetProfileCompletenessPerc" FunctionName="oriondbModel.Store.usp_GetProfileCompletenessPerc" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram2" FunctionName="oriondbModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram2" FunctionName="oriondbModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram2" FunctionName="oriondbModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition2" FunctionName="oriondbModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="oriondbModel.sp_helpdiagramdefinition2_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams2" FunctionName="oriondbModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="oriondbModel.sp_helpdiagrams2_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram2" FunctionName="oriondbModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams2" FunctionName="oriondbModel.Store.sp_upgraddiagrams" />
           <EntitySetMapping Name="advertisementLists">
             <EntityTypeMapping TypeName="oriondbModel.advertisementList">
               <MappingFragment StoreEntitySet="advertisementList">
@@ -5700,6 +5829,14 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="months">
+            <EntityTypeMapping TypeName="oriondbModel.month">
+              <MappingFragment StoreEntitySet="months">
+                <ScalarProperty Name="monthName" ColumnName="monthName" />
+                <ScalarProperty Name="monthID" ColumnName="monthID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ProfilePerformances">
             <EntityTypeMapping TypeName="oriondbModel.ProfilePerformance">
               <MappingFragment StoreEntitySet="ProfilePerformance">
@@ -5884,19 +6021,21 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <EntitySetMapping Name="qenEmpDetails">
             <EntityTypeMapping TypeName="oriondbModel.qenEmpDetail">
               <MappingFragment StoreEntitySet="qenEmpDetails">
-                <ScalarProperty Name="projectDescription" ColumnName="projectDescription" />
+                <ScalarProperty Name="totalExperience" ColumnName="totalExperience" />
+                <ScalarProperty Name="empEndYear" ColumnName="empEndYear" />
+                <ScalarProperty Name="empEndMonth" ColumnName="empEndMonth" />
+                <ScalarProperty Name="empEndDate" ColumnName="empEndDate" />
+                <ScalarProperty Name="empStartYear" ColumnName="empStartYear" />
+                <ScalarProperty Name="empStartMonth" ColumnName="empStartMonth" />
+                <ScalarProperty Name="empStartDate" ColumnName="empStartDate" />
                 <ScalarProperty Name="isPresent" ColumnName="isPresent" />
                 <ScalarProperty Name="jobLocation" ColumnName="jobLocation" />
-                <ScalarProperty Name="teamSize" ColumnName="teamSize" />
-                <ScalarProperty Name="qenRoleInProject" ColumnName="qenRoleInProject" />
                 <ScalarProperty Name="qenID" ColumnName="qenID" />
                 <ScalarProperty Name="dataIsUpdated" ColumnName="dataIsUpdated" />
                 <ScalarProperty Name="dataIsCreated" ColumnName="dataIsCreated" />
                 <ScalarProperty Name="qenPosition" ColumnName="qenPosition" />
                 <ScalarProperty Name="qenSalary" ColumnName="qenSalary" />
-                <ScalarProperty Name="qenEmpTo" ColumnName="qenEmpTo" />
                 <ScalarProperty Name="jobDescription" ColumnName="jobDescription" />
-                <ScalarProperty Name="qenEmpFrom" ColumnName="qenEmpFrom" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="qenEmploymentNum" ColumnName="qenEmploymentNum" />
               </MappingFragment>

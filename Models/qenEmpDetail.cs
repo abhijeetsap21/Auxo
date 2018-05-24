@@ -16,20 +16,24 @@ namespace NewLetter.Models
     {
         public long qenEmploymentNum { get; set; }
         public string CompanyName { get; set; }
-        public Nullable<System.DateTime> qenEmpFrom { get; set; }
         public string jobDescription { get; set; }
-        public Nullable<System.DateTime> qenEmpTo { get; set; }
         public Nullable<double> qenSalary { get; set; }
         public string qenPosition { get; set; }
         public Nullable<System.DateTime> dataIsCreated { get; set; }
         public Nullable<System.DateTime> dataIsUpdated { get; set; }
         public long qenID { get; set; }
-        public string qenRoleInProject { get; set; }
-        public Nullable<int> teamSize { get; set; }
         public string jobLocation { get; set; }
         public Nullable<bool> isPresent { get; set; }
-        public string projectDescription { get; set; }
+        public Nullable<int> empStartDate { get; set; }
+        public Nullable<int> empStartMonth { get; set; }
+        public Nullable<int> empStartYear { get; set; }
+        public Nullable<int> empEndDate { get; set; }
+        public Nullable<int> empEndMonth { get; set; }
+        public Nullable<int> empEndYear { get; set; }
+        public string totalExperience { get; set; }
     
+        public virtual month month { get; set; }
+        public virtual month month1 { get; set; }
         public virtual qendidateList qendidateList { get; set; }
     }
 }

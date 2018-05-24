@@ -38,6 +38,7 @@
                                             <th>Company Name</th>
                                             <th>Designation</th>
                                             <th>Duration</th>
+                                            <th>Years of Experience</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -51,15 +52,17 @@
                                                 <td>@row</td>
                                                 <td>@data.CompanyName</td>
                                                 <td>@data.qenPosition</td>
-                                                @if (data.qenEmpTo.Value.ToString("dd/MM/yyyy") == "01/01/1900")
+                                                @if (data.empEndYear == 1900)
                                                 {
-                                                <td>@data.qenEmpFrom.Value.ToString("dd/MM/yyyy") <b>To</b> Present</td>
+                                                    <td>@data.empStartDate/@data.empStartMonth/@data.empStartYear <b>To</b> Present</td>
                                                 }
                                                 else
                                                 {
-                                                <td>@data.qenEmpFrom.Value.ToString("dd/MM/yyyy") <b>To</b> @data.qenEmpTo.Value.ToString("dd/MM/yyyy")</td> 
+                                                    <td>@data.empStartDate/@data.empStartMonth/@data.empStartYear <b>To</b> @data.empEndDate/@data.empEndMonth/@data.empEndYear </td> 
                                                 }
-
+                                                
+                                                    <td>@data.totalExperience</td>
+                                                
                                                 <td>
                                                     <a onclick="return editemployment(@data.qenEmploymentNum);"><i class="glyphicon glyphicon-edit"></i></a>
                                                     <a onclick="return deleteemployment(@data.qenEmploymentNum,this);" id="delete_@data.qenEmploymentNum"><i class="glyphicon glyphicon-trash"></i></a>

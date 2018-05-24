@@ -14,10 +14,7 @@ using SelectPdf;
 using System.Globalization;
 using System.Data.SqlClient;
 using static NewLetter.Models.storedProcedureModels;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using iTextSharp.text.html.simpleparser;
-using iTextSharp.tool.xml;
+using static NewLetter.Models.BaseUtil;
 
 namespace NewLetter.Controllers
 {
@@ -485,13 +482,32 @@ namespace NewLetter.Controllers
                 qenid = (long)Convert.ToInt64(qenID);
                 EmployerModel model = null;
                 List<qenEmpDetail> emp = null;
+                DateTime from = new DateTime();
+
+
                 if (qenid != 0)
                 {
-                    emp = db.qenEmpDetails.Where(ex => ex.qenID == qenid).OrderByDescending(ex => ex.qenEmpFrom).ToList();
+                    emp = db.qenEmpDetails.Where(ex => ex.qenID == qenid).OrderByDescending(ex => ex.empStartYear).ToList();  
+                    foreach(var item in emp)
+                    {
+                        DateTime compareTo =  DateTime.Parse(item.empStartMonth +"/" + item.empStartDate + "/" + item.empStartYear);
+                        if(item.empEndYear != 1900)
+                        {
+                             from = DateTime.Parse(item.empEndMonth + "/" + item.empEndDate + "/" + item.empEndYear);
+                        }
+                        else
+                        {
+                            from = DateTime.Parse(BaseUtil.GetCurrentDateTime().ToString());
+                        }
+                        var dateSpan = DateTimeSpan.CompareDates(compareTo, from);
+                        item.totalExperience = (dateSpan.Years+" "+ "Years" + "and" + dateSpan.Months +" "+ "Months");
+
+                    }                  
                     if (emp.Count > 0 && emp != null)
                     {
                         model = new EmployerModel();
-                        model.employers = emp;
+                        model.employers = emp;                     
+                        
                         model.qenid = qenid;
                     }
                     else
@@ -506,6 +522,7 @@ namespace NewLetter.Controllers
                     model.qenid = qenid;
                 }
                 ViewBag.qenID = qenid;
+                
                 return View(model);
             }
             catch (Exception ex)
@@ -655,12 +672,19 @@ namespace NewLetter.Controllers
             {                
                 BaseUtil.CaptureErrorValues(ex);                
             }
+            var dates_ = BaseUtil.getdates();
+            var months_ = db.months.ToList();
+            var years_ = BaseUtil.getYears();
+            ViewBag.dates = dates_.Select(e => new { e.Value, e.Text });
+            ViewBag.months = months_.Select(e => new {e.monthID, e.monthName });
+            ViewBag.years = years_.Select(e => new { e.Value, e.Text });
+
             return PartialView("_PartialPopUpEmployment", emp);
         }
 
         [HttpPost]
          [ValidateAntiForgeryToken]
-        public ActionResult SaveEmploymentDetails(qenEmpDetail model)
+        public ActionResult SaveEmploymentDetails(qenEmpDetail model, FormCollection frm)
         {
             try
             {               
@@ -672,19 +696,25 @@ namespace NewLetter.Controllers
                     {
                         
                         emp.qenPosition = model.qenPosition;
-                        emp.qenEmpFrom = model.qenEmpFrom;
-                        
-                        if (model.qenEmpTo == null)
-                        {
-                            model.qenEmpTo = Convert.ToDateTime("1900-01-01");
-                        }
-                        else
-                        {
-                            emp.qenEmpTo = model.qenEmpTo;
-                        }
+                        emp.empStartDate = model.empStartDate;
+                        emp.empStartMonth = model.empStartMonth;
+                        emp.empStartYear = model.empStartYear;
+                        emp.empEndDate = model.empEndDate;
+                        emp.empEndMonth = model.empEndMonth;
+                        emp.empEndYear = model.empEndYear;
+
+                        if (model.empEndDate == null && model.empEndMonth == null && model.empEndYear == null)
+                        //{
+                        //    model.qenEmpTo = Convert.ToDateTime("1900-01-01");
+                        //}
+                        //else
+                        //{
+                        //    emp.qenEmpTo = model.qenEmpTo;
+                        //}
                         emp.qenSalary = model.qenSalary;
                         emp.CompanyName = model.CompanyName;
                         emp.jobDescription = model.jobDescription;
+                        emp.jobLocation = model.jobLocation;
                         emp.dataIsUpdated = BaseUtil.GetCurrentDateTime();
                         db.SaveChanges();
                         TempData["message"] = "Employment information updated";
@@ -693,15 +723,36 @@ namespace NewLetter.Controllers
                 else
                     //ModelState["qenEmpTo"].Errors.Clear();
                 {
-                    model.qenEmpFrom = model.qenEmpFrom; 
-                    if(model.qenEmpTo == null)
-                    {
-                        model.qenEmpTo = Convert.ToDateTime("1900-01-01");
-                    }
-                    //model.qenEmpTo = model.qenEmpTo;
+                    emp = new qenEmpDetail();
                     
-                    model.dataIsCreated = BaseUtil.GetCurrentDateTime();
-                    db.qenEmpDetails.Add(model);
+                    emp.empStartDate = model.empStartDate;                                      
+                    emp.empStartMonth = model.empStartMonth;
+                    emp.empStartYear = model.empStartYear;
+                    if(frm["ispresentval"] == "true")
+                    {
+                        emp.empEndDate = 1;
+                        emp.empEndMonth = 1;
+                        emp.empEndYear = 1900;
+                        emp.isPresent = true;
+                    }
+                    else if(frm["ispresentval"] == "false")
+                    {
+                        emp.empEndDate = model.empEndDate;
+                        emp.empEndMonth = model.empEndMonth;
+                        emp.empEndYear = model.empEndYear;
+                        emp.isPresent = false;
+                        
+                    }
+                    
+                    emp.qenSalary = model.qenSalary;
+                    emp.CompanyName = model.CompanyName;                    
+                    emp.jobLocation = model.jobLocation;
+                    emp.jobDescription = model.jobDescription;
+                    emp.qenPosition = model.qenPosition;
+                    emp.qenID = model.qenID;
+
+                    emp.dataIsCreated = BaseUtil.GetCurrentDateTime();
+                    db.qenEmpDetails.Add(emp);
                     db.SaveChanges();
                     // --------------------------in case new employment histry added update old references -----------------------------------------
                     var refernceCheck = db.qenReferences.Where(e => e.qenID == model.qenID && e.isDelete==false).ToList();
@@ -1116,37 +1167,15 @@ namespace NewLetter.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Export(string GridHtml, string qenID_)
+        public void Export(string GridHtml, string qenID_)
         {
             long qenID = Convert.ToInt64(qenID_);
             //eventName : 1 for view, 2 for contact, 3 for download
             if (Convert.ToInt16(BaseUtil.GetSessionValue(AdminInfo.role_id.ToString())) == 2)
             {
                 UpdateProfilePerformance(qenID, 3);
-            }
-            //using (MemoryStream stream = new System.IO.MemoryStream())
-            //{
-            //    HtmlToPdf converter = new HtmlToPdf();
-            //    SelectPdf.PdfDocument doc = converter.ConvertHtmlString(GridHtml);
-            //    converter.Options.WebPageHeight = 842;
-            //    converter.Options.WebPageWidth = 595;
-            //    byte[] pdf = doc.Save();
-            //    doc.Close();
-            //    FileResult fileResult = new FileContentResult(pdf, "application/pdf");
-            //    fileResult.FileDownloadName = "Document.pdf";
-            //    return fileResult;
-
-            //}
-            using (MemoryStream stream = new System.IO.MemoryStream())
-            {
-                StringReader sr = new StringReader(GridHtml);
-                Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 100f, 0f);
-                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
-                pdfDoc.Open();
-                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
-                pdfDoc.Close();
-                return File(stream.ToArray(), "application/pdf", "PDFUsingiTextSharp.pdf");
-            }
+            }         
+            
         }
 
         [HttpGet]
