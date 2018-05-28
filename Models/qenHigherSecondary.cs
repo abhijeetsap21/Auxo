@@ -18,12 +18,15 @@ namespace NewLetter.Models
         public long qenID { get; set; }
         public string schoolName { get; set; }
         public Nullable<int> hSecondaryPassYear { get; set; }
-        public Nullable<double> hSecondaryPercentage { get; set; }
+        public string hsecondaryGradeOrPercentage { get; set; }
         public string hSecondaryBoard { get; set; }
-        public string hSecondarySubjects { get; set; }
+        public string hSecondaryStream { get; set; }
         public Nullable<System.DateTime> dataIsCreated { get; set; }
         public Nullable<System.DateTime> dataIsUpdated { get; set; }
+        public string city { get; set; }
+        public Nullable<int> educationTypeID { get; set; }
     
+        public virtual educationType educationType { get; set; }
         public virtual qendidateList qendidateList { get; set; }
     }
 }

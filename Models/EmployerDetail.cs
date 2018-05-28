@@ -21,6 +21,10 @@ namespace NewLetter.Models
             this.App_status1 = new HashSet<App_status>();
             this.Candidate_status = new HashSet<Candidate_status>();
             this.Candidate_status1 = new HashSet<Candidate_status>();
+            this.courseSpecializations = new HashSet<courseSpecialization>();
+            this.courseSpecializations1 = new HashSet<courseSpecialization>();
+            this.courseTypes = new HashSet<courseType>();
+            this.courseTypes1 = new HashSet<courseType>();
             this.currencies = new HashSet<currency>();
             this.currencies1 = new HashSet<currency>();
             this.Educations = new HashSet<Education>();
@@ -71,6 +75,14 @@ namespace NewLetter.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Candidate_status> Candidate_status1 { get; set; }
         public virtual companyDetail companyDetail { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<courseSpecialization> courseSpecializations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<courseSpecialization> courseSpecializations1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<courseType> courseTypes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<courseType> courseTypes1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<currency> currencies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -18,14 +18,18 @@ namespace NewLetter.Models
         public long qenID { get; set; }
         public string collegeName { get; set; }
         public string collegeUniversity { get; set; }
-        public string courseName { get; set; }
-        public string courseField { get; set; }
-        public Nullable<double> gradPercentage { get; set; }
-        public string subjects { get; set; }
+        public Nullable<long> courseName { get; set; }
+        public Nullable<long> courseField { get; set; }
+        public string gradPercentageorGrade { get; set; }
         public Nullable<System.DateTime> dataIsCreated { get; set; }
         public Nullable<System.DateTime> dataIsUpdated { get; set; }
         public Nullable<int> YearPassing { get; set; }
+        public string city { get; set; }
+        public Nullable<int> educationTypeID { get; set; }
     
+        public virtual courseSpecialization courseSpecialization { get; set; }
+        public virtual courseType courseType { get; set; }
+        public virtual educationType educationType { get; set; }
         public virtual qendidateList qendidateList { get; set; }
     }
 }

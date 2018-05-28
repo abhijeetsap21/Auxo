@@ -925,7 +925,7 @@ input:focus{outline: none !important;}
    
 }
 @media only screen and (max-width:480px){
-	.common-round-shape {margin: 34px 13px 0 0;left: 10px;}
+	.common-round-shape {margin:34px 7px 0 0;left: 10px;}
 	.common-user-loggedin {margin: 0px 10px 10px 0;}
 }
 @media only screen and (max-width:414px){
@@ -1075,6 +1075,7 @@ input:focus{outline: none !important;}
 	 .navbar-default .navbar-nav > li > a i{height: 22px; width: 22px; margin:-4px 7px 0 0px; font-size: 10px; line-height: 23px;}
 	 .completed_text_profile{font-size:11px;}
 	 .forgot_password_bg_page_url{width:70%;}
+	 .form-horizontal.edit-candidate-cv .edit-candidate-cv-btn{margin: 23px 0 0 6px;}
 
 	 
 }
@@ -1147,15 +1148,18 @@ input:focus{outline: none !important;}
 	 .form-horizontal.edit-candidate-cv .edit-candidate-cv-btn{float: left; margin: 22px 0 0 0px;}
 	 .forgot_password_bg_page_url{width:100%;}
 	 .thankyou-btns.login-btn input{margin:0px 0 0 0px !important;}
-	 
+	 .text_center_powered img{margin: -20px 0 10px 0px;}
+	 .employe_zone_text_login a{margin: 0 0 8px 0px;}
+	 .form-horizontal h4 .profile_text{margin: 0px;}
 	 
 
 }
  @media only screen and (max-width:480px) {
-.common-right-block a.warning-verification{right:0px;}
-.form-horizontal.edit-candidate-cv .edit-candidate-cv-btn{float: right; margin: 22px 0 0 0px;}
+.common-right-block a.warning-verification{right:-20px;}
+.form-horizontal.edit-candidate-cv .edit-candidate-cv-btn{float: right; margin:-5px 0 0 0px;}
+	 
 }
  @media only screen and (max-width: 320px) {
-	 .common-right-block a.warning-verification{right:47px;}
+	 .common-right-block a.warning-verification{right:30px;}
 	 	 .form-horizontal.edit-candidate-cv .edit-candidate-cv-btn{float: left; margin: 22px 0 0 0px;}
 }

@@ -1,5 +1,4 @@
 ﻿@using System.Web.Mvc.Html
-@model NewLetter.Models.AcademicModel
 @{
     ViewBag.Title = "AcademicInfo";
 }
@@ -23,123 +22,35 @@
                     <div class="right-box form-horizontal">
                         @{ var qenid = ViewBag.qenid;}
                         @*<div class="form" id="content-1">*@
-
-                        <div class="panel-group" id="accordion">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                            High School
-                                        </a>
-                                    </h4>
-                                </div>
-
-                                <div id="collapseOne" class="panel-collapse collapse in">
-                                    <div class="panel-body">
-                                        @Html.Action("highSchool", "profile", new { qenid = @qenid })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                            Higher School
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseTwo" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        @Html.Action("higherSchool", "profile", new { qenid = @qenid })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                            Graduation
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseThree" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        @Html.Action("Graduation", "profile", new { qenid = @qenid })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                                            Post Graduation
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapseFour" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        @Html.Action("PostGraduation", "profile", new { qenid = @qenid })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
+                        @Html.DropDownList("Select Education",new SelectList(ViewBag.educationTypes, "educationTypeID", "educationTypeName"),"Educaton Type",new { @id="educationType",onchange = "return loadEducationType(this.value);"})                    
                     </div>
                 </div>
             </div>
         </div>
+        <div id="user_content">
+
+        </div>
     </div>
-
-    @*</div>*@
-
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" defer></script>-->
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    @*<script>
-            function highSchool()
-            {
-                debugger
-                var URL = '@Url.Action("highSchool", "NewLetter")?qenid='+'@qenid';
-                $.get(URL, function (data) {
-                    debugger
-                    $("#education").html(data);
-                });
-            }
-        </script>
-
-        <script>
-            function higherSchool() {
-                debugger
-                var URL = '@Url.Action("higherSchool", "NewLetter")?qenid=' + '@qenid';
-                $.get(URL, function (data) {
-                    debugger
-                    $("#education").html(data);
-                });
-            }
-        </script>
-        <script>
-            function Graduation()
-            {
-                debugger
-                var URL = '@Url.Action("Graduation", "NewLetter")?qenid='+'@qenid';
-                $.get(URL, function (data) {
-                    debugger
-                    $("#education").html(data);
-                });
-            }
-        </script>
-        <script>
-            function PostGraduation()
-            {
-                debugger
-                var URL = '@Url.Action("PostGraduation", "NewLetter")?qenid='+'@qenid';
-                $.get(URL, function (data) {
-                    debugger
-                    $("#education").html(data);
-                });
-            }
-        </script>*@
 </div>
+
+
+<script>
+
+    function loadEducationType(id)
+    {
+        debugger
+        if (id == 1) {
+            $('#user_content').load('@Url.Action("highSchool", "profile",new { qenid = qenid})');
+        }
+        if(id == 2)
+        {
+            $('#user_content').load('@Url.Action("higherSchool", "profile",new { qenid = qenid})');
+        }
+        if (id == 3) {
+            $('#user_content').load('@Url.Action("Graduation", "profile",new { qenid = qenid})');
+        }
+        if (id == 4) {
+            $('#user_content').load('@Url.Action("PostGraduation", "profile",new { qenid = qenid})');
+        }
+    }
+</script>

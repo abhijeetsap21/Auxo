@@ -201,33 +201,52 @@ namespace NewLetter.Models
     }
     public class ValidateSecondary
     {
-        [RegularExpression("^[0-9]*$", ErrorMessage = "invalid number")]
-        [Required(ErrorMessage = "please enter pass year")]
-        public int? secondaryPassYear { get; set; }
-        [RegularExpression("^(100([.][0]{1,})?$|[0-9]{1,2}([.][0-9]{1,})?)$", ErrorMessage = "invalid number")]
-        [Required(ErrorMessage = "please enter percentage")]
-        public int? secondaryPercentage { get; set; }
+        [Display(Name ="School Name")]
         [Required(ErrorMessage = "please enter school name")]
-        public string schoolName { get; set; }
-        [Required(ErrorMessage = "please enter board")]
+        public string schoolName {get;set;}
+
+        [Display(Name = "Year of passing")]        
+        [Required(ErrorMessage = "please select passing year")]
+        public int? secondaryPassYear { get; set; }
+
+        [Display(Name = "Grade Or Percentage")]
+        [Required(ErrorMessage = "please select percentage/grade")]
+        public string secondaryGradeOrPercentage { get; set; }
+
+        [Display(Name = "Board")]
+        [Required(ErrorMessage = "please select board")]
         public string secondaryBoard { get; set; }
-        [Required(ErrorMessage = "please enter subject")]
-        public string secondarySubjects { get; set; }
+
+        [Display(Name = "City")]
+        [Required(ErrorMessage = "please select city")]
+        public string city { get; set; }
+
     }
     public class HCValidateSecondary
     {
-        [RegularExpression("^[0-9]*$", ErrorMessage = "invalid number")]
-        [Required(ErrorMessage = "please enter pass year")]
-        public int? hSecondaryPassYear { get; set; }
-        [Required(ErrorMessage = "please enter percentage")]
-        [RegularExpression("^(100([.][0]{1,})?$|[0-9]{1,2}([.][0-9]{1,})?)$", ErrorMessage = "invalid number")]
-        public int? hSecondaryPercentage { get; set; }
+        [Display(Name = "School Name")]
         [Required(ErrorMessage = "please enter school name")]
         public string schoolName { get; set; }
-        [Required(ErrorMessage = "please enter board")]
+
+        [Display(Name = "Year of passing")]
+        [Required(ErrorMessage = "please select passing year")]
+        public int? hSecondaryPassYear { get; set; }
+
+        [Display(Name = "Grade Or Percentage")]
+        [Required(ErrorMessage = "please select percentage/grade")]        
+        public string hsecondaryGradeOrPercentage { get; set; }
+
+        [Display(Name = "Board")]
+        [Required(ErrorMessage = "please select board")]
         public string hSecondaryBoard { get; set; }
-        [Required(ErrorMessage = "please enter subject")]
-        public string hSecondarySubjects { get; set; }
+
+        [Display(Name = "Stream")]
+        [Required(ErrorMessage = "please select stream")]
+        public string hSecondaryStream { get; set; }
+
+        [Display(Name = "City")]
+        [Required(ErrorMessage = "please select city")]
+        public string city { get; set; }
     }
     public class EmpDetails
     {
@@ -274,58 +293,70 @@ namespace NewLetter.Models
     }
     public class qengradutionvalidtion
     {
-        [RegularExpression("^[0-9]*$", ErrorMessage = "invalid number")]
-        [Required(ErrorMessage = "please enter pass year")]
+        [Display(Name = "Graduation Year")]
+        [Required(ErrorMessage = "please select passing year")]
         public int? YearPassing { get; set; }
 
-        [Required(ErrorMessage = "please enter percentage")]
-        [RegularExpression("^(100([.][0]{1,})?$|[0-9]{1,2}([.][0-9]{1,})?)$", ErrorMessage = "invalid number")]
-        public long? gradPercentage { get; set; }
+        [Display(Name = "Grade/Percentage")]
+        [Required(ErrorMessage = "please select grade/percentage")]       
+        public string gradPercentageorGrade { get; set; }
 
+        [Display(Name = "Specialization")]
         [Required(ErrorMessage ="Course field is required")]
-        public string courseField { get; set; }
+        public long courseField { get; set; }
 
+        [Display(Name = "Course Name")]
         [Required(ErrorMessage = "Course name is required")]
-        public string courseName { get; set; }
+        public long courseName { get; set; }
 
+        [Display(Name = "University")]
         [Required(ErrorMessage = "University name is required")]
         public string collegeUniversity { get; set; }
 
+        [Display(Name = "College")]
         [Required(ErrorMessage = "College name is required")]
         public string collegeName { get; set; }
 
-       
-        [Required(ErrorMessage = "Subjects are required")]
-        public string subjects { get; set; }
+        [Display(Name = "City")]
+        [Required(ErrorMessage = "city name is required")]
+        public string city { get; set; }
 
-        
+
+
     }
 
     public class qenpgradutionvalidtion
     {
-        [RegularExpression("^[0-9]*$", ErrorMessage = "invalid number")]
-        [Required(ErrorMessage = "please enter pass year")]
+        [Display(Name = "Post Graduation Year")]
+        [Required(ErrorMessage = "please select passing year")]
         public int? YearPassing { get; set; }
 
-        [Required(ErrorMessage = "please enter percentage")]
-        [RegularExpression("^(100([.][0]{1,})?$|[0-9]{1,2}([.][0-9]{1,})?)$", ErrorMessage = "invalid number")]
-        public long? pGradPercentage { get; set; }
+        [Display(Name = "Grade/Percentage")]
+        [Required(ErrorMessage = "please select grade/percentage")]
+        public string pgradPercentageorGrade { get; set; }
 
+        [Display(Name = "Specialization")]
         [Required(ErrorMessage = "Course field is required")]
-        public string courseField { get; set; }
+        public long courseField { get; set; }
 
+        [Display(Name = "Course Name")]
         [Required(ErrorMessage = "Course name is required")]
-        public string courseName { get; set; }
+        public long courseName { get; set; }
 
+        [Display(Name = "University")]
         [Required(ErrorMessage = "University name is required")]
         public string collegeUniversity { get; set; }
 
+        [Display(Name = "College")]
         [Required(ErrorMessage = "College name is required")]
         public string collegeName { get; set; }
 
+        [Display(Name = "City")]
+        [Required(ErrorMessage = "city name is required")]
+        public string city { get; set; }
 
-        [Required(ErrorMessage = "Subjects are required")]
-        public string subjects { get; set; }
+
+
     }
     public class qenrefvalidation
     {

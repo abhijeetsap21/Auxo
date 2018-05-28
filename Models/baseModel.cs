@@ -480,7 +480,7 @@ namespace NewLetter.Models
         {
             List<SelectListItem> years = new List<SelectListItem>();
             int startYear = Convert.ToInt16(WebConfigurationManager.AppSettings["qenStartYear"]);
-            int endYear = Convert.ToInt16(WebConfigurationManager.AppSettings["qenEndYear"]);
+            int endYear = BaseUtil.GetCurrentDateTime().Year;
             
             for(int i = startYear; i<= endYear; i++)
                 {
@@ -493,6 +493,82 @@ namespace NewLetter.Models
                 }
             return years;
 
+        }
+
+        public static List<SelectListItem> getGradeOrPercentage()
+        {
+            List<SelectListItem> gradeOrPercentage = new List<SelectListItem>();
+            gradeOrPercentage.Add(new SelectListItem
+            {
+                Text = "Distinction  | A+ [80% -    ]",
+                Value = "Distinction  | A+ [80% -    ]",
+            });
+            gradeOrPercentage.Add(new SelectListItem
+            {
+                Text = "First Class  | A  [60% -79% ]",
+                Value = "First Class  | A  [60% -79% ]",
+            });
+            gradeOrPercentage.Add(new SelectListItem
+            {
+                Text = "Second Class | B[40 % -59 %]",
+                Value = "Second Class | B  [40% - 59%]",
+            });
+            gradeOrPercentage.Add(new SelectListItem
+            {
+                Text = "Third Class  | C  [33% - 39%]",
+                Value = "Third Class  | C  [33% - 39%]",
+            });
+
+            return gradeOrPercentage;
+        }
+
+        public static List<SelectListItem> getBoardName()
+        {
+            List<SelectListItem> boardNames = new List<SelectListItem>();
+            boardNames.Add(new SelectListItem
+            {
+                Text = "I.C.S.E.",
+                Value = "I.C.S.E.",
+            });
+            boardNames.Add(new SelectListItem
+            {
+                Text = "C.B.S.E.",
+                Value = "C.B.S.E.",
+            });
+            boardNames.Add(new SelectListItem
+            {
+                Text = "N.I.O.S./Open School",
+                Value = "N.I.O.S./Open School",
+            });
+            boardNames.Add(new SelectListItem
+            {
+                Text = "State Board",
+                Value = "State Board",
+            });
+            return boardNames;
+
+        }
+
+        public static List<SelectListItem> getHigherSecondaryStreams()
+        {
+            List<SelectListItem> HigherSecondaryStreams = new List<SelectListItem>();
+            HigherSecondaryStreams.Add(new SelectListItem
+            {
+                Text = "Science",
+                Value = "Science",
+            });
+            HigherSecondaryStreams.Add(new SelectListItem
+            {
+                Text = "Commerce",
+                Value = "Commerce",
+            });
+            HigherSecondaryStreams.Add(new SelectListItem
+            {
+                Text = "Arts",
+                Value = "Arts",
+            });
+
+            return HigherSecondaryStreams;       
         }
 
         public static List<SelectListItem> getMonths()

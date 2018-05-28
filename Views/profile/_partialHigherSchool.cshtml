@@ -1,89 +1,76 @@
-﻿
-@model NewLetter.Models.qenHigherSecondary
+﻿@model NewLetter.Models.qenHigherSecondary
 
-@using (Html.BeginForm("higherSchool", "profile", FormMethod.Post))
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-
-    <div class="high-school-main">
-        <!--  <p class="blue-title">Higher School</p>-->
-
+    
+    <div class="form-horizontal">
+        <h4>HigherSecondary</h4>
+        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+              
 
-
-        @Html.HiddenFor(model => model.qenID)
-
-        <div class="col-md-12 col-sm-12 margin-20 padding_lbl_threee">
-            <div class="col-md-6 col-sm-12 padding_lbl_threee bg_left_acadmic_detail_bordersf">
-                <div class="col-md-12 col-sm-12 padding_lbl_threee">
-                    <div class="form-group">
-                        <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label top_margin_schkoolname">School Name:</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                            @Html.TextBoxFor(model => model.schoolName, new { maxlength = "100" })
-                            @Html.ValidationMessageFor(model => model.schoolName, "", new { @class = "col_1 tleft text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-12 col-sm-12 padding_lbl_threee">
-                    <div class="form-group">
-                        <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Board Name:</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                            @Html.TextBoxFor(model => model.hSecondaryBoard, new { maxlength = "100" })
-                            @Html.ValidationMessageFor(model => model.hSecondaryBoard, "", new { @class = "col_1 tleft text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-12 col-sm-12 padding_lbl_threee">
-                    <div class="form-group">
-                        <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Subjects:</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                            @Html.TextBoxFor(model => model.hSecondarySubjects, new { maxlength = "100" })
-                            @Html.ValidationMessageFor(model => model.hSecondarySubjects, "", new { @class = "col_1 tleft text-danger" })
-                        </div>
-                    </div>
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.schoolName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.schoolName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.schoolName, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="col-md-6 col-sm-12 padding_lbl_threee bg_left_acadmic_detail_bordersf_to">
-                <div class="col-md-12 col-sm-12 padding_lbl_threee">
-                    <div class="form-group">
-                        <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Percentage:</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                            @Html.TextBoxFor(m => m.hSecondaryPercentage, new { maxlength = "5" })
-                            @Html.ValidationMessageFor(m => m.hSecondaryPercentage, "", new { @class = "col_1 tleft text-danger" })
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-sm-12 padding_lbl_threee">
-                    <div class="form-group">
-                        <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Passing Year:</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                            @Html.TextBoxFor(m => m.hSecondaryPassYear, new { maxlength = "4" })
-                            @Html.ValidationMessageFor(m => m.hSecondaryPassYear, "", new { @class = "col_1 tleft text-danger" })
-                        </div>
-                    </div>
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.hSecondaryPassYear, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">                
+                @Html.DropDownListFor(model => model.hSecondaryPassYear, new SelectList(ViewBag.years, "Value", "Text"), "Year", new { @id = "yearselect" })
+                @Html.ValidationMessageFor(model => model.hSecondaryPassYear, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-                @if(Model.schoolName != null)
-                { 
-                <div class="col-md-12 text-right academic">
-                    <input type="submit" value="Update" class="academic-create-btn btn btn-default btn_careere_save_rtv" />
-                </div>
-                }
-                else
-                {
-                    <div class="col-md-12 text-right academic">
-                        <input type="submit" value="Save" class="academic-create-btn btn btn-default btn_careere_save_rtv" />
-                    </div>
-                }
+        <div class="form-group">
+            @Html.LabelFor(model => model.hsecondaryGradeOrPercentage, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">                
+                @Html.DropDownListFor(model => model.hsecondaryGradeOrPercentage, new SelectList(ViewBag.grades, "Value", "Text"), "Grade / Percentage", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.hsecondaryGradeOrPercentage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.hSecondaryBoard, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">             
+                @Html.DropDownListFor(model => model.hSecondaryBoard, new SelectList(ViewBag.boardNames, "Value", "Text"), "Board", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.hSecondaryBoard, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.hSecondaryStream, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.hSecondaryStream, new SelectList(ViewBag.streams,"Value","Text"),"Stream",new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.hSecondaryStream, "", new { @class = "text-danger" })
+            </div>
+        </div> 
+              
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.city, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control",@id = "city" } })
+                @Html.ValidationMessageFor(model => model.city, "", new { @class = "text-danger" })
+            </div>
+        </div>       
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
-<hr class="none_hr_tag">
+
+<script>
+    var input = document.getElementById('city');
+      var autocomplete = new google.maps.places.Autocomplete(input);
+</script>
 
 <script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>

@@ -84,6 +84,32 @@
           <Property Name="latitude" Type="float" />
           <Property Name="longitude" Type="float" />
         </EntityType>
+        <EntityType Name="courseSpecialization">
+          <Key>
+            <PropertyRef Name="courseSpecialization" />
+          </Key>
+          <Property Name="courseSpecialization" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="courseTypeID" Type="bigint" Nullable="false" />
+          <Property Name="specializationName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="dataIsCreated" Type="datetime" Nullable="false" />
+          <Property Name="dataIsUpdated" Type="datetime" Nullable="false" />
+          <Property Name="createdBy" Type="bigint" Nullable="false" />
+          <Property Name="modifiedBy" Type="bigint" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="courseTypes">
+          <Key>
+            <PropertyRef Name="courseTypeID" />
+          </Key>
+          <Property Name="courseTypeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="educationTypeID" Type="int" Nullable="false" />
+          <Property Name="courseName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="dataIscCreated" Type="datetime" Nullable="false" />
+          <Property Name="dataIsUpdated" Type="datetime" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+          <Property Name="createdBy" Type="bigint" Nullable="false" />
+          <Property Name="modifiedBy" Type="bigint" Nullable="false" />
+        </EntityType>
         <EntityType Name="currency">
           <Key>
             <PropertyRef Name="currencyID" />
@@ -109,6 +135,18 @@
           <Property Name="isSelected" Type="bit" Nullable="false" />
           <Property Name="createdBy" Type="bigint" Nullable="false" />
           <Property Name="modifiedBy" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="educationTypes">
+          <Key>
+            <PropertyRef Name="educationTypeID" />
+          </Key>
+          <Property Name="educationTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="educationTypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="dataIsCreated" Type="datetime" Nullable="false" />
+          <Property Name="dataIsUpdated" Type="datetime" Nullable="false" />
+          <Property Name="createdBy" Type="bigint" Nullable="false" />
+          <Property Name="modifiedBy" Type="bigint" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="EmployerDetails">
           <Key>
@@ -322,13 +360,14 @@
           <Property Name="qenID" Type="bigint" Nullable="false" />
           <Property Name="collegeName" Type="nvarchar" MaxLength="100" />
           <Property Name="collegeUniversity" Type="nvarchar" MaxLength="100" />
-          <Property Name="courseName" Type="varchar" MaxLength="100" />
-          <Property Name="courseField" Type="nvarchar" MaxLength="50" />
-          <Property Name="gradPercentage" Type="float" />
-          <Property Name="subjects" Type="nvarchar" MaxLength="40" />
+          <Property Name="courseName" Type="bigint" />
+          <Property Name="courseField" Type="bigint" />
+          <Property Name="gradPercentageorGrade" Type="nvarchar" MaxLength="100" />
           <Property Name="dataIsCreated" Type="datetime" />
           <Property Name="dataIsUpdated" Type="datetime" />
           <Property Name="YearPassing" Type="int" />
+          <Property Name="city" Type="nvarchar" MaxLength="100" />
+          <Property Name="educationTypeID" Type="int" />
         </EntityType>
         <EntityType Name="qendidateList">
           <Key>
@@ -389,13 +428,14 @@
           <Property Name="qenID" Type="bigint" Nullable="false" />
           <Property Name="collegeName" Type="nvarchar" MaxLength="500" />
           <Property Name="collegeUniversity" Type="nvarchar" MaxLength="200" />
-          <Property Name="courseName" Type="nvarchar" MaxLength="500" />
-          <Property Name="courseField" Type="nvarchar" MaxLength="30" />
-          <Property Name="pGradPercentage" Type="float" />
-          <Property Name="subjects" Type="nvarchar" MaxLength="500" />
+          <Property Name="courseName" Type="bigint" />
+          <Property Name="courseField" Type="bigint" />
+          <Property Name="pgradPercentageorGrade" Type="nvarchar" MaxLength="100" />
           <Property Name="dataIsCreated" Type="datetime" />
           <Property Name="dataIsUpdated" Type="datetime" />
           <Property Name="YearPassing" Type="int" />
+          <Property Name="city" Type="nvarchar" MaxLength="100" />
+          <Property Name="educationTypeID" Type="int" />
         </EntityType>
         <EntityType Name="qendidatePHD">
           <Key>
@@ -489,11 +529,13 @@
           <Property Name="qenID" Type="bigint" Nullable="false" />
           <Property Name="schoolName" Type="varchar" MaxLength="40" />
           <Property Name="hSecondaryPassYear" Type="int" />
-          <Property Name="hSecondaryPercentage" Type="float" />
+          <Property Name="hsecondaryGradeOrPercentage" Type="nvarchar" MaxLength="50" />
           <Property Name="hSecondaryBoard" Type="nvarchar" MaxLength="50" />
-          <Property Name="hSecondarySubjects" Type="nvarchar" MaxLength="100" />
+          <Property Name="hSecondaryStream" Type="nvarchar" MaxLength="50" />
           <Property Name="dataIsCreated" Type="datetime" />
           <Property Name="dataIsUpdated" Type="datetime" />
+          <Property Name="city" Type="nvarchar" MaxLength="500" />
+          <Property Name="educationTypeID" Type="int" />
         </EntityType>
         <EntityType Name="qenInterviewSchedule">
           <Key>
@@ -555,11 +597,12 @@
           <Property Name="qenID" Type="bigint" Nullable="false" />
           <Property Name="schoolName" Type="varchar" MaxLength="40" />
           <Property Name="secondaryPassYear" Type="int" />
-          <Property Name="secondaryPercentage" Type="float" />
+          <Property Name="secondaryGradeOrPercentage" Type="nvarchar" MaxLength="50" />
           <Property Name="secondaryBoard" Type="nvarchar" MaxLength="20" />
           <Property Name="dataIsCreated" Type="datetime" />
           <Property Name="dataIsUpdated" Type="datetime" />
-          <Property Name="secondarySubjects" Type="nvarchar" MaxLength="100" />
+          <Property Name="city" Type="nvarchar" MaxLength="500" />
+          <Property Name="educationTypeID" Type="int" />
         </EntityType>
         <EntityType Name="qenSkills">
           <Key>
@@ -857,6 +900,78 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Principal>
             <Dependent Role="companyDetails">
               <PropertyRef Name="companyIndustry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_courseSpecialization_courseTypes">
+          <End Role="courseTypes" Type="Self.courseTypes" Multiplicity="1" />
+          <End Role="courseSpecialization" Type="Self.courseSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courseTypes">
+              <PropertyRef Name="courseTypeID" />
+            </Principal>
+            <Dependent Role="courseSpecialization">
+              <PropertyRef Name="courseTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_courseSpecialization_EmployerDetails">
+          <End Role="EmployerDetails" Type="Self.EmployerDetails" Multiplicity="1" />
+          <End Role="courseSpecialization" Type="Self.courseSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployerDetails">
+              <PropertyRef Name="EmployerID" />
+            </Principal>
+            <Dependent Role="courseSpecialization">
+              <PropertyRef Name="createdBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_courseSpecialization_EmployerDetails1">
+          <End Role="EmployerDetails" Type="Self.EmployerDetails" Multiplicity="1" />
+          <End Role="courseSpecialization" Type="Self.courseSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployerDetails">
+              <PropertyRef Name="EmployerID" />
+            </Principal>
+            <Dependent Role="courseSpecialization">
+              <PropertyRef Name="modifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_courseTypes_educationTypes">
+          <End Role="educationTypes" Type="Self.educationTypes" Multiplicity="1" />
+          <End Role="courseTypes" Type="Self.courseTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="educationTypes">
+              <PropertyRef Name="educationTypeID" />
+            </Principal>
+            <Dependent Role="courseTypes">
+              <PropertyRef Name="educationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_courseTypes_EmployerDetails">
+          <End Role="EmployerDetails" Type="Self.EmployerDetails" Multiplicity="1" />
+          <End Role="courseTypes" Type="Self.courseTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployerDetails">
+              <PropertyRef Name="EmployerID" />
+            </Principal>
+            <Dependent Role="courseTypes">
+              <PropertyRef Name="createdBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_courseTypes_EmployerDetails1">
+          <End Role="EmployerDetails" Type="Self.EmployerDetails" Multiplicity="1" />
+          <End Role="courseTypes" Type="Self.courseTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployerDetails">
+              <PropertyRef Name="EmployerID" />
+            </Principal>
+            <Dependent Role="courseTypes">
+              <PropertyRef Name="modifiedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1328,6 +1443,42 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_qendidateGraduation_courseSpecialization">
+          <End Role="courseSpecialization" Type="Self.courseSpecialization" Multiplicity="0..1" />
+          <End Role="qendidateGraduation" Type="Self.qendidateGraduation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courseSpecialization">
+              <PropertyRef Name="courseSpecialization" />
+            </Principal>
+            <Dependent Role="qendidateGraduation">
+              <PropertyRef Name="courseField" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_qendidateGraduation_courseTypes">
+          <End Role="courseTypes" Type="Self.courseTypes" Multiplicity="0..1" />
+          <End Role="qendidateGraduation" Type="Self.qendidateGraduation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courseTypes">
+              <PropertyRef Name="courseTypeID" />
+            </Principal>
+            <Dependent Role="qendidateGraduation">
+              <PropertyRef Name="courseName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_qendidateGraduation_educationTypes">
+          <End Role="educationTypes" Type="Self.educationTypes" Multiplicity="0..1" />
+          <End Role="qendidateGraduation" Type="Self.qendidateGraduation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="educationTypes">
+              <PropertyRef Name="educationTypeID" />
+            </Principal>
+            <Dependent Role="qendidateGraduation">
+              <PropertyRef Name="educationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_qendidateList_genderList">
           <End Role="genderList" Type="Self.genderList" Multiplicity="0..1" />
           <End Role="qendidateList" Type="Self.qendidateList" Multiplicity="*" />
@@ -1361,6 +1512,42 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Principal>
             <Dependent Role="qendidateListInJob">
               <PropertyRef Name="qenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_qendidatePGraduation_courseSpecialization">
+          <End Role="courseSpecialization" Type="Self.courseSpecialization" Multiplicity="0..1" />
+          <End Role="qendidatePGraduation" Type="Self.qendidatePGraduation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courseSpecialization">
+              <PropertyRef Name="courseSpecialization" />
+            </Principal>
+            <Dependent Role="qendidatePGraduation">
+              <PropertyRef Name="courseField" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_qendidatePGraduation_courseTypes">
+          <End Role="courseTypes" Type="Self.courseTypes" Multiplicity="0..1" />
+          <End Role="qendidatePGraduation" Type="Self.qendidatePGraduation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courseTypes">
+              <PropertyRef Name="courseTypeID" />
+            </Principal>
+            <Dependent Role="qendidatePGraduation">
+              <PropertyRef Name="courseName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_qendidatePGraduation_educationTypes">
+          <End Role="educationTypes" Type="Self.educationTypes" Multiplicity="0..1" />
+          <End Role="qendidatePGraduation" Type="Self.qendidatePGraduation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="educationTypes">
+              <PropertyRef Name="educationTypeID" />
+            </Principal>
+            <Dependent Role="qendidatePGraduation">
+              <PropertyRef Name="educationTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1460,6 +1647,18 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_qenHigherSecondary_educationTypes">
+          <End Role="educationTypes" Type="Self.educationTypes" Multiplicity="0..1" />
+          <End Role="qenHigherSecondary" Type="Self.qenHigherSecondary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="educationTypes">
+              <PropertyRef Name="educationTypeID" />
+            </Principal>
+            <Dependent Role="qenHigherSecondary">
+              <PropertyRef Name="educationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_qenInterviewSchedule_companyDetails">
           <End Role="companyDetails" Type="Self.companyDetails" Multiplicity="1" />
           <End Role="qenInterviewSchedule" Type="Self.qenInterviewSchedule" Multiplicity="*" />
@@ -1529,6 +1728,18 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Principal>
             <Dependent Role="qenMialSendInterested">
               <PropertyRef Name="qenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_qenSecondary_educationTypes">
+          <End Role="educationTypes" Type="Self.educationTypes" Multiplicity="0..1" />
+          <End Role="qenSecondary" Type="Self.qenSecondary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="educationTypes">
+              <PropertyRef Name="educationTypeID" />
+            </Principal>
+            <Dependent Role="qenSecondary">
+              <PropertyRef Name="educationTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1932,8 +2143,11 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <EntitySet Name="App_status" EntityType="Self.App_status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Candidate_status" EntityType="Self.Candidate_status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="companyDetails" EntityType="Self.companyDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="courseSpecialization" EntityType="Self.courseSpecialization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="courseTypes" EntityType="Self.courseTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="currency" EntityType="Self.currency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Education" EntityType="Self.Education" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="educationTypes" EntityType="Self.educationTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployerDetails" EntityType="Self.EmployerDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="employerType" EntityType="Self.employerType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmploymentType" EntityType="Self.EmploymentType" Schema="dbo" store:Type="Tables" />
@@ -2055,6 +2269,30 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <AssociationSet Name="FK_companyDetails_industry" Association="Self.FK_companyDetails_industry">
             <End Role="industry" EntitySet="industry" />
             <End Role="companyDetails" EntitySet="companyDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_courseSpecialization_courseTypes" Association="Self.FK_courseSpecialization_courseTypes">
+            <End Role="courseTypes" EntitySet="courseTypes" />
+            <End Role="courseSpecialization" EntitySet="courseSpecialization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_courseSpecialization_EmployerDetails" Association="Self.FK_courseSpecialization_EmployerDetails">
+            <End Role="EmployerDetails" EntitySet="EmployerDetails" />
+            <End Role="courseSpecialization" EntitySet="courseSpecialization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_courseSpecialization_EmployerDetails1" Association="Self.FK_courseSpecialization_EmployerDetails1">
+            <End Role="EmployerDetails" EntitySet="EmployerDetails" />
+            <End Role="courseSpecialization" EntitySet="courseSpecialization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_courseTypes_educationTypes" Association="Self.FK_courseTypes_educationTypes">
+            <End Role="educationTypes" EntitySet="educationTypes" />
+            <End Role="courseTypes" EntitySet="courseTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_courseTypes_EmployerDetails" Association="Self.FK_courseTypes_EmployerDetails">
+            <End Role="EmployerDetails" EntitySet="EmployerDetails" />
+            <End Role="courseTypes" EntitySet="courseTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_courseTypes_EmployerDetails1" Association="Self.FK_courseTypes_EmployerDetails1">
+            <End Role="EmployerDetails" EntitySet="EmployerDetails" />
+            <End Role="courseTypes" EntitySet="courseTypes" />
           </AssociationSet>
           <AssociationSet Name="FK_currency_EmployerDetails" Association="Self.FK_currency_EmployerDetails">
             <End Role="EmployerDetails" EntitySet="EmployerDetails" />
@@ -2212,6 +2450,18 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             <End Role="qendidateList" EntitySet="qendidateList" />
             <End Role="qenAppliedJob" EntitySet="qenAppliedJob" />
           </AssociationSet>
+          <AssociationSet Name="FK_qendidateGraduation_courseSpecialization" Association="Self.FK_qendidateGraduation_courseSpecialization">
+            <End Role="courseSpecialization" EntitySet="courseSpecialization" />
+            <End Role="qendidateGraduation" EntitySet="qendidateGraduation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_qendidateGraduation_courseTypes" Association="Self.FK_qendidateGraduation_courseTypes">
+            <End Role="courseTypes" EntitySet="courseTypes" />
+            <End Role="qendidateGraduation" EntitySet="qendidateGraduation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_qendidateGraduation_educationTypes" Association="Self.FK_qendidateGraduation_educationTypes">
+            <End Role="educationTypes" EntitySet="educationTypes" />
+            <End Role="qendidateGraduation" EntitySet="qendidateGraduation" />
+          </AssociationSet>
           <AssociationSet Name="FK_qendidateList_genderList" Association="Self.FK_qendidateList_genderList">
             <End Role="genderList" EntitySet="genderList" />
             <End Role="qendidateList" EntitySet="qendidateList" />
@@ -2223,6 +2473,18 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <AssociationSet Name="FK_qendidateListInJob_qendidateList" Association="Self.FK_qendidateListInJob_qendidateList">
             <End Role="qendidateList" EntitySet="qendidateList" />
             <End Role="qendidateListInJob" EntitySet="qendidateListInJob" />
+          </AssociationSet>
+          <AssociationSet Name="FK_qendidatePGraduation_courseSpecialization" Association="Self.FK_qendidatePGraduation_courseSpecialization">
+            <End Role="courseSpecialization" EntitySet="courseSpecialization" />
+            <End Role="qendidatePGraduation" EntitySet="qendidatePGraduation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_qendidatePGraduation_courseTypes" Association="Self.FK_qendidatePGraduation_courseTypes">
+            <End Role="courseTypes" EntitySet="courseTypes" />
+            <End Role="qendidatePGraduation" EntitySet="qendidatePGraduation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_qendidatePGraduation_educationTypes" Association="Self.FK_qendidatePGraduation_educationTypes">
+            <End Role="educationTypes" EntitySet="educationTypes" />
+            <End Role="qendidatePGraduation" EntitySet="qendidatePGraduation" />
           </AssociationSet>
           <AssociationSet Name="FK_qendidateProfileSharedWith_qendidateList" Association="Self.FK_qendidateProfileSharedWith_qendidateList">
             <End Role="qendidateList" EntitySet="qendidateList" />
@@ -2256,6 +2518,10 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             <End Role="qendidateList" EntitySet="qendidateList" />
             <End Role="qenEmpDetails" EntitySet="qenEmpDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_qenHigherSecondary_educationTypes" Association="Self.FK_qenHigherSecondary_educationTypes">
+            <End Role="educationTypes" EntitySet="educationTypes" />
+            <End Role="qenHigherSecondary" EntitySet="qenHigherSecondary" />
+          </AssociationSet>
           <AssociationSet Name="FK_qenInterviewSchedule_companyDetails" Association="Self.FK_qenInterviewSchedule_companyDetails">
             <End Role="companyDetails" EntitySet="companyDetails" />
             <End Role="qenInterviewSchedule" EntitySet="qenInterviewSchedule" />
@@ -2279,6 +2545,10 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <AssociationSet Name="FK_qenMialSendInterested_qendidateList" Association="Self.FK_qenMialSendInterested_qendidateList">
             <End Role="qendidateList" EntitySet="qendidateList" />
             <End Role="qenMialSendInterested" EntitySet="qenMialSendInterested" />
+          </AssociationSet>
+          <AssociationSet Name="FK_qenSecondary_educationTypes" Association="Self.FK_qenSecondary_educationTypes">
+            <End Role="educationTypes" EntitySet="educationTypes" />
+            <End Role="qenSecondary" EntitySet="qenSecondary" />
           </AssociationSet>
           <AssociationSet Name="FK_qenSkills_qendidateList" Association="Self.FK_qenSkills_qendidateList">
             <End Role="qendidateList" EntitySet="qendidateList" />
@@ -2585,13 +2855,46 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams2" />
+          <FunctionImport Name="sp_alterdiagram3">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram3">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram3">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition3" ReturnType="Collection(oriondbModel.sp_helpdiagramdefinition3_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams3" ReturnType="Collection(oriondbModel.sp_helpdiagrams3_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram3">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams3" />
           <EntitySet Name="advertisementLists" EntityType="oriondbModel.advertisementList" />
           <EntitySet Name="app_error_log" EntityType="oriondbModel.app_error_log" />
           <EntitySet Name="App_status" EntityType="oriondbModel.App_status" />
           <EntitySet Name="Candidate_status" EntityType="oriondbModel.Candidate_status" />
           <EntitySet Name="companyDetails" EntityType="oriondbModel.companyDetail" />
+          <EntitySet Name="courseSpecializations" EntityType="oriondbModel.courseSpecialization" />
+          <EntitySet Name="courseTypes" EntityType="oriondbModel.courseType" />
           <EntitySet Name="currencies" EntityType="oriondbModel.currency" />
           <EntitySet Name="Educations" EntityType="oriondbModel.Education" />
+          <EntitySet Name="educationTypes" EntityType="oriondbModel.educationType" />
           <EntitySet Name="EmployerDetails" EntityType="oriondbModel.EmployerDetail" />
           <EntitySet Name="employerTypes" EntityType="oriondbModel.employerType" />
           <EntitySet Name="EmploymentTypes" EntityType="oriondbModel.EmploymentType" />
@@ -2687,6 +2990,46 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             <End Role="companyDetail" EntitySet="companyDetails" />
             <End Role="slotTempBlocked" EntitySet="slotTempBlockeds" />
           </AssociationSet>
+          <AssociationSet Name="FK_courseSpecialization_courseTypes" Association="oriondbModel.FK_courseSpecialization_courseTypes">
+            <End Role="courseType" EntitySet="courseTypes" />
+            <End Role="courseSpecialization" EntitySet="courseSpecializations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_courseSpecialization_EmployerDetails" Association="oriondbModel.FK_courseSpecialization_EmployerDetails">
+            <End Role="EmployerDetail" EntitySet="EmployerDetails" />
+            <End Role="courseSpecialization" EntitySet="courseSpecializations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_courseSpecialization_EmployerDetails1" Association="oriondbModel.FK_courseSpecialization_EmployerDetails1">
+            <End Role="EmployerDetail" EntitySet="EmployerDetails" />
+            <End Role="courseSpecialization" EntitySet="courseSpecializations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_qendidateGraduation_courseSpecialization" Association="oriondbModel.FK_qendidateGraduation_courseSpecialization">
+            <End Role="courseSpecialization" EntitySet="courseSpecializations" />
+            <End Role="qendidateGraduation" EntitySet="qendidateGraduations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_qendidatePGraduation_courseSpecialization" Association="oriondbModel.FK_qendidatePGraduation_courseSpecialization">
+            <End Role="courseSpecialization" EntitySet="courseSpecializations" />
+            <End Role="qendidatePGraduation" EntitySet="qendidatePGraduations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_courseTypes_educationTypes" Association="oriondbModel.FK_courseTypes_educationTypes">
+            <End Role="educationType" EntitySet="educationTypes" />
+            <End Role="courseType" EntitySet="courseTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_courseTypes_EmployerDetails" Association="oriondbModel.FK_courseTypes_EmployerDetails">
+            <End Role="EmployerDetail" EntitySet="EmployerDetails" />
+            <End Role="courseType" EntitySet="courseTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_courseTypes_EmployerDetails1" Association="oriondbModel.FK_courseTypes_EmployerDetails1">
+            <End Role="EmployerDetail" EntitySet="EmployerDetails" />
+            <End Role="courseType" EntitySet="courseTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_qendidateGraduation_courseTypes" Association="oriondbModel.FK_qendidateGraduation_courseTypes">
+            <End Role="courseType" EntitySet="courseTypes" />
+            <End Role="qendidateGraduation" EntitySet="qendidateGraduations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_qendidatePGraduation_courseTypes" Association="oriondbModel.FK_qendidatePGraduation_courseTypes">
+            <End Role="courseType" EntitySet="courseTypes" />
+            <End Role="qendidatePGraduation" EntitySet="qendidatePGraduations" />
+          </AssociationSet>
           <AssociationSet Name="FK_currency_EmployerDetails" Association="oriondbModel.FK_currency_EmployerDetails">
             <End Role="EmployerDetail" EntitySet="EmployerDetails" />
             <End Role="currency" EntitySet="currencies" />
@@ -2710,6 +3053,22 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <AssociationSet Name="FK_jobDetails_Education" Association="oriondbModel.FK_jobDetails_Education">
             <End Role="Education" EntitySet="Educations" />
             <End Role="jobDetail" EntitySet="jobDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_qendidateGraduation_educationTypes" Association="oriondbModel.FK_qendidateGraduation_educationTypes">
+            <End Role="educationType" EntitySet="educationTypes" />
+            <End Role="qendidateGraduation" EntitySet="qendidateGraduations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_qendidatePGraduation_educationTypes" Association="oriondbModel.FK_qendidatePGraduation_educationTypes">
+            <End Role="educationType" EntitySet="educationTypes" />
+            <End Role="qendidatePGraduation" EntitySet="qendidatePGraduations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_qenHigherSecondary_educationTypes" Association="oriondbModel.FK_qenHigherSecondary_educationTypes">
+            <End Role="educationType" EntitySet="educationTypes" />
+            <End Role="qenHigherSecondary" EntitySet="qenHigherSecondaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_qenSecondary_educationTypes" Association="oriondbModel.FK_qenSecondary_educationTypes">
+            <End Role="educationType" EntitySet="educationTypes" />
+            <End Role="qenSecondary" EntitySet="qenSecondaries" />
           </AssociationSet>
           <AssociationSet Name="FK_EmployerDetails_EmployerDetails" Association="oriondbModel.FK_EmployerDetails_EmployerDetails">
             <End Role="EmployerDetail" EntitySet="EmployerDetails" />
@@ -3260,6 +3619,17 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition3_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams3_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
         <EntityType Name="advertisementList">
           <Key>
             <PropertyRef Name="advertisementRefID" />
@@ -3353,6 +3723,43 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <NavigationProperty Name="slotsBlockeds" Relationship="oriondbModel.FK_slotsBlocked_company" FromRole="companyDetail" ToRole="slotsBlocked" />
           <NavigationProperty Name="slotTempBlockeds" Relationship="oriondbModel.FK_slotTempBlocked_companyDetails" FromRole="companyDetail" ToRole="slotTempBlocked" />
         </EntityType>
+        <EntityType Name="courseSpecialization">
+          <Key>
+            <PropertyRef Name="courseSpecialization1" />
+          </Key>
+          <Property Name="courseSpecialization1" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="courseTypeID" Type="Int64" Nullable="false" />
+          <Property Name="specializationName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dataIsCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dataIsUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createdBy" Type="Int64" Nullable="false" />
+          <Property Name="modifiedBy" Type="Int64" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="courseType" Relationship="oriondbModel.FK_courseSpecialization_courseTypes" FromRole="courseSpecialization" ToRole="courseType" />
+          <NavigationProperty Name="EmployerDetail" Relationship="oriondbModel.FK_courseSpecialization_EmployerDetails" FromRole="courseSpecialization" ToRole="EmployerDetail" />
+          <NavigationProperty Name="EmployerDetail1" Relationship="oriondbModel.FK_courseSpecialization_EmployerDetails1" FromRole="courseSpecialization" ToRole="EmployerDetail" />
+          <NavigationProperty Name="qendidateGraduations" Relationship="oriondbModel.FK_qendidateGraduation_courseSpecialization" FromRole="courseSpecialization" ToRole="qendidateGraduation" />
+          <NavigationProperty Name="qendidatePGraduations" Relationship="oriondbModel.FK_qendidatePGraduation_courseSpecialization" FromRole="courseSpecialization" ToRole="qendidatePGraduation" />
+        </EntityType>
+        <EntityType Name="courseType">
+          <Key>
+            <PropertyRef Name="courseTypeID" />
+          </Key>
+          <Property Name="courseTypeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="educationTypeID" Type="Int32" Nullable="false" />
+          <Property Name="courseName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dataIscCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dataIsUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <Property Name="createdBy" Type="Int64" Nullable="false" />
+          <Property Name="modifiedBy" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="courseSpecializations" Relationship="oriondbModel.FK_courseSpecialization_courseTypes" FromRole="courseType" ToRole="courseSpecialization" />
+          <NavigationProperty Name="educationType" Relationship="oriondbModel.FK_courseTypes_educationTypes" FromRole="courseType" ToRole="educationType" />
+          <NavigationProperty Name="EmployerDetail" Relationship="oriondbModel.FK_courseTypes_EmployerDetails" FromRole="courseType" ToRole="EmployerDetail" />
+          <NavigationProperty Name="EmployerDetail1" Relationship="oriondbModel.FK_courseTypes_EmployerDetails1" FromRole="courseType" ToRole="EmployerDetail" />
+          <NavigationProperty Name="qendidateGraduations" Relationship="oriondbModel.FK_qendidateGraduation_courseTypes" FromRole="courseType" ToRole="qendidateGraduation" />
+          <NavigationProperty Name="qendidatePGraduations" Relationship="oriondbModel.FK_qendidatePGraduation_courseTypes" FromRole="courseType" ToRole="qendidatePGraduation" />
+        </EntityType>
         <EntityType Name="currency">
           <Key>
             <PropertyRef Name="currencyID" />
@@ -3385,6 +3792,23 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <NavigationProperty Name="EmployerDetail1" Relationship="oriondbModel.FK_Education_EmployerDetails1" FromRole="Education" ToRole="EmployerDetail" />
           <NavigationProperty Name="jobDetails" Relationship="oriondbModel.FK_jobDetails_Education" FromRole="Education" ToRole="jobDetail" />
         </EntityType>
+        <EntityType Name="educationType">
+          <Key>
+            <PropertyRef Name="educationTypeID" />
+          </Key>
+          <Property Name="educationTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="educationTypeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="dataIsCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dataIsUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createdBy" Type="Int64" Nullable="false" />
+          <Property Name="modifiedBy" Type="Int64" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="courseTypes" Relationship="oriondbModel.FK_courseTypes_educationTypes" FromRole="educationType" ToRole="courseType" />
+          <NavigationProperty Name="qendidateGraduations" Relationship="oriondbModel.FK_qendidateGraduation_educationTypes" FromRole="educationType" ToRole="qendidateGraduation" />
+          <NavigationProperty Name="qendidatePGraduations" Relationship="oriondbModel.FK_qendidatePGraduation_educationTypes" FromRole="educationType" ToRole="qendidatePGraduation" />
+          <NavigationProperty Name="qenHigherSecondaries" Relationship="oriondbModel.FK_qenHigherSecondary_educationTypes" FromRole="educationType" ToRole="qenHigherSecondary" />
+          <NavigationProperty Name="qenSecondaries" Relationship="oriondbModel.FK_qenSecondary_educationTypes" FromRole="educationType" ToRole="qenSecondary" />
+        </EntityType>
         <EntityType Name="EmployerDetail">
           <Key>
             <PropertyRef Name="EmployerID" />
@@ -3405,6 +3829,10 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <NavigationProperty Name="Candidate_status" Relationship="oriondbModel.FK_Candidate_status_EmployerDetails" FromRole="EmployerDetail" ToRole="Candidate_status" />
           <NavigationProperty Name="Candidate_status1" Relationship="oriondbModel.FK_Candidate_status_EmployerDetails1" FromRole="EmployerDetail" ToRole="Candidate_status" />
           <NavigationProperty Name="companyDetail" Relationship="oriondbModel.FK_EmployerDetails_companyDetails" FromRole="EmployerDetail" ToRole="companyDetail" />
+          <NavigationProperty Name="courseSpecializations" Relationship="oriondbModel.FK_courseSpecialization_EmployerDetails" FromRole="EmployerDetail" ToRole="courseSpecialization" />
+          <NavigationProperty Name="courseSpecializations1" Relationship="oriondbModel.FK_courseSpecialization_EmployerDetails1" FromRole="EmployerDetail" ToRole="courseSpecialization" />
+          <NavigationProperty Name="courseTypes" Relationship="oriondbModel.FK_courseTypes_EmployerDetails" FromRole="EmployerDetail" ToRole="courseType" />
+          <NavigationProperty Name="courseTypes1" Relationship="oriondbModel.FK_courseTypes_EmployerDetails1" FromRole="EmployerDetail" ToRole="courseType" />
           <NavigationProperty Name="currencies" Relationship="oriondbModel.FK_currency_EmployerDetails" FromRole="EmployerDetail" ToRole="currency" />
           <NavigationProperty Name="currencies1" Relationship="oriondbModel.FK_currency_EmployerDetails1" FromRole="EmployerDetail" ToRole="currency" />
           <NavigationProperty Name="Educations" Relationship="oriondbModel.FK_Education_EmployerDetails" FromRole="EmployerDetail" ToRole="Education" />
@@ -3682,13 +4110,17 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Name="qenID" Type="Int64" Nullable="false" />
           <Property Name="collegeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="collegeUniversity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="courseName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="courseField" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="gradPercentage" Type="Double" />
-          <Property Name="subjects" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="courseName" Type="Int64" />
+          <Property Name="courseField" Type="Int64" />
+          <Property Name="gradPercentageorGrade" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="dataIsCreated" Type="DateTime" Precision="3" />
           <Property Name="dataIsUpdated" Type="DateTime" Precision="3" />
           <Property Name="YearPassing" Type="Int32" />
+          <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="educationTypeID" Type="Int32" />
+          <NavigationProperty Name="courseSpecialization" Relationship="oriondbModel.FK_qendidateGraduation_courseSpecialization" FromRole="qendidateGraduation" ToRole="courseSpecialization" />
+          <NavigationProperty Name="courseType" Relationship="oriondbModel.FK_qendidateGraduation_courseTypes" FromRole="qendidateGraduation" ToRole="courseType" />
+          <NavigationProperty Name="educationType" Relationship="oriondbModel.FK_qendidateGraduation_educationTypes" FromRole="qendidateGraduation" ToRole="educationType" />
           <NavigationProperty Name="qendidateList" Relationship="oriondbModel.FK__qendidate__qenID__0EA330E9" FromRole="qendidateGraduation" ToRole="qendidateList" />
         </EntityType>
         <EntityType Name="qendidateList">
@@ -3772,13 +4204,17 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Name="qenID" Type="Int64" Nullable="false" />
           <Property Name="collegeName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="collegeUniversity" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="courseName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="courseField" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="pGradPercentage" Type="Double" />
-          <Property Name="subjects" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="courseName" Type="Int64" />
+          <Property Name="courseField" Type="Int64" />
+          <Property Name="pgradPercentageorGrade" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="dataIsCreated" Type="DateTime" Precision="3" />
           <Property Name="dataIsUpdated" Type="DateTime" Precision="3" />
           <Property Name="YearPassing" Type="Int32" />
+          <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="educationTypeID" Type="Int32" />
+          <NavigationProperty Name="courseSpecialization" Relationship="oriondbModel.FK_qendidatePGraduation_courseSpecialization" FromRole="qendidatePGraduation" ToRole="courseSpecialization" />
+          <NavigationProperty Name="courseType" Relationship="oriondbModel.FK_qendidatePGraduation_courseTypes" FromRole="qendidatePGraduation" ToRole="courseType" />
+          <NavigationProperty Name="educationType" Relationship="oriondbModel.FK_qendidatePGraduation_educationTypes" FromRole="qendidatePGraduation" ToRole="educationType" />
           <NavigationProperty Name="qendidateList" Relationship="oriondbModel.FK__qendidate__qenID__267ABA7A" FromRole="qendidatePGraduation" ToRole="qendidateList" />
         </EntityType>
         <EntityType Name="qendidatePHD">
@@ -3882,11 +4318,14 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Name="qenID" Type="Int64" Nullable="false" />
           <Property Name="schoolName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="hSecondaryPassYear" Type="Int32" />
-          <Property Name="hSecondaryPercentage" Type="Double" />
+          <Property Name="hsecondaryGradeOrPercentage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="hSecondaryBoard" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="hSecondarySubjects" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="hSecondaryStream" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="dataIsCreated" Type="DateTime" Precision="3" />
           <Property Name="dataIsUpdated" Type="DateTime" Precision="3" />
+          <Property Name="city" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="educationTypeID" Type="Int32" />
+          <NavigationProperty Name="educationType" Relationship="oriondbModel.FK_qenHigherSecondary_educationTypes" FromRole="qenHigherSecondary" ToRole="educationType" />
           <NavigationProperty Name="qendidateList" Relationship="oriondbModel.FK__qenHigher__qenID__1273C1CD" FromRole="qenHigherSecondary" ToRole="qendidateList" />
         </EntityType>
         <EntityType Name="qenInterviewSchedule">
@@ -3956,11 +4395,13 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Name="qenID" Type="Int64" Nullable="false" />
           <Property Name="schoolName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="secondaryPassYear" Type="Int32" />
-          <Property Name="secondaryPercentage" Type="Double" />
+          <Property Name="secondaryGradeOrPercentage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="secondaryBoard" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="dataIsCreated" Type="DateTime" Precision="3" />
           <Property Name="dataIsUpdated" Type="DateTime" Precision="3" />
-          <Property Name="secondarySubjects" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="educationTypeID" Type="Int32" />
+          <NavigationProperty Name="educationType" Relationship="oriondbModel.FK_qenSecondary_educationTypes" FromRole="qenSecondary" ToRole="educationType" />
           <NavigationProperty Name="qendidateList" Relationship="oriondbModel.FK__qenSecond__qenID__15502E78" FromRole="qenSecondary" ToRole="qendidateList" />
         </EntityType>
         <EntityType Name="qenSkill">
@@ -4307,6 +4748,126 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_courseSpecialization_courseTypes">
+          <End Type="oriondbModel.courseType" Role="courseType" Multiplicity="1" />
+          <End Type="oriondbModel.courseSpecialization" Role="courseSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courseType">
+              <PropertyRef Name="courseTypeID" />
+            </Principal>
+            <Dependent Role="courseSpecialization">
+              <PropertyRef Name="courseTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_courseSpecialization_EmployerDetails">
+          <End Type="oriondbModel.EmployerDetail" Role="EmployerDetail" Multiplicity="1" />
+          <End Type="oriondbModel.courseSpecialization" Role="courseSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployerDetail">
+              <PropertyRef Name="EmployerID" />
+            </Principal>
+            <Dependent Role="courseSpecialization">
+              <PropertyRef Name="createdBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_courseSpecialization_EmployerDetails1">
+          <End Type="oriondbModel.EmployerDetail" Role="EmployerDetail" Multiplicity="1" />
+          <End Type="oriondbModel.courseSpecialization" Role="courseSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployerDetail">
+              <PropertyRef Name="EmployerID" />
+            </Principal>
+            <Dependent Role="courseSpecialization">
+              <PropertyRef Name="modifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_qendidateGraduation_courseSpecialization">
+          <End Type="oriondbModel.courseSpecialization" Role="courseSpecialization" Multiplicity="0..1" />
+          <End Type="oriondbModel.qendidateGraduation" Role="qendidateGraduation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courseSpecialization">
+              <PropertyRef Name="courseSpecialization1" />
+            </Principal>
+            <Dependent Role="qendidateGraduation">
+              <PropertyRef Name="courseField" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_qendidatePGraduation_courseSpecialization">
+          <End Type="oriondbModel.courseSpecialization" Role="courseSpecialization" Multiplicity="0..1" />
+          <End Type="oriondbModel.qendidatePGraduation" Role="qendidatePGraduation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courseSpecialization">
+              <PropertyRef Name="courseSpecialization1" />
+            </Principal>
+            <Dependent Role="qendidatePGraduation">
+              <PropertyRef Name="courseField" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_courseTypes_educationTypes">
+          <End Type="oriondbModel.educationType" Role="educationType" Multiplicity="1" />
+          <End Type="oriondbModel.courseType" Role="courseType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="educationType">
+              <PropertyRef Name="educationTypeID" />
+            </Principal>
+            <Dependent Role="courseType">
+              <PropertyRef Name="educationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_courseTypes_EmployerDetails">
+          <End Type="oriondbModel.EmployerDetail" Role="EmployerDetail" Multiplicity="1" />
+          <End Type="oriondbModel.courseType" Role="courseType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployerDetail">
+              <PropertyRef Name="EmployerID" />
+            </Principal>
+            <Dependent Role="courseType">
+              <PropertyRef Name="createdBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_courseTypes_EmployerDetails1">
+          <End Type="oriondbModel.EmployerDetail" Role="EmployerDetail" Multiplicity="1" />
+          <End Type="oriondbModel.courseType" Role="courseType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployerDetail">
+              <PropertyRef Name="EmployerID" />
+            </Principal>
+            <Dependent Role="courseType">
+              <PropertyRef Name="modifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_qendidateGraduation_courseTypes">
+          <End Type="oriondbModel.courseType" Role="courseType" Multiplicity="0..1" />
+          <End Type="oriondbModel.qendidateGraduation" Role="qendidateGraduation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courseType">
+              <PropertyRef Name="courseTypeID" />
+            </Principal>
+            <Dependent Role="qendidateGraduation">
+              <PropertyRef Name="courseName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_qendidatePGraduation_courseTypes">
+          <End Type="oriondbModel.courseType" Role="courseType" Multiplicity="0..1" />
+          <End Type="oriondbModel.qendidatePGraduation" Role="qendidatePGraduation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="courseType">
+              <PropertyRef Name="courseTypeID" />
+            </Principal>
+            <Dependent Role="qendidatePGraduation">
+              <PropertyRef Name="courseName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_currency_EmployerDetails">
           <End Type="oriondbModel.EmployerDetail" Role="EmployerDetail" Multiplicity="1" />
           <End Type="oriondbModel.currency" Role="currency" Multiplicity="*" />
@@ -4376,6 +4937,54 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Principal>
             <Dependent Role="jobDetail">
               <PropertyRef Name="EducationReq" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_qendidateGraduation_educationTypes">
+          <End Type="oriondbModel.educationType" Role="educationType" Multiplicity="0..1" />
+          <End Type="oriondbModel.qendidateGraduation" Role="qendidateGraduation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="educationType">
+              <PropertyRef Name="educationTypeID" />
+            </Principal>
+            <Dependent Role="qendidateGraduation">
+              <PropertyRef Name="educationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_qendidatePGraduation_educationTypes">
+          <End Type="oriondbModel.educationType" Role="educationType" Multiplicity="0..1" />
+          <End Type="oriondbModel.qendidatePGraduation" Role="qendidatePGraduation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="educationType">
+              <PropertyRef Name="educationTypeID" />
+            </Principal>
+            <Dependent Role="qendidatePGraduation">
+              <PropertyRef Name="educationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_qenHigherSecondary_educationTypes">
+          <End Type="oriondbModel.educationType" Role="educationType" Multiplicity="0..1" />
+          <End Type="oriondbModel.qenHigherSecondary" Role="qenHigherSecondary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="educationType">
+              <PropertyRef Name="educationTypeID" />
+            </Principal>
+            <Dependent Role="qenHigherSecondary">
+              <PropertyRef Name="educationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_qenSecondary_educationTypes">
+          <End Type="oriondbModel.educationType" Role="educationType" Multiplicity="0..1" />
+          <End Type="oriondbModel.qenSecondary" Role="qenSecondary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="educationType">
+              <PropertyRef Name="educationTypeID" />
+            </Principal>
+            <Dependent Role="qenSecondary">
+              <PropertyRef Name="educationTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5511,20 +6120,20 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <FunctionImportMapping FunctionImportName="usp_GetNullFieldsFromSecondary" FunctionName="oriondbModel.Store.usp_GetNullFieldsFromSecondary" />
           <FunctionImportMapping FunctionImportName="usp_GetNullFieldsGraduation" FunctionName="oriondbModel.Store.usp_GetNullFieldsGraduation" />
           <FunctionImportMapping FunctionImportName="usp_GetProfileCompletenessPerc" FunctionName="oriondbModel.Store.usp_GetProfileCompletenessPerc" />
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram2" FunctionName="oriondbModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram2" FunctionName="oriondbModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram2" FunctionName="oriondbModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition2" FunctionName="oriondbModel.Store.sp_helpdiagramdefinition">
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram3" FunctionName="oriondbModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram3" FunctionName="oriondbModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram3" FunctionName="oriondbModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition3" FunctionName="oriondbModel.Store.sp_helpdiagramdefinition">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="oriondbModel.sp_helpdiagramdefinition2_Result">
+              <ComplexTypeMapping TypeName="oriondbModel.sp_helpdiagramdefinition3_Result">
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams2" FunctionName="oriondbModel.Store.sp_helpdiagrams">
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams3" FunctionName="oriondbModel.Store.sp_helpdiagrams">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="oriondbModel.sp_helpdiagrams2_Result">
+              <ComplexTypeMapping TypeName="oriondbModel.sp_helpdiagrams3_Result">
                 <ScalarProperty Name="Database" ColumnName="Database" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -5533,8 +6142,8 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram2" FunctionName="oriondbModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams2" FunctionName="oriondbModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram3" FunctionName="oriondbModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams3" FunctionName="oriondbModel.Store.sp_upgraddiagrams" />
           <EntitySetMapping Name="advertisementLists">
             <EntityTypeMapping TypeName="oriondbModel.advertisementList">
               <MappingFragment StoreEntitySet="advertisementList">
@@ -5619,6 +6228,34 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="courseSpecializations">
+            <EntityTypeMapping TypeName="oriondbModel.courseSpecialization">
+              <MappingFragment StoreEntitySet="courseSpecialization">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="dataIsUpdated" ColumnName="dataIsUpdated" />
+                <ScalarProperty Name="dataIsCreated" ColumnName="dataIsCreated" />
+                <ScalarProperty Name="specializationName" ColumnName="specializationName" />
+                <ScalarProperty Name="courseTypeID" ColumnName="courseTypeID" />
+                <ScalarProperty Name="courseSpecialization1" ColumnName="courseSpecialization" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="courseTypes">
+            <EntityTypeMapping TypeName="oriondbModel.courseType">
+              <MappingFragment StoreEntitySet="courseTypes">
+                <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="dataIsUpdated" ColumnName="dataIsUpdated" />
+                <ScalarProperty Name="dataIscCreated" ColumnName="dataIscCreated" />
+                <ScalarProperty Name="courseName" ColumnName="courseName" />
+                <ScalarProperty Name="educationTypeID" ColumnName="educationTypeID" />
+                <ScalarProperty Name="courseTypeID" ColumnName="courseTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="currencies">
             <EntityTypeMapping TypeName="oriondbModel.currency">
               <MappingFragment StoreEntitySet="currency">
@@ -5644,6 +6281,19 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
                 <ScalarProperty Name="dataIsCreated" ColumnName="dataIsCreated" />
                 <ScalarProperty Name="educationName" ColumnName="educationName" />
                 <ScalarProperty Name="EducationID" ColumnName="EducationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="educationTypes">
+            <EntityTypeMapping TypeName="oriondbModel.educationType">
+              <MappingFragment StoreEntitySet="educationTypes">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="dataIsUpdated" ColumnName="dataIsUpdated" />
+                <ScalarProperty Name="dataIsCreated" ColumnName="dataIsCreated" />
+                <ScalarProperty Name="educationTypeName" ColumnName="educationTypeName" />
+                <ScalarProperty Name="educationTypeID" ColumnName="educationTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5868,11 +6518,12 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <EntitySetMapping Name="qendidateGraduations">
             <EntityTypeMapping TypeName="oriondbModel.qendidateGraduation">
               <MappingFragment StoreEntitySet="qendidateGraduation">
+                <ScalarProperty Name="educationTypeID" ColumnName="educationTypeID" />
+                <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="YearPassing" ColumnName="YearPassing" />
                 <ScalarProperty Name="dataIsUpdated" ColumnName="dataIsUpdated" />
                 <ScalarProperty Name="dataIsCreated" ColumnName="dataIsCreated" />
-                <ScalarProperty Name="subjects" ColumnName="subjects" />
-                <ScalarProperty Name="gradPercentage" ColumnName="gradPercentage" />
+                <ScalarProperty Name="gradPercentageorGrade" ColumnName="gradPercentageorGrade" />
                 <ScalarProperty Name="courseField" ColumnName="courseField" />
                 <ScalarProperty Name="courseName" ColumnName="courseName" />
                 <ScalarProperty Name="collegeUniversity" ColumnName="collegeUniversity" />
@@ -5938,11 +6589,12 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <EntitySetMapping Name="qendidatePGraduations">
             <EntityTypeMapping TypeName="oriondbModel.qendidatePGraduation">
               <MappingFragment StoreEntitySet="qendidatePGraduation">
+                <ScalarProperty Name="educationTypeID" ColumnName="educationTypeID" />
+                <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="YearPassing" ColumnName="YearPassing" />
                 <ScalarProperty Name="dataIsUpdated" ColumnName="dataIsUpdated" />
                 <ScalarProperty Name="dataIsCreated" ColumnName="dataIsCreated" />
-                <ScalarProperty Name="subjects" ColumnName="subjects" />
-                <ScalarProperty Name="pGradPercentage" ColumnName="pGradPercentage" />
+                <ScalarProperty Name="pgradPercentageorGrade" ColumnName="pgradPercentageorGrade" />
                 <ScalarProperty Name="courseField" ColumnName="courseField" />
                 <ScalarProperty Name="courseName" ColumnName="courseName" />
                 <ScalarProperty Name="collegeUniversity" ColumnName="collegeUniversity" />
@@ -6044,11 +6696,13 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <EntitySetMapping Name="qenHigherSecondaries">
             <EntityTypeMapping TypeName="oriondbModel.qenHigherSecondary">
               <MappingFragment StoreEntitySet="qenHigherSecondary">
+                <ScalarProperty Name="educationTypeID" ColumnName="educationTypeID" />
+                <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="dataIsUpdated" ColumnName="dataIsUpdated" />
                 <ScalarProperty Name="dataIsCreated" ColumnName="dataIsCreated" />
-                <ScalarProperty Name="hSecondarySubjects" ColumnName="hSecondarySubjects" />
+                <ScalarProperty Name="hSecondaryStream" ColumnName="hSecondaryStream" />
                 <ScalarProperty Name="hSecondaryBoard" ColumnName="hSecondaryBoard" />
-                <ScalarProperty Name="hSecondaryPercentage" ColumnName="hSecondaryPercentage" />
+                <ScalarProperty Name="hsecondaryGradeOrPercentage" ColumnName="hsecondaryGradeOrPercentage" />
                 <ScalarProperty Name="hSecondaryPassYear" ColumnName="hSecondaryPassYear" />
                 <ScalarProperty Name="schoolName" ColumnName="schoolName" />
                 <ScalarProperty Name="qenID" ColumnName="qenID" />
@@ -6113,11 +6767,12 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <EntitySetMapping Name="qenSecondaries">
             <EntityTypeMapping TypeName="oriondbModel.qenSecondary">
               <MappingFragment StoreEntitySet="qenSecondary">
-                <ScalarProperty Name="secondarySubjects" ColumnName="secondarySubjects" />
+                <ScalarProperty Name="educationTypeID" ColumnName="educationTypeID" />
+                <ScalarProperty Name="city" ColumnName="city" />
                 <ScalarProperty Name="dataIsUpdated" ColumnName="dataIsUpdated" />
                 <ScalarProperty Name="dataIsCreated" ColumnName="dataIsCreated" />
                 <ScalarProperty Name="secondaryBoard" ColumnName="secondaryBoard" />
-                <ScalarProperty Name="secondaryPercentage" ColumnName="secondaryPercentage" />
+                <ScalarProperty Name="secondaryGradeOrPercentage" ColumnName="secondaryGradeOrPercentage" />
                 <ScalarProperty Name="secondaryPassYear" ColumnName="secondaryPassYear" />
                 <ScalarProperty Name="schoolName" ColumnName="schoolName" />
                 <ScalarProperty Name="qenID" ColumnName="qenID" />

@@ -115,13 +115,16 @@
                     foreach (var item in Model.employmentinfo)
                     {
                         <tr>
-                            <td style="width: 123px; margin: 0px; padding: 0px; border: none; vertical-align:
-
-            top;">
-                                <p style="font-size: 14px; margin: 0px; padding: 0px; line-height:
-
-            17px;">@item.qenEmpFrom.Value.ToShortDateString()<br /><i>To</i><br />@item.qenEmpTo.Value.ToShortDateString()</p>
-        </td>
+                            <td style="width: 123px; margin: 0px; padding: 0px; border: none; vertical-align:top;">  
+                                @if (item.empEndYear != 1900)
+                                {
+                                <p style="font-size: 14px; margin: 0px; padding: 0px; line-height:17px;">@item.empStartDate @item.empStartMonth @item.empStartYear<br /><i>To</i><br />@item.empEndDate @item.empEndMonth @item.empEndYear</p>
+                                }
+                                else
+                                {
+                                    <p style="font-size: 14px; margin: 0px; padding: 0px; line-height:17px;">@item.empStartDate @item.empStartMonth @item.empStartYear<br /><i>To</i><br />Present</p>
+                                }
+                            </td>
         <td style="margin: 0px; padding: 0px; border: none; vertical-align: top;">
             <h3 style="margin: 0px 0 8px 0px; padding: 0px; font-size: 18px; font-weight: bold;
 

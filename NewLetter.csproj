@@ -94,11 +94,11 @@
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
@@ -388,10 +388,19 @@
     <Compile Include="Models\companyDetail.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\courseSpecialization.cs">
+      <DependentUpon>orionDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\courseType.cs">
+      <DependentUpon>orionDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\currency.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Education.cs">
+      <DependentUpon>orionDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\educationType.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployerDetail.cs">
@@ -559,6 +568,9 @@
     <Compile Include="Models\sp_helpdiagramdefinition2_Result.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition3_Result.cs">
+      <DependentUpon>orionDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
@@ -566,6 +578,9 @@
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams2_Result.cs">
+      <DependentUpon>orionDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams3_Result.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
@@ -1201,11 +1216,7 @@
     <Content Include="Views\profile\_partialAddSkills.cshtml" />
     <Content Include="Views\profile\_partialCertifications.cshtml" />
     <Content Include="Views\profile\_partialEmpInfo.cshtml" />
-    <Content Include="Views\profile\_partialGraduation.cshtml" />
-    <Content Include="Views\profile\_partialHigherSchool.cshtml" />
-    <Content Include="Views\profile\_partialHighSchool.cshtml" />
     <Content Include="Views\profile\_partialPInfo.cshtml" />
-    <Content Include="Views\profile\_partialPostGraduation.cshtml" />
     <Content Include="Views\profile\_partialRefInfo.cshtml" />
     <Content Include="Views\profile\_partialSkills.cshtml" />
     <Content Include="Views\companyDetails\empedit.cshtml" />
@@ -1245,6 +1256,10 @@
     <Content Include="Views\profile\VerifyDetails.cshtml" />
     <Content Include="Views\profile\_partialShareLinkedIN.cshtml" />
     <Content Include="Views\profile\PreviewCV.cshtml" />
+    <Content Include="Views\profile\_partialHighSchool.cshtml" />
+    <Content Include="Views\profile\_partialHigherSchool.cshtml" />
+    <Content Include="Views\profile\_partialGraduation.cshtml" />
+    <Content Include="Views\profile\_partialPostGraduation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="advertisement\" />

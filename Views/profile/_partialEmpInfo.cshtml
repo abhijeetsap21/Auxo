@@ -23,7 +23,9 @@
             <div class="col-md-12 col-sm-12 col-xs-12 employment_bg_formemployment_bg_form">
 
                 <div class="right-box">
-
+                    <div id="AddSkillsEMP">
+                        @Html.Action("EmploymentAddPop", new { qenid = @id })
+                    </div>
                     @*<div class="form" id="content-1">*@
 
 
@@ -74,9 +76,7 @@
 								</div>
                                             }
                         }
-                        <div id="AddSkillsEMP">
-                            @Html.Action("EmploymentAddPop", new { qenid = @id })
-                        </div>
+                        
 
 
                     </div>
