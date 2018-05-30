@@ -1,24 +1,23 @@
 ﻿@model IEnumerable<NewLetter.Models.qenSkill>
 
 
-    <style>
-        span.col_1.tleft.text-danger.field-validation-error :before {
-            content: " Warning ! ";
-            color: red;
-            font-weight: bold;
-        }
+<style>
+    span.col_1.tleft.text-danger.field-validation-error :before {
+        content: " Warning ! ";
+        color: red;
+        font-weight: bold;
+    }
 
-        .text-danger {
-            color: red;
-        }
-    </style>
+    .text-danger {
+        color: red;
+    }
+</style>
 
 <div id="employment">
     @{ var id = ViewBag.qenID;}
 
     <div class="container border_slill_info_cantener">
-	<p class="account_input_text_center">Suggested Search will generate more relevant options based on accurate input </p>
-        <div class="row sub-container">            
+        <div class="row sub-container">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="right-box">
                     <div id="AddSkillscan">
@@ -26,47 +25,47 @@
                     </div>
 
                     @*<div class="form" id="content-1">*@
-                        @if (Model.Count() > 0)
-                        {
-                            int a = 0;
-                            <br />
-							<div class="certificate_tab_main">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Sr.No.</th>
-                                        <th>Skill</th>
-                                        <th>Experience</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
+                    @if (Model.Count() > 0)
+                    {
+                        int a = 0;
+                        <br />
+                            <div class="certificate_tab_main">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr.No.</th>
+                                            <th>Skill</th>
+                                            <th>Experience</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
 
-                                @foreach (var item in Model)
-                                {
-                                    a++;
-                                    <tr>
-                                        <td>@a</td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.skill.skillName)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.yearOfExp)
-                                        </td>
-                                        <td>
-                                            <a onclick="return editskill(@item.qenSkillsID);"><i class="glyphicon glyphicon-edit"></i></a>
-                                            <a onclick="return deleteskill(@item.qenSkillsID,this);" id="delete_@item.qenSkillsID"><i class="glyphicon glyphicon-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                }
-                            </table>
-							</div>
-                        }   
+                                    @foreach (var item in Model)
+                                    {
+                                        a++;
+                                        <tr>
+                                            <td>@a</td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.skill.skillName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.yearOfExp)
+                                            </td>
+                                            <td>
+                                                <a onclick="return editskill(@item.qenSkillsID);"><i class="glyphicon glyphicon-edit"></i></a>
+                                                <a onclick="return deleteskill(@item.qenSkillsID,this);" id="delete_@item.qenSkillsID"><i class="glyphicon glyphicon-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                    }
 
-                    </div>                    
                 </div>
             </div>
-
         </div>
+
+    </div>
 
     @*</div>*@
     <script>

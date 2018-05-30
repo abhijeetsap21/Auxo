@@ -8,7 +8,11 @@ namespace NewLetter.Models
     public class ResumeModel
     {
         public qendidateList personainfo { get; set; }
-        public AcademicModel educationinfo { get; set; }
+        //public AcademicModel educationinfo { get; set; }
+        public qenSecondary secondaryEducationInfo { get; set; }
+        public qenHigherSecondary higherSecondaryEducationInfo { get; set; }
+        public List<qendidateGraduation> graducationEducationInfo { get; set; }
+        public List<qendidatePGraduation> postGraduationEducationInfo { get; set; }
         public List<qendidatePHD> phdinfo { get; set; }
         public List<qenEmpDetail> employmentinfo { get; set; }
         public List<qenReference> refrences { get; set; }

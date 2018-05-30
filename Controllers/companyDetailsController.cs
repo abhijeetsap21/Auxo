@@ -91,8 +91,7 @@ namespace NewLetter.Controllers
             academic.graduation = g != null ? g : new qendidateGraduation();
             academic.hsecondary = hs != null ? hs : new qenHigherSecondary();
             academic.secondary = s != null ? s : new qenSecondary();
-            academic.pgraduation = pg != null ? pg : new qendidatePGraduation();
-            model.educationinfo = academic;
+            academic.pgraduation = pg != null ? pg : new qendidatePGraduation();           
             model.employmentinfo = emp != null ? emp : new List<qenEmpDetail>();
             model.refrences = refrences != null ? refrences : new List<qenReference>();
             model.phdinfo = phd != null ? phd : new List<qendidatePHD>();

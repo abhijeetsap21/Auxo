@@ -1267,8 +1267,10 @@ namespace NewLetter.Models
                     {
                         cs.Write(cipherBytes, 0, cipherBytes.Length);
                         cs.Close();
+                        cs.Dispose(); // dispose function added due warning generated
                     }
                     cipherText = Encoding.Unicode.GetString(ms.ToArray());
+                    ms.Dispose();
                 }
             }
             return cipherText;
