@@ -16,6 +16,7 @@ using System.Data.SqlClient;
 using static NewLetter.Models.storedProcedureModels;
 using static NewLetter.Models.BaseUtil;
 using System.Web.Script.Serialization;
+using System.Dynamic;
 
 namespace NewLetter.Controllers
 {
@@ -153,17 +154,29 @@ namespace NewLetter.Controllers
                 BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
-        }
+        }   
+              
 
         public ActionResult _partialacadInfo(string qenID)
         {
             long qenid = 0;
             try
             {
+                
+                long qenID_ = Convert.ToInt32(qenID);
+                AcademicInfo model = new AcademicInfo();
+                List<qenSecondary> secondary = db.qenSecondaries.Where(e => e.qenID == qenID_).ToList();
+                List<qenHigherSecondary> higherSecondary = db.qenHigherSecondaries.Where(e => e.qenID == qenID_).ToList();
+                List<qendidateGraduation> graduation = db.qendidateGraduations.Where(e => e.qenID == qenID_).ToList();
+                List<qendidatePGraduation> pgrads = db.qendidatePGraduations.Where(e => e.qenID == qenID_).ToList();
+                model.secondary = secondary != null ? secondary : new List<qenSecondary>();
+                model.higherSecondary = higherSecondary != null ? higherSecondary : new List<qenHigherSecondary>();
+                model.graduation = graduation != null ? graduation : new List<qendidateGraduation>();
+                model.pgraduation = pgrads != null ? pgrads : new List<qendidatePGraduation>();
                 ViewBag.educationTypes = db.educationTypes.Select(e => new { e.educationTypeID, e.educationTypeName }).ToList();
                 qenid = (long)Convert.ToInt64(qenID);
                 ViewBag.qenid = qenid;
-                return View();
+                return View(model);
             }
             catch (Exception ex)
             {
@@ -171,6 +184,52 @@ namespace NewLetter.Controllers
                 BaseUtil.CaptureErrorValues(ex);
                 return RedirectToAction("Error");
             }
+        }
+        //Check if high school details exists
+        public int checkHighSchoolEntryExists(long qenID)
+        {
+            if (!db.qenSecondaries.Any(e => e.qenID == qenID))
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        // Check if Higher secondary exists
+        public int checkHigherSecondaryEntryExists(long qenID)
+        {
+            if (!db.qenHigherSecondaries.Any(e => e.qenID == qenID))
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        // Delete High School Entry 
+        public ActionResult deleteHighSchool(long qenid)
+        {
+            qenSecondary objqenSecondary = null;
+            try
+            {
+                objqenSecondary = db.qenSecondaries.Where(ex => ex.qenID == qenid).FirstOrDefault();
+                if (objqenSecondary != null)
+                {
+                    db.qenSecondaries.Remove(objqenSecondary);
+                    db.SaveChanges();
+                    TempData["message"] = "Secondary information deleted";
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseUtil.CaptureErrorValues(ex);
+            }
+            return RedirectToAction("editCandidate");
         }
 
         [HttpGet]
@@ -185,14 +244,14 @@ namespace NewLetter.Controllers
                 var boardNames_ = BaseUtil.getBoardName();
                 if (oqenSecondary != null)
                 {
-                    ViewBag.years = years_.Select(e => new { e.Value, e.Text });
+                    ViewBag.years = years_.Select(e => new { e.Value, e.Text }).OrderByDescending(e=>e.Value);
                     ViewBag.grades = grades_.Select(e => new { e.Value,e.Text});
                     ViewBag.boardNames = boardNames_.Select(e => new { e.Value,e.Text});
                     return PartialView("_partialHighSchool", oqenSecondary);
                 }
                 else
                 {
-                    ViewBag.years = years_.Select(e => new { e.Value, e.Text });
+                    ViewBag.years = years_.Select(e => new { e.Value, e.Text }).OrderByDescending(e => e.Value);
                     ViewBag.grades = grades_.Select(e => new { e.Value, e.Text });
                     ViewBag.boardNames = boardNames_.Select(e => new { e.Value, e.Text });
                     oqenSecondary = new qenSecondary();
@@ -252,6 +311,27 @@ namespace NewLetter.Controllers
             }
         }
 
+        //Delete Senior Secondary 
+        public ActionResult deleteSeniorSecondary(long qenid)
+        {
+            qenHigherSecondary objqenHigherSecondary = null;
+            try
+            {
+                objqenHigherSecondary = db.qenHigherSecondaries.Where(ex => ex.qenID == qenid).FirstOrDefault();
+                if (objqenHigherSecondary != null)
+                {
+                    db.qenHigherSecondaries.Remove(objqenHigherSecondary);
+                    db.SaveChanges();
+                    TempData["message"] = "Senior Secondary information deleted";
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseUtil.CaptureErrorValues(ex);
+            }
+            return RedirectToAction("editCandidate");
+        }
+
         [HttpGet]
         public ActionResult higherSchool(long qenid)
         {
@@ -265,7 +345,7 @@ namespace NewLetter.Controllers
                 oqenSecondary = db.qenHigherSecondaries.Where(e => e.qenID == qenid).FirstOrDefault();
                 if (oqenSecondary != null)
                 {
-                    ViewBag.years = years_.Select(e => new { e.Value, e.Text });
+                    ViewBag.years = years_.Select(e => new { e.Value, e.Text }).OrderByDescending(e => e.Value);
                     ViewBag.grades = grades_.Select(e => new { e.Value, e.Text });
                     ViewBag.boardNames = boardNames_.Select(e => new { e.Value, e.Text });
                     ViewBag.streams = streams_.Select(e => new { e.Value,e.Text});
@@ -273,7 +353,7 @@ namespace NewLetter.Controllers
                 }
                 else
                 {
-                    ViewBag.years = years_.Select(e => new { e.Value, e.Text });
+                    ViewBag.years = years_.Select(e => new { e.Value, e.Text }).OrderByDescending(e => e.Value);
                     ViewBag.grades = grades_.Select(e => new { e.Value, e.Text });
                     ViewBag.boardNames = boardNames_.Select(e => new { e.Value, e.Text });
                     ViewBag.streams = streams_.Select(e => new { e.Value, e.Text });
@@ -346,19 +426,19 @@ namespace NewLetter.Controllers
         }
 
         [HttpGet]
-        public ActionResult Graduation(long qenid)
+        public ActionResult Graduation(long qenid,long?gradid)
         {
             var years_ = BaseUtil.getYears();
             var grades_ = BaseUtil.getGradeOrPercentage();
             try
             {
-                qendidateGraduation oqenSecondary = null;
-                oqenSecondary = db.qendidateGraduations.Where(e => e.qenID == qenid).FirstOrDefault();
+                qendidateGraduation oqenSecondary = null;               
                 var gradCourseList_ = db.courseTypes.Where(e => e.educationTypeID == 3).Select(e=> new { e.courseTypeID,e.courseName}).ToList();
                 var specialzation_ = db.courseSpecializations.Where(e => e.courseTypeID == 1).Select(e => new {e.courseSpecialization1,e.specializationName }).ToList();
-                if (oqenSecondary != null)
+                if (gradid != null)
                 {
-                    ViewBag.years = years_.Select(e => new { e.Value, e.Text });
+                    oqenSecondary = db.qendidateGraduations.Where(e => e.qenID == qenid && e.gradid == gradid).FirstOrDefault();
+                    ViewBag.years = years_.Select(e => new { e.Value, e.Text }).OrderByDescending(e => e.Value);
                     ViewBag.grades = grades_.Select(e => new { e.Value, e.Text });
                     ViewBag.gradCourses = gradCourseList_.Select(e => new { e.courseTypeID, e.courseName });
                     ViewBag.specializations = specialzation_.Select(e => new { e.courseSpecialization1 , e.specializationName});
@@ -366,7 +446,7 @@ namespace NewLetter.Controllers
                 }
                 else
                 {
-                    ViewBag.years = years_.Select(e => new { e.Value, e.Text });
+                    ViewBag.years = years_.Select(e => new { e.Value, e.Text }).OrderByDescending(e => e.Value);
                     ViewBag.grades = grades_.Select(e => new { e.Value, e.Text });
                     ViewBag.gradCourses = gradCourseList_.Select(e => new { e.courseTypeID, e.courseName });
                     ViewBag.specializations = specialzation_.Select(e => new { e.courseSpecialization1, e.specializationName });
@@ -383,6 +463,27 @@ namespace NewLetter.Controllers
             }
         }
 
+        //Delete graduation 
+        public ActionResult deletegraduation(long qenid,long gradid)
+        {
+            qendidateGraduation objqendidateGraduation = null;
+            try
+            {
+                objqendidateGraduation = db.qendidateGraduations.Where(ex => ex.qenID == qenid && ex.gradid == gradid).FirstOrDefault();
+                if (objqendidateGraduation != null)
+                {
+                    db.qendidateGraduations.Remove(objqendidateGraduation);
+                    db.SaveChanges();
+                    TempData["message"] = "graduation information deleted";
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseUtil.CaptureErrorValues(ex);
+            }
+            return RedirectToAction("editCandidate");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Graduation(qendidateGraduation oqenSecondary)
@@ -393,8 +494,9 @@ namespace NewLetter.Controllers
                 oqenSecondary.dataIsUpdated = BaseUtil.GetCurrentDateTime();
                 if (ModelState.IsValid)
                 {
-                    if (!db.qendidateGraduations.Any(e => e.qenID == oqenSecondary.qenID))
+                    if (oqenSecondary.gradid == 0)
                     {
+                        oqenSecondary.educationTypeID = 3;
                         db.qendidateGraduations.Add(oqenSecondary);
                         db.SaveChanges();
                         TempData["message"] = "Academic Information Updated Successfully";
@@ -428,21 +530,43 @@ namespace NewLetter.Controllers
                 return RedirectToAction("Error");
             }
         }
+        //Delete Post Graduation Details
+
+        public ActionResult deletepgraduation(long qenid, long pgradid)
+        {
+            qendidatePGraduation objqendidatePGraduation = null;
+            try
+            {
+                objqendidatePGraduation = db.qendidatePGraduations.Where(ex => ex.qenID == qenid && ex.pggradid == pgradid).FirstOrDefault();
+                if (objqendidatePGraduation != null)
+                {
+                    db.qendidatePGraduations.Remove(objqendidatePGraduation);
+                    db.SaveChanges();
+                    TempData["message"] = "Post graduation information deleted";
+                }
+            }
+            catch (Exception ex)
+            {
+                BaseUtil.CaptureErrorValues(ex);
+            }
+            return RedirectToAction("editCandidate");
+        }
 
         [HttpGet]
-        public ActionResult PostGraduation(long qenid)
+        public ActionResult PostGraduation(long qenid, long? pgradid)
         {
             try
             {
                 var years_ = BaseUtil.getYears();
                 var grades_ = BaseUtil.getGradeOrPercentage();
                 qendidatePGraduation oqenSecondary = null;
-                oqenSecondary = db.qendidatePGraduations.Where(e => e.qenID == qenid).FirstOrDefault();
+                
                 var pgradCourseList_ = db.courseTypes.Where(e => e.educationTypeID == 4).Select(e => new { e.courseTypeID, e.courseName }).ToList();
                 var specialzation_ = db.courseSpecializations.Where(e => e.courseTypeID == 3).Select(e => new { e.courseSpecialization1, e.specializationName }).ToList();
-                if (oqenSecondary != null)
+                if (pgradid != null)
                 {
-                    ViewBag.years = years_.Select(e => new { e.Value, e.Text });
+                    oqenSecondary = db.qendidatePGraduations.Where(e => e.qenID == qenid && e.pggradid == pgradid).FirstOrDefault();
+                    ViewBag.years = years_.Select(e => new { e.Value, e.Text }).OrderByDescending(e=>e.Value);
                     ViewBag.grades = grades_.Select(e => new { e.Value, e.Text });
                     ViewBag.pgradCourses = pgradCourseList_.Select(e => new { e.courseTypeID, e.courseName });
                     ViewBag.specializations = specialzation_.Select(e => new { e.courseSpecialization1, e.specializationName });
@@ -450,7 +574,7 @@ namespace NewLetter.Controllers
                 }
                 else
                 {
-                    ViewBag.years = years_.Select(e => new { e.Value, e.Text });
+                    ViewBag.years = years_.Select(e => new { e.Value, e.Text }).OrderByDescending(e=>e.Value);
                     ViewBag.grades = grades_.Select(e => new { e.Value, e.Text });
                     ViewBag.pgradCourses = pgradCourseList_.Select(e => new { e.courseTypeID, e.courseName });
                     ViewBag.specializations = specialzation_.Select(e => new { e.courseSpecialization1, e.specializationName });
@@ -477,8 +601,9 @@ namespace NewLetter.Controllers
                 oqenSecondary.dataIsUpdated = BaseUtil.GetCurrentDateTime();
                 if (ModelState.IsValid)
                 {
-                    if (!db.qendidatePGraduations.Any(e => e.qenID == oqenSecondary.qenID))
+                    if (oqenSecondary.pggradid == 0)
                     {
+                        oqenSecondary.educationTypeID = 4;
                         db.qendidatePGraduations.Add(oqenSecondary);
                         db.SaveChanges();
                         TempData["message"] = "Academic Information Updated Successfully";

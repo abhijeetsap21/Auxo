@@ -15,6 +15,14 @@ namespace NewLetter.Models
         public List<qenSkill> skills { get; set;  }
     }
 
+    public class AcademicInfo
+    {
+        public List<qenSecondary> secondary { get; set; }
+        public List<qenHigherSecondary> higherSecondary { get; set; }
+        public List<qendidateGraduation> graduation { get; set; }
+        public List<qendidatePGraduation> pgraduation { get; set; }
+    }
+
     public class companyRegistrationModel
     {
         public companyDetail companyInfo { get; set; }

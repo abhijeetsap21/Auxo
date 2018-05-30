@@ -12,7 +12,6 @@ using System.IO;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System.Data.Entity.Validation;
-using SelectPdf;
 using System.Web.Script.Serialization;
 using System.Diagnostics;
 using System.Web.Configuration;
@@ -1001,63 +1000,63 @@ namespace NewLetter.Controllers
             return View(advert);
         }
 
-        // Generate PDF and send mail
+        //// Generate PDF and send mail
 
-        [HttpPost]
-        [ValidateInput(false)]
-        public async Task<FileResult> Exportnews(string GridHtml, string advID)
-        {
+        //[HttpPost]
+        //[ValidateInput(false)]
+        //public async Task<FileResult> Exportnews(string GridHtml, string advID)
+        //{
 
-            string result = GridHtml;
-            var path = string.Empty;
-            int empID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.employerID.ToString()));
-            var empdetails = db.EmployerDetails.Where(e => e.EmployerID == empID).FirstOrDefault();
-            long ID = Convert.ToInt64(advID);
+        //    string result = GridHtml;
+        //    var path = string.Empty;
+        //    int empID = Convert.ToInt32(BaseUtil.GetSessionValue(AdminInfo.employerID.ToString()));
+        //    var empdetails = db.EmployerDetails.Where(e => e.EmployerID == empID).FirstOrDefault();
+        //    long ID = Convert.ToInt64(advID);
 
-            using (MemoryStream stream = new System.IO.MemoryStream())
-            {
-                HtmlToPdf converter = new HtmlToPdf();
-                SelectPdf.PdfDocument doc = converter.ConvertHtmlString(GridHtml);
-                converter.Options.WebPageHeight = 400;
-                converter.Options.WebPageWidth = 400;
-                advertisementList adlist = new advertisementList();
-                adlist = db.advertisementLists.Where(e => e.advertisementRefID == ID).FirstOrDefault();
-                byte[] pdf = doc.Save();
-                doc.Close();
-                FileResult fileResult = new FileContentResult(pdf, "application/pdf");
-                fileResult.FileDownloadName = empdetails.Name.ToString() + Guid.NewGuid().ToString() + "news.pdf";
-                adlist.advertisementPDFUrk = "https://spotaneedle.com/newspaper_created/" + fileResult.FileDownloadName;
-                var filename = fileResult.FileDownloadName;
-                db.SaveChanges();
-                uploadPDF(GridHtml, filename);
-                var emailresult = db.advertisementLists.Where(ex => ex.empID == empID).FirstOrDefault();
-                var encryptedID = BaseUtil.encrypt(ID.ToString());
-                StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toEmployerPostedAdWithLink.html"));
-                string HTML_Body = sr.ReadToEnd();
-                string newString = HTML_Body.Replace("#name", empdetails.Name).Replace("#refid", encryptedID);
-                sr.Close();
-                string To = empdetails.Email.ToString();
-                string mail_Subject = "NewsPaper Link Creation Successs ";
-                profileController objprofileController = new profileController();
-                BaseUtil.sendEmailer(To, mail_Subject, newString, "");
-                return fileResult;
-            }
-        }
+        //    using (MemoryStream stream = new System.IO.MemoryStream())
+        //    {
+        //        HtmlToPdf converter = new HtmlToPdf();
+        //        SelectPdf.PdfDocument doc = converter.ConvertHtmlString(GridHtml);
+        //        converter.Options.WebPageHeight = 400;
+        //        converter.Options.WebPageWidth = 400;
+        //        advertisementList adlist = new advertisementList();
+        //        adlist = db.advertisementLists.Where(e => e.advertisementRefID == ID).FirstOrDefault();
+        //        byte[] pdf = doc.Save();
+        //        doc.Close();
+        //        FileResult fileResult = new FileContentResult(pdf, "application/pdf");
+        //        fileResult.FileDownloadName = empdetails.Name.ToString() + Guid.NewGuid().ToString() + "news.pdf";
+        //        adlist.advertisementPDFUrk = "https://spotaneedle.com/newspaper_created/" + fileResult.FileDownloadName;
+        //        var filename = fileResult.FileDownloadName;
+        //        db.SaveChanges();
+        //        uploadPDF(GridHtml, filename);
+        //        var emailresult = db.advertisementLists.Where(ex => ex.empID == empID).FirstOrDefault();
+        //        var encryptedID = BaseUtil.encrypt(ID.ToString());
+        //        StreamReader sr = new StreamReader(Server.MapPath("/Emailer/toEmployerPostedAdWithLink.html"));
+        //        string HTML_Body = sr.ReadToEnd();
+        //        string newString = HTML_Body.Replace("#name", empdetails.Name).Replace("#refid", encryptedID);
+        //        sr.Close();
+        //        string To = empdetails.Email.ToString();
+        //        string mail_Subject = "NewsPaper Link Creation Successs ";
+        //        profileController objprofileController = new profileController();
+        //        BaseUtil.sendEmailer(To, mail_Subject, newString, "");
+        //        return fileResult;
+        //    }
+        //}
 
-        //upload PDF
+        ////upload PDF
 
-        public void uploadPDF(string GridHtml, string file)
-        {
-            using (MemoryStream stream = new System.IO.MemoryStream())
-            {
-                HtmlToPdf converter = new HtmlToPdf();
-                SelectPdf.PdfDocument doc = converter.ConvertHtmlString(GridHtml);
-                converter.Options.WebPageHeight = 400;
-                converter.Options.WebPageWidth = 400;
-                doc.Save(Server.MapPath("~/newspaper_created/" + file));
-                doc.Close();
-            }
-        }
+        //public void uploadPDF(string GridHtml, string file)
+        //{
+        //    using (MemoryStream stream = new System.IO.MemoryStream())
+        //    {
+        //        HtmlToPdf converter = new HtmlToPdf();
+        //        SelectPdf.PdfDocument doc = converter.ConvertHtmlString(GridHtml);
+        //        converter.Options.WebPageHeight = 400;
+        //        converter.Options.WebPageWidth = 400;
+        //        doc.Save(Server.MapPath("~/newspaper_created/" + file));
+        //        doc.Close();
+        //    }
+        //}
 
         // Job List    
 
