@@ -328,6 +328,7 @@
     <Compile Include="Areas\Admin\Controllers\CandidateMasterController.cs" />
     <Compile Include="Areas\Admin\Controllers\CandidateStatusController.cs" />
     <Compile Include="Areas\Admin\Controllers\CompanyMasterController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CourseTypesController.cs" />
     <Compile Include="Areas\Admin\Controllers\CurrencyController.cs" />
     <Compile Include="Areas\Admin\Controllers\EducationController.cs" />
     <Compile Include="Areas\Admin\Controllers\EducationTypesController.cs" />
@@ -342,6 +343,7 @@
     <Compile Include="Areas\Admin\Models\CandidateMaster.cs" />
     <Compile Include="Areas\Admin\Models\CandidateStatus.cs" />
     <Compile Include="Areas\Admin\Models\CompanyMaster.cs" />
+    <Compile Include="Areas\Admin\Models\CourseTypes.cs" />
     <Compile Include="Areas\Admin\Models\Currency.cs" />
     <Compile Include="Areas\Admin\Models\Education.cs" />
     <Compile Include="Areas\Admin\Models\EducationTypes.cs" />
@@ -1058,6 +1060,11 @@
     <Content Include="Areas\Admin\Views\EducationTypes\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\EducationTypes\Index.cshtml" />
     <Content Include="Areas\Admin\Views\EducationTypes\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CourseTypes\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CourseTypes\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\CourseTypes\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\CourseTypes\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CourseTypes\Index.cshtml" />
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>

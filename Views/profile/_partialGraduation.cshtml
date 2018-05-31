@@ -4,84 +4,95 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>qendidateGraduation</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })      
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.collegeUniversity, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.collegeUniversity, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.collegeUniversity, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.collegeName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.collegeName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.collegeName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.city, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control", @id = "city" } })
-                @Html.ValidationMessageFor(model => model.city, "", new { @class = "text-danger" })
-            </div>
-        </div>        
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.courseName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.courseName,new SelectList(ViewBag.gradCourses, "courseTypeID", "courseName"),"Courses", new { onchange = "return FIllSpecializations(this.value)", htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.courseName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.courseField, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.courseField,new SelectList(ViewBag.specializations, "courseSpecialization1", "specializationName"),"Specializations" ,new {@id="specializations", htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.courseField, "", new { @class = "text-danger" })
-            </div>
-        </div>
-                      
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.YearPassing, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">                
-                @Html.DropDownListFor(model => model.YearPassing, new SelectList(ViewBag.years, "Value", "Text"), "Year", new { @id = "yearselect" })
-                @Html.ValidationMessageFor(model => model.YearPassing, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.gradPercentageorGrade, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.gradPercentageorGrade, new SelectList(ViewBag.grades, "Value", "Text"), "Grade / Percentage", new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.gradPercentageorGrade, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    
+        <h4>Graduation</h4>
         
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="col-md-12 col-sm-12 margin-20 padding_lbl_threee">
+        <div class="col-md-6 col-sm-12 padding_lbl_threee rgv_color_bg_main">
+            <div class="col-md-12 col-sm-12 padding_lbl_threee">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.collegeUniversity, htmlAttributes: new { @class = "col-md-6 col-sm-6 col-xs-12 control-label" })
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.EditorFor(model => model.collegeUniversity, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.collegeUniversity, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 padding_lbl_threee">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.collegeName, htmlAttributes: new { @class = "col-md-6 col-sm-6 col-xs-12 control-label" })
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.EditorFor(model => model.collegeName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.collegeName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+           </div>
+            <div class="col-md-12 col-sm-12 padding_lbl_threee">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.city, htmlAttributes: new { @class = "col-md-6 col-sm-6 col-xs-12 control-label" })
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.EditorFor(model => model.city, new { htmlAttributes = new { @class = "form-control", @id = "city" } })
+                        @Html.ValidationMessageFor(model => model.city, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 padding_lbl_threee">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.courseName, htmlAttributes: new { @class = "col-md-6 col-sm-6 col-xs-12 control-label" })
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.DropDownListFor(model => model.courseName, new SelectList(ViewBag.gradCourses, "courseTypeID", "courseName"), "Courses", new { onchange = "return FIllSpecializations(this.value)", htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.courseName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            </div>
+        <div class="col-md-6 col-sm-12 padding_lbl_threee rgv_color_bg_main_to">
+            <div class="col-md-12 col-sm-12 padding_lbl_threee">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.courseField, htmlAttributes: new { @class = "col-md-6 col-sm-6 col-xs-12 control-label" })
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.DropDownListFor(model => model.courseField, new SelectList(ViewBag.specializations, "courseSpecialization1", "specializationName"), "Specializations", new { @id = "specializations", htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.courseField, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 padding_lbl_threee">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.YearPassing, htmlAttributes: new { @class = "col-md-6 col-sm-6 col-xs-12 control-label" })
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.DropDownListFor(model => model.YearPassing, new SelectList(ViewBag.years, "Value", "Text"), "Year", new { @id = "yearselect" })
+                        @Html.ValidationMessageFor(model => model.YearPassing, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+           </div>
+            <div class="col-md-12 col-sm-12 padding_lbl_threee">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.gradPercentageorGrade, htmlAttributes: new { @class = "col-md-6 col-sm-6 col-xs-12 control-label" })
+                    <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.DropDownListFor(model => model.gradPercentageorGrade, new SelectList(ViewBag.grades, "Value", "Text"), "Grade / Percentage", new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.gradPercentageorGrade, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                </div>
 
-        
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                @if (Model.collegeName == null)
+
+
+                <div class="form-group">
+                    <div class="col-md-12 text-right academic">
+                        @if (Model.collegeName == null)
                 {
-                    <input type="submit" value="Add" class="btn btn-default" />
-                }
-                else
-                {
-                    <input type="submit" value="Update" class="btn btn-default" />
-                }
+                            <input type="submit" value="Add" class="btn btn-default" />
+                        }
+                        else
+                        {
+                            <input type="submit" value="Update" class="btn btn-default" />
+                        }
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 }
 
 <script>
