@@ -189,6 +189,7 @@
                                 if (roleID == "1" || roleID == "4")
                                 {
                                     <li>@Html.ActionLink("Education", "Index", "Education", new { area = "Admin" }, null)</li>
+                                    <li>@Html.ActionLink("Education Types", "Index", "EducationTypes", new { area = "Admin" }, null)</li>
                                     <li>@Html.ActionLink("Candidate Status", "Index", "CandidateStatus", new { area = "Admin" }, null)</li>
                                     <li>@Html.ActionLink("Interview Slots", "Index", "Slots", new { area = "Admin" }, null)</li>
                                     <li>@Html.ActionLink("Slots Information  ", "SlotsInformation", "TimeSlots", new { area = "Admin" }, null)</li>
@@ -203,8 +204,7 @@
                                         <li>@Html.ActionLink(" Add Colleague ", "create", "NewEmployee", new { area = "" }, null)</li>
                                         <li>@Html.ActionLink(" Pending Jobs ", "pendingJobs", "jobDetails", new { area = "" }, null)</li>
                                         <li>@Html.ActionLink(" Created Advertisements ", "jobPluginList", "jobDetails", new { area = "" }, null)</li>
-                                    }
-                                    <li>@Html.ActionLink("Skills", "Index", "Skills", new { area = "Admin" }, null)</li>
+                                    }                                   
                                     <li>@Html.ActionLink("Roles", "Index", "Roles", new { area = "Admin" }, null)</li>
                                     <li>@Html.ActionLink("Job Status", "Index", "JobStatus", new { area = "Admin" }, null)</li>
                                     <li>@Html.ActionLink("Industry", "Index", "Industry", new { area = "Admin" }, null)</li>

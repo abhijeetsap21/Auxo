@@ -80,10 +80,8 @@ namespace NewLetter.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var candidate_status =
-                
-                repo.Single(id);
-           
+            var candidate_status = repo.Single(id);
+
             if (candidate_status == null)
             {
                 return HttpNotFound();

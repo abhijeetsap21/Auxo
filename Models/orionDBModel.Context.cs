@@ -965,5 +965,10 @@ namespace NewLetter.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams3");
         }
+    
+        public virtual ObjectResult<usp_GetAllEducationTypes_Result> usp_GetAllEducationTypes()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAllEducationTypes_Result>("usp_GetAllEducationTypes");
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\git\Auxo_git_05242018\Auxo_git_05242018\Auxo_git\Models\orionDBModel.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\git\Auxo_git_05302018\Auxo_git_05302018\Auxo_git\Models\orionDBModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

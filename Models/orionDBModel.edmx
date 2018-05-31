@@ -2107,6 +2107,7 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
         <Function Name="spReadjobDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="empID" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="usp_GetAllEducationTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_GetNullFieldFromCertifications" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="qenID" Type="bigint" Mode="In" />
         </Function>
@@ -3330,6 +3331,7 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             <End Role="slot" EntitySet="slots" />
             <End Role="slotTempBlocked" EntitySet="slotTempBlockeds" />
           </AssociationSet>
+          <FunctionImport Name="usp_GetAllEducationTypes" ReturnType="Collection(oriondbModel.usp_GetAllEducationTypes_Result)" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -5768,6 +5770,15 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="usp_GetAllEducationTypes_Result">
+          <Property Type="Int32" Name="educationTypeID" Nullable="false" />
+          <Property Type="String" Name="educationTypeName" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="dataIsCreated" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="dataIsUpdated" Nullable="false" Precision="23" />
+          <Property Type="Int64" Name="createdBy" Nullable="false" />
+          <Property Type="Int64" Name="modifiedBy" Nullable="false" />
+          <Property Type="Boolean" Name="isActive" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6940,6 +6951,19 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetAllEducationTypes" FunctionName="oriondbModel.Store.usp_GetAllEducationTypes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="oriondbModel.usp_GetAllEducationTypes_Result">
+                <ScalarProperty Name="educationTypeID" ColumnName="educationTypeID" />
+                <ScalarProperty Name="educationTypeName" ColumnName="educationTypeName" />
+                <ScalarProperty Name="dataIsCreated" ColumnName="dataIsCreated" />
+                <ScalarProperty Name="dataIsUpdated" ColumnName="dataIsUpdated" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

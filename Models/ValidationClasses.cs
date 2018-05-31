@@ -66,6 +66,22 @@ namespace NewLetter.Models
 
     }
 
+    [MetadataType(typeof(educationTypevalidation))]
+    public partial class educationType
+    {
+
+    }
+
+    public class educationTypevalidation
+    {
+        [Required(ErrorMessage = "Name is requied")]
+        [Display(Name = "Education Type")]
+        public string educationTypeName { get; set; }
+                
+        [Display(Name = "Active / In-Active")]
+        public bool isActive { get; set; }
+    }
+
     public class HCValidateCertificate
         {
         [Required(ErrorMessage = "Certificate name is required")]

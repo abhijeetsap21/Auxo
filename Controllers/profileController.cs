@@ -173,7 +173,7 @@ namespace NewLetter.Controllers
                 model.higherSecondary = higherSecondary != null ? higherSecondary : new List<qenHigherSecondary>();
                 model.graduation = graduation != null ? graduation : new List<qendidateGraduation>();
                 model.pgraduation = pgrads != null ? pgrads : new List<qendidatePGraduation>();
-                ViewBag.educationTypes = db.educationTypes.Select(e => new { e.educationTypeID, e.educationTypeName }).ToList();
+                ViewBag.educationTypes = db.educationTypes.Where(e=>e.isActive == true).Select(e => new { e.educationTypeID, e.educationTypeName }).ToList();
                 qenid = (long)Convert.ToInt64(qenID);
                 ViewBag.qenid = qenid;
                 return View(model);
