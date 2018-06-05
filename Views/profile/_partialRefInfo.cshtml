@@ -53,7 +53,7 @@
                                     <div class="form-group">
                                         <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Email:</label>
                                         <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                                            @Html.TextBoxFor(m => m.qenRefEmail1, new { id = "qenRefEmail1", placeholder = "" })
+                                            @Html.TextBoxFor(m => m.qenRefEmail1, new { id = "qenRefEmail1", placeholder = "",onchange="return check()" })
                                             @Html.ValidationMessageFor(m => m.qenRefEmail1, "", new { @class = "col_1 tleft text-danger" })
                                         </div>
                                     </div>
@@ -117,7 +117,7 @@
                                     <div class="form-group">
                                         <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Email:</label>
                                         <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                                            @Html.TextBoxFor(m => m.qenRefEmail2, new { id = "qenRefEmail2", placeholder = "" })
+                                            @Html.TextBoxFor(m => m.qenRefEmail2, new { id = "qenRefEmail2", placeholder = "", onchange = "return check()" })
                                             @Html.ValidationMessageFor(m => m.qenRefEmail2, "", new { @class = "col_1 tleft text-danger" })
                                         </div>
                                     </div>
@@ -220,4 +220,30 @@
         });
     }
 
+</script>
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<script>
+    function check()
+    {
+        debugger
+        var email1 = document.getElementById('qenRefEmail1').value;
+        var email2 = document.getElementById('qenRefEmail2').value;
+        debugger
+        if(email1 != null && email2 != null )
+        {
+            if(email1 == email2)
+            {
+                bootbox.alert({
+                    title: 'Alert',
+                    message: 'Please use separate email address'
+                });
+
+                document.getElementById('qenRefEmail1').value = null;
+                document.getElementById('qenRefEmail2').value = null;
+            }
+        }
+    }
 </script>

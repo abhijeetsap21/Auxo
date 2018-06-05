@@ -15,12 +15,7 @@ namespace NewLetter.Models
         public long jobid { get; set; }
 
 
-    }
-    //[MetadataType(typeof(qenrefvalidation))]
-    //public partial class qenReference
-    //{
-
-    //}
+    }   
     [MetadataType(typeof(jobDetailsvalidation))]
     public partial class jobDetail
     {
@@ -83,6 +78,46 @@ namespace NewLetter.Models
     {
 
     }
+    [MetadataType(typeof(qenrefvalidation))]
+    public partial class qenReference
+    {
+
+    }
+    public class qenrefvalidation
+    {
+        public long qenRefID1 { get; set; }
+        public long qenRefID2 { get; set; }
+        [Required(ErrorMessage = "please enter refrence name")]
+        public string qenRefName1 { get; set; }
+        [Required(ErrorMessage = "please enter company name")]
+        public string qenRefCompany1 { get; set; }
+        [Required(ErrorMessage = "please enter postion")]
+        public string qenRefPosition1 { get; set; }
+        [Required(ErrorMessage = "please enter phone number")]
+        [RegularExpression(@"^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$", ErrorMessage = "Invalid phone number")]
+        public System.Nullable<double> qenRefPhone1 { get; set; }
+        [Required(ErrorMessage = "please enter email ")]
+        [RegularExpression("^[a-z0-9_\\+-]+(\\.[a-z0-9_\\+-]+)*@[a-z0-9-]+(\\.[a-z0-9]+‌​)*\\.([a-z]{2,4})$", ErrorMessage = "Invalid email format.")]
+        public string qenRefEmail1 { get; set; }
+        [Required(ErrorMessage = "please enter refrence name")]
+        public string qenRefName2 { get; set; }
+        [Required(ErrorMessage = "please enter company name")]
+        public string qenRefCompany2 { get; set; }
+        [Required(ErrorMessage = "please enter phone number")]
+        [RegularExpression(@"^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$", ErrorMessage = "Invalid phone number")]
+        public System.Nullable<double> qenRefPhone2 { get; set; }
+        [Required(ErrorMessage = "please enter email ")]
+        [RegularExpression("^[a-z0-9_\\+-]+(\\.[a-z0-9_\\+-]+)*@[a-z0-9-]+(\\.[a-z0-9]+‌​)*\\.([a-z]{2,4})$", ErrorMessage = "Invalid email format.")]
+        public string qenRefEmail2 { get; set; }
+        [Required(ErrorMessage = "please enter postion")]
+        public string qenRefPosition2 { get; set; }
+        public int? qenid { get; set; }
+        [Required(ErrorMessage = "Please accept terms and conditions")]
+        public string acceptterms { get; set; }
+        public bool isCheckComplete1 { get; set; }
+        public bool isCheckComplete2 { get; set; }
+    }
+
     public partial class courseTypeValidation
     {
         [Required(ErrorMessage = "Course name is required")]
@@ -407,40 +442,7 @@ namespace NewLetter.Models
 
 
     }
-    public class qenrefvalidation
-    {
-        public long qenRefID1 { get; set; }
-        public long qenRefID2 { get; set; }
-        [Required(ErrorMessage = "please enter refrence name")]
-        public string qenRefName1 { get; set; }
-        [Required(ErrorMessage = "please enter company name")]
-        public string qenRefCompany1 { get; set; }
-        [Required(ErrorMessage = "please enter postion")]
-        public string qenRefPosition1 { get; set; }
-        [Required(ErrorMessage = "please enter phone number")]
-        [RegularExpression(@"^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$", ErrorMessage = "Invalid phone number")]
-        public System.Nullable<double> qenRefPhone1 { get; set; }
-        [Required(ErrorMessage = "please enter email ")]
-        [RegularExpression("^[a-z0-9_\\+-]+(\\.[a-z0-9_\\+-]+)*@[a-z0-9-]+(\\.[a-z0-9]+‌​)*\\.([a-z]{2,4})$", ErrorMessage = "Invalid email format.")]
-        public string qenRefEmail1 { get; set; }
-        [Required(ErrorMessage = "please enter refrence name")]
-        public string qenRefName2 { get; set; }
-        [Required(ErrorMessage = "please enter company name")]
-        public string qenRefCompany2 { get; set; }
-        [Required(ErrorMessage = "please enter phone number")]
-        [RegularExpression(@"^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$", ErrorMessage = "Invalid phone number")]
-        public System.Nullable<double> qenRefPhone2 { get; set; }
-        [Required(ErrorMessage = "please enter email ")]
-        [RegularExpression("^[a-z0-9_\\+-]+(\\.[a-z0-9_\\+-]+)*@[a-z0-9-]+(\\.[a-z0-9]+‌​)*\\.([a-z]{2,4})$", ErrorMessage = "Invalid email format.")]
-        public string qenRefEmail2 { get; set; }
-        [Required(ErrorMessage = "please enter postion")]
-        public string qenRefPosition2 { get; set; }
-        public int? qenid { get; set; }
-        [Required(ErrorMessage = "Please accept terms and conditions")]
-        public string acceptterms { get; set; }
-        public bool isCheckComplete1 { get; set; }
-        public bool isCheckComplete2 { get; set; }
-    }
+    
     public class qendidateListValidation
     {
         public long qenID { get; set; }

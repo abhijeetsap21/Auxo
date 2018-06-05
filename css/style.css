@@ -560,7 +560,7 @@ tr.brdr-btm {border-bottom: 1px solid #ccc;}
 .form-horizontal.job-view-padd {margin-bottom: 50px;}
 .popup-error span {float: left;width: auto;margin: 0 0 0 15px;}
 .common-round-shape span.count {position: relative;top: 0;}
-.form-horizontal.edit-candidate-cv.candidate-apply table.table {padding: 0 40px;width: 100%;max-width: 95%;margin: 0 auto;border-right: 1px solid #ccc;border-left: 1px solid #ccc;border-bottom: 1px solid #ccc; font-size: 14px;}
+.form-horizontal.edit-candidate-cv.candidate-apply table.table {padding: 0 40px;width: 100%;max-width: 97%;margin: 0 auto;border-right: 1px solid #ccc;border-left: 1px solid #ccc;border-bottom: 1px solid #ccc; font-size: 14px;}
 .form-horizontal.edit-candidate-cv.candidate-apply table.table tr th, .form-horizontal.edit-candidate-cv.candidate-apply table.table tr td {border:1px solid #ccc;}
 .form-horizontal.edit-candidate-cv.candidate-apply table.table tr th{text-transform: capitalize;}
 .form-horizontal.edit-candidate-cv.candidate-apply table.table tr th {background: #282c75;color: #fff;}
@@ -849,6 +849,10 @@ input:focus{outline: none !important;}
 .verifed_text_bg_white_main_bg p{margin: 40px 15px 40px 15px;}
 
 .candidate_cv_pages_btn_export .btn-default{margin: 10px 0 10px 0px;}
+.table > tbody + tbody{border-top: none;}
+.orginization_text_imploment{display: inline-block; float: left;}
+
+.btn.export_batton_priview_cv{margin: 10px 0 10px 0px;}
 
 
 @media only screen and (max-width: 1600px) {
@@ -878,7 +882,7 @@ input:focus{outline: none !important;}
 	.form-horizontal.edit-candidate-cv.profile-performance {width: 65%;}
 }
 @media only screen and (max-width: 1024px) {
-	.common-round-shape {margin: 36px 16px 0 0;}
+	.common-round-shape {margin:18px 16px 0 0;}
 	.tab-content {float: right;width: 75%;}
 	.form-horizontal .nav-tabs {border-bottom: 0px;background: transparent;float: left;width: 25%;}
 	.form-horizontal .nav > li {background: #4a4dd0;margin: 0 0 10px;float: left;width: 100%;}
@@ -1008,12 +1012,12 @@ input:focus{outline: none !important;}
 	 .form-horizontal.edit-candidate-cv{margin:0 auto;}
 	 .gry .dashboard .flex{display: inline-block; width: 100%; margin: 0px 0 11px 0px;}
 	 .gry .table-responsive {overflow-x: scroll;}
-	 .common-round-shape{margin: 36px 2px 0 0px;}
+	 .common-round-shape{margin:18px 2px 0 0px;}
 	 .gry .form-horizontal{max-width:96%; margin-top: 13px;}
 	 .add_ipad_heder{width:50%; padding-top:30px;}
 	 .thankyou_page_main_bg{width:90%;}
 	 .common-right-block a.warning-verification{right:38px;}
-	 .common-right-block{margin: 28px 0 0px; width: 340px;}
+	 .common-right-block{margin:18px 0 0px; width: 340px;}
 	 label.cutom-label a{word-wrap: break-word;}
 	 
 	 .personal_detail_main_bg_responsive .nav-tabs{width: auto;}
@@ -1151,15 +1155,16 @@ input:focus{outline: none !important;}
 	 .text_center_powered img{margin: -20px 0 10px 0px;}
 	 .employe_zone_text_login a{margin: 0 0 8px 0px;}
 	 .form-horizontal h4 .profile_text{margin: 0px;}
+	 .common-right-block a.warning-verification{right:5px;}
 	 
 
 }
  @media only screen and (max-width:480px) {
-.common-right-block a.warning-verification{right:-20px;}
-.form-horizontal.edit-candidate-cv .edit-candidate-cv-btn{float: right; margin:-5px 0 0 0px;}
+.common-right-block a.warning-verification{right:-15px;}
+.form-horizontal.edit-candidate-cv .edit-candidate-cv-btn{float: right; margin:-6px 0 0 0px;}
 	 
 }
  @media only screen and (max-width: 320px) {
-	 .common-right-block a.warning-verification{right:30px;}
+	 .common-right-block a.warning-verification{right:47px;}
 	 	 .form-horizontal.edit-candidate-cv .edit-candidate-cv-btn{float: left; margin: 22px 0 0 0px;}
 }

@@ -43,81 +43,114 @@
                         @Html.ValidationMessageFor(ex => ex.qenSalary, "", new { @class = "col_1 tleft text-danger" })
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12 col-sm-12 padding_lbl_threee">
+            </div>            
+            <div class="col-md-12 col-sm-12">
                 <div class="form-group">
                     <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label">Start Date:</label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                        @Html.DropDownListFor(model => model.empStartDate, new SelectList(ViewBag.dates, "Value", "Text"), "Date", new { @id = "empStartDate", onchange = " return DateCheck1(); " })
-                        @Html.DropDownListFor(model => model.empStartMonth, new SelectList(ViewBag.months, "monthID", "monthName"), " Month ", new { @id = "empStartMonth" })
-                        @Html.DropDownListFor(ex => ex.empStartYear, new SelectList(ViewBag.years, "Value", "Text"), "Year", new { @id = "yearselect", onchange = " return DateCheck1(); " })
+                       @Html.DropDownListFor(model => model.empStartDate, new SelectList(ViewBag.dates, "Value", "Text" ), "Date", new { @id = "empStartDate" , onchange = " return DateCheck1(); " })                                          
+                       
+						
+                    </div>			
+					 
+                </div>
+				<div class="form-group">
+				<label class="col-md-6 col-sm-6 col-xs-12 control-label"></label>
+				<div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+				@Html.DropDownListFor(model => model.empStartMonth, new SelectList(ViewBag.months, "monthID", "monthName"), " Month ",new { @id = "empStartMonth" })
+				</div>
+				</div>
+				
+                      <div class="form-group"> 
+					  <label class="col-md-6 col-sm-6 col-xs-12 control-label"></label>
+					  <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+					  @Html.DropDownListFor(ex => ex.empStartYear, new SelectList(ViewBag.years, "Value", "Text"), "Year", new { @id = "yearselect", onchange = " return DateCheck1(); " })
+					  </div>
+					  </div>
+						
+						
                         @Html.ValidationMessageFor(ex => ex.empStartMonth, "", new { @class = "col_1 tleft text-danger" })
                         @Html.ValidationMessageFor(ex => ex.empStartYear, "", new { @class = "col_1 tleft text-danger" })
-                        <label class="container_check">
-                            <input type="checkbox" name="present" onclick="return disable(this)" id="presentemp_check" />
-                            <input type="hidden" value="false" name="ispresentval" id="ispresent" />
-                            <span class="checkmark"></span>
-                            Is Present Employment?
-                        </label>
-                    </div>
-                </div>
             </div>
-            <div class="col-md-12 col-sm-12 padding_lbl_threee">
+            <div class="col-md-12 col-sm-12">
                 <div class="form-group">
                     <label for="concept" class="col-md-6 col-sm-6 col-xs-12 control-label" id="endDateLabel">End Date:</label>
                     <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
-                        @Html.DropDownListFor(model => model.empEndDate, new SelectList(ViewBag.dates, "Value", "Text"), "Date", new { @id = "empEndDate", onchange = " return DateCheck1(); " })
-                        @Html.DropDownListFor(model => model.empEndMonth, new SelectList(ViewBag.months, "monthID", "monthName"), " Month ", new { @id = "empEndMonth" })
-                        @Html.DropDownListFor(ex => ex.empEndYear, new SelectList(ViewBag.years, "Value", "Text"), "Year", new { @id = "yearselect_1", onchange = " return DateCheck1(); " })
+                        @Html.DropDownListFor(model => model.empEndDate, new SelectList(ViewBag.dates, "Value", "Text"), "Date",new { @id = "empEndDate", onchange = " return DateCheck1(); " }) 
+						
+						<label class="container_check"><input type="checkbox" name="present" onclick="return disable(this)" id="presentemp_check" />                            
+                          <input type="hidden" value="false" name="ispresentval" id="ispresent"/> 
+						<span class="checkmark"></span>
+						Is Present Employment?</label>
+						</div>
+                       
                         @Html.ValidationMessageFor(ex => ex.empEndMonth, "", new { @class = "col_1 tleft text-danger" })
                         @Html.ValidationMessageFor(ex => ex.empEndYear, "", new { @class = "col_1 tleft text-danger" })
                     </div>
-                </div>
+					
+					<div class="form-group">
+					<label class="col-md-6 col-sm-6 col-xs-12 control-label"></label>
+					<div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+					 @Html.DropDownListFor(model => model.empEndMonth, new SelectList(ViewBag.months, "monthID", "monthName"), " Month ", new { @id = "empEndMonth" })
+					 </div>
+					 </div>
+					 
+					 <div class="">
+					 <label class="col-md-6 col-sm-6 col-xs-12 control-label"></label>
+					 <div class="col-md-6 col-sm-6 col-xs-12 padding-none">
+                        @Html.DropDownListFor(ex => ex.empEndYear, new SelectList(ViewBag.years, "Value", "Text"), "Year", new { @id = "yearselect_1",onchange = " return DateCheck1(); " })
+               </div>
+			   </div>
+			   
+			   
             </div>
         </div>
-        <div class="col-md-6 col-sm-12 padding_lbl_threee bg_color_employment_left_bg">
+        <div class="col-md-6 col-sm-12 bg_color_employment_left_bg">
             <div class="col-md-12 col-sm-12 padding_lbl_threee">
                 <div class="form-group">
                     <label style="padding-top:0px;" for="concept" class="col-md-12 col-sm-12 col-xs-12 control-label left-title job_title_job_discription_text">Job Description#:</label>
                     <div class="col-md-12 col-sm-12 col-xs-12 padding-none text-area_hieght_employer">
                         @Html.TextAreaFor(ex => ex.jobDescription, new { maxlength = "100", @class = "form-control" })
-                        @Html.ValidationMessageFor(ex => ex.jobDescription, "", new { @class = "col_1 tleft text-danger" })
+                        @Html.ValidationMessageFor(ex => ex.jobDescription, "", new { @class = "col_1 tleft text-danger" })						 
                     </div>
                     @*<div id="mceu_11" class="mce-tinymce mce-container mce-panel" hidefocus="1" tabindex="-1" role="application" style="visibility: hidden; border-width: 1px; width: 100%;"><div id="mceu_11-body" class="mce-container-body mce-stack-layout"><div id="mceu_12" class="mce-top-part mce-container mce-stack-layout-item mce-first"><div id="mceu_12-body" class="mce-container-body"><div id="mceu_13" class="mce-container mce-menubar mce-toolbar mce-first" role="menubar" style="border-width: 0px 0px 1px;"><div id="mceu_13-body" class="mce-container-body mce-flow-layout"><div id="mceu_14" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-first mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_14" role="menuitem" aria-haspopup="true"><button id="mceu_14-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">File</span> <i class="mce-caret"></i></button></div><div id="mceu_15" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_15" role="menuitem" aria-haspopup="true"><button id="mceu_15-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Edit</span> <i class="mce-caret"></i></button></div><div id="mceu_16" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_16" role="menuitem" aria-haspopup="true"><button id="mceu_16-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">View</span> <i class="mce-caret"></i></button></div><div id="mceu_17" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-last mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_17" role="menuitem" aria-haspopup="true"><button id="mceu_17-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Format</span> <i class="mce-caret"></i></button></div></div></div><div id="mceu_18" class="mce-toolbar-grp mce-container mce-panel mce-last" hidefocus="1" tabindex="-1" role="group"><div id="mceu_18-body" class="mce-container-body mce-stack-layout"><div id="mceu_19" class="mce-container mce-toolbar mce-stack-layout-item mce-first mce-last" role="toolbar"><div id="mceu_19-body" class="mce-container-body mce-flow-layout"><div id="mceu_20" class="mce-container mce-flow-layout-item mce-first mce-btn-group" role="group"><div id="mceu_20-body"><div id="mceu_0" class="mce-widget mce-btn mce-first mce-disabled" tabindex="-1" role="button" aria-label="Undo" aria-disabled="true"><button id="mceu_0-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-undo"></i></button></div><div id="mceu_1" class="mce-widget mce-btn mce-last mce-disabled" tabindex="-1" role="button" aria-label="Redo" aria-disabled="true"><button id="mceu_1-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-redo"></i></button></div></div></div><div id="mceu_21" class="mce-container mce-flow-layout-item mce-btn-group" role="group"><div id="mceu_21-body"><div id="mceu_2" class="mce-widget mce-btn mce-menubtn mce-first mce-last mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_2" role="button" aria-haspopup="true"><button id="mceu_2-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Formats</span> <i class="mce-caret"></i></button></div></div></div><div id="mceu_22" class="mce-container mce-flow-layout-item mce-btn-group" role="group"><div id="mceu_22-body"><div id="mceu_3" class="mce-widget mce-btn mce-first" tabindex="-1" aria-pressed="false" role="button" aria-label="Bold"><button id="mceu_3-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-bold"></i></button></div><div id="mceu_4" class="mce-widget mce-btn mce-last" tabindex="-1" aria-pressed="false" role="button" aria-label="Italic"><button id="mceu_4-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-italic"></i></button></div></div></div><div id="mceu_23" class="mce-container mce-flow-layout-item mce-btn-group" role="group"><div id="mceu_23-body"><div id="mceu_5" class="mce-widget mce-btn mce-first" tabindex="-1" aria-pressed="false" role="button" aria-label="Align left"><button id="mceu_5-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-alignleft"></i></button></div><div id="mceu_6" class="mce-widget mce-btn" tabindex="-1" aria-pressed="false" role="button" aria-label="Align center"><button id="mceu_6-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-aligncenter"></i></button></div><div id="mceu_7" class="mce-widget mce-btn" tabindex="-1" aria-pressed="false" role="button" aria-label="Align right"><button id="mceu_7-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-alignright"></i></button></div><div id="mceu_8" class="mce-widget mce-btn mce-last" tabindex="-1" aria-pressed="false" role="button" aria-label="Justify"><button id="mceu_8-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-alignjustify"></i></button></div></div></div><div id="mceu_24" class="mce-container mce-flow-layout-item mce-btn-group" role="group"><div id="mceu_24-body"><div id="mceu_9" class="mce-widget mce-btn mce-first" tabindex="-1" role="button" aria-label="Decrease indent"><button id="mceu_9-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-outdent"></i></button></div><div id="mceu_10" class="mce-widget mce-btn mce-last" tabindex="-1" role="button" aria-label="Increase indent"><button id="mceu_10-button" role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-indent"></i></button></div></div></div><div id="mceu_25" class="mce-container mce-flow-layout-item mce-last mce-btn-group" role="group"><div id="mceu_25-body"></div></div></div></div></div></div></div></div><div id="mceu_26" class="mce-edit-area mce-container mce-panel mce-stack-layout-item" hidefocus="1" tabindex="-1" role="group" style="border-width: 1px 0px 0px;"><iframe id="jobDescription_ifr" frameborder="0" allowtransparency="true" title="Rich Text Area. Press ALT-F9 for menu. Press ALT-F10 for toolbar. Press ALT-0 for help" style="width: 100%; height: 100px; display: block;"></iframe></div><div id="mceu_27" class="mce-statusbar mce-container mce-panel mce-stack-layout-item mce-last" hidefocus="1" tabindex="-1" role="group" style="border-width: 1px 0px 0px;"><div id="mceu_27-body" class="mce-container-body mce-flow-layout"><div id="mceu_28" class="mce-path mce-flow-layout-item mce-first"><div role="button" class="mce-path-item mce-last" data-index="0" tabindex="-1" id="mceu_28-0" aria-level="1">p</div></div><div id="mceu_29" class="mce-flow-layout-item mce-resizehandle"><i class="mce-ico mce-i-resize"></i></div><span id="mceu_30" class="mce-branding mce-widget mce-label mce-flow-layout-item mce-last"> Powered by <a href="https://www.tinymce.com/?utm_campaign=editor_referral&amp;utm_medium=poweredby&amp;utm_source=tinymce" rel="noopener" target="_blank" role="presentation" tabindex="-1">tinymce</a></span></div></div></div></div>*@
                 </div>
             </div>
 
-            @{
+             @{ 
                 if (Model.qenEmploymentNum == 0)
                 {
-                    <div class="col-md-12 text-right academic padding_lbl_threee">
-                        <input type="submit" name="save" value="ADD" class="plus-btn academic-create-btn btn btn-default distip_btn_seves" />
-                    </div>
+            <div class="col-md-12 text-right academic padding_lbl_threee">
+			<p class="orginization_text_imploment"># - At the time of leaving the organization</p>
+                <input type="submit" name="save" value="ADD" class="plus-btn academic-create-btn btn btn-default distip_btn_seves" />
+            </div>
                 }
                 else
                 {
                     <div class="col-md-12 text-right academic padding_lbl_threee">
+					
                         <input type="submit" name="save" value="Update" class="plus-btn academic-create-btn btn btn-default distip_btn_seves" />
                     </div>
                 }
             }
+			
         </div>
-        <p># - At the time of leaving the organization</p>
+        
     </div>
 
-                }
+}
 <script type="text/javascript">
 
     function DateCheck1() {
         debugger
         var EDate = document.getElementById('empEndDate').value;
-        var EMonth = document.getElementById('empEndMonth').value;
+        var EMonth = document.getElementById('empEndMonth').value;        
         var EYear = $("#yearselect_1 option:selected").text();
 
         var SDate = document.getElementById('empStartDate').value;
-        var SMonth = document.getElementById('empStartMonth').value;
+        var SMonth = document.getElementById('empStartMonth').value;        
         var SYear = $("#yearselect option:selected").text();
-
+        
         var EndDate = EYear + '/' + EMonth + '/' + EDate;
         var StartDate = SYear + '/' + SMonth + '/' + SDate;
 
@@ -130,7 +163,7 @@
         //} && sDate > eDate
 
 		if (StartDate_ != '' && EndDate_ != '' && StartDate_ > EndDate_) {
-            debugger
+            debugger            
             document.getElementById('empEndDate').value = ""
             document.getElementById('empEndMonth').value = ""
             document.getElementById('yearselect_1').value = ""
@@ -139,7 +172,7 @@
             document.getElementById('yearselect').value = ""
 
 
-
+           
 
             debugger
             bootbox.alert({
@@ -153,16 +186,16 @@
 </script>
 
 @*<script>
-        function convertToDate(str) {
-            debugger
-            var dd = str.substring(0, 2);
-            var mm = str.substring(3, 5);
-            var yy = str.substring(6, 11);
-            var dat = mm + "/" + dd + "/" + yy;
-            var dt = new Date(dat);
-            return dt;
-        }
-    </script>*@
+    function convertToDate(str) {
+        debugger
+        var dd = str.substring(0, 2);
+        var mm = str.substring(3, 5);
+        var yy = str.substring(6, 11);
+        var dat = mm + "/" + dd + "/" + yy;
+        var dt = new Date(dat);
+        return dt;
+    }
+</script>*@
 
 <script>
     debugger
@@ -174,7 +207,7 @@
             document.getElementById("empEndMonth").style.display = "none";
             document.getElementById("yearselect_1").style.display = "none";
             document.getElementById('ispresent').value = true;
-
+           
         }
         else
         {
@@ -189,4 +222,4 @@
 <script>
       var input = document.getElementById('autocomplete');
       var autocomplete = new google.maps.places.Autocomplete(input);
-</script>
+    </script>
