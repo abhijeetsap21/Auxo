@@ -72,6 +72,39 @@ namespace NewLetter.Models
 
     }
 
+    [MetadataType(typeof(courseTypeSPValidation))]
+    public partial class usp_GetcourseTypesByeducationTypeIDandPageIndex_Result
+    {
+
+    }
+
+    [MetadataType(typeof(courseTypeValidation))]
+    public partial class courseType
+    {
+
+    }
+    public partial class courseTypeValidation
+    {
+        [Required(ErrorMessage = "Course name is required")]
+        [Display(Name = "Course Name")]
+        public string courseName { get; set; }
+
+        [Required(ErrorMessage = "Education type is required")]
+        [Display(Name = "Education Type")]
+        public int educationTypeID { get; set; }
+    }
+
+
+
+    public partial class courseTypeSPValidation
+    {
+        [Display(Name = "Course Name")]
+        public string courseName { get; set; }
+
+        [Display(Name = "Creation Date")]
+        public DateTime dataIscCreated { get; set; }
+    }
+
     public class educationTypevalidation
     {
         [Required(ErrorMessage = "Name is requied")]

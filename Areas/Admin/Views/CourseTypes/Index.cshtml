@@ -1,0 +1,58 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_Employer.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<body>
+    @using (Html.BeginForm("EmployerListResult", "EmployerMaster", FormMethod.Post, new { id = "msform" }))
+    {
+        <div class="row">
+            <div class="col-sm-2" style="background-color:#eef; padding:5px">                
+                @Html.DropDownList("Select Education", new SelectList(ViewBag.educationTypes, "educationTypeID", "educationTypeName"), "Educaton Type", new { @id = "educationType" })
+            </div>        
+
+            
+            <div class="col-sm-2" style="background-color:#eef; padding:5px">
+                <input type="button" name="search" class="previous action-button" value="Search" onclick="return Result();" />
+
+            </div>
+        </div>
+    }
+    <div id="viewResult">
+    </div>
+</body>
+
+<script>
+    $(document).ready(function () {
+        debugger        
+        $("#viewResult").load('@Url.Action("getCourseTypesByEducationType", "CourseTypes")?currentPageIndex=' + 1 + '&educationTypeID=' + 3)
+    });
+</script>
+
+<script>
+    debugger
+    function getResult(currentPageIndex,educationTypeID)
+    {
+        debugger
+        var curr_ = currentPageIndex;
+        var educationType_ = educationTypeID;
+        $("#viewResult").load('@Url.Action("getCourseTypesByEducationType", "CourseTypes")?currentPageIndex=' + curr_ + '&educationTypeID=' + educationType_)
+    }
+</script>
+
+<script>
+    debugger
+    function Result(currentPageIndex, educationTypeID)
+    {
+        debugger
+        var curr_ = 1;
+        var val = document.getElementById("educationType").value;
+        $("#viewResult").load('@Url.Action("getCourseTypesByEducationType", "CourseTypes")?currentPageIndex=' + curr_ + '&educationTypeID=' + val)
+    }
+</script>
+

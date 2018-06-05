@@ -2108,6 +2108,10 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Parameter Name="empID" Type="bigint" Mode="In" />
         </Function>
         <Function Name="usp_GetAllEducationTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_GetAllEducationTypes_Admin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_GetcourseTypesByeducationTypeIDandPageIndex" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="educationTypeID" Type="int" Mode="In" />
+        </Function>
         <Function Name="usp_GetNullFieldFromCertifications" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="qenID" Type="bigint" Mode="In" />
         </Function>
@@ -3332,6 +3336,10 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
             <End Role="slotTempBlocked" EntitySet="slotTempBlockeds" />
           </AssociationSet>
           <FunctionImport Name="usp_GetAllEducationTypes" ReturnType="Collection(oriondbModel.usp_GetAllEducationTypes_Result)" />
+          <FunctionImport Name="usp_GetAllEducationTypes_Admin" ReturnType="Collection(oriondbModel.usp_GetAllEducationTypes_Admin_Result)" />
+          <FunctionImport Name="usp_GetcourseTypesByeducationTypeIDandPageIndex" ReturnType="Collection(oriondbModel.usp_GetcourseTypesByeducationTypeIDandPageIndex_Result)">
+            <Parameter Name="educationTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -5779,6 +5787,15 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
           <Property Type="Int64" Name="modifiedBy" Nullable="false" />
           <Property Type="Boolean" Name="isActive" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="usp_GetAllEducationTypes_Admin_Result">
+          <Property Type="Int32" Name="educationTypeID" Nullable="false" />
+          <Property Type="String" Name="educationTypeName" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="usp_GetcourseTypesByeducationTypeIDandPageIndex_Result">
+          <Property Type="Int64" Name="courseTypeID" Nullable="false" />
+          <Property Type="String" Name="courseName" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="dataIscCreated" Nullable="false" Precision="23" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6961,6 +6978,23 @@ warning 6002: The table/view 'oriondb.dbo.view_qenlist' does not have a primary 
                 <ScalarProperty Name="createdBy" ColumnName="createdBy" />
                 <ScalarProperty Name="modifiedBy" ColumnName="modifiedBy" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetAllEducationTypes_Admin" FunctionName="oriondbModel.Store.usp_GetAllEducationTypes_Admin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="oriondbModel.usp_GetAllEducationTypes_Admin_Result">
+                <ScalarProperty Name="educationTypeID" ColumnName="educationTypeID" />
+                <ScalarProperty Name="educationTypeName" ColumnName="educationTypeName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetcourseTypesByeducationTypeIDandPageIndex" FunctionName="oriondbModel.Store.usp_GetcourseTypesByeducationTypeIDandPageIndex">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="oriondbModel.usp_GetcourseTypesByeducationTypeIDandPageIndex_Result">
+                <ScalarProperty Name="courseTypeID" ColumnName="courseTypeID" />
+                <ScalarProperty Name="courseName" ColumnName="courseName" />
+                <ScalarProperty Name="dataIscCreated" ColumnName="dataIscCreated" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

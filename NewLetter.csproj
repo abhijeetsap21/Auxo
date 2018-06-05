@@ -625,7 +625,13 @@
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\usp_GetAllEducationTypes_Admin_Result.cs">
+      <DependentUpon>orionDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\usp_GetAllEducationTypes_Result.cs">
+      <DependentUpon>orionDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\usp_GetcourseTypesByeducationTypeIDandPageIndex_Result.cs">
       <DependentUpon>orionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ValidationClasses.cs" />
@@ -1061,10 +1067,9 @@
     <Content Include="Areas\Admin\Views\EducationTypes\Index.cshtml" />
     <Content Include="Areas\Admin\Views\EducationTypes\Create.cshtml" />
     <Content Include="Areas\Admin\Views\CourseTypes\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\CourseTypes\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\CourseTypes\Details.cshtml" />
     <Content Include="Areas\Admin\Views\CourseTypes\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\CourseTypes\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CourseTypes\_partialCourseTypeList.cshtml" />
     <None Include="job_scheduling_data_2_0.xsd">
       <SubType>Designer</SubType>
     </None>

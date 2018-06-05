@@ -11,5 +11,6 @@ namespace NewLetter.Models
         {
             public int perc { get; set; }
         }
+        
     }
 }

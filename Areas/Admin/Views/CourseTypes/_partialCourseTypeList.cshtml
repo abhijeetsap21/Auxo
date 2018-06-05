@@ -1,0 +1,61 @@
+﻿@model IEnumerable<NewLetter.Models.usp_GetcourseTypesByeducationTypeIDandPageIndex_Result>
+
+@{ 
+    var PageCount_ = ViewBag.PageCount;
+    var CurrentPageIndex_ = ViewBag.CurrentPageIndex;
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.courseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dataIscCreated)
+        </th>       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.courseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dataIscCreated)
+        </td>        
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.courseTypeID })            
+        </td>
+    </tr>
+   
+}
+    <tr>
+        @for (int i = 1; i <= PageCount_; i++)
+        {
+            <td>
+                @if (i != CurrentPageIndex_)
+                {
+                    <a href="javascript:PagerClick(@i);">@i</a>
+                }
+                else
+                {
+                    <span>@i</span>
+                }
+            </td>
+        }
+    </tr>
+
+</table>
+<input type="hidden" id="hfCurrentPageIndex" name="currentPageIndex" value='@CurrentPageIndex_' />
+
+<script type="text/javascript">
+            function PagerClick(index) {
+                document.getElementById("hfCurrentPageIndex").value = index;
+                var val = document.getElementById("educationType").value;
+                getResult(index, val);
+            }
+</script>

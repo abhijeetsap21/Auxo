@@ -970,5 +970,19 @@ namespace NewLetter.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAllEducationTypes_Result>("usp_GetAllEducationTypes");
         }
+    
+        public virtual ObjectResult<usp_GetAllEducationTypes_Admin_Result> usp_GetAllEducationTypes_Admin()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetAllEducationTypes_Admin_Result>("usp_GetAllEducationTypes_Admin");
+        }
+    
+        public virtual ObjectResult<usp_GetcourseTypesByeducationTypeIDandPageIndex_Result> usp_GetcourseTypesByeducationTypeIDandPageIndex(Nullable<int> educationTypeID)
+        {
+            var educationTypeIDParameter = educationTypeID.HasValue ?
+                new ObjectParameter("educationTypeID", educationTypeID) :
+                new ObjectParameter("educationTypeID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetcourseTypesByeducationTypeIDandPageIndex_Result>("usp_GetcourseTypesByeducationTypeIDandPageIndex", educationTypeIDParameter);
+        }
     }
 }

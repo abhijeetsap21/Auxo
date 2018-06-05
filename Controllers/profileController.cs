@@ -4,19 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using NewLetter.Models;
-using System.Threading.Tasks;
 using System.IO;
-using SendGrid;
-using SendGrid.Helpers.Mail;
 using System.Data.Entity;
-using System.Data.Entity.Validation;
-using SelectPdf;
-using System.Globalization;
-using System.Data.SqlClient;
-using static NewLetter.Models.storedProcedureModels;
 using static NewLetter.Models.BaseUtil;
 using System.Web.Script.Serialization;
-using System.Dynamic;
 
 namespace NewLetter.Controllers
 {
