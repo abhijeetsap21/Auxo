@@ -200,20 +200,20 @@
             <div class="table-responsive">
                 <div class="col-md-12 col-sm-12 col-xs-12 dashboard">
                     <div class="row">
-                        <div class="col-md-3 padding-none flex">
+                        <div class="col-md-3 padding-none flex ten_sepratore_part">
                             <label>Job Title</label><input type="text" value="" name="txt_JobTitle" id="txt_JobTitle">
                         </div>
 
-                        <div class="col-md-3 padding-none flex">
+                        <div class="col-md-3 padding-none flex ten_sepratore_part">
                             <label>City</label>@Html.TextBox("city", null, new { id = "locality", onFocus = "geolocate()" })
                         </div>
 
 
-                        <div class="col-md-3 padding-none flex">
+                        <div class="col-md-3 padding-none flex ten_sepratore_part">
                             <label>Job Type</label>@Html.DropDownList("employmentType", " Job Type ")
                         </div>
 
-                        <div class="col-md-2 padding-none flex">
+                        <div class="col-md-2 padding-none flex ten_sepratore_part">
                             <label>Exp.</label><select name="ddl_update" id="ddl_update">
                                 <option value="1">1 Month</option>
                                 <option value="2">1 Week </option>
@@ -222,7 +222,7 @@
                                 <option value="5">  ALL  </option>
                             </select>
                         </div>
-                        <div class="col-md-1 padding-none flex">
+                        <div class="col-md-1 padding-none flex ten_sepratore_part_to">
                             <input type="button" name="search" class="previous action-button" value="Search" onclick="return searchResult();" />
                         </div>
                     </div>

@@ -2,61 +2,59 @@
 @using NewLetter.Models;
 @model IEnumerable<NewLetter.Models.sp_searchjob_Result>
 
- 
-
-
 @{  var roleID = BaseUtil.RoleID(); var loginID = BaseUtil.GetSessionValue(AdminInfo.UserID.ToString()); int totalpages = Convert.ToInt32(ViewBag.totalpages);}
-<div class="form-horizontal edit-candidate-cv">
-<div class="div_table table-responsive">
-    <table id="MyTable" class="table table-striped table-bordered table-hover col-md-12 display">
-        <thead>
-            <tr><td>y</td></tr></thead>
-        <tbody id="frst">
+<div class="">
+<div class="div_table">
+    <div id="MyTable">
+       
+        <div id="frst">
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    <div class="bs-example">
-                        <div class="media">
+            <div class="main_discription_area_text_part">
+                <div>
+                    <div class="">
+                        <div class="">
                            
-                            <div class="media-body">
-                                <h4>@item.CompanyName <small><i>Posted on @item.dataIsCreated.ToString("dd/MM/yyyy")</i></small></h4>
-                                <p class="main_ttl_text_jobs">@item.jobTitle</p>
-                                <div class="col-sm-12 job-table">
+                            <div class="">
+                                <h4 class="backgraund_color_none_job_list_page">@item.CompanyName <small><i>Posted on @item.dataIsCreated.ToString("dd/MM/yyyy")</i></small></h4>
+                                <p class="main_ttl_text_jobs col-sm-12"><b>@item.jobTitle</b></p>
+                                <div class="col-sm-12">
 
-                                    <table style="width:auto">
-                                        <tr>
-                                            <td>Openings : </td>
-                                            <td>@item.NoOfOpenings<b>|</b></td>
+                                    <div>
+                                        <div>
+                                            <p class="opning_jobs_text_main_listing_section first_opnings"><b>Openings :</b> @item.NoOfOpenings</p>
+                                            
 
-                                            <td>Work Experience : </td>
-                                            @{ string exp = "";
+                                            <p class="opning_jobs_text_main_listing_section"><b>Work Experience :</b>  @{ string exp = "";
                                                 if (@item.workExpMin == 0)
                                                 {
                                                     exp = "Fresher";
                                                 }
                                                 else { exp = @item.workExpMin + "year"; }
                                             }
-                                            <td>@exp<b>|</b></td>
-                                            <td>Location : </td>
-                                            <td>@item.city<b>|</b></td>
+											@exp
+											</p>
+                                           
+                                           
+                                            <p class="opning_jobs_text_main_listing_section"><b>Location :</b> @item.city</p>
+                                            
 
-                                            <td>Education : </td>
-                                            <td>@item.EducationReq<b>|</b></td>
+                                            <p class="opning_jobs_text_main_listing_section"><b>Education :</b> @item.EducationReq</p>
+                                           
 
-                                            <td>Industry : </td>
-                                            <td>@item.industryName</td>
-                                        </tr>
-                                    </table>
+                                            <p class="opning_jobs_text_main_listing_section"><b>Industry :</b> @item.industryName</p>
+                                            
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-12 job-table des-job">
-                                    <div class="col-sm-1 padding-none">Description:</div>
-                                    <div class="col-sm-11 padding-none">@Html.Raw(item.jobDescription)</div>
+                                    <div class="col-sm-1 padding-none tablate_view_discription_text"><b>Description:</b></div>
+                                    <div class="col-sm-11 padding-none inline_discription_text_main_area tablate_view_discription_textto">@Html.Raw(item.jobDescription)</div>
                                 </div>
                                 <div class="col-md-12 padding-none flex-btn">
                                     <div class="col-sm-6">
-                                        <div class="col-sm-1 padding-none jobTitle"> Skills : </div>
-                                        <div class="col-sm-11 padding-none jobTitle">  @item.skillset</div>
+                                        <div class="col-sm-12 padding-none jobTitle"> Skills : @item.skillset</div>
+                                       
                                     </div>
                                     <div class="col-sm-6 view-candi text-right">
                                         @{if (@roleID == "1" || @roleID == "2" || @roleID == "3" || @roleID == "4")
@@ -80,25 +78,33 @@
                         </div>
                     </div>
 
-                </td>
-            </tr>
+                </div>
+            </div>
               }
-        </tbody>
-    </table>
-   @{ if (Model != null)
+        </div>
+    </div>
+   @{ if (Model != null && Model.Count() != 0)
        {
-        <div class="col-md-12 text-right academic job">
+        <div class="text-right academic job">
             <input type="button" onclick="return searchA();" value="See More JObs" id="btnmore" class="academic-create-btn btn btn-default" />
             <input type="hidden" id="pagecount" value='@totalpages' />
         </div>
        }
+	    
+}
+
+  @{ if (Model.Count() == 0)
+       {
+        <p class="nojobfound">No jobs available as per your criteria. Kindly use a different criteria.</p>
+       }
+	    
 }
 
         </div>
 </div>
 
 
-<script> 
+@*<script> 
     var jqOld = jQuery.noConflict();
     jqOld(document).ready(function () {
         jqOld('#MyTable').DataTable({
@@ -124,7 +130,7 @@
             }
         });
     });
-</script>
+</script>*@
 
 <script>
     function callApply(jobID)

@@ -470,7 +470,7 @@ form.company-detail .company-logo-img {margin: 0;}
 .dashboard label {float: left;width: auto;font-size: 14px;color: #4c4c4c;margin: 0 10px 0 0;}
 .dashboard input[type="text"], .dashboard select {width: 70%;padding: 5px;font-size: 14px;border: 1px solid #cecece;border-radius: 3px;}
 .dashboard .flex {display: flex;vertical-align: middle;align-items: center;}
-.dashboard input[type="button"] {transition: all 0.25s linear 0s;background: #4a4dd0;border: 0;color: #fff;padding: 6px 25px;line-height: 19px;border-radius: 3px;}
+.dashboard input[type="button"] {transition: all 0.25s linear 0s;background: #4a4dd0;border: 0;color: #fff;padding:6px 25px;border-radius: 3px;}
 .dashboard input#locality[type="text"] {width: 80%;}
 .dashboard input#txtskill[type="text"] {width: 80%;}
 .dashboard input[type="button"]:hover {background: #e97b26;}
@@ -854,6 +854,20 @@ input:focus{outline: none !important;}
 
 .btn.export_batton_priview_cv{margin: 10px 0 10px 0px;}
 
+.opning_jobs_text_main_listing_section{display:inline-block; margin:0 0px 9px 0px;}
+
+.opning_jobs_text_main_listing_section:before{content: " "; display: inline-block; height: 14px; background: #717171; width: 2px; margin: 3px 14px 0 14px; float: left;}
+
+.first_opnings:before{display: none !important; content: " ";}
+
+
+.main_discription_area_text_part {border: solid 1px #ccc; margin-top: 25px; width:100%; display:inline-block;}
+.inline_discription_text_main_area p{font-size: 15px !important;}
+
+.form-horizontal .backgraund_color_none_job_list_page{background: none; color: #4a4dd0; padding: 12px 15px 12px; border-bottom: solid 1px #ccc;}
+.form-horizontal h4 i{margin-top: 6px;}
+.nojobfound{text-align: center; margin: 60px 0 60px 0px;}
+
 
 @media only screen and (max-width: 1600px) {
 	body {font-size: 13px;}
@@ -863,6 +877,9 @@ input:focus{outline: none !important;}
 	.col_sm_left_boxis ul li{width:71px;}
 	.col_sm_left_boxis ul li span{font-size:11px;}
 	.user_large_profile_pic{margin: 10px 0 0 0px;}
+	.tablate_view_discription_text{width: 10%;}
+	.tablate_view_discription_textto{width:90%;}
+	
 }
 @media only screen and (max-width:1440px){
 	h2.thankyou-title{font-size:22px;}
@@ -877,9 +894,9 @@ input:focus{outline: none !important;}
 	#MyTable tbody .job-table tr {margin: 0 0 2px;}
 	.des-job {margin: 0 0 5px;}
 	.view-candi a, .job.academic input.academic-create-btn.btn.btn-default {padding: 6px 10px;font-size: 12px;}
-	.dashboard input[type="button"] {padding: 6px 10px;font-size: 12px;}
 	.dashboard label {float: left;width: auto;font-size: 13px;color: #4c4c4c;margin: 0 5px 0 0;}
 	.form-horizontal.edit-candidate-cv.profile-performance {width: 65%;}
+	.col_sm_left_boxis ul li{width:71px;}
 }
 @media only screen and (max-width: 1024px) {
 	.common-round-shape {margin:18px 16px 0 0;}
@@ -955,6 +972,7 @@ input:focus{outline: none !important;}
 	 .common-right-block a.warning-verification{right: 8.1%;}
 	 .col_sm_left_boxis{padding: 0px;}
 	 .col_sm_left_boxis ul li b:after{width:36px;}
+	 
 }
 @media only screen and (min-width:992px) and (max-width:1199px) {
 	.common-right-block a.warning-verification{right:50px;}
@@ -999,7 +1017,16 @@ input:focus{outline: none !important;}
 	.bg_left_acadmic_detail_bordersf_to{padding: 15px !important;}
 	.edit_candidate #accordion{margin: 0 0 0 10px;}
 	.forgot_password_bg_page_url{width:60%;}
+	.tablate_view_discription_text{width:16%;}
+	 .tablate_view_discription_textto{width: 84%;}
+	.ten_sepratore_part{width: 50% !important; margin-bottom: 10px;}
+	.ten_sepratore_part input{width:100% !important;}
+	.ten_sepratore_part_to{width: 100%;}
+	.ten_sepratore_part select{width: 100% !important;}
+	.ten_sepratore_part_to {padding-left: 15px; padding-right: 15px;}
 
+	.ten_sepratore_part{display:inline-block !important; padding-left: 15px; padding-right: 15px;}
+	.table-das{padding: 0px;}
 }
  @media only screen and (min-width:768px) and (max-width:991px) {
 .register-page{display: table-footer-group;}
@@ -1080,6 +1107,8 @@ input:focus{outline: none !important;}
 	 .completed_text_profile{font-size:11px;}
 	 .forgot_password_bg_page_url{width:70%;}
 	 .form-horizontal.edit-candidate-cv .edit-candidate-cv-btn{margin: 23px 0 0 6px;}
+	 .tablate_view_discription_text{width:20%;}
+	 .tablate_view_discription_textto{width: 80%;}
 
 	 
 }
@@ -1156,6 +1185,13 @@ input:focus{outline: none !important;}
 	 .employe_zone_text_login a{margin: 0 0 8px 0px;}
 	 .form-horizontal h4 .profile_text{margin: 0px;}
 	 .common-right-block a.warning-verification{right:5px;}
+	 .opning_jobs_text_main_listing_section{width:100%;}
+	 .opning_jobs_text_main_listing_section:before{display: none;}
+	 .des-job {padding: 0 15px 0 15px; margin: 0px;}
+	 
+	 .main_discription_area_text_part .flex-btn{margin-top: 10px; display: inline-block; width: 100%;}
+	 .main_discription_area_text_part .flex-btn .jobTitle{margin-bottom: 10px;}
+	 .nojobfound {text-align: center;margin: 10px 0 10px 0px;}
 	 
 
 }

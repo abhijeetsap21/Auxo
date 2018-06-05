@@ -343,8 +343,7 @@ namespace NewLetter.Models
         [Required(ErrorMessage = "please enter your postition")]
         public string qenPosition { get; set; }
 
-        [Required(ErrorMessage = "please enter salary")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "invalid salary detail")]
+        [Required(ErrorMessage = "please enter salary")]     
         public System.Nullable<double> qenSalary { get; set; }
 
         [AllowHtml]

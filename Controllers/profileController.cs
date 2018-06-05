@@ -672,7 +672,7 @@ namespace NewLetter.Controllers
                             from = DateTime.Parse(BaseUtil.GetCurrentDateTime().ToString());
                         }
                         var dateSpan = DateTimeSpan.CompareDates(compareTo, from);
-                        item.totalExperience = (dateSpan.Years+" "+ "Years" + "and" + dateSpan.Months +" "+ "Months");
+                        item.totalExperience = (dateSpan.Years+" "+ "Years"+" "+ "and"+" " + dateSpan.Months +" "+ "Months");
 
                     }                  
                     if (emp.Count > 0 && emp != null)
@@ -849,7 +849,7 @@ namespace NewLetter.Controllers
             var years_ = BaseUtil.getYears();
             ViewBag.dates = dates_.Select(e => new { e.Value, e.Text });
             ViewBag.months = months_.Select(e => new {e.monthID, e.monthName });
-            ViewBag.years = years_.Select(e => new { e.Value, e.Text });
+            ViewBag.years = years_.Select(e => new { e.Value, e.Text }).OrderByDescending(e=>e.Value);
 
             return PartialView("_PartialPopUpEmployment", emp);
         }
@@ -871,18 +871,21 @@ namespace NewLetter.Controllers
                         emp.empStartDate = model.empStartDate;
                         emp.empStartMonth = model.empStartMonth;
                         emp.empStartYear = model.empStartYear;
-                        emp.empEndDate = model.empEndDate;
-                        emp.empEndMonth = model.empEndMonth;
-                        emp.empEndYear = model.empEndYear;
+                        if (frm["ispresentval"] == "true")
+                        {
+                            emp.empEndDate = 1;
+                            emp.empEndMonth = 1;
+                            emp.empEndYear = 1900;
+                            emp.isPresent = true;
+                        }
+                        else if (frm["ispresentval"] == "false")
+                        {
+                            emp.empEndDate = model.empEndDate;
+                            emp.empEndMonth = model.empEndMonth;
+                            emp.empEndYear = model.empEndYear;
+                            emp.isPresent = false;
 
-                        if (model.empEndDate == null && model.empEndMonth == null && model.empEndYear == null)
-                        //{
-                        //    model.qenEmpTo = Convert.ToDateTime("1900-01-01");
-                        //}
-                        //else
-                        //{
-                        //    emp.qenEmpTo = model.qenEmpTo;
-                        //}
+                        }
                         emp.qenSalary = model.qenSalary;
                         emp.CompanyName = model.CompanyName;
                         emp.jobDescription = model.jobDescription;

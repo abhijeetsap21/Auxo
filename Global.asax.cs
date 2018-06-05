@@ -32,12 +32,17 @@ namespace NewLetter
 
         }
 
-        // below code for automatic redirectoin to secure 
+        //below code for automatic redirectoin to secure
         //protected void Application_BeginRequest()
         //{
-        //    if (!Context.Request.IsSecureConnection)
-        //        Response.Redirect(Context.Request.Url.ToString().Replace("http:", "https:"));
+          //  if (!Context.Request.IsSecureConnection)
+            //    Response.Redirect(Context.Request.Url.ToString().Replace("http:", "https:"));
         //}
+
+
+
+
+
         //protected void Session_Start(object sender, EventArgs e)
         //{
         //    NotificationComponenet NC = new NotificationComponenet();
