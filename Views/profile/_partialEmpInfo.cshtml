@@ -18,14 +18,16 @@
     @{ var id = ViewBag.qenID;}
 
     <div class="container">
+	
+	
         <div class="row sub-container">
             
             <div class="col-md-12 col-sm-12 col-xs-12 employment_bg_formemployment_bg_form">
-
+<div id="AddSkillsEMP">
+                            @Html.Action("EmploymentAddPop", new { qenid = @id })
+                        </div>
                 <div class="right-box">
-                    <div id="AddSkillsEMP">
-                        @Html.Action("EmploymentAddPop", new { qenid = @id })
-                    </div>
+
                     @*<div class="form" id="content-1">*@
 
 
@@ -75,8 +77,7 @@
                                 </table>
 								</div>
                                             }
-                        }
-                        
+                        }                        
 
 
                     </div>

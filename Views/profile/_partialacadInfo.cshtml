@@ -7,23 +7,20 @@
     span.col_1.tleft.text-danger.field-validation-error :before {
         content: " Warning ! ";
         color: red;
-        font-weight: bold;
-    }
+        font-weight: bold;}
 
-    .text-danger {
-        color: red;
-    }
+    .text-danger {color: red;}
 </style>
 
-<div id="pd">
-    <div class="container">
-        <div class="row sub-container">
+<div class="remove_border_yes_accdmic_details" id="pd">
+    <div class="">
+        <div class="sub-container display_inline_block_class">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="row">
                     <div class="right-box form-horizontal">
                         @{ var qenid = ViewBag.qenid;}
                         @*<div class="form" id="content-1">*@
-                        @Html.DropDownList("Select Education",new SelectList(ViewBag.educationTypes, "educationTypeID", "educationTypeName"),"Educaton Type",new { @id="educationType",onchange = "return loadEducationType(this.value);"})                    
+                        @Html.DropDownList("Select Education",new SelectList(ViewBag.educationTypes, "educationTypeID", "educationTypeName"),"Educaton Type",new {@id="educationType",onchange = "return loadEducationType(this.value);",@class = "eduction_select_box"})                    
                     </div>
                 </div>
             </div>
@@ -31,7 +28,7 @@
         <div id="user_content">
 
         </div>
-        <p>Post Graduation</p>
+        <p class="post_graduation_ttls">Post Graduation</p>
         <div class="table-responsive">
             <table class="table table-striped" style="width: 100%; border-spacing: 0px; margin: 0px 0 0px 0px; padding: 0px;">
                 <thead>
@@ -64,7 +61,7 @@
         </div>
 
 
-        <p>Graduation</p>
+        <p class="graduation_ttl_acc">Graduation</p>
         <div class="table-responsive">
             <table class="table table-striped" style="width: 100%; border-spacing: 0px; margin: 0px 0 0px 0px; padding: 0px;">
                 <thead>
@@ -97,7 +94,7 @@
             </table>
         </div>  
 
-        <p>Higher Secondary</p>
+        <p class="graduation_ttl_acc">Higher Secondary</p>
         <div class="table-responsive">
             <table class="table table-striped" style="width: 100%; border-spacing: 0px; margin: 0px 0 0px 0px; padding: 0px;">
                 <thead>
@@ -127,7 +124,7 @@
             </table>
         </div> 
 
-        <p>Secondary</p>
+        <p class="graduation_ttl_acc">Secondary</p>
         <div class="table-responsive">
             <table class="table table-striped" style="width: 100%; border-spacing: 0px; margin: 0px 0 0px 0px; padding: 0px;">
                 <thead>

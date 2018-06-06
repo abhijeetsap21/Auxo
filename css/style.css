@@ -506,7 +506,7 @@ input#btn_:hover{background:#282c75;}
 .tab-content table.table tr td {border: 1px solid #ccc;}
 .tab-content table.table tr td a {cursor: pointer;margin: 0 5px;position:relative;}
 .tab-content table.table tr td a:first-child::before {content: '|';position: absolute;right: -11px;top: -2px;}
-.tab-content table.table {border: 1px solid #ccc;max-width: 100%;margin: 20px auto;}
+.tab-content table.table {border: 1px solid #ccc;max-width: 100%;margin: 20px 0 0 0px;}
 .margin-bot-20-30 {margin: 0 30px 20px 0;}
 .edit_candidate.dashboard label.left-label {text-align: left;margin: 0 0 10px;}
 .form-horizontal .nav-tabs > li > a:focus {text-decoration: none;background-color: #e97b27;outline: none;}  
@@ -746,7 +746,7 @@ input:focus{outline: none !important;}
 
 .rgv_color_bg_main_to{background: #eeecec; padding: 20px 0 10px 0; border: solid 1px #ccc; margin-bottom: 20px;}
 
-.add_slill_bg_border_style{background: #eeecec; padding: 20px 0 0px 0 !important; border: solid 1px #ccc; margin-bottom: 20px;}
+.add_slill_bg_border_style{background: #eeecec; padding:13px 0 10px 0 !important; border: solid 1px #ccc; margin-bottom: 20px;}
 
 .border_slill_info_cantener{border: solid 1px #ccc; padding: 15px;}
 
@@ -763,7 +763,7 @@ input:focus{outline: none !important;}
 
 .media-body .des-job p{font-size: 15px !important;}
 
-.container_check{margin: 13px 0 0 0px !important; width:100% !important;}
+.container_check{margin: 0px 0 0 0px !important; width:100% !important;}
 .container_check{display: block; position: relative; padding-left:27px; margin-bottom: 24px; margin-top: 5px; cursor: pointer; font-size: 16px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; text-align: left !important; padding-top: 0px !important; color: #8f9295; font-weight: bold;}
 .container_check input {position: absolute; opacity: 0;}
 .checkmark {position: absolute; top: 0; left: 0; height:19px; width:19px; background-color: #fff; border: 2px solid #bdbdbd; border-radius: 4px;}
@@ -774,7 +774,7 @@ input:focus{outline: none !important;}
 .distip_btn_seves{margin: 15px 0px 0 0px !important;}
 .refrences_bg_border_tabs{padding: 15px; border: solid 1px #ccc; padding-top: 0px;}
 .margin_nones_abs{margin: 0px !important;}
-.bg_color_cmn_refrence_tab{background: #eeecec; padding:15px; border: solid 1px #ccc; width: 48%; margin-right: 1.60%; min-height: 350px;}
+.bg_color_cmn_refrence_tab{background: #eeecec; padding:15px; border: solid 1px #ccc; width:48.40%; margin-right: 1.60%; min-height: 350px;}
 .bg_color_cmn_refrence_tab_to{background: #eeecec; padding:15px; border: solid 1px #ccc;}
 .employment_bg_formemployment_bg_form .table{margin-top: 0px !important;}
 
@@ -805,7 +805,7 @@ input:focus{outline: none !important;}
 .atd_bg_color_wrning .fa-exclamation-triangle{background: #fcb323; border-radius: 100%; padding: 6px; font-size: 10px; color: #fff;}
 .canvasjs-chart-credit{display: none;}
 
-.edit_candidate .bg_color_main_forms_to .save_btn_ipad_design{margin-right: 15px;}
+.edit_candidate .bg_color_main_forms_to .save_btn_ipad_design{margin-right: 15px; margin-top: 19px;}
 .main_ttl_text_jobs{text-transform: capitalize;}
 
 
@@ -868,6 +868,55 @@ input:focus{outline: none !important;}
 .form-horizontal h4 i{margin-top: 6px;}
 .nojobfound{text-align: center; margin: 60px 0 60px 0px;}
 
+.btn_regular_s{text-align: right; width:83%;}
+
+.remove_border_yes_accdmic_details{border: solid 1px #ccc; padding:15px; max-width: 100% !important; border-radius: 0px;}
+
+.remove_border_yes_accdmic_details .eduction_select_box{width: 260px !important; height: 38px; font-weight: bold; border-radius: 5px;}
+
+.post_graduation_ttls{margin: 0 0 4px 0; font-weight: bold; float: left; width: 100%; font-size: 15px;}
+
+.graduation_ttl_acc{margin:17px 0 4px 0; font-weight: bold; float: left; width: 100%; font-size: 15px;}
+
+.form-horizontal .post_graduation_ttl_adit_mod{margin: 0 0 7px 0; font-weight: bold; float: left; width: 100%; font-size: 15px; background: none; padding: 0px; border: none;}
+
+.display_inline_block_class{display: inline-block; width: 100%;}
+.form_graduation_margin_edit_mode{margin:0px;}
+
+.min_height_ppc_bg_edit_mode{margin-bottom: 15px;}
+.form_graduation_margin_edit_mode .col-md-12.col-sm-12.margin-20.padding_lbl_threee{margin-top: 0px;}
+
+.form_graduation_margin_edit_mode .btn.btn-default{margin: 0px;}
+
+.form_graduation_margin_edit_mode .academic{margin: 0px;}
+
+.form_graduation_margin_edit_mode .min_height_highseconder_school{margin-bottom: 15px; min-height: 228px;}
+
+.form_graduation_margin_edit_mode .min_height_highseconder_school_to{margin-bottom: 15px; min-height:183px;}
+
+.emploement_text_main_bg_form{margin: 0px;}
+
+
+.job_discriotio_implment_page_right_text_box_txt{margin:0 0 9px 0px; padding: 0px;}
+.job_discriotio_implment_page_right_text_box_txt span{float: right; font-size: 12px;}
+.emploement_text_main_bg_form .margin-20{margin:0px;}
+
+.emploement_text_main_bg_form .date_format_class_emploment{width:27% !important}
+.emploement_text_main_bg_form .date_format_month_class_imploment{width:42.70% !important;}
+.emploement_text_main_bg_form .date_format_year_imploment{width:27% !important;}
+
+.emploement_text_main_bg_form .is_imploement_checkbox_design_margin{margin: 0px;}
+
+.emploement_text_main_bg_form .bg_color_employment_left_bg_one{min-height:360px; margin-bottom: 15px;}
+.emploement_text_main_bg_form .bg_color_employment_left_bg{min-height:360px; margin-bottom: 15px;}
+
+
+.skille_tab_form_mai_class{margin: 0px;}
+
+.skille_tab_form_mai_class .margin-20{margin:0 0 15px 0;}
+
+
+
 
 @media only screen and (max-width: 1600px) {
 	body {font-size: 13px;}
@@ -879,11 +928,19 @@ input:focus{outline: none !important;}
 	.user_large_profile_pic{margin: 10px 0 0 0px;}
 	.tablate_view_discription_text{width: 10%;}
 	.tablate_view_discription_textto{width:90%;}
+	.btn_regular_s {text-align: right; width:89%;}
+		.emploement_text_main_bg_form .date_format_class_emploment{width:30% !important;}
+	.emploement_text_main_bg_form .date_format_year_imploment{width: 31% !important;}
+	.emploement_text_main_bg_form .date_format_month_class_imploment{width:34.90% !important;}
 	
 }
 @media only screen and (max-width:1440px){
 	h2.thankyou-title{font-size:22px;}
 	h2.thankyou-title-2{font-size:22px;}
+	.btn_regular_s {text-align: right; width: 94%;}
+	.emploement_text_main_bg_form .date_format_class_emploment{width: 29% !important;}
+	.emploement_text_main_bg_form .date_format_year_imploment{width: 30% !important;}
+	.emploement_text_main_bg_form .date_format_month_class_imploment{width:36.7% !important;}
 }
 @media only screen and (max-width: 1366px) {
 	.form-horizontal .logo-company-cj {padding: 0;}
@@ -897,6 +954,10 @@ input:focus{outline: none !important;}
 	.dashboard label {float: left;width: auto;font-size: 13px;color: #4c4c4c;margin: 0 5px 0 0;}
 	.form-horizontal.edit-candidate-cv.profile-performance {width: 65%;}
 	.col_sm_left_boxis ul li{width:71px;}
+	.btn_regular_s {text-align: right; width: 96%;}
+	.emploement_text_main_bg_form .date_format_class_emploment{width:30% !important;}
+	.emploement_text_main_bg_form .date_format_year_imploment{width: 31% !important;}
+	.emploement_text_main_bg_form .date_format_month_class_imploment{width:34.7% !important;}
 }
 @media only screen and (max-width: 1024px) {
 	.common-round-shape {margin:18px 16px 0 0;}
@@ -1027,6 +1088,16 @@ input:focus{outline: none !important;}
 
 	.ten_sepratore_part{display:inline-block !important; padding-left: 15px; padding-right: 15px;}
 	.table-das{padding: 0px;}
+	.tab-content table.table tr td{white-space: nowrap;}
+	 .tab-content table.table tr th{white-space: nowrap;}
+	 .gry .table-responsive{display: inline-block; width: 100%;}
+	.emploement_text_main_bg_form .bg_color_employment_left_bg_one{padding: 15px; margin-right: 0px; min-height: inherit;}
+	.emploement_text_main_bg_form .bg_color_employment_left_bg{padding: 15px; min-height: inherit;}
+	.certificate_tab_main {overflow-x: auto; display: inline-block; width: 100%;}
+	.emploement_text_main_bg_form .date_format_month_class_imploment{width: 36.90% !important;}
+	
+	
+	
 }
  @media only screen and (min-width:768px) and (max-width:991px) {
 .register-page{display: table-footer-group;}
@@ -1109,11 +1180,24 @@ input:focus{outline: none !important;}
 	 .form-horizontal.edit-candidate-cv .edit-candidate-cv-btn{margin: 23px 0 0 6px;}
 	 .tablate_view_discription_text{width:20%;}
 	 .tablate_view_discription_textto{width: 80%;}
-
+	 .tab-content table.table tr td{white-space: nowrap;}
+	 .tab-content table.table tr th{white-space: nowrap;}
+	 .gry .table-responsive{display: inline-block; width: 100%;}
+	 .form_graduation_margin_edit_mode .min_height_highseconder_school_to{margin-bottom: 0px;}
+	  .form_graduation_margin_edit_mode .min_height_highseconder_school{margin-bottom: 0px;}
+	 .graduation_ttl_acc{margin: 0px 0 4px 0px;}
+	 
+	 .emploement_text_main_bg_form .bg_color_employment_left_bg_one{border: none; background: #fff; min-height: inherit;}
+	 .emploement_text_main_bg_form .is_imploement_checkbox_design_margin{margin-bottom: 5px !important; margin-top: -2px !important;}
+	 .container_check{padding-left: 27px !important;}
+	 .emploement_text_main_bg_form .date_format_month_class_imploment{width:43.7% !important;}
+	 .emploement_text_main_bg_form .bg_color_employment_left_bg{background: #fff; border:none; min-height: inherit;}
+	 .emploement_text_main_bg_form .date_format_month_class_imploment{width:36.90% !important;}
 	 
 }
  @media only screen and (max-width:767px) {
 	 .text_center_powered{text-align: center !important;}
+	 .remove_border_yes_accdmic_details .eduction_select_box{width:100% !important;}
 	 
 	 .register-page{display: table-footer-group;}
 	 .register-main h3{padding: 7px 0 7px 0px; font-size: 20px;}
@@ -1192,6 +1276,23 @@ input:focus{outline: none !important;}
 	 .main_discription_area_text_part .flex-btn{margin-top: 10px; display: inline-block; width: 100%;}
 	 .main_discription_area_text_part .flex-btn .jobTitle{margin-bottom: 10px;}
 	 .nojobfound {text-align: center;margin: 10px 0 10px 0px;}
+	 .btn_regular_s {text-align: right; width: 100%; margin-top: 40px;}
+	 .graduation_ttl_acc{margin: 0px 0 4px 0px;}
+	 .job_discriotio_implment_page_right_text_box_txt span{margin: 8px 0 8px 0px; float: left; width: 100%;}
+	 .rgv_color_bg_main{min-height: inherit;}
+	 
+	 .emploement_text_main_bg_form .bg_color_employment_left_bg_one{min-height: inherit; margin-bottom: 0px; border: none; background: #fff;}
+	 .emploement_text_main_bg_form .date_format_class_emploment{width: 100% !important; margin-bottom: 15px;}
+	 .emploement_text_main_bg_form .date_format_month_class_imploment{width: 100% !important; margin-bottom: 15px;}
+	 .emploement_text_main_bg_form .date_format_year_imploment{width:100% !important;}
+	 .container_check{padding-left: 27px !important;}
+	 
+	 .emploement_text_main_bg_form .bg_color_employment_left_bg{border: none; background: #fff; min-height: inherit;}
+	 
+	 .emploement_text_main_bg_form .tab-content table.table{margin-top:10px !important;}
+	 .text-area_hieght_employer textarea{height: 115px;}
+	 .tab-content table.table{margin: 10px auto;}
+	 .skille_tab_form_mai_class .margin-20{margin: 0px;}
 	 
 
 }
@@ -1203,4 +1304,5 @@ input:focus{outline: none !important;}
  @media only screen and (max-width: 320px) {
 	 .common-right-block a.warning-verification{right:47px;}
 	 	 .form-horizontal.edit-candidate-cv .edit-candidate-cv-btn{float: left; margin: 22px 0 0 0px;}
+	 .form-horizontal h4 .profile_text{text-align: center; display: inline-block; width: 100%;}
 }

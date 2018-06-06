@@ -1,14 +1,14 @@
 ﻿@model NewLetter.Models.qenSecondary
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("highSchool","profile",FormMethod.Post,new {@class = "form_graduation_margin_edit_mode"})) 
 {
     @Html.AntiForgeryToken()
 
     
-        <h4>High School</h4>
+        <h4 class="post_graduation_ttl_adit_mod">High School</h4>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="col-md-12 col-sm-12 margin-20 padding_lbl_threee">
-        <div class="col-md-6 col-sm-12 padding_lbl_threee rgv_color_bg_main">
+        <div class="col-md-6 col-sm-12 padding_lbl_threee rgv_color_bg_main min_height_highseconder_school_to">
             <div class="col-md-12 col-sm-12 padding_lbl_threee">
                 <div class="form-group">
                     @Html.LabelFor(model => model.secondaryBoard, htmlAttributes: new { @class = "col-md-6 col-sm-6 col-xs-12 control-label" })
@@ -17,7 +17,8 @@
                         @Html.ValidationMessageFor(model => model.secondaryBoard, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            </div>            
+            </div>        
+            @Html.HiddenFor(model => model.qenID)    
                 <div class="col-md-12 col-sm-12 padding_lbl_threee">
                     <div class="form-group">
                         @Html.LabelFor(model => model.schoolName, htmlAttributes: new { @class = "col-md-6 col-sm-6 col-xs-12 control-label" })
@@ -39,7 +40,7 @@
                 </div>
             
         </div>
-        <div class="col-md-6 col-sm-12 padding_lbl_threee rgv_color_bg_main_to">
+        <div class="col-md-6 col-sm-12 padding_lbl_threee rgv_color_bg_main_to min_height_highseconder_school_to">
             <div class="col-md-12 col-sm-12 padding_lbl_threee">
                 <div class="form-group">
                     @Html.LabelFor(model => model.secondaryPassYear, htmlAttributes: new { @class = "col-md-6 col-sm-6 col-xs-12 control-label" })

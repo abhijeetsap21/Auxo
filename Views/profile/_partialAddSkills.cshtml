@@ -1,7 +1,7 @@
 ﻿@model NewLetter.Models.qenSkillName
 
 
-@using (Html.BeginForm("AddSkills", "profile", FormMethod.Post))
+@using (Html.BeginForm("AddSkills", "profile", FormMethod.Post,new{@class = "skille_tab_form_mai_class"}))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.qenSkillsID)
@@ -31,6 +31,9 @@
                     </div>
                 </div>
             </div>
+
+
+
         </div>
         @{if (Model.qenSkillsID == 0)
                 {
@@ -45,6 +48,6 @@
                 </div>
             }
         }
-        <p class="account_input_text_center">Enter atleast 1 char for better suggestion for skills </p>
+        <p class="account_input_text_center">Enter at-least 1 char for better suggestion for skills </p>
     </div>
             }

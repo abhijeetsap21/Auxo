@@ -789,6 +789,7 @@
     <Content Include="images\2f37b215-5d32-4651-a915-9aba2d268636_signature.png" />
     <Content Include="images\712.GIF" />
     <Content Include="images\accent.png" />
+    <Content Include="images\ad.jpg" />
     <Content Include="images\add-btn.png" />
     <Content Include="images\add_icon.png" />
     <Content Include="images\asc.gif" />
@@ -815,19 +816,23 @@
     <Content Include="images\cancel.png" />
     <Content Include="images\chart.jpg" />
     <Content Include="images\close.png" />
+    <Content Include="images\created_by_logo.png" />
     <Content Include="images\dash_brd_arow.png" />
     <Content Include="images\dash_brd_arow_hvr.png" />
     <Content Include="images\Delete.png" />
     <Content Include="images\delete_icon.png" />
     <Content Include="images\desc.gif" />
     <Content Include="images\digital-india.jpg" />
+    <Content Include="images\download.png" />
     <Content Include="images\download_icon.png" />
     <Content Include="images\dsb_arrow.gif" />
     <Content Include="images\dsb_h3_hed_bg.png" />
+    <Content Include="images\Dummy-Text-Featured.jpg" />
     <Content Include="images\Edit.png" />
     <Content Include="images\email.png" />
     <Content Include="images\facebook-btn.jpg" />
     <Content Include="images\facebook.jpg" />
+    <Content Include="images\favicon.png" />
     <Content Include="images\g-icon.jpg" />
     <Content Include="images\googlebtn.jpg" />
     <Content Include="images\help.png" />
@@ -851,6 +856,7 @@
     <Content Include="images\lgn_h2_bg.gif" />
     <Content Include="images\lgn_h2_bg_200.gif" />
     <Content Include="images\lgn_h2_icon.png" />
+    <Content Include="images\like_img.png" />
     <Content Include="images\linkedin-btn.jpg" />
     <Content Include="images\loader.gif" />
     <Content Include="images\login-bottom-bg.png" />
@@ -899,6 +905,8 @@
     <Content Include="images\Skype.ico" />
     <Content Include="images\spot-logo.png" />
     <Content Include="images\spota-needle-login.png" />
+    <Content Include="images\star_img.png" />
+    <Content Include="images\thankyou.png" />
     <Content Include="images\The-Best-of-Nations.png" />
     <Content Include="images\Thumbs.db" />
     <Content Include="images\top-alert-icon.png" />
@@ -951,6 +959,7 @@
     <Content Include="images\upload.png" />
     <Content Include="images\user-drop-down.png" />
     <Content Include="images\user-img.jpg" />
+    <Content Include="images\user_icon_pic.png" />
     <Content Include="images\verificationcode.jpg" />
     <Content Include="js\bootstrap-datetimepicker.js" />
     <Content Include="js\bootstrap-datetimepicker.min.js" />

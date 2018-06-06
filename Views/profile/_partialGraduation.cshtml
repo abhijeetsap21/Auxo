@@ -1,11 +1,11 @@
 ﻿@model NewLetter.Models.qendidateGraduation
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Graduation","profile",FormMethod.Post,new {@class = "form_graduation_margin_edit_mode"})) 
 {
     @Html.AntiForgeryToken()
     
     
-        <h4>Graduation</h4>
+        <h4 class="post_graduation_ttl_adit_mod">Graduation</h4>
         
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="col-md-12 col-sm-12 margin-20 padding_lbl_threee">
@@ -19,6 +19,8 @@
                     </div>
                 </div>
             </div>
+            @Html.HiddenFor(model => model.qenID)
+            
             <div class="col-md-12 col-sm-12 padding_lbl_threee">
                 <div class="form-group">
                     @Html.LabelFor(model => model.collegeName, htmlAttributes: new { @class = "col-md-6 col-sm-6 col-xs-12 control-label" })

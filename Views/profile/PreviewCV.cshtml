@@ -8,12 +8,14 @@
 <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jquery.min.js"></script>
 <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jszip.min.js"></script>
 <script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
-    
-	<div class="text-center">
+    <div class="container">
+	<div class="btn_regular_s col-sm-9">
  <input type="button" value="Export" onclick="return ExportPdf();" class="btn btn-default export_batton_priview_cv" />
  </div>
+ </div>
         <div id="Grid" style="width:100%;">
-            <div style="margin: 0px; padding:30px 0 30px 0px; background: #bfbfbf;">
+		<div class="clear:both;"></div>
+            <div style="margin:0; padding:30px 0 30px 0px; background: #bfbfbf;">
                 <table style="margin: 0 auto; width: 990px; background: #fff; font-family: arial; font-size:15px;"
                        border="0" cellspacing="0" cellpadding="0">
                     <tr>
@@ -233,10 +235,12 @@
 <p style="margin: 0px 0 20px 0; padding: 0px; font-size:14px; line-height:24px;">
     @Model.personainfo.CareerObjective
 </p>
+<img style="float:right; margin:0 0 8px 0px;" src="~/images/created_by_logo.png" alt="">
 </td>
 </tr>
 </table>
 </div>
+
 </div>   
 
 <script>

@@ -13,14 +13,8 @@
     {
         <div class="row">
             <div class="col-sm-2" style="background-color:#eef; padding:5px">                
-                @Html.DropDownList("Select Education", new SelectList(ViewBag.educationTypes, "educationTypeID", "educationTypeName"), "Educaton Type", new { @id = "educationType" })
-            </div>        
-
-            
-            <div class="col-sm-2" style="background-color:#eef; padding:5px">
-                <input type="button" name="search" class="previous action-button" value="Search" onclick="return Result();" />
-
-            </div>
+                @Html.DropDownList("Select Education", new SelectList(ViewBag.educationTypes, "educationTypeID", "educationTypeName"), "Educaton Type", new { @id = "educationType",onchange= "return Result();" })
+            </div>       
         </div>
     }
     <div id="viewResult">
