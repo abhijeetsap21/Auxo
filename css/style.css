@@ -351,10 +351,10 @@ li.dropdown.custom-menu.open:after{content:'';}
 
 
 /*Register Page*/
-.register-page{background:url(../images/registration-bg.jpg) left top no-repeat; background-size:cover;}
-.register-page .container{max-width:774px; width:100%; padding-top:30px;}
+.register-page{background:url(../images/registration-bg.jpg) left top no-repeat; background-size:cover; overflow: hidden;}
+.register-page .container{max-width:774px; width:100%; padding-top:12px;}
 .register-main{background:#fff; width:100%; border-radius: 3px; display:inline-block; float:left;
- margin:35px 0 0; padding:40px 40px;}
+ margin:20px 0 0; padding:30px 30px;}
 .register-main p{font-size:12.9px; font-family:"Segoe UI", "Segoe UI Light", "Segoe UI Symbol"; color:#666;  margin:0 0 0 0;}
 .register-main h3{display:block; margin:0px; padding:0px 0 24px 0; font-size:26.12px; color:#4a4dd0;}
 .input-group{margin:0px 0 10px 0;}
@@ -645,6 +645,8 @@ input:focus{outline: none !important;}
 .employe_zone_text_login a:hover{background: #3c3fc3 !important; color: #fff;}
 .text_center_powered{text-align: center;}
 
+.text_center_powered{text-align: center;}
+
 
 
 
@@ -843,7 +845,7 @@ input:focus{outline: none !important;}
 .forgot_password_bg_page_url h2{margin: 0px; padding:10px 0 10px 0; font-size: 26.12px; color: #4a4dd0;}
 .forgot_password_bg_page_url h4{padding: 0px 0 0 0px;}
 
-.thankyou-btns.login-btn input{margin: 28px 0 0 0px !important;}
+.thankyou-btns.login-btn input{margin:14px 0 0 0px !important;}
 
 .verifed_text_bg_white_main_bg{min-height: 350px; margin: 40px 15px 60px 15px;}
 .verifed_text_bg_white_main_bg p{margin: 40px 15px 40px 15px;}
@@ -915,6 +917,13 @@ input:focus{outline: none !important;}
 
 .skille_tab_form_mai_class .margin-20{margin:0 0 15px 0;}
 
+.custom_text_setting ul{padding: 0 0 0 19px; margin: 0px !important;}
+
+.custom_text_setting h2{float: left; width: 100%; margin:13px 0 5px 0 !important; font-size: 18px !important; font-weight: 500 !important; color: #000 !important;}
+.custom_text_setting p{margin:0px !important;}
+
+.custom_text_setting label.cutom-label-2{margin: 11px 0 5px 0px;}
+.powered_by_logo_hd{height:20px;}
 
 
 
@@ -1095,6 +1104,7 @@ input:focus{outline: none !important;}
 	.emploement_text_main_bg_form .bg_color_employment_left_bg{padding: 15px; min-height: inherit;}
 	.certificate_tab_main {overflow-x: auto; display: inline-block; width: 100%;}
 	.emploement_text_main_bg_form .date_format_month_class_imploment{width: 36.90% !important;}
+	.register-page{ overflow: inherit;}
 	
 	
 	
@@ -1193,6 +1203,10 @@ input:focus{outline: none !important;}
 	 .emploement_text_main_bg_form .date_format_month_class_imploment{width:43.7% !important;}
 	 .emploement_text_main_bg_form .bg_color_employment_left_bg{background: #fff; border:none; min-height: inherit;}
 	 .emploement_text_main_bg_form .date_format_month_class_imploment{width:36.90% !important;}
+	 
+	 label.cutom-label{margin: 0 0px 0px 0px; width: 100%; float: inherit;}
+	 .right_detail_information_tages_forgat .col-sm-12{margin-bottom: 10px;}
+	 .register-page{ overflow: inherit;}
 	 
 }
  @media only screen and (max-width:767px) {
@@ -1293,6 +1307,8 @@ input:focus{outline: none !important;}
 	 .text-area_hieght_employer textarea{height: 115px;}
 	 .tab-content table.table{margin: 10px auto;}
 	 .skille_tab_form_mai_class .margin-20{margin: 0px;}
+	 .verifed_text_bg_white_main_bg p{margin: 10px 15px 40px 15px;}
+	 .register-page{ overflow: inherit;}
 	 
 
 }
